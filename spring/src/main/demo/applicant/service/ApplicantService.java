@@ -1,85 +1,134 @@
+
 package com.example.demo.applicant.service;
 
-import com.example.demo.applicant.dto.ApplicantCreateRequest;
-import com.example.demo.applicant.dto.ApplicantResponse;
-import com.example.demo.applicant.dto.HealthSnapshotCreateRequest;
-import com.example.demo.applicant.dto.HealthSnapshotResponse;
+import com.example.demo.applicant.dto.ApplicantDto;
 import com.example.demo.applicant.entity.Applicant;
 import com.example.demo.applicant.entity.HealthSnapshot;
 import com.example.demo.applicant.repository.ApplicantRepository;
 import com.example.demo.applicant.repository.HealthSnapshotRepository;
-import com.example.demo.global.exception.NotFoundException;
+import com.example.demo.global.exception.ApiException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * 신청자·건강정보 업무 서비스.
+ *
+ * [역할]
+ * 1. 신청자 등록 및 조회
+ * 2. 신청자별 건강정보 등록
+ * 3. 존재하지 않는 신청자에 대한 요청 차단
+ *
+ * Controller는 HTTP 처리를 담당하고,
+ * Service는 업무 규칙과 트랜잭션을 담당한다.
+ */
 @Service
+@Transactional(readOnly = true)
 public class ApplicantService {
 
     private final ApplicantRepository applicantRepository;
-    private final HealthSnapshotRepository healthSnapshotRepository;
+    private final HealthSnapshotRepository healthRepository;
 
-    public ApplicantService(ApplicantRepository applicantRepository,
-                            HealthSnapshotRepository healthSnapshotRepository) {
+    public ApplicantService(
+            ApplicantRepository applicantRepository,
+            HealthSnapshotRepository healthRepository
+    ) {
         this.applicantRepository = applicantRepository;
-        this.healthSnapshotRepository = healthSnapshotRepository;
+        this.healthRepository = healthRepository;
     }
 
-    public List<ApplicantResponse> listApplicants() {
-        return applicantRepository.findAll().stream()
+    /**
+     * 전체 신청자 조회.
+     * Entity를 DTO로 변환해 반환한다.
+     */
+    public List<ApplicantDto.Response> listApplicants() {
+        return applicantRepository.findAll()
+                .stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
-    public ApplicantResponse getApplicant(Long id) {
-        Applicant applicant = applicantRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Applicant not found: " + id));
+    /**
+     * 신청자 단건 조회.
+     * 신청자가 존재하지 않으면 HTTP 404 오류를 발생시킨다.
+     */
+    public ApplicantDto.Response getApplicant(Long id) {
+        Applicant applicant = findApplicant(id);
         return toResponse(applicant);
     }
 
-    public ApplicantResponse createApplicant(ApplicantCreateRequest request) {
-        Applicant applicant = new Applicant();
-        applicant.setDisplayName(request.getDisplayName());
-        applicant.setAge(request.getAge());
-        applicant.setCreatedAt(OffsetDateTime.now(ZoneOffset.UTC));
+    /**
+     * 신규 신청자 등록.
+     *
+     * 입력 검증은 Controller의 @Valid가 수행하고,
+     * Service는 DB 저장과 응답 변환을 담당한다.
+     */
+    @Transactional
+    public ApplicantDto.Response createApplicant(
+            ApplicantDto.CreateRequest request
+    ) {
+        Applicant applicant = new Applicant(
+                request.displayName().trim(),
+                request.age()
+        );
 
         Applicant saved = applicantRepository.save(applicant);
         return toResponse(saved);
     }
 
-    /** 신청자 건강 스냅샷 1건 생성 */
-    public HealthSnapshotResponse createHealthSnapshot(Long applicantId, HealthSnapshotCreateRequest request) {
-        Applicant applicant = applicantRepository.findById(applicantId)
-                .orElseThrow(() -> new NotFoundException("Applicant not found: " + applicantId));
+    /**
+     * 신청자 건강정보 스냅샷 생성.
+     *
+     * 1. 신청자 존재 여부 확인
+     * 2. 건강정보 객체 생성
+     * 3. applicant_id 관계 설정
+     * 4. DB 저장
+     */
+    @Transactional
+    public ApplicantDto.HealthResponse createHealthSnapshot(
+            Long applicantId,
+            ApplicantDto.HealthCreateRequest request
+    ) {
+        Applicant applicant = findApplicant(applicantId);
 
-        HealthSnapshot snapshot = new HealthSnapshot();
-        snapshot.setApplicant(applicant);
-        snapshot.setPhysicalLevel(request.getPhysicalLevel());
-        snapshot.setChronicDiseaseFlag(request.getChronicDiseaseFlag());
-        snapshot.setWorkHourLimit(request.getWorkHourLimit());
-        snapshot.setCreatedAt(OffsetDateTime.now(ZoneOffset.UTC));
+        HealthSnapshot snapshot = new HealthSnapshot(
+                applicant,
+                request.physicalLevel(),
+                request.chronicDiseaseFlag(),
+                request.workHourLimit()
+        );
 
-        HealthSnapshot saved = healthSnapshotRepository.save(snapshot);
+        HealthSnapshot saved = healthRepository.save(snapshot);
 
-        HealthSnapshotResponse resp = new HealthSnapshotResponse();
-        resp.setId(saved.getId());
-        resp.setApplicantId(applicantId);
-        resp.setPhysicalLevel(saved.getPhysicalLevel());
-        resp.setChronicDiseaseFlag(saved.getChronicDiseaseFlag());
-        resp.setWorkHourLimit(saved.getWorkHourLimit());
-        resp.setCreatedAt(saved.getCreatedAt());
-        return resp;
+        return new ApplicantDto.HealthResponse(
+                saved.getId(),
+                applicant.getId(),
+                saved.getPhysicalLevel(),
+                saved.getChronicDiseaseFlag(),
+                saved.getWorkHourLimit(),
+                saved.getCreatedAt()
+        );
     }
 
-    private ApplicantResponse toResponse(Applicant applicant) {
-        ApplicantResponse resp = new ApplicantResponse();
-        resp.setId(applicant.getId());
-        resp.setDisplayName(applicant.getDisplayName());
-        resp.setAge(applicant.getAge());
-        resp.setCreatedAt(applicant.getCreatedAt());
-        return resp;
+    /**
+     * 공통 신청자 조회 메서드.
+     * 중복된 findById + 예외 처리 코드를 한 곳에 모은다.
+     */
+    private Applicant findApplicant(Long id) {
+        return applicantRepository.findById(id)
+                .orElseThrow(() -> ApiException.notFound(
+                        "Applicant not found: " + id
+                ));
+    }
+
+    /** 신청자 Entity를 API 응답 DTO로 변환한다. */
+    private ApplicantDto.Response toResponse(Applicant applicant) {
+        return new ApplicantDto.Response(
+                applicant.getId(),
+                applicant.getDisplayName(),
+                applicant.getAge(),
+                applicant.getCreatedAt()
+        );
     }
 }

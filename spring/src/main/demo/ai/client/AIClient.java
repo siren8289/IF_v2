@@ -1,94 +1,131 @@
+
 package com.example.demo.ai.client;
 
 import com.example.demo.ai.dto.ExplainRequestDto;
 import com.example.demo.ai.dto.ExplainResponseDto;
 import com.example.demo.ai.dto.ScoreRequestDto;
 import com.example.demo.ai.dto.ScoreResponseDto;
-import com.example.demo.global.exception.AiServiceTimeoutException;
-import com.example.demo.global.exception.AiServiceUnavailableException;
+import com.example.demo.global.exception.ApiException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * Spring Boot와 FastAPI 간 HTTP 통신 담당.
+ *
+ * [역할]
+ * - /score : 위험도 계산 요청
+ * - /explain : 위험도 설명 요청
+ *
+ * [예외 처리]
+ * - 타임아웃 : HTTP 504
+ * - 연결 및 응답 오류 : HTTP 502
+ *
+ * 업무 데이터 저장은 담당하지 않는다.
+ */
 @Component
 public class AIClient {
 
     private final RestTemplate restTemplate;
     private final String baseUrl;
 
-    public AIClient(RestTemplate restTemplate,
-                    @Value("${app.ai.base-url:http://localhost:8000}") String baseUrl) {
+    /**
+     * FastAPI 서버 주소를 주입한다.
+     * 마지막 슬래시는 제거해 URL 중복을 방지한다.
+     */
+    public AIClient(
+            RestTemplate restTemplate,
+            @Value("${app.ai.base-url:http://localhost:8000}")
+            String baseUrl
+    ) {
         this.restTemplate = restTemplate;
-        this.baseUrl = baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
+        this.baseUrl = baseUrl.endsWith("/")
+                ? baseUrl.substring(0, baseUrl.length() - 1)
+                : baseUrl;
     }
 
     /**
-     * FastAPI POST /score 호출.
-     * @throws AiServiceTimeoutException 타임아웃
-     * @throws AiServiceUnavailableException 연결 실패·4xx/5xx 등
+     * FastAPI /score 호출.
+     *
+     * @param request 신청자 및 일자리 평가 입력
+     * @return FastAPI가 계산한 위험도 결과
      */
     public ScoreResponseDto score(ScoreRequestDto request) {
         try {
-            return restTemplate.postForObject(baseUrl + "/score", request, ScoreResponseDto.class);
+            return restTemplate.postForObject(
+                    baseUrl + "/score",
+                    request,
+                    ScoreResponseDto.class
+            );
         } catch (RestClientException e) {
             throw mapAiException("AI score API 호출 실패", e);
         }
     }
 
     /**
-     * FastAPI POST /explain 호출.
-     * @throws AiServiceTimeoutException 타임아웃
-     * @throws AiServiceUnavailableException 연결 실패·4xx/5xx 등
+     * FastAPI /explain 호출.
+     *
+     * @param request 위험도 점수 및 설명 생성 입력
+     * @return AI 설명 결과
      */
     public ExplainResponseDto explain(ExplainRequestDto request) {
         try {
-            return restTemplate.postForObject(baseUrl + "/explain", request, ExplainResponseDto.class);
+            return restTemplate.postForObject(
+                    baseUrl + "/explain",
+                    request,
+                    ExplainResponseDto.class
+            );
         } catch (RestClientException e) {
             throw mapAiException("AI explain API 호출 실패", e);
         }
     }
 
-    static RuntimeException mapAiException(String prefix, RestClientException e) {
-        if (isTimeout(e)) {
-            return new AiServiceTimeoutException(prefix + ": timeout", e);
+    /**
+     * HTTP 클라이언트 예외를 서비스 공통 예외로 변환한다.
+     *
+     * 타임아웃 여부를 원인 예외 체인에서 확인한다.
+     */
+    private static ApiException mapAiException(
+            String message,
+            RestClientException cause
+    ) {
+        if (isTimeout(cause)) {
+            return ApiException.aiTimeout(message, cause);
         }
-        return new AiServiceUnavailableException(prefix + ": " + e.getMessage(), e);
+
+        return ApiException.aiUnavailable(message, cause);
     }
 
-    private static boolean isTimeout(Throwable t) {
-        Throwable cur = t;
-        while (cur != null) {
-            if (cur instanceof SocketTimeoutException
-                    || cur instanceof TimeoutException
-                    || (cur instanceof ResourceAccessException && containsTimeoutMessage(cur))) {
+    /**
+     * 중첩된 예외 원인까지 검사해 타임아웃 여부를 판별한다.
+     */
+    private static boolean isTimeout(Throwable throwable) {
+        Throwable current = throwable;
+
+        while (current != null) {
+            if (current instanceof SocketTimeoutException
+                    || current instanceof TimeoutException) {
                 return true;
             }
-            if (containsTimeoutMessage(cur) && cur instanceof ResourceAccessException) {
-                return true;
-            }
-            String msg = cur.getMessage();
-            if (msg != null) {
-                String lower = msg.toLowerCase();
-                if (lower.contains("timed out") || lower.contains("timeout")) {
+
+            String message = current.getMessage();
+
+            if (message != null) {
+                String lower = message.toLowerCase();
+
+                if (lower.contains("timed out")
+                        || lower.contains("timeout")) {
                     return true;
                 }
             }
-            cur = cur.getCause();
-        }
-        return false;
-    }
 
-    private static boolean containsTimeoutMessage(Throwable t) {
-        String msg = t.getMessage();
-        if (msg == null) {
-            return false;
+            current = current.getCause();
         }
-        String lower = msg.toLowerCase();
-        return lower.contains("timed out") || lower.contains("timeout") || lower.contains("read timed out");
+
+        return false;
     }
 }

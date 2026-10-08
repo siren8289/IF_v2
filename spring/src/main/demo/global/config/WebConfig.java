@@ -1,38 +1,49 @@
+
 package com.example.demo.global.config;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.List;
-
+/**
+ * IF_v2 웹 요청 공통 설정.
+ *
+ * [역할]
+ * - React 프론트엔드의 Spring API 접근 허용
+ * - 허용 출처, HTTP 메서드, 요청 헤더 관리
+ *
+ * [통신 흐름]
+ * React(Vite) → Spring Boot(/api/**)
+ *
+ * 운영 환경에서는 허용 출처를 실제 도메인으로 제한한다.
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    /** CorsFilter가 OPTIONS 프리플라이트에도 CORS 헤더를 붙이도록 전역 적용 */
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000", "http://127.0.0.1:3000"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
-        config.setMaxAge(3600L);
+    /**
+     * 접근을 허용할 프론트엔드 주소.
+     *
+     * application.yml 또는 환경변수에서 재설정 가능.
+     * 기본값은 로컬 개발 환경 기준이다.
+     */
+    @Value("${app.cors.allowed-origins:http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000}")
+    private String[] allowedOrigins;
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
-
+    /**
+     * /api/** 요청에 대한 CORS 정책.
+     *
+     * OPTIONS 프리플라이트 요청을 포함하여
+     * 지정한 출처의 HTTP 요청을 허용한다.
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:3000", "http://127.0.0.1:3000")
-                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                .allowedOrigins(allowedOrigins)
+                .allowedMethods(
+                        "GET", "POST", "PUT",
+                        "PATCH", "DELETE", "OPTIONS"
+                )
                 .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(3600);

@@ -63,6 +63,7 @@ public class AIRiskService {
     public void computeAndSaveRisk(Long assessmentId) {
         Prep prep = transactionTemplate.execute(status -> {
             ScoreRequestDto scoreReq = buildScoreRequest(assessmentId);
+            validateRiskScore(scoreResp);
             Integer age = assessmentRepository.findById(assessmentId)
                     .map(a -> a.getApplicant().getAge())
                     .orElse(null);
