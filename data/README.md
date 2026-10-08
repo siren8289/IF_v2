@@ -37,4 +37,4 @@ python -m unittest discover -s data/tests -v
 
 상세: [수집 설계](../docs/ingestion/DE.md), [수집 설명](../docs/ingestion/README.md), [분석 스펙](../docs/analytics/DA.md), [저장소 연결](../docs/analytics/DATA.md), [DB 실행](../docs/storage.md).
 
-설정 예시: `.env.example`. `.env`를 복사한 뒤 `set -a; source data/.env; set +a`로 셸에 적용합니다. 문서는 [docs/](../docs/README.md), EDA 실험은 [notebooks/](notebooks/README.md)에 모읍니다.
+설정 예시: `.env.example`. `.env`를 복사한 뒤 `set -a; source data/.env; set +a`로 셸에 적용합니다. 문서는 [docs/](../docs/README.md), EDA 실험은 [notebooks/](analytics/notebooks/README.md)에 모읍니다.

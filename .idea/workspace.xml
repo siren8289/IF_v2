@@ -5,20 +5,60 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="데이터 api 연결 확인 완료">
-      <change beforePath="$PROJECT_DIR$/.idea/IF.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IF.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ingestion/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/processing/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/processing/external_normalization.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/processing/job_profiler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/data/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ingestion/clients/public_api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ingestion/collectors/external_public.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ingestion/external_public_ingestion.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ingestion/external_sources.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ingestion/snapshots/external/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/notebooks/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/data/analytics/notebooks/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/notebooks/data_test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/analytics/notebooks/data_test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pipelines/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pipelines/refresh_summary.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pipelines/run_all.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/processing/parsers/external_payload.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/processing/transforms/external_normalization.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/quality/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/quality/analytics_checks.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/quality/checks.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/quality/external_checks.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/quality/external_validation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/analytics/01_star_schema.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/analytics/02_refresh_fact.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/analytics/03_kpi_views.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/apply-schema.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/docker-init.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/external/01_reference_schema.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/external/02_indexes_constraints.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/external/03_seed_sources.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/init-db.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/migrations/001_add_updated_at.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/migrations/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/operational/01_tables.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/operational/02_indexes.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/operational/03_constraints.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/operational/04_summary.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/operational/05_seed_dev.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/storage/verify-db-efficiency.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/tests/fixtures/sample_region.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/tests/test_external_public_ingestion.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/REFACTOR_REPORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/REFACTOR_REPORT.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="8a3c71b5-2c89-4fed-94a7-c94dcef6b693" value="" />
+    </colors>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="400" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,35 +77,35 @@
     &quot;assignee&quot;: &quot;siren8289&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/siren8289/IF_v2.git",
-    "accountId": "00d02ef8-407e-4386-b6dc-788810f9146e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/siren8289/IF_v2.git&quot;,
+    &quot;accountId&quot;: &quot;00d02ef8-407e-4386-b6dc-788810f9146e&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.126840397597449" />
-      <entry key="MS500" value="3.7388726449683523" />
-      <entry key="S2" value="5.447953053642812" />
-      <entry key="S5" value="6.256230330929233" />
-      <entry key="S10" value="6.603125370879696" />
-      <entry key="S30" value="6.984426238539539" />
-      <entry key="S60" value="8.412544210547377" />
-      <entry key="M2" value="12.126822770800267" />
-      <entry key="M5" value="17.909514673867363" />
-      <entry key="M10" value="21.231077581304152" />
-      <entry key="M15" value="23.296773640484815" />
-      <entry key="M30" value="33.43613778021506" />
-      <entry key="H1" value="68.23978396366253" />
-      <entry key="H2" value="125.8612086898896" />
-      <entry key="H4" value="181.36735891347277" />
-      <entry key="D1" value="252.16461711652175" />
-      <entry key="W1" value="267.36440649718764" />
+      <entry key="MS100" value="1.0000057819998418" />
+      <entry key="MS500" value="1.0896509147352273" />
+      <entry key="S2" value="1.6203476640834662" />
+      <entry key="S5" value="2.1393859122423606" />
+      <entry key="S10" value="2.5417821466143913" />
+      <entry key="S30" value="3.427604685698098" />
+      <entry key="S60" value="4.20497850973116" />
+      <entry key="M2" value="5.333496081999592" />
+      <entry key="M5" value="7.573363718944524" />
+      <entry key="M10" value="13.655448962721161" />
+      <entry key="M15" value="22.296513740010173" />
+      <entry key="M30" value="47.897602297982985" />
+      <entry key="H1" value="92.2224420386768" />
+      <entry key="H2" value="160.58354018473716" />
+      <entry key="H4" value="232.6779058202673" />
+      <entry key="D1" value="333.9593940472362" />
+      <entry key="W1" value="356.96741049791973" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -87,23 +127,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.8276814074511223" />
-      <entry key="MS500" value="3.650586279235774" />
-      <entry key="S2" value="5.421904429558973" />
-      <entry key="S5" value="6.245163385818609" />
-      <entry key="S10" value="6.5974563626298846" />
-      <entry key="S30" value="6.98246144783364" />
-      <entry key="S60" value="8.411315494627633" />
-      <entry key="M2" value="12.125870892370061" />
-      <entry key="M5" value="17.908919251093696" />
-      <entry key="M10" value="21.230715192348168" />
-      <entry key="M15" value="23.296499833047523" />
-      <entry key="M30" value="33.43593033229417" />
-      <entry key="H1" value="68.23958698562971" />
-      <entry key="H2" value="125.86103933639194" />
-      <entry key="H4" value="181.36724057689023" />
-      <entry key="D1" value="252.16459021384318" />
-      <entry key="W1" value="267.3644024326498" />
+      <entry key="MS100" value="0.9075244025927733" />
+      <entry key="MS500" value="1.0687065831299205" />
+      <entry key="S2" value="1.612403814522773" />
+      <entry key="S5" value="2.135045147979512" />
+      <entry key="S10" value="2.5391748697266343" />
+      <entry key="S30" value="3.426486227384922" />
+      <entry key="S60" value="4.204318790677797" />
+      <entry key="M2" value="5.333089846603899" />
+      <entry key="M5" value="7.573136357238154" />
+      <entry key="M10" value="13.655192187182944" />
+      <entry key="M15" value="22.29617333507647" />
+      <entry key="M30" value="47.89716454754705" />
+      <entry key="H1" value="92.22202792123636" />
+      <entry key="H2" value="160.5832161399592" />
+      <entry key="H4" value="232.6776895414256" />
+      <entry key="D1" value="333.95934605632254" />
+      <entry key="W1" value="356.96740326352244" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -114,27 +154,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/jeong-yelim/IF_portfolio",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jeong-yelim/IF_portfolio&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/analytics" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

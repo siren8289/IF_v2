@@ -76,7 +76,7 @@ DB SQL은 storage/, 갱신 스크립트는 pipelines/, DB 품질 검사는 quali
 - `data/ingestion/clients/public_api.py`
 - `data/ingestion/collectors/__init__.py`
 - `data/ingestion/collectors/external_public.py`
-- `data/notebooks/README.md`
+- `../data/analytics/notebooks`
 - `data/pipelines/README.md`
 - `data/processing/__init__.py`
 - `data/processing/external_normalization.py`

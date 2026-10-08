@@ -23,3 +23,10 @@ data/.venv/
 # Python caches
 __pycache__/
 *.py[cod]
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local environment
+.venv/
+.env

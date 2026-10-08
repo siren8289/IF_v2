@@ -22,5 +22,5 @@
 
 ## 3. 원칙
 - **원형 보존**: EDA 단계에서는 컬럼 삭제, 전처리, JOIN, DB 적재를 수행하지 않고 원본 데이터 그대로 보존합니다.
-- **API Key**: `data/.env`의 `PUBLIC_DATA_API_KEY` 환경변수를 공통 사용합니다.
+- **API Key**: `../../.env`의 `PUBLIC_DATA_API_KEY` 환경변수를 공통 사용합니다.
 - **Raw 데이터**: 모든 API의 수집 원본은 `data/raw/*.csv`에 UTF-8-SIG 인코딩으로 저장됩니다.
