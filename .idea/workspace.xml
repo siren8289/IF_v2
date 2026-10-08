@@ -4,7 +4,75 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="공공데이터 디비 적재 완료" />
+    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="공공데이터 디비 적재 완료">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/spring/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/classes/java/main/com/example/demo/DemoApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/libs/spring-0.0.1-SNAPSHOT-plain.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/libs/spring-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/resolvedMainClassName" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/resources/main/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/resources/main/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/tmp/bootJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/DemoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/admin/entity/AdminUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/admin/entity/AdminUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/admin/repository/AdminUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/admin/repository/AdminUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/client/AIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/client/AIClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/dto/ExplainRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/dto/ExplainRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/dto/ExplainResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/dto/ExplainResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/dto/FactorExplanationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/dto/FactorExplanationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/dto/ScoreFactorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/dto/ScoreFactorDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/dto/ScoreRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/dto/ScoreRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/dto/ScoreResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/dto/ScoreResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/entity/AIRiskResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/entity/AIRiskResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/health/AiServiceHealthIndicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/health/AiServiceHealthIndicator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/repository/AIRiskResultRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/repository/AIRiskResultRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/ai/service/AIRiskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/service/AIRiskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/controller/ApplicantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/controller/ApplicantController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/dto/ApplicantCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/ApplicantCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/dto/ApplicantResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/ApplicantResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/dto/HealthSnapshotCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/HealthSnapshotCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/dto/HealthSnapshotResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/HealthSnapshotResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/entity/Applicant.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/entity/Applicant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/entity/HealthSnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/entity/HealthSnapshot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/repository/ApplicantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/repository/ApplicantRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/repository/HealthSnapshotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/repository/HealthSnapshotRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/applicant/service/ApplicantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/service/ApplicantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/controller/AssessmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/controller/AssessmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/controller/AssessmentRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/controller/AssessmentRecordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/dto/AssessmentCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/dto/AssessmentCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/dto/AssessmentRecordResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/dto/AssessmentRecordResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/dto/AssessmentResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/dto/AssessmentResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/dto/AssessmentRiskDetailResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/dto/AssessmentRiskDetailResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/dto/AssessmentSummaryResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/dto/AssessmentSummaryResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/dto/AssessmentUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/dto/AssessmentUpdateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/entity/Assessment.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/entity/Assessment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/entity/AssessmentStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/entity/AssessmentStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/repository/AssessmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/repository/AssessmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/assessment/service/AssessmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/service/AssessmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/config/RestTemplateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/config/SwaggerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/exception/AiServiceTimeoutException.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/exception/AiServiceTimeoutException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/exception/AiServiceUnavailableException.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/exception/AiServiceUnavailableException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/exception/InvalidRequestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/exception/InvalidRequestException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/exception/InvalidStatusTransitionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/exception/InvalidStatusTransitionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/exception/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/exception/NotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/response/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/global/response/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/response/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/job/controller/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/controller/JobController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/job/dto/JobResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/dto/JobResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/job/entity/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/entity/Job.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/job/repository/JobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/repository/JobRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/example/demo/job/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,7 +84,7 @@
     </colors>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="400" />
+    <option name="cachedIndexableFilesCount" value="472" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -35,73 +103,73 @@
     &quot;assignee&quot;: &quot;siren8289&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/siren8289/IF_v2.git&quot;,
-    &quot;accountId&quot;: &quot;00d02ef8-407e-4386-b6dc-788810f9146e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/siren8289/IF_v2.git",
+    "accountId": "8c505c11-8a43-47ad-93eb-84070cd25495"
   }
-}</component>
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.034118331539159" />
-      <entry key="MS500" value="2.0347503800696254" />
-      <entry key="S2" value="3.9530690515929945" />
-      <entry key="S5" value="5.325455096796463" />
-      <entry key="S10" value="6.053136819740451" />
-      <entry key="S30" value="6.655601743469559" />
-      <entry key="S60" value="6.823885057841849" />
-      <entry key="M2" value="6.913906632295452" />
-      <entry key="M5" value="7.445907317228227" />
-      <entry key="M10" value="10.410296219871231" />
-      <entry key="M15" value="14.436316335587726" />
-      <entry key="M30" value="27.35478611893454" />
-      <entry key="H1" value="56.89651287535118" />
-      <entry key="H2" value="120.79958943515376" />
-      <entry key="H4" value="211.0868692992392" />
-      <entry key="D1" value="373.3031677298007" />
-      <entry key="W1" value="415.42626436171923" />
+      <entry key="MS100" value="1.0009118061345865" />
+      <entry key="MS500" value="1.5761406687898099" />
+      <entry key="S2" value="5.072011927072924" />
+      <entry key="S5" value="9.279261864883983" />
+      <entry key="S10" value="11.99708532499952" />
+      <entry key="S30" value="14.485601633138284" />
+      <entry key="S60" value="15.295072523340465" />
+      <entry key="M2" value="16.342299771771813" />
+      <entry key="M5" value="18.885914416079505" />
+      <entry key="M10" value="22.578571931031686" />
+      <entry key="M15" value="26.663785857522896" />
+      <entry key="M30" value="39.54279705227722" />
+      <entry key="H1" value="68.80021431466373" />
+      <entry key="H2" value="132.37797096474767" />
+      <entry key="H4" value="223.19029008880614" />
+      <entry key="D1" value="388.14617626645224" />
+      <entry key="W1" value="431.2420938732633" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="9.350050801801398E-234" />
-      <entry key="S10" value="3.057785277255646E-117" />
-      <entry key="S30" value="1.4514508312069958E-39" />
-      <entry key="S60" value="3.809791111343244E-20" />
-      <entry key="M2" value="1.9518686204105136E-10" />
-      <entry key="M5" value="1.3067130634461762E-4" />
-      <entry key="M10" value="0.011431155074821514" />
-      <entry key="M15" value="0.050745018006209806" />
-      <entry key="M30" value="0.22526654879544328" />
-      <entry key="H1" value="0.47462253296218776" />
-      <entry key="H2" value="0.6889285398081488" />
-      <entry key="H4" value="0.8300171924774504" />
-      <entry key="D1" value="0.9694256682499335" />
-      <entry key="W1" value="0.9955738988379341" />
+      <entry key="S5" value="4.861226603142792E-257" />
+      <entry key="S10" value="6.972249710920277E-129" />
+      <entry key="S30" value="1.9104000067638258E-43" />
+      <entry key="S60" value="4.370812289224773E-22" />
+      <entry key="M2" value="2.0906487723251766E-11" />
+      <entry key="M5" value="5.3470276649410914E-5" />
+      <entry key="M10" value="0.007312337290457201" />
+      <entry key="M15" value="0.03767363076857488" />
+      <entry key="M30" value="0.19409696228579906" />
+      <entry key="H1" value="0.44056436792573084" />
+      <entry key="H2" value="0.6637502300758403" />
+      <entry key="H4" value="0.8147086780413231" />
+      <entry key="D1" value="0.9664225545753596" />
+      <entry key="W1" value="0.9951327247158638" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.019405653451712" />
-      <entry key="MS500" value="2.024481712126073" />
-      <entry key="S2" value="3.9442358999715488" />
-      <entry key="S5" value="5.3192325359262" />
-      <entry key="S10" value="6.049232318668807" />
-      <entry key="S30" value="6.654071879481501" />
-      <entry key="S60" value="6.823087582530621" />
-      <entry key="M2" value="6.913484611115342" />
-      <entry key="M5" value="7.444896488447232" />
-      <entry key="M10" value="10.418082379810825" />
-      <entry key="M15" value="14.481748412690337" />
-      <entry key="M30" value="27.573316406056215" />
-      <entry key="H1" value="57.36533529893817" />
-      <entry key="H2" value="121.48457718255317" />
-      <entry key="H4" value="211.91454559189785" />
-      <entry key="D1" value="374.2721343385172" />
-      <entry key="W1" value="416.42177065101697" />
+      <entry key="MS100" value="0.17278625063578662" />
+      <entry key="MS500" value="1.2155374919623059" />
+      <entry key="S2" value="4.848222826386633" />
+      <entry key="S5" value="9.137809154752091" />
+      <entry key="S10" value="11.9104125339703" />
+      <entry key="S30" value="14.45194267804676" />
+      <entry key="S60" value="15.277539260943753" />
+      <entry key="M2" value="16.33331038767816" />
+      <entry key="M5" value="18.881878276976874" />
+      <entry key="M10" value="22.581733795090653" />
+      <entry key="M15" value="26.696300866356868" />
+      <entry key="M30" value="39.730481867068164" />
+      <entry key="H1" value="69.23509058496141" />
+      <entry key="H2" value="133.0377722762641" />
+      <entry key="H4" value="224.00262495315695" />
+      <entry key="D1" value="389.11212850031933" />
+      <entry key="W1" value="432.23715720645924" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -117,6 +185,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -137,13 +206,16 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/spring/src/main" />
+      <recent name="$PROJECT_DIR$/spring/src" />
       <recent name="$PROJECT_DIR$/data/analytics" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-821f704e66d9-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.9437.214" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
       </set>
     </attachedChunks>
   </component>
