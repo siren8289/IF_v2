@@ -1,0 +1,13 @@
+﻿dataset,status,rows,columns
+PUB-001_자립형일자리_행정구역코드,SUCCESS,19,7
+PUB-002A_노인사회활동_지역코드,SUCCESS,340,6
+PUB-002B_노인사회활동_기관코드,SUCCESS,3935,4
+PUB-003_자립형일자리_수행기관,SUCCESS,1485,10
+PUB-004_자립형일자리_사업모집공고,FAILED: RuntimeError: 최대 30페이지에 도달했습니다. 데이터 유실 방지를 위해 완료 파일로 저장하지 않습니다.,0,0
+PUB-011_100세누리_구인정보,FAILED: RuntimeError: 동일한 페이지가 반복 반환되었습니다. 페이지 파라미터 또는 필수 검색조건을 확인하세요.,0,0
+PUB-005_장기요양_인정현황,SUCCESS,210,19
+PUB-006_연령별_재해자수,SUCCESS,82,44
+PUB-007_산업중분류별_사고재해,SUCCESS,180,45
+PUB-008_노동지청별_재해자수,SUCCESS,294,44
+PUB-009_산업규모별_재해자수,SUCCESS,180,36
+PUB-010_시도별_장기요양판정,SUCCESS,8001,8

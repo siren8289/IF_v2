@@ -4,48 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="데이터 api 연결 확인 완료">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="공공데이터 raw 데이터 추출 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/data/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ingestion/clients/public_api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ingestion/collectors/external_public.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ingestion/external_public_ingestion.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ingestion/external_sources.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ingestion/snapshots/external/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/notebooks/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/data/analytics/notebooks/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/notebooks/data_test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/analytics/notebooks/data_test.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pipelines/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pipelines/refresh_summary.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pipelines/run_all.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/processing/parsers/external_payload.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/processing/transforms/external_normalization.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/quality/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/quality/analytics_checks.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/quality/checks.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/quality/external_checks.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/quality/external_validation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/analytics/01_star_schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/analytics/02_refresh_fact.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/analytics/03_kpi_views.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/apply-schema.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/docker-init.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/external/01_reference_schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/external/02_indexes_constraints.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/external/03_seed_sources.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/init-db.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/migrations/001_add_updated_at.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/migrations/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/operational/01_tables.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/operational/02_indexes.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/operational/03_constraints.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/operational/04_summary.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/operational/05_seed_dev.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storage/verify-db-efficiency.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tests/fixtures/sample_region.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tests/test_external_public_ingestion.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/REFACTOR_REPORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/REFACTOR_REPORT.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,61 +49,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000057819998418" />
-      <entry key="MS500" value="1.0896509147352273" />
-      <entry key="S2" value="1.6203476640834662" />
-      <entry key="S5" value="2.1393859122423606" />
-      <entry key="S10" value="2.5417821466143913" />
-      <entry key="S30" value="3.427604685698098" />
-      <entry key="S60" value="4.20497850973116" />
-      <entry key="M2" value="5.333496081999592" />
-      <entry key="M5" value="7.573363718944524" />
-      <entry key="M10" value="13.655448962721161" />
-      <entry key="M15" value="22.296513740010173" />
-      <entry key="M30" value="47.897602297982985" />
-      <entry key="H1" value="92.2224420386768" />
-      <entry key="H2" value="160.58354018473716" />
-      <entry key="H4" value="232.6779058202673" />
-      <entry key="D1" value="333.9593940472362" />
-      <entry key="W1" value="356.96741049791973" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000007508876" />
+      <entry key="S2" value="1.010371717346002" />
+      <entry key="S5" value="1.3069153787168162" />
+      <entry key="S10" value="1.9575169713547802" />
+      <entry key="S30" value="3.0698391737137825" />
+      <entry key="S60" value="3.7574764676227725" />
+      <entry key="M2" value="5.124441738364092" />
+      <entry key="M5" value="9.49754569485661" />
+      <entry key="M10" value="15.221514511760759" />
+      <entry key="M15" value="20.12083922603626" />
+      <entry key="M30" value="33.464840162007384" />
+      <entry key="H1" value="63.97251359873746" />
+      <entry key="H2" value="128.85312958821123" />
+      <entry key="H4" value="217.16555119090944" />
+      <entry key="D1" value="370.11487086927485" />
+      <entry key="W1" value="409.030719177128" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="0.0" />
-      <entry key="M15" value="0.0" />
-      <entry key="M30" value="0.0" />
-      <entry key="H1" value="0.0" />
-      <entry key="H2" value="0.0" />
-      <entry key="H4" value="0.0" />
-      <entry key="D1" value="0.0" />
-      <entry key="W1" value="0.0" />
+      <entry key="S5" value="4.5365098851979203E-156" />
+      <entry key="S10" value="2.129908421786701E-78" />
+      <entry key="S30" value="1.2866299113730597E-26" />
+      <entry key="S60" value="1.1342971001342912E-13" />
+      <entry key="M2" value="3.3679327489341155E-7" />
+      <entry key="M5" value="0.002575997067912261" />
+      <entry key="M10" value="0.05075428127667914" />
+      <entry key="M15" value="0.13708242802604026" />
+      <entry key="M30" value="0.3702464422868102" />
+      <entry key="H1" value="0.6084787936212813" />
+      <entry key="H2" value="0.7800505070963557" />
+      <entry key="H4" value="0.8832046801825475" />
+      <entry key="D1" value="0.9795130511460118" />
+      <entry key="W1" value="0.9970472654364181" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9075244025927733" />
-      <entry key="MS500" value="1.0687065831299205" />
-      <entry key="S2" value="1.612403814522773" />
-      <entry key="S5" value="2.135045147979512" />
-      <entry key="S10" value="2.5391748697266343" />
-      <entry key="S30" value="3.426486227384922" />
-      <entry key="S60" value="4.204318790677797" />
-      <entry key="M2" value="5.333089846603899" />
-      <entry key="M5" value="7.573136357238154" />
-      <entry key="M10" value="13.655192187182944" />
-      <entry key="M15" value="22.29617333507647" />
-      <entry key="M30" value="47.89716454754705" />
-      <entry key="H1" value="92.22202792123636" />
-      <entry key="H2" value="160.5832161399592" />
-      <entry key="H4" value="232.6776895414256" />
-      <entry key="D1" value="333.95934605632254" />
-      <entry key="W1" value="356.96740326352244" />
+      <entry key="MS100" value="8.131359975509232E-7" />
+      <entry key="MS500" value="0.060538637191923504" />
+      <entry key="S2" value="0.5050853684032834" />
+      <entry key="S5" value="1.0470467789384863" />
+      <entry key="S10" value="1.8029017179558953" />
+      <entry key="S30" value="3.006681148796257" />
+      <entry key="S60" value="3.720538136595844" />
+      <entry key="M2" value="5.098859752683416" />
+      <entry key="M5" value="9.480870474367308" />
+      <entry key="M10" value="15.256452777733177" />
+      <entry key="M15" value="20.24371866754338" />
+      <entry key="M30" value="33.824060439933696" />
+      <entry key="H1" value="64.57357425698306" />
+      <entry key="H2" value="129.6287259147215" />
+      <entry key="H4" value="218.04626865362152" />
+      <entry key="D1" value="371.09392066774797" />
+      <entry key="W1" value="410.02769881560704" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -154,28 +114,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jeong-yelim/IF_portfolio&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jeong-yelim/IF_portfolio",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/analytics" />
@@ -204,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791447044592</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="공공데이터 raw 데이터 추출 완료">
+      <option name="closed" value="true" />
+      <created>1791471064030</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1791471064030</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +192,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="데이터 api 연결 확인 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="데이터 api 연결 확인 완료" />
+    <MESSAGE value="공공데이터 raw 데이터 추출 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="공공데이터 raw 데이터 추출 완료" />
   </component>
 </project>

@@ -1,0 +1,6 @@
+﻿dataset,status,raw_rows,clean_rows,columns,duplicates_removed,post_duplicates,null_cells,file
+장기요양 인정현황,SUCCESS,210,210,20,0,0,638,/Users/jeong-yelim/IF_portfolio/data/analytics/processed/ltc_status_clean.csv
+시도별 장기요양 판정,SUCCESS,8001,7998,9,3,0,0,/Users/jeong-yelim/IF_portfolio/data/analytics/processed/ltc_region_clean.csv
+연령별 재해,SUCCESS,82,82,43,0,0,1681,/Users/jeong-yelim/IF_portfolio/data/analytics/processed/accident_age_clean.csv
+산업별 사고재해,SUCCESS,180,180,44,0,0,3690,/Users/jeong-yelim/IF_portfolio/data/analytics/processed/_________clean.csv
+산업규모별 재해,SUCCESS,180,180,35,0,0,3780,/Users/jeong-yelim/IF_portfolio/data/analytics/processed/accident_size_clean.csv
