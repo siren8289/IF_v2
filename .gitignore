@@ -12,10 +12,14 @@ ai/data/interim/
 ai/data/marts/
 ai/.venv/
 
-# de: 공공 ingestion 산출물 (스키마/코드만 버전 관리)
-de/data/external/raw/
-de/data/external/validated/
-de/data/external/serving/
-de/data/external/manifests/
-de/data/external/lineage/
-de/.venv/
+# data: 공공 ingestion 산출물 (스키마/코드만 버전 관리)
+data/ingestion/snapshots/external/raw/
+data/ingestion/snapshots/external/validated/
+data/ingestion/snapshots/external/serving/
+data/ingestion/snapshots/external/manifests/
+data/ingestion/snapshots/external/lineage/
+data/.venv/
+
+# Python caches
+__pycache__/
+*.py[cod]

@@ -4,7 +4,9 @@
 
 > **IF는 대시보드 목록 조회의 N+1 가능성을 DTO Projection으로 차단하고, PostgreSQL 인덱스·Materialized View·Star Schema·증분 적재 구조를 추가해 조회 성능과 데이터 분석 확장성을 함께 개선한 프로젝트입니다.**
 
-데이터 분석 관련 문서는 [`da/README.md`](da/README.md), Data Engineering은 [`de/README.md`](de/README.md), DB 진입점은 [`db/README.md`](db/README.md) 아래로 정리했습니다.
+데이터 파이프라인 진입점은 [`data/README.md`](data/README.md)입니다. 공공데이터 API → 수집 → 정제·품질 검사 → PostgreSQL → 분석/AI → Spring API → Vite 흐름으로 구성합니다.
+
+데이터 분석 관련 문서는 [`docs/analytics/README.md`](docs/analytics/README.md), Data Engineering은 [`docs/ingestion/README.md`](docs/ingestion/README.md), DB 진입점은 [`docs/storage.md`](docs/storage.md) 아래로 정리했습니다.
 
 ---
 
@@ -150,7 +152,7 @@ Service 트랜잭션 안에서 필요한 데이터를 다 가져오게 강제
 
 Entity에 `@Index`를 선언해 자주 조회되는 컬럼을 명시했습니다.
 
-다만 운영 DB에서는 Entity annotation만 믿기보다 실제 운영 스키마 반영용 SQL을 별도로 관리하는 것이 더 안전합니다. 그래서 IF는 `db/operational/02_indexes.sql`에 운영 인덱스 SQL을 분리해두었습니다.
+다만 운영 DB에서는 Entity annotation만 믿기보다 실제 운영 스키마 반영용 SQL을 별도로 관리하는 것이 더 안전합니다. 그래서 IF는 `data/storage/operational/02_indexes.sql`에 운영 인덱스 SQL을 분리해두었습니다.
 
 ```text id="7u1z2r"
 Entity @Index:
@@ -206,16 +208,16 @@ Assessment 5건 생성
 
 | 항목                   | 내용                                                           | 주요 파일                               |
 | -------------------- | ------------------------------------------------------------ | ----------------------------------- |
-| B-tree / 복합 인덱스      | `assessed_at`, `status`, `(applicant_id, assessed_at)` 등 12개 | `db/operational/02_indexes.sql`     |
-| Partial Index        | `risk_grade = 'HIGH'`만 인덱싱                                   | `db/operational/02_indexes.sql`     |
-| Materialized View    | 대시보드 집계 MV 구성                                                | `db/operational/04_summary.sql`     |
-| Star Schema          | `dim_date`, `dim_job`, `dim_applicant`, `fact_assessment`    | `db/analytics/01_star_schema.sql`   |
-| 증분 적재                | `updated_at` 기준 UPSERT                                       | `db/analytics/02_refresh_fact.sql`  |
-| CHECK / FK / Trigger | 데이터 무결성 강화                                                   | `db/operational/03_constraints.sql` |
-| 품질 검사 SQL            | PK, FK, 허용값 검증                                               | `db/quality/checks.sql`             |
-| 파이프라인                | 적재 → 검사 → MV 갱신                                              | `db/pipeline/run_all.sh`            |
-| EXPLAIN 검증           | 인덱스 효과 확인                                                    | `db/verify-db-efficiency.sql`       |
-| 로드맵 문서               | DB 효율화 적용 현황                                                 | `db/README.md`                      |
+| B-tree / 복합 인덱스      | `assessed_at`, `status`, `(applicant_id, assessed_at)` 등 12개 | `data/storage/operational/02_indexes.sql`     |
+| Partial Index        | `risk_grade = 'HIGH'`만 인덱싱                                   | `data/storage/operational/02_indexes.sql`     |
+| Materialized View    | 대시보드 집계 MV 구성                                                | `data/storage/operational/04_summary.sql`     |
+| Star Schema          | `dim_date`, `dim_job`, `dim_applicant`, `fact_assessment`    | `data/storage/analytics/01_star_schema.sql`   |
+| 증분 적재                | `updated_at` 기준 UPSERT                                       | `data/storage/analytics/02_refresh_fact.sql`  |
+| CHECK / FK / Trigger | 데이터 무결성 강화                                                   | `data/storage/operational/03_constraints.sql` |
+| 품질 검사 SQL            | PK, FK, 허용값 검증                                               | `data/quality/checks.sql`             |
+| 파이프라인                | 적재 → 검사 → MV 갱신                                              | `data/pipelines/run_all.sh`            |
+| EXPLAIN 검증           | 인덱스 효과 확인                                                    | `data/storage/verify-db-efficiency.sql`       |
+| 로드맵 문서               | DB 효율화 적용 현황                                                 | `docs/storage.md`                      |
 
 ---
 

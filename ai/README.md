@@ -63,7 +63,7 @@ python -m src.etl.01_build_job_risk_by_region
 
 ### 4. 공공 Reference/Context 수집
 
-공공 DE 파이프라인(코드·DDL·DQ·테스트)은 루트 [`de/`](../de/) 로 분리했습니다. 실행·스펙은 [`de/README.md`](../de/README.md), [`de/DE.md`](../de/DE.md)를 보세요.
+공공 DE 파이프라인(코드·DDL·DQ·테스트)은 루트 [`data/`](../data/) 로 분리했습니다. 실행·스펙은 [`docs/ingestion/README.md`](../docs/ingestion/README.md), [`docs/ingestion/DE.md`](../docs/ingestion/DE.md)를 보세요.
 
 ### 5. FastAPI 실행
 
@@ -80,7 +80,7 @@ uvicorn src.app.main:app --reload
 - `POST /explain`
   - 입력: 이미 계산된 `risk_score` / `risk_band` / `top_factors` / 비식별 요약
   - Gemini로 자연어 설명만 생성 (`prompt_v1`). 실패 시 deterministic fallback
-  - 스펙·Evidence: 루트 `AI.md`
+  - 스펙·Evidence: `docs/AI.md`
 
 ML 실험 공간(미서빙): `ai/ml/` — 승인 gate 전 `/score`에 연결하지 않음.
 ### 6. 테스트
@@ -90,7 +90,7 @@ PYTHONPATH=. python3 -m unittest discover -s tests
 ```
 
 포함: AI score 불변성·guardrails·fallback (`tests/test_ai_invariants.py`).  
-공공 ingestion 테스트는 `de/tests/` 에 있습니다.
+공공 ingestion 테스트는 `data/tests/` 에 있습니다.
 
 ### 7. 다음 확장 포인트
 

@@ -1,0 +1,60 @@
+IF_v2/  (현재 작업 폴더명: IF_portfolio)
+├── web-vite/                         # React + Vite · 기존 시각화
+├── spring/                           # Spring Boot · 기존 Java 구조
+├── ai/                               # FastAPI · AI 추론 · 기존 전처리
+├── data/
+│   ├── ingestion/
+│   │   ├── clients/public_api.py      # HTTP·파일 입력
+│   │   ├── collectors/external_public.py # 수집·serving·lineage·CLI
+│   │   ├── external_sources.json      # Source contract
+│   │   ├── snapshots/external/        # 실행 산출물 (Git 제외)
+│   │   └── external_public_ingestion.py # 이전 CLI 호환 진입점
+│   ├── processing/
+│   │   ├── parsers/external_payload.py
+│   │   ├── transforms/external_normalization.py
+│   │   └── external_normalization.py  # 이전 import 호환
+│   ├── storage/
+│   │   ├── operational/              # 01_tables ~ 05_seed_dev SQL
+│   │   ├── external/                 # Reference DDL·index·source seed SQL
+│   │   ├── analytics/                # Star schema·fact refresh·KPI SQL
+│   │   ├── migrations/001_add_updated_at.sql
+│   │   ├── apply-schema.sh
+│   │   ├── init-db.sh
+│   │   ├── docker-init.sh
+│   │   └── verify-db-efficiency.sql
+│   ├── pipelines/
+│   │   ├── run_all.sh                # DB 증분 적재·품질·MV·로그
+│   │   ├── refresh_summary.sql
+│   │   └── README.md
+│   ├── notebooks/README.md           # EDA·실험 위치; 기존 notebook 없음
+│   ├── quality/
+│   │   ├── external_validation.py
+│   │   ├── external_checks.sql
+│   │   ├── analytics_checks.sql
+│   │   ├── checks.sql
+│   │   └── README.md
+│   ├── tests/
+│   │   ├── test_external_public_ingestion.py
+│   │   └── fixtures/sample_region.xml
+│   ├── .env.example
+│   ├── requirements.txt
+│   └── README.md
+├── docs/
+│   ├── ingestion/                    # 기존 DE 문서
+│   ├── analytics/                    # 기존 DA 문서
+│   ├── AI.md
+│   ├── BE.md
+│   ├── ML.md
+│   ├── QA.md
+│   ├── storage.md
+│   ├── processing.md
+│   ├── README.md
+│   ├── STRUCTURE_FULL.txt
+│   └── REFACTOR_REPORT.md
+├── .github/workflows/githubactions.yml
+├── .gitignore
+├── README.md
+└── docker-compose.yml
+
+공공 API → clients/collectors → parsers/transforms + quality → PostgreSQL storage → 분석/AI → Spring → Vite
+현재 공공 Parquet → PostgreSQL 자동 적재는 미구현이며 폴더 변경으로 새 기능을 추가하지 않는다.

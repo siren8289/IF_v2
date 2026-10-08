@@ -1,7 +1,7 @@
 # ML experiments (PROPOSED — not in MVP serving path)
 
 Authoritative production score is **rule + statistics** (`rule_stat_v1`).
-See root [`ML.md`](../../ML.md).
+See [`docs/ML.md`](../../docs/ML.md).
 
 This directory is reserved for future:
 

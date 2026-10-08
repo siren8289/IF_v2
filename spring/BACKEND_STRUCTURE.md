@@ -1,7 +1,7 @@
 ## IF Spring Backend 구조·유지보수 기준
 
 이 문서는 고령자 노동·돌봄 규제 판단 웹앱의 **Spring + PostgreSQL 백엔드** 구조를 정리한 것이다.
-제품/계약 스펙·Evidence는 루트 [`BE.md`](../BE.md)를 따른다.
+제품/계약 스펙·Evidence는 [`docs/BE.md`](../docs/BE.md)를 따른다.
 
 핵심 목표는 **기능(도메인) 단위로 코드를 묶어서**, 기능 추가·변경 시 영향 범위를 쉽게 파악하는 것이다.
 
@@ -123,35 +123,38 @@ com.example.demo
 
 #### 6-1. 로컬 DB 최초 생성 (한 번만)
 
-DB는 루트 **`db/`** (+ 공공 Reference `de/external/`) 가 단일 소스다. Hibernate는 `ddl-auto: validate`만 수행한다.
+DB는 루트 **`data/storage/`** (+ 공공 Reference `data/storage/external/`) 가 단일 소스다. Hibernate는 `ddl-auto: validate`만 수행한다.
 
 ```
-db/
-├── operational/     운영 DB (정규화 6테이블 + pipeline_run_log)
-├── analytics/       Star Schema (dim_* + fact_assessment)
-├── quality/         데이터 품질 SQL 테스트
-├── pipeline/        증분 적재 → 검사 → MV 갱신
-├── init-db.sh       Postgres 계정·DB 생성
-└── apply-schema.sh  SQL 일괄 적용 (de/external 포함)
-de/
-├── external/        공공 Reference/Context DDL
-└── quality/         external_checks.sql
+data/
+├── storage/
+│   ├── operational/  운영 테이블·인덱스·제약·요약
+│   ├── external/     공공 Reference DDL·source seed
+│   ├── analytics/    Star Schema·KPI view
+│   ├── migrations/   컬럼 보강 SQL
+│   ├── init-db.sh
+│   └── apply-schema.sh
+├── ingestion/        clients · collectors
+├── processing/       parsers · transforms
+├── pipelines/        증분 fact → 검사 → MV 갱신
+└── quality/          Python · SQL DQ
+docs/                 수집·분석·Backend 문서
 ```
 
 ```bash
 # 레포 루트에서
-chmod +x db/*.sh db/pipeline/*.sh
-./db/init-db.sh                    # DB 생성 + 스키마 + 시드
+chmod +x data/storage/*.sh data/pipelines/*.sh
+./data/storage/init-db.sh                    # DB 생성 + 스키마 + 시드
 cd spring && ./gradlew bootRun
 
 # 스키마만 재적용
-./db/apply-schema.sh
+./data/storage/apply-schema.sh
 
 # 파이프라인 1 run (증분 fact + 품질 + MV)
-./db/pipeline/run_all.sh
+./data/pipelines/run_all.sh
 
 # EXPLAIN 검증
-PGPASSWORD=change-me psql -h localhost -U if_user -d if_spring -f db/verify-db-efficiency.sql
+PGPASSWORD=change-me psql -h localhost -U if_user -d if_spring -f data/storage/verify-db-efficiency.sql
 ```
 
 `docker compose up --build`로 띄우면 `postgres` 서비스가 위 과정을 컨테이너 안에서 대신 해준다
