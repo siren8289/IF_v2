@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/notebooks/data_test.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/processing/job_profiler.py" afterDir="false" />
+    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="데이터 api 연결 확인 완료">
       <change beforePath="$PROJECT_DIR$/.idea/IF.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IF.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/notebooks/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/data/notebooks/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ingestion/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/processing/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/processing/external_normalization.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/processing/job_profiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,23 +49,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0000000000000255" />
-      <entry key="S10" value="1.0000001597589399" />
-      <entry key="S30" value="1.0054261087880116" />
-      <entry key="S60" value="1.0737343000719608" />
-      <entry key="M2" value="1.2888403256284289" />
-      <entry key="M5" value="2.6943398341971263" />
-      <entry key="M10" value="11.718385292723246" />
-      <entry key="M15" value="25.730355527179277" />
-      <entry key="M30" value="67.15957751218518" />
-      <entry key="H1" value="118.77381334180507" />
-      <entry key="H2" value="162.8921754311402" />
-      <entry key="H4" value="192.49921974032867" />
-      <entry key="D1" value="222.36151489378466" />
-      <entry key="W1" value="228.03691367341324" />
+      <entry key="MS100" value="2.126840397597449" />
+      <entry key="MS500" value="3.7388726449683523" />
+      <entry key="S2" value="5.447953053642812" />
+      <entry key="S5" value="6.256230330929233" />
+      <entry key="S10" value="6.603125370879696" />
+      <entry key="S30" value="6.984426238539539" />
+      <entry key="S60" value="8.412544210547377" />
+      <entry key="M2" value="12.126822770800267" />
+      <entry key="M5" value="17.909514673867363" />
+      <entry key="M10" value="21.231077581304152" />
+      <entry key="M15" value="23.296773640484815" />
+      <entry key="M30" value="33.43613778021506" />
+      <entry key="H1" value="68.23978396366253" />
+      <entry key="H2" value="125.8612086898896" />
+      <entry key="H4" value="181.36735891347277" />
+      <entry key="D1" value="252.16461711652175" />
+      <entry key="W1" value="267.36440649718764" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -83,23 +87,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.30566006942301716" />
-      <entry key="MS500" value="0.7889468408524652" />
-      <entry key="S2" value="0.9424578483106844" />
-      <entry key="S5" value="0.9765731377944544" />
-      <entry key="S10" value="0.9882173106600717" />
-      <entry key="S30" value="1.001480332423613" />
-      <entry key="S60" value="1.0717429004424963" />
-      <entry key="M2" value="1.2878187735019895" />
-      <entry key="M5" value="2.693889339508535" />
-      <entry key="M10" value="11.71806469923936" />
-      <entry key="M15" value="25.730047273430262" />
-      <entry key="M30" value="67.1592781589499" />
-      <entry key="H1" value="118.77356308583558" />
-      <entry key="H2" value="162.89200286145268" />
-      <entry key="H4" value="192.49911650521656" />
-      <entry key="D1" value="222.36149471265338" />
-      <entry key="W1" value="228.03691070770427" />
+      <entry key="MS100" value="1.8276814074511223" />
+      <entry key="MS500" value="3.650586279235774" />
+      <entry key="S2" value="5.421904429558973" />
+      <entry key="S5" value="6.245163385818609" />
+      <entry key="S10" value="6.5974563626298846" />
+      <entry key="S30" value="6.98246144783364" />
+      <entry key="S60" value="8.411315494627633" />
+      <entry key="M2" value="12.125870892370061" />
+      <entry key="M5" value="17.908919251093696" />
+      <entry key="M10" value="21.230715192348168" />
+      <entry key="M15" value="23.296499833047523" />
+      <entry key="M30" value="33.43593033229417" />
+      <entry key="H1" value="68.23958698562971" />
+      <entry key="H2" value="125.86103933639194" />
+      <entry key="H4" value="181.36724057689023" />
+      <entry key="D1" value="252.16459021384318" />
+      <entry key="W1" value="267.3644024326498" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -146,6 +150,15 @@
       <option name="presentableId" value="Default" />
       <updated>1770724876612</updated>
     </task>
+    <task id="LOCAL-00001" summary="데이터 api 연결 확인 완료">
+      <option name="closed" value="true" />
+      <created>1791447044591</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1791447044592</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,5 +174,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="데이터 api 연결 확인 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="데이터 api 연결 확인 완료" />
   </component>
 </project>
