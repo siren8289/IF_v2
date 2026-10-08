@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Brain } from "lucide-react";
 
+// 위험도 계산 대기 화면(표시 전용). 데이터 처리는 useComputeRisk가 담당한다.
 export function RiskAnalyzing() {
   return (
     <div className="flex flex-col items-center justify-center py-20">

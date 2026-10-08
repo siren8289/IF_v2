@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { motion } from "motion/react";
 
 interface AuthShellProps {
+  // 좌측 브랜딩 패널 내용(제목/설명/뱃지)은 화면별로 다르므로 슬롯으로 받는다.
   title: ReactNode;
   description: ReactNode;
   badges: ReactNode;

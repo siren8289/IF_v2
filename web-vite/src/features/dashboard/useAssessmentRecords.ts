@@ -24,6 +24,7 @@ export function useAssessmentRecords() {
     setLoading(true);
     setError(null);
     try {
+      // 목록과 요약을 병렬로 요청해 화면이 한 번에 갱신되게 한다.
       const [list, summaryRes] = await Promise.all([
         listAssessmentRecords(page, PAGE_SIZE),
         getAssessmentSummary(),
@@ -44,6 +45,7 @@ export function useAssessmentRecords() {
     load(0);
   }, [load]);
 
+  // 삭제/수정 후에는 로컬 목록을 고치지 않고 서버 상태를 다시 조회해 요약 카드와 맞춘다.
   const remove = async (id: string) => {
     try {
       await deleteAssessment(Number(id));

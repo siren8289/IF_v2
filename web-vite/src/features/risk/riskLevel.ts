@@ -1,5 +1,6 @@
 import type { RiskLevel } from "@/shared/model/assessment";
 
+// 등급별 색상/라벨 (Tailwind 클래스 + 게이지 SVG stroke 색)
 export const RISK_LEVEL_STYLE: Record<
   RiskLevel,
   { color: string; bg: string; border: string; text: string; stroke: string }

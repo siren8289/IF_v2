@@ -1,5 +1,6 @@
 /** Backend API DTOs (align with openapi.yml / Spring DTOs) */
 
+/** 신청자 등록 응답 */
 export interface ApplicantResponse {
   id: number;
   displayName: string;
@@ -7,17 +8,20 @@ export interface ApplicantResponse {
   createdAt: string;
 }
 
+/** POST /api/applicants 요청 본문 */
 export interface ApplicantCreateRequest {
   displayName: string;
   age: number;
 }
 
+/** POST /api/applicants/{id}/health-snapshots 요청 본문 */
 export interface HealthSnapshotCreateRequest {
   physicalLevel: number;
   chronicDiseaseFlag: boolean;
   workHourLimit: number;
 }
 
+/** 건강 스냅샷 등록 응답. id를 평가 생성(healthId)에 사용한다. */
 export interface HealthSnapshotResponse {
   id: number;
   applicantId: number;
@@ -27,6 +31,7 @@ export interface HealthSnapshotResponse {
   createdAt: string;
 }
 
+/** 평가 생성 응답. id로 분석/결과 화면 URL을 만든다. */
 export interface AssessmentResponse {
   id: number;
   applicantId: number;
@@ -34,11 +39,13 @@ export interface AssessmentResponse {
   assessedAt: string;
 }
 
+/** POST /api/applicants/{id}/assessments 요청 본문 */
 export interface AssessmentCreateRequest {
   jobId: number;
   healthId: number;
 }
 
+/** GET /api/jobs 항목 (평가 대상 직무) */
 export interface JobResponse {
   id: number;
   jobTitle: string;
@@ -48,6 +55,7 @@ export interface JobResponse {
   createdAt: string;
 }
 
+/** GET /api/assessments/{id}/risk-detail: FastAPI 점수/설명을 Spring이 합쳐 내려준 결과 */
 export interface AssessmentRiskDetailResponse {
   riskScore: number;
   riskBand: string;

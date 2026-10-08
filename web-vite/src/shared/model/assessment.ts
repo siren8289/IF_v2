@@ -1,3 +1,4 @@
+// 화면 도메인 모델과 서버 값 <-> 화면 값 변환 규칙. 여러 기능(대시보드/평가/위험도)이 공유한다.
 export type RiskLevel = "Low" | "Medium" | "High";
 export type AssessmentStatus = "Draft" | "Analyzed" | "Completed";
 export type HealthStatus = "good" | "average" | "bad";
@@ -15,22 +16,26 @@ export interface Assessment {
   status: AssessmentStatus;
 }
 
+/** 상태 수정 모달의 선택지 (value는 서버 상태 값). */
 export const STATUS_OPTIONS: { value: string; label: string }[] = [
   { value: "PENDING_AI", label: "AI 대기" },
   { value: "AI_COMPLETED", label: "분석 완료" },
   { value: "FINALIZED", label: "확정" },
 ];
 
+// 서버 상태 -> 화면 상태 매핑 테이블
 const STATUS_FROM_API: Record<string, AssessmentStatus> = {
   PENDING_AI: "Draft",
   AI_COMPLETED: "Analyzed",
   FINALIZED: "Completed",
 };
 
+/** 서버 상태를 화면 상태로 변환. 알 수 없는 값은 Draft. */
 export function statusFromApi(status: string): AssessmentStatus {
   return STATUS_FROM_API[status] ?? "Draft";
 }
 
+/** 화면 상태를 서버 상태로 변환 (상태 수정 모달 초기값용). */
 export function statusToApi(status: AssessmentStatus): string {
   if (status === "Draft") return "PENDING_AI";
   if (status === "Analyzed") return "AI_COMPLETED";

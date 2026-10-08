@@ -3,6 +3,7 @@ import { RiskResultCard } from "@/features/risk/components/RiskResultCard";
 import { useRiskDetail } from "@/features/risk/useRiskDetail";
 import { parseAssessmentId, type Assessment } from "@/shared/model/assessment";
 
+// 라우트 /assessments/:id/result: risk-detail 조회 결과를 카드로 보여주고 목록으로 돌아간다.
 export default function RiskResultPage() {
   const navigate = useNavigate();
   const { id } = useParams();

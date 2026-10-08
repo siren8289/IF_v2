@@ -10,6 +10,7 @@ import {
 import { useJobs } from "../useJobs";
 
 interface AssessmentFormProps {
+  // 등록 성공 시 생성된 평가 ID를 넘기고, 이동은 페이지가 결정한다.
   onCreated: (assessmentId: number) => void;
 }
 
@@ -32,6 +33,7 @@ export function AssessmentForm({ onCreated }: AssessmentFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async () => {
+    // 검증 실패 시 API를 호출하지 않는다.
     const nextErrors = validateAssessmentForm(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;

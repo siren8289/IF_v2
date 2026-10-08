@@ -1,3 +1,4 @@
+// API Client 계층: 신청자/건강 스냅샷 등록 엔드포인트 (평가 입력 1~2단계).
 import { apiRequest } from "./client";
 import type {
   ApplicantCreateRequest,
@@ -6,6 +7,7 @@ import type {
   HealthSnapshotResponse,
 } from "./types";
 
+/** POST /api/applicants */
 export function createApplicant(
   body: ApplicantCreateRequest
 ): Promise<ApplicantResponse> {
@@ -15,6 +17,7 @@ export function createApplicant(
   });
 }
 
+/** POST /api/applicants/{applicantId}/health-snapshots */
 export function createHealthSnapshot(
   applicantId: number,
   body: HealthSnapshotCreateRequest

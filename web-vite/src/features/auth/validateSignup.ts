@@ -6,6 +6,7 @@ export interface SignupFormValues {
   department: string;
 }
 
+/** 가입 폼 검증. 필드명 -> 오류 문구 맵을 반환하며 빈 객체면 통과. */
 export function validateSignup(values: SignupFormValues): Record<string, string> {
   const errors: Record<string, string> = {};
   if (!values.id) errors.id = "아이디를 입력해주세요";

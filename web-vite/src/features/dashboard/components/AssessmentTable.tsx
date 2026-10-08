@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, ChevronUp, FileText, Pencil, Trash2, User } from "lucide-react";
 import type { Assessment } from "@/shared/model/assessment";
 
+// 상태/위험도 뱃지 색상
 const statusColor = (status: string) => {
   switch (status) {
     case "Completed": return "bg-blue-100 text-blue-700 border-blue-200";
@@ -20,6 +21,7 @@ const riskColor = (level: string) => {
   }
 };
 
+// 표시 전용: 행 펼침/수정/삭제/리포트 동작은 모두 콜백으로 페이지에 위임한다.
 interface AssessmentTableProps {
   items: Assessment[];
   expandedId: string | null;

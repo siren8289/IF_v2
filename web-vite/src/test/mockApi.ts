@@ -1,5 +1,6 @@
 import { vi } from "vitest";
 
+// 테스트용 요청 내역(경로/메서드/파싱된 본문)
 interface MockRequest {
   path: string;
   method: string;
@@ -32,6 +33,7 @@ export function mockApi(handlers: Record<string, Handler>) {
   return fetchMock;
 }
 
+// 특정 요청("METHOD /path")이 호출된 내역만 추려 호출 순서/본문을 검증할 때 쓴다.
 export function callsTo(fetchMock: ReturnType<typeof mockApi>, key: string) {
   return fetchMock.mock.calls.filter(
     ([input, init]) => `${init?.method ?? "GET"} ${new URL(String(input)).pathname}` === key

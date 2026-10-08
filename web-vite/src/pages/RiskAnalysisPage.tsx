@@ -3,6 +3,7 @@ import { RiskAnalyzing } from "@/features/risk/components/RiskAnalyzing";
 import { useComputeRisk } from "@/features/risk/useComputeRisk";
 import { parseAssessmentId } from "@/shared/model/assessment";
 
+// 라우트 /assessments/:id/analysis: compute-risk(Spring -> FastAPI) 요청 중 대기 화면을 보여준다.
 export default function RiskAnalysisPage() {
   const navigate = useNavigate();
   const { id } = useParams();

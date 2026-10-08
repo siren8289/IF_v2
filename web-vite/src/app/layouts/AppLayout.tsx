@@ -11,6 +11,7 @@ export function AppLayout() {
   const navigate = useNavigate();
   const isDashboard = useLocation().pathname === "/dashboard";
 
+  // 기존 Layout의 handleBack 규칙: 대시보드는 로그아웃(로그인으로), 그 외에는 대시보드로.
   const handleBack = () => {
     if (isDashboard) {
       logout();

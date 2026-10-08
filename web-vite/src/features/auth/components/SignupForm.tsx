@@ -10,6 +10,7 @@ interface SignupFormProps {
   onSuccess: () => void;
 }
 
+// 오류 여부에 따라 테두리 색만 달라지는 입력란 공통 스타일
 const inputClass = (hasError: boolean) =>
   `w-full px-5 py-3.5 bg-gray-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2F8F6B] transition-all ${hasError ? "border-red-500" : "border-gray-200"}`;
 
@@ -28,6 +29,7 @@ export function SignupForm({ onSuccess }: SignupFormProps) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    // 검증(순수 함수) -> 저장(localStorage) -> 로그인 화면 이동 순서로 진행한다.
     const nextErrors = validateSignup(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;

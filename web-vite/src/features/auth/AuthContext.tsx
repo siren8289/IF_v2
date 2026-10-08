@@ -19,9 +19,11 @@ interface AuthContextValue {
   logout: () => void;
 }
 
+// 인증 상태(전역 상태): 페이지 이동과 무관하게 RequireAuth/헤더(로그아웃)가 공유한다.
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  // 새로고침해도 로그인이 유지되도록 초기값을 sessionStorage에서 읽는다.
   const [isAuthenticated, setIsAuthenticated] = useState(hasSession);
 
   const login = useCallback((id: string, password: string) => {
@@ -46,6 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+/** Provider 밖에서 호출하면 바로 알 수 있도록 오류를 던진다. */
 export function useAuth(): AuthContextValue {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error("useAuth must be used within AuthProvider");

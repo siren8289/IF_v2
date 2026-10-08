@@ -3,6 +3,7 @@ import { computeRisk } from "@/shared/api/assessments";
 
 /** 평가 ID당 한 번만 위험도 계산을 요청하고, 성공/실패와 무관하게 완료 시 onSettled를 호출한다. */
 export function useComputeRisk(assessmentId: number | null, onSettled: () => void): void {
+  // StrictMode에서 effect가 두 번 실행되어도 계산 요청(POST)이 중복되지 않게 한다.
   const startedRef = useRef(false);
   const onSettledRef = useRef(onSettled);
   onSettledRef.current = onSettled;

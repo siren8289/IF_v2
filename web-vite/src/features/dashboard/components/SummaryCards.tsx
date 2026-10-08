@@ -4,6 +4,7 @@ import type { AssessmentSummaryResponse } from "@/shared/api/types";
 const CARD =
   "bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100";
 
+// 요약 카드 3개(총 건수/고위험/완료). 값은 서버 COUNT 집계를 그대로 표시한다.
 export function SummaryCards({ summary }: { summary: AssessmentSummaryResponse | null }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

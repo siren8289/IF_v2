@@ -2,6 +2,7 @@ import { apiRequest } from "./client";
 import { listAssessmentRecords, updateAssessment } from "./assessments";
 import { mockApi } from "@/test/mockApi";
 
+// fetch를 목으로 바꿔 API Client의 요청 형식과 오류 처리를 확인한다.
 afterEach(() => vi.unstubAllGlobals());
 
 describe("apiRequest", () => {
@@ -23,6 +24,7 @@ describe("apiRequest", () => {
   });
 });
 
+// Spring API 계약(엔드포인트 형식)이 바뀌지 않았는지 확인한다.
 describe("assessments API 계약", () => {
   it("목록은 page/size/sort 쿼리를 유지한다", async () => {
     const fetchMock = mockApi({

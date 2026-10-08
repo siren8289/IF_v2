@@ -1,3 +1,4 @@
+// API Client 계층: 평가 생성/목록/요약/수정/삭제와 위험도 계산·조회 엔드포인트.
 import { apiRequest } from "./client";
 import type {
   AssessmentCreateRequest,
@@ -23,6 +24,7 @@ export function getAssessmentSummary(): Promise<AssessmentSummaryResponse> {
   return apiRequest<AssessmentSummaryResponse>("/api/assessments/summary");
 }
 
+/** POST /api/applicants/{applicantId}/assessments */
 export function createAssessment(
   applicantId: number,
   body: AssessmentCreateRequest
@@ -33,6 +35,7 @@ export function createAssessment(
   );
 }
 
+/** DELETE /api/assessments/{id} */
 export async function deleteAssessment(assessmentId: number): Promise<void> {
   await apiRequest<void>(`/api/assessments/${assessmentId}`, {
     method: "DELETE",
@@ -57,6 +60,7 @@ export async function computeRisk(assessmentId: number): Promise<void> {
   });
 }
 
+/** GET /api/assessments/{id}/risk-detail: 점수·등급·요인 설명 조회 */
 export function getRiskDetail(
   assessmentId: number
 ): Promise<AssessmentRiskDetailResponse> {

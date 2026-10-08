@@ -7,6 +7,7 @@ import { SummaryCards } from "@/features/dashboard/components/SummaryCards";
 import { useAssessmentRecords } from "@/features/dashboard/useAssessmentRecords";
 import { statusToApi, type Assessment } from "@/shared/model/assessment";
 
+// 라우트 /dashboard: 목록·요약 조회(useAssessmentRecords)와 화면 이동/모달 상태를 조합한다.
 export default function DashboardPage() {
   const navigate = useNavigate();
   const {
@@ -21,6 +22,7 @@ export default function DashboardPage() {
     remove,
     changeStatus,
   } = useAssessmentRecords();
+  // 펼친 행과 수정 대상은 화면 전용 상태라 훅이 아닌 페이지에서 관리한다.
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [editing, setEditing] = useState<Assessment | null>(null);
 
@@ -32,6 +34,7 @@ export default function DashboardPage() {
     await remove(item.id);
   };
 
+  // 저장 시 모달을 먼저 닫고 PATCH -> 목록·요약 재조회를 한다.
   const handleSaveStatus = async (status: string) => {
     if (!editing) return;
     const id = editing.id;

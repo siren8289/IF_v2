@@ -7,6 +7,7 @@ import {
   statusToApi,
 } from "./assessment";
 
+// 서버 값 <-> 화면 값 변환 규칙이 기존 동작과 같은지 확인한다.
 describe("assessment model", () => {
   it("서버 등급을 화면 등급으로 변환하고 값이 없으면 Medium", () => {
     expect(riskGradeToLevel("HIGH")).toBe("High");

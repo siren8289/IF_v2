@@ -3,6 +3,7 @@ import { callsTo, mockApi } from "@/test/mockApi";
 
 afterEach(() => vi.unstubAllGlobals());
 
+// 평가 등록이 신청자 -> 건강 스냅샷 -> 평가 순서로, 앞 단계 ID를 이어서 쓰는지 확인한다.
 describe("registerAssessment", () => {
   it("신청자 -> 건강 스냅샷 -> 평가 순으로 호출하고 평가 ID를 반환한다", async () => {
     const fetchMock = mockApi({

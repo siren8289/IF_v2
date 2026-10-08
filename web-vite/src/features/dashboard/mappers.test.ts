@@ -1,5 +1,6 @@
 import { mapRecordToAssessment } from "./mappers";
 
+// 대시보드 목록: API 레코드 -> 화면 모델 변환 확인한다.
 describe("mapRecordToAssessment", () => {
   it("API 레코드를 화면 모델로 변환한다", () => {
     expect(

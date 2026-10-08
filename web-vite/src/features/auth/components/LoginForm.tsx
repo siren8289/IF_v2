@@ -11,6 +11,7 @@ interface LoginFormProps {
 
 export function LoginForm({ onSuccess }: LoginFormProps) {
   const { login } = useAuth();
+  // 기존 UI와 같게 개발 편의를 위한 기본 관리자 계정을 미리 채워 둔다.
   const [id, setId] = useState("admin");
   const [password, setPassword] = useState("1234");
   const [error, setError] = useState("");
@@ -19,6 +20,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     e.preventDefault();
     setError("");
 
+    // 인증 판단은 AuthContext가 하고, 이 컴포넌트는 메시지/이동 알림만 담당한다.
     const result = login(id, password);
     if (!result) {
       setError("아이디 또는 비밀번호가 올바르지 않습니다.");

@@ -3,6 +3,7 @@ import { AlertTriangle, Info } from "lucide-react";
 import type { RiskView } from "../useRiskDetail";
 import { DEFAULT_SUMMARY, RISK_LEVEL_STYLE } from "../riskLevel";
 
+// 위험도 결과 카드(표시 전용): 좌측 점수 게이지, 우측 AI 요약과 주요 기여 요인.
 export function RiskResultCard({ view }: { view: RiskView }) {
   const { score, level, factors, summary, guidance, disclaimer } = view;
   const style = RISK_LEVEL_STYLE[level];
@@ -44,6 +45,7 @@ export function RiskResultCard({ view }: { view: RiskView }) {
             <div>
               <h3 className={`font-bold ${style.color} mb-2 text-lg`}>AI 해석 요약</h3>
               <p className="text-gray-700 leading-relaxed text-sm md:text-base whitespace-pre-line">
+                {/* 서버 요약이 없으면 등급별 기본 문구를 보여준다. */}
                 {summary || DEFAULT_SUMMARY[level]}
               </p>
               {guidance && (

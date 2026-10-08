@@ -7,6 +7,7 @@ interface StatusEditModalProps {
   onClose: () => void;
 }
 
+/** 상태 수정 모달. 선택값은 모달 내부 state로 두고, 저장 시에만 부모에 전달한다. */
 export function StatusEditModal({ initialStatus, onSave, onClose }: StatusEditModalProps) {
   const [status, setStatus] = useState(initialStatus);
 
