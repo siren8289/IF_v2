@@ -29,32 +29,32 @@ public interface JobRepository extends JpaRepository<Job, Long> {
      * - 일자리명
      * - 근무지역
      *
-     * keyword가 null이면 전체 조회한다.
-     *
      * Pageable이 LIMIT/OFFSET과 정렬을 처리한다.
      */
     @Query(
             value = """
             SELECT j
             FROM Job j
-            WHERE (
-                :keyword IS NULL
-                OR LOWER(j.jobTitle)
-                    LIKE LOWER(CONCAT('%', :keyword, '%'))
-                OR LOWER(j.workplace)
-                    LIKE LOWER(CONCAT('%', :keyword, '%'))
-            )
+            WHERE LOWER(j.jobTitle)
+                LIKE LOWER(CONCAT(
+                    '%', CAST(:keyword AS string), '%'
+                ))
+            OR LOWER(j.workplace)
+                LIKE LOWER(CONCAT(
+                    '%', CAST(:keyword AS string), '%'
+                ))
             """,
             countQuery = """
             SELECT COUNT(j)
             FROM Job j
-            WHERE (
-                :keyword IS NULL
-                OR LOWER(j.jobTitle)
-                    LIKE LOWER(CONCAT('%', :keyword, '%'))
-                OR LOWER(j.workplace)
-                    LIKE LOWER(CONCAT('%', :keyword, '%'))
-            )
+            WHERE LOWER(j.jobTitle)
+                LIKE LOWER(CONCAT(
+                    '%', CAST(:keyword AS string), '%'
+                ))
+            OR LOWER(j.workplace)
+                LIKE LOWER(CONCAT(
+                    '%', CAST(:keyword AS string), '%'
+                ))
             """
     )
     Page<Job> searchJobs(

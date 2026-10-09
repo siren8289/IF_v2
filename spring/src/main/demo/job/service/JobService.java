@@ -91,8 +91,11 @@ public class JobService {
         );
 
         // DB 검색 후 응답 DTO로 변환
-        return jobRepository
-                .searchJobs(normalizedKeyword, pageable)
+        Page<Job> jobs = normalizedKeyword == null
+                ? jobRepository.findAll(pageable)
+                : jobRepository.searchJobs(normalizedKeyword, pageable);
+
+        return jobs
                 .map(this::toResponse);
     }
 
