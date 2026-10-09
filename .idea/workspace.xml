@@ -4,33 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="assessment 수정">
-      <change afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/ApplicantDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/demo/global/config/AppConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/demo/global/exception/ApiException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/ai/client/AIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/client/AIClient.java" afterDir="false" />
+    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="applicant back 수정">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/spring/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/admin/entity/AdminUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/admin/entity/AdminUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/admin/repository/AdminUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/admin/repository/AdminUserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/src/main/demo/ai/service/AIRiskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/service/AIRiskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/controller/ApplicantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/controller/ApplicantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/ApplicantCreateRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/ApplicantResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/HealthSnapshotCreateRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/dto/HealthSnapshotResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/entity/Applicant.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/entity/Applicant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/entity/HealthSnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/entity/HealthSnapshot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/repository/ApplicantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/repository/ApplicantRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/repository/HealthSnapshotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/repository/HealthSnapshotRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/applicant/service/ApplicantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/applicant/service/ApplicantService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/config/RestTemplateConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/config/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/exception/AiServiceTimeoutException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/exception/AiServiceUnavailableException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/exception/InvalidRequestException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/exception/InvalidStatusTransitionException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/exception/NotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/global/response/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/global/response/ErrorResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/assessment/service/AssessmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/service/AssessmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/controller/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/controller/JobController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/dto/JobResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/dto/JobResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/entity/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/entity/Job.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/repository/JobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/repository/JobRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +38,7 @@
     </colors>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="372" />
+    <option name="cachedIndexableFilesCount" value="363" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -62,73 +57,73 @@
     &quot;assignee&quot;: &quot;siren8289&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/siren8289/IF_v2.git",
-    "accountId": "8c505c11-8a43-47ad-93eb-84070cd25495"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/siren8289/IF_v2.git&quot;,
+    &quot;accountId&quot;: &quot;8c505c11-8a43-47ad-93eb-84070cd25495&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.2773923680169612" />
-      <entry key="MS500" value="1.7737824980828178" />
-      <entry key="S2" value="1.943921353909527" />
-      <entry key="S5" value="2.1128332109473167" />
-      <entry key="S10" value="2.4407216813341748" />
-      <entry key="S30" value="3.161256762384501" />
-      <entry key="S60" value="3.516960314019295" />
-      <entry key="M2" value="3.9197330851928003" />
-      <entry key="M5" value="7.860218685787492" />
-      <entry key="M10" value="16.56318654763824" />
-      <entry key="M15" value="23.946630885673738" />
-      <entry key="M30" value="41.51505707224113" />
-      <entry key="H1" value="73.28309936491209" />
-      <entry key="H2" value="137.84347277291644" />
-      <entry key="H4" value="230.92154122318533" />
-      <entry key="D1" value="403.8896162354888" />
-      <entry key="W1" value="449.72505480629525" />
+      <entry key="MS100" value="1.0000045720833022" />
+      <entry key="MS500" value="1.1613598174555397" />
+      <entry key="S2" value="3.0146485404279137" />
+      <entry key="S5" value="4.801127556680872" />
+      <entry key="S10" value="5.75953198122883" />
+      <entry key="S30" value="6.565268611135306" />
+      <entry key="S60" value="7.01420304735869" />
+      <entry key="M2" value="7.9164632732205735" />
+      <entry key="M5" value="11.563387256597629" />
+      <entry key="M10" value="19.661406780735458" />
+      <entry key="M15" value="27.02932999031133" />
+      <entry key="M30" value="44.974901941160866" />
+      <entry key="H1" value="77.09222320667139" />
+      <entry key="H2" value="141.8109069913807" />
+      <entry key="H4" value="235.36794901753166" />
+      <entry key="D1" value="410.14190131622706" />
+      <entry key="W1" value="456.60602453291216" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="2.915887E-318" />
-      <entry key="S10" value="1.7075964721025189E-159" />
-      <entry key="S30" value="1.195258248978504E-53" />
-      <entry key="S60" value="3.457250712601719E-27" />
-      <entry key="M2" value="5.879839039124896E-14" />
-      <entry key="M5" value="5.102067205889389E-6" />
-      <entry key="M10" value="0.0022587755988343304" />
-      <entry key="M15" value="0.01721533156812844" />
-      <entry key="M30" value="0.13120720852197282" />
-      <entry key="H1" value="0.36222535598984873" />
-      <entry key="H2" value="0.6018516062866731" />
-      <entry key="H4" value="0.7757909552751137" />
-      <entry key="D1" value="0.9585706306901352" />
-      <entry key="W1" value="0.9939736559186544" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="1.909326397707018E-166" />
+      <entry key="S30" value="5.758288133528939E-56" />
+      <entry key="S60" value="2.399643334649749E-28" />
+      <entry key="M2" value="1.54907822095908E-14" />
+      <entry key="M5" value="2.99246678911153E-6" />
+      <entry key="M10" value="0.0017298747900098227" />
+      <entry key="M15" value="0.014410413617582963" />
+      <entry key="M30" value="0.12004338223152067" />
+      <entry key="H1" value="0.34647277271312465" />
+      <entry key="H2" value="0.5886193784723065" />
+      <entry key="H4" value="0.7672153403525681" />
+      <entry key="D1" value="0.9567964302412888" />
+      <entry key="W1" value="0.9937106290249371" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.31310059826823095" />
-      <entry key="MS500" value="1.182327306630044" />
-      <entry key="S2" value="1.7381733389598628" />
-      <entry key="S5" value="2.000847349451588" />
-      <entry key="S10" value="2.359640237290891" />
-      <entry key="S30" value="3.1211919368303787" />
-      <entry key="S60" value="3.494434022294408" />
-      <entry key="M2" value="3.907649495496073" />
-      <entry key="M5" value="7.853869461094335" />
-      <entry key="M10" value="16.5600856014519" />
-      <entry key="M15" value="23.958277460219442" />
-      <entry key="M30" value="41.63996326718881" />
-      <entry key="H1" value="73.63954523037184" />
-      <entry key="H2" value="138.44115783359055" />
-      <entry key="H4" value="231.69476955680733" />
-      <entry key="D1" value="404.84766865591314" />
-      <entry key="W1" value="450.7189517305768" />
+      <entry key="MS100" value="0.9592679921357782" />
+      <entry key="MS500" value="1.1169788094216055" />
+      <entry key="S2" value="2.9009156485678793" />
+      <entry key="S5" value="4.725110656473296" />
+      <entry key="S10" value="5.714295207069766" />
+      <entry key="S30" value="6.548125774936295" />
+      <entry key="S60" value="7.003912134839005" />
+      <entry key="M2" value="7.908851487001985" />
+      <entry key="M5" value="11.557876291390064" />
+      <entry key="M10" value="19.658135792683122" />
+      <entry key="M15" value="27.038480959291906" />
+      <entry key="M30" value="45.0888811345917" />
+      <entry key="H1" value="77.4330181060068" />
+      <entry key="H2" value="142.39537654930845" />
+      <entry key="H4" value="236.13259261891216" />
+      <entry key="D1" value="411.0981742539421" />
+      <entry key="W1" value="457.59965755895973" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -139,30 +134,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/jeong-yelim/IF_portfolio",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jeong-yelim/IF_portfolio&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/spring/src/main" />
@@ -210,7 +205,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791481259759</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="applicant back 수정">
+      <option name="closed" value="true" />
+      <created>1791482491712</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1791482491712</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +245,7 @@
     <MESSAGE value="공공데이터 raw 데이터 추출 완료" />
     <MESSAGE value="공공데이터 디비 적재 완료" />
     <MESSAGE value="assessment 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="assessment 수정" />
+    <MESSAGE value="applicant back 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="applicant back 수정" />
   </component>
 </project>

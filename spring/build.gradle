@@ -1,3 +1,4 @@
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.5'
@@ -18,23 +19,56 @@ repositories {
 }
 
 dependencies {
+    // Spring REST API
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // PostgreSQL + JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // 서버 상태 확인
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Swagger / OpenAPI
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+    // DTO 입력값 검증
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // PostgreSQL 드라이버
     runtimeOnly 'org.postgresql:postgresql'
+
+    // 테스트용 DB
     testRuntimeOnly 'com.h2database:h2'
 
+    // JUnit 및 Spring 테스트
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+/*
+ * IF_v2 Java 소스 경로 설정
+ *
+ * 현재:
+ * spring/src/main/demo/DemoApplication.java
+ * spring/src/main/demo/job/...
+ * spring/src/main/demo/applicant/...
+ *
+ * Gradle 기본값은 src/main/java이므로
+ * 현재 폴더를 소스 경로로 등록한다.
+ */
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/demo']
+        }
+    }
+}
+
+// JUnit 5 테스트
 tasks.named('test') {
     useJUnitPlatform()
 }
 
+// Spring Boot 실행
+// 프로필은 실행 명령에서 선택한다.
 bootRun {
-    // 기본: PostgreSQL + if_user (application.yml). postgres 계정 쓰려면:
-    // ./gradlew bootRun --args='--spring.profiles.active=local'
-    args '--spring.profiles.active=default'
 }

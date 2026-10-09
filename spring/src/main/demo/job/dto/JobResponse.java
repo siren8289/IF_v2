@@ -1,61 +1,38 @@
+
 package com.example.demo.job.dto;
 
 import java.time.OffsetDateTime;
 
-public class JobResponse {
+/**
+ * 일자리 API 응답 DTO.
+ *
+ * [역할]
+ * - Job Entity의 데이터를 클라이언트에 전달
+ * - JPA Entity 직접 노출 방지
+ *
+ * [사용 API]
+ * GET /api/jobs
+ * GET /api/jobs/{jobId}
+ */
+public record JobResponse(
 
-    private Long id;
-    private String jobTitle;
-    private String workplace;
-    private String workHours;
-    private String description;
-    private OffsetDateTime createdAt;
+        // 일자리 ID
+        Long id,
 
-    public Long getId() {
-        return id;
-    }
+        // 일자리명
+        String jobTitle,
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+        // 근무지역
+        String workplace,
 
-    public String getJobTitle() {
-        return jobTitle;
-    }
+        // 근무시간
+        String workHours,
 
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
+        // 상세 설명
+        String description,
 
-    public String getWorkplace() {
-        return workplace;
-    }
+        // 등록 일시
+        OffsetDateTime createdAt
 
-    public void setWorkplace(String workplace) {
-        this.workplace = workplace;
-    }
-
-    public String getWorkHours() {
-        return workHours;
-    }
-
-    public void setWorkHours(String workHours) {
-        this.workHours = workHours;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+) {
 }
