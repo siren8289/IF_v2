@@ -1,32 +1,18 @@
-
 package com.example.demo.assessment.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
-public class AssessmentCreateRequest {
-
-    @NotNull(message = "jobId는 필수입니다.")
-    @Positive(message = "jobId는 1 이상이어야 합니다.")
-    private Long jobId;
-
-    @NotNull(message = "healthId는 필수입니다.")
-    @Positive(message = "healthId는 1 이상이어야 합니다.")
-    private Long healthId;
-
-    public Long getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(Long jobId) {
-        this.jobId = jobId;
-    }
-
-    public Long getHealthId() {
-        return healthId;
-    }
-
-    public void setHealthId(Long healthId) {
-        this.healthId = healthId;
-    }
+/** 평가 입력 화면에서 보내는 값 */
+public record AssessmentCreateRequest(
+        @NotBlank @Size(max = 50) String applicantName,
+        @NotNull @Min(1) @Max(120) Integer age,
+        @NotNull @Min(1) @Max(5) Integer physicalLevel,   // 1=좋음 ~ 5=나쁨
+        @NotNull Boolean chronicDisease,
+        @NotNull @Min(1) @Max(24) Integer workHourLimit,
+        @NotNull Long jobId
+) {
 }

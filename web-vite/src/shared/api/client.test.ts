@@ -1,9 +1,7 @@
 import { apiRequest } from "./client";
-import { listAssessmentRecords, updateAssessment } from "./assessments";
-import { listJobs } from "./jobs";
-import { mockApi } from "@/test/mockApi";
+import { createAssessment, deleteAssessment } from "./api";
+import { mockApi, callsTo } from "@/test/mockApi";
 
-// fetch를 목으로 바꿔 API Client의 요청 형식과 오류 처리를 확인한다.
 afterEach(() => vi.unstubAllGlobals());
 
 describe("apiRequest", () => {
@@ -11,39 +9,25 @@ describe("apiRequest", () => {
     const fetchMock = mockApi({ "GET /api/jobs": { json: [{ id: 1 }] } });
     await expect(apiRequest("/api/jobs")).resolves.toEqual([{ id: 1 }]);
     expect(String(fetchMock.mock.calls[0][0])).toBe("http://localhost:8080/api/jobs");
-    expect(fetchMock.mock.calls[0][1]?.headers).toMatchObject({ "Content-Type": "application/json" });
   });
 
-  it("실패 응답은 상태 코드가 포함된 Error로 던진다", async () => {
-    mockApi({ "GET /api/jobs": { status: 500 } });
-    await expect(apiRequest("/api/jobs")).rejects.toThrow("API 500");
+  it("실패 응답은 서버 메시지가 포함된 Error로 던진다", async () => {
+    mockApi({ "GET /api/jobs": { status: 502, json: { message: "AI 서버 호출에 실패했습니다." } } });
+    await expect(apiRequest("/api/jobs")).rejects.toThrow("API 502: AI 서버 호출에 실패했습니다.");
   });
 
   it("204 응답은 undefined를 반환한다", async () => {
-    mockApi({ "PATCH /api/assessments/3": { status: 204 } });
-    await expect(updateAssessment(3, { status: "FINALIZED" })).resolves.toBeUndefined();
+    mockApi({ "DELETE /api/assessments/3": { status: 204 } });
+    await expect(deleteAssessment(3)).resolves.toBeUndefined();
   });
-});
 
-// Spring API 계약(엔드포인트 형식)이 바뀌지 않았는지 확인한다.
-describe("assessments API 계약", () => {
-  it("목록은 page/size/sort 쿼리를 유지한다", async () => {
-    const fetchMock = mockApi({
-      "GET /api/assessments": { json: { content: [], totalElements: 0, totalPages: 0, number: 0, size: 20 } },
+  it("평가 등록은 POST 한 번으로 id를 받는다", async () => {
+    const fetchMock = mockApi({ "POST /api/assessments": { status: 201, json: { id: 7 } } });
+    const id = await createAssessment({
+      applicantName: "홍길동", age: 70, physicalLevel: 3,
+      chronicDisease: true, workHourLimit: 6, jobId: 1,
     });
-    await listAssessmentRecords(2, 20);
-    expect(String(fetchMock.mock.calls[0][0])).toContain("?page=2&size=20&sort=assessedAt,desc");
-  });
-});
-
-describe("jobs API 계약", () => {
-  it("Spring 페이지 응답에서 직무 목록을 반환한다", async () => {
-    const jobs = [{ id: 1, jobTitle: "배송기사" }];
-    mockApi({
-      "GET /api/jobs": {
-        json: { content: jobs, totalElements: 1, totalPages: 1, number: 0, size: 20 },
-      },
-    });
-    await expect(listJobs()).resolves.toEqual(jobs);
+    expect(id).toBe(7);
+    expect(callsTo(fetchMock, "POST /api/assessments")).toHaveLength(1);
   });
 });
