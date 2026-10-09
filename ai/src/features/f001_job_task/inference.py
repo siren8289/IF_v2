@@ -8,7 +8,7 @@ from pathlib import Path
 import joblib
 import numpy as np
 import torch
-from .train_task_dl import TaskCNN, encode_title
+from .model import TaskCNN, encode_title
 
 FEATURE_DIR = Path(__file__).resolve().parent
 REVIEW_SCORE_THRESHOLD = 0.50
