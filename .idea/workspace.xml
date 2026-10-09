@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="초안 생성 완료" />
+    <list default="true" id="129bac82-9f0a-494c-9b9d-7f098ada94eb" name="변경" comment="ai_f001 기능 개발 완료">
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/compare_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/compare_task_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/predict.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/predict_f001.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/predict_task.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/predict_task_dl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/prepare_review_queue.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/prepare_task_labels.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/sample_task_review.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/train_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/train_task_dl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/train_task_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/train_task_weak.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/training_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ai/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/artifacts/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/ai/src/features/f001_job_task/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/notebooks/01_job_task_baseline.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/tests/test_baseline.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/tests/test_job_analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/tests/test_job_context.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,23 +71,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0053797722927524" />
-      <entry key="MS500" value="1.5215883160396655" />
-      <entry key="S2" value="3.0158607390278096" />
-      <entry key="S5" value="3.981743779804256" />
-      <entry key="S10" value="4.442033132346413" />
-      <entry key="S30" value="5.413004294950676" />
-      <entry key="S60" value="10.865883969416792" />
-      <entry key="M2" value="24.551019921087153" />
-      <entry key="M5" value="46.687956718129804" />
-      <entry key="M10" value="61.07098803358102" />
-      <entry key="M15" value="68.2760959229612" />
-      <entry key="M30" value="79.13591884760379" />
-      <entry key="H1" value="97.59159585642628" />
-      <entry key="H2" value="148.40778686716516" />
-      <entry key="H4" value="247.18763666920714" />
-      <entry key="D1" value="494.3658543242272" />
-      <entry key="W1" value="571.5857587621433" />
+      <entry key="MS100" value="1.013542491151161" />
+      <entry key="MS500" value="1.5578358493420943" />
+      <entry key="S2" value="2.9587422740347984" />
+      <entry key="S5" value="4.625555620193783" />
+      <entry key="S10" value="5.890136250648371" />
+      <entry key="S30" value="7.551169067372904" />
+      <entry key="S60" value="9.315389551792713" />
+      <entry key="M2" value="11.520853812017437" />
+      <entry key="M5" value="14.414186491914286" />
+      <entry key="M10" value="21.497918155060958" />
+      <entry key="M15" value="33.0903883133194" />
+      <entry key="M30" value="73.68721004743051" />
+      <entry key="H1" value="135.88741962632696" />
+      <entry key="H2" value="219.54850310322476" />
+      <entry key="H4" value="341.0289958332335" />
+      <entry key="D1" value="643.5775981965601" />
+      <entry key="W1" value="742.3401808909917" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -71,37 +95,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="2.7430372772094928E-164" />
-      <entry key="S60" value="1.656211724753057E-82" />
-      <entry key="M2" value="1.286938897054968E-41" />
-      <entry key="M5" value="4.4037552197837165E-17" />
-      <entry key="M10" value="6.636079580432803E-9" />
-      <entry key="M15" value="3.5313523856440446E-6" />
-      <entry key="M30" value="0.001879189289466086" />
-      <entry key="H1" value="0.04334961694716667" />
-      <entry key="H2" value="0.2082057082482769" />
-      <entry key="H4" value="0.45629563689375485" />
-      <entry key="D1" value="0.8774203834789627" />
-      <entry key="W1" value="0.9814921197115498" />
+      <entry key="S30" value="1.5499777888814126E-220" />
+      <entry key="S60" value="1.2449810395670343E-110" />
+      <entry key="M2" value="1.1157871838155453E-55" />
+      <entry key="M5" value="1.0447985169778962E-22" />
+      <entry key="M10" value="1.02215386169495E-11" />
+      <entry key="M15" value="4.7098909208197004E-8" />
+      <entry key="M30" value="2.1702283107589637E-4" />
+      <entry key="H1" value="0.014731694779484661" />
+      <entry key="H2" value="0.12137419321867642" />
+      <entry key="H4" value="0.34838799235719425" />
+      <entry key="D1" value="0.8388362621109956" />
+      <entry key="W1" value="0.9752068481229409" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9845809200856583" />
-      <entry key="MS500" value="1.5126036557623848" />
-      <entry key="S2" value="3.006358830214509" />
-      <entry key="S5" value="3.975386733756416" />
-      <entry key="S10" value="4.438202911800385" />
-      <entry key="S30" value="5.4105387933017575" />
-      <entry key="S60" value="10.8603543380125" />
-      <entry key="M2" value="24.543100576141157" />
-      <entry key="M5" value="46.681671753598046" />
-      <entry key="M10" value="61.06694176014276" />
-      <entry key="M15" value="68.27312975280493" />
-      <entry key="M30" value="79.13604607686248" />
-      <entry key="H1" value="97.63334108214431" />
-      <entry key="H2" value="148.61404882451595" />
-      <entry key="H4" value="247.64215341917293" />
-      <entry key="D1" value="495.2427508425981" />
-      <entry key="W1" value="572.5671679090585" />
+      <entry key="MS100" value="0.9781428103065197" />
+      <entry key="MS500" value="1.540555445879278" />
+      <entry key="S2" value="2.949403692373957" />
+      <entry key="S5" value="4.61970469494129" />
+      <entry key="S10" value="5.886395588606393" />
+      <entry key="S30" value="7.549589190938514" />
+      <entry key="S60" value="9.314459401470012" />
+      <entry key="M2" value="11.5203065084521" />
+      <entry key="M5" value="14.413923575721292" />
+      <entry key="M10" value="21.497708816651226" />
+      <entry key="M15" value="33.09013326466692" />
+      <entry key="M30" value="73.68699629676557" />
+      <entry key="H1" value="135.90142163772177" />
+      <entry key="H2" value="219.66862436445481" />
+      <entry key="H4" value="341.3759569994365" />
+      <entry key="D1" value="644.4159207927069" />
+      <entry key="W1" value="743.3153034266477" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -141,10 +165,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/spring/src/test/java" />
-      <recent name="$PROJECT_DIR$/spring/src/main" />
-      <recent name="$PROJECT_DIR$/spring/src" />
-      <recent name="$PROJECT_DIR$/data/analytics" />
+      <recent name="$PROJECT_DIR$/ai/src/features/f001_job_task/artifacts" />
+      <recent name="$PROJECT_DIR$/ai/src/features/f001_job_task/artifacts/f001/data" />
+      <recent name="$PROJECT_DIR$/ai/src/features/f001_job_task" />
+      <recent name="$PROJECT_DIR$/ai/tests/f001" />
+      <recent name="$PROJECT_DIR$/ai/src/core" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -156,7 +181,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="" />
+      <changelist id="" name="Changes" comment="" />
       <created>1770724876612</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -234,7 +259,23 @@
       <option name="project" value="LOCAL" />
       <updated>1791538815228</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ai 기능별 폴더 및 파일 정리">
+      <option name="closed" value="true" />
+      <created>1791539795152</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1791539795152</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ai_f001 기능 개발 완료">
+      <option name="closed" value="true" />
+      <created>1791544420842</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1791544420842</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,18 +313,9 @@
     <MESSAGE value="ai 폴더 정리 완료" />
     <MESSAGE value="ai 001, 002, 003 기능 데이터 스키마 적재 및 생성 완료" />
     <MESSAGE value="초안 생성 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="초안 생성 완료" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ai/tests/test_job_analysis.py</url>
-          <line>377</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="ai 기능별 폴더 및 파일 정리" />
+    <MESSAGE value="ai_f001 기능 개발 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="ai_f001 기능 개발 완료" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -7,4 +7,4 @@ __pycache__/
 .coverage
 htmlcov/
 artifacts/*
-!artifacts/.gitkeep
+!src/features/f001_job_task/.gitkeep
