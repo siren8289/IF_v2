@@ -24,8 +24,7 @@ from src.features.f001_job_task.service import (
     JobAnalysisError,
     analyze_job_service,
 )
-from src.features.f001_job_task.predict import predict_job
-from src.features.f001_job_task.predict_f001 import predict_f001
+from src.features.f001_job_task.inference import predict_job, predict_f001
 
 
 logger = logging.getLogger(__name__)
