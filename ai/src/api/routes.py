@@ -9,6 +9,7 @@ POST /api/v1/jobs/predict
     ML 기반 직무군 예측 (Weak Label 실험용)
 """
 
+
 import logging
 from typing import Literal
 
@@ -19,13 +20,15 @@ from src.api.schemas import (
     JobAnalysisRequest,
     JobAnalysisResponse,
 )
+from src.features.f001_job_task.inference import predict_job, predict_f001
 from src.features.f001_job_task.model import JobInput
 from src.features.f001_job_task.service import (
     JobAnalysisError,
     analyze_job_service,
 )
-from src.features.f001_job_task.inference import predict_job, predict_f001
-
+from src.features.f002_risk.service import get_risk_evidence
+from src.features.f002_risk.service import get_age_statistics
+from src.features.f002_risk.service import get_combined_risk_evidence
 
 logger = logging.getLogger(__name__)
 
@@ -202,4 +205,107 @@ def predict_job_endpoint(request: F001PredictRequest):
         raise HTTPException(
             status_code=500,
             detail="직무군 예측 중 오류가 발생했습니다.",
+        ) from exc
+
+
+# ============================================================
+# AI-F-002 산업재해 통계 근거 조회
+# ============================================================
+
+@router.get(
+    "/jobs/{job_id}/risk-evidence",
+    tags=["AI-F-002 Risk Evidence"],
+    summary="직무별 산업재해 통계 근거 조회",
+)
+def get_job_risk_evidence(job_id: str):
+    """
+    직무 ID로 F-002의 통계 근거와 매핑 검토 상태를 조회한다.
+
+    실제 사고 확률 및 개인 위험도 점수는 제공하지 않는다.
+    """
+    try:
+        return get_risk_evidence(job_id)
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    except LookupError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+
+    except FileNotFoundError as exc:
+        logger.error("F-002 데이터 없음: %s", exc)
+        raise HTTPException(
+            status_code=503,
+            detail="위험도 근거 데이터를 사용할 수 없습니다.",
+        ) from exc
+
+
+
+
+# ============================================================
+# F-002 연령별 산업재해 통계 조회 API
+# ============================================================
+
+@router.get(
+    "/risk/age-statistics",
+    tags=["AI-F-002 Risk Evidence"],
+    summary="연령별 산업재해 통계 조회",
+)
+def get_age_statistics_endpoint(year: int):
+    """특정 연도의 연령별 재해자수 통계를 반환한다."""
+    try:
+        return get_age_statistics(year)
+
+    except LookupError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+
+    except (FileNotFoundError, ValueError) as exc:
+        logger.error("F-002 연령별 데이터 오류: %s", exc)
+        raise HTTPException(
+            status_code=503,
+            detail="연령별 통계 데이터를 사용할 수 없습니다.",
+        ) from exc
+
+
+@router.get(
+    "/jobs/{job_id}/risk-summary",
+    tags=["AI-F-002 Risk Evidence"],
+    summary="직무별 산업·연령 통계 통합 조회",
+)
+def get_risk_summary_endpoint(
+    job_id: str,
+    year: int | None = None,
+):
+    try:
+        return get_combined_risk_evidence(
+            job_id=job_id,
+            year=year,
+        )
+
+    except LookupError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    except FileNotFoundError as exc:
+        logger.error("F-002 통계 파일 없음: %s", exc)
+        raise HTTPException(
+            status_code=503,
+            detail="통계 근거 파일을 사용할 수 없습니다.",
         ) from exc
