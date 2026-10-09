@@ -148,40 +148,6 @@ def predict_task(title: str) -> dict:
     }
 
 
-def main():
-    titles = (
-        [" ".join(sys.argv[1:])]
-        if len(sys.argv) > 1
-        else [
-            "아파트 미화원 모집",
-            "야간 배송기사 모집",
-            "요양보호사 채용",
-            "전기설비 관리기사",
-            "일반 사무직 모집",
-            "의류수거 기사 모집",
-        ]
-    )
-
-    for title in titles:
-        result = predict_task(title)
-
-        print("\n" + "=" * 55)
-        print("직무:", result["title"])
-        print("실험 모델:", result["model_type"])
-
-        for item in result["task_characteristics"]:
-            if item["candidate"]:
-                status = "후보"
-            else:
-                status = "미확정"
-
-            print(
-                f"{item['label']:<24} "
-                f"{item['score']:.4f}  {status}"
-            )
-
-        print("검토 필요:", result["review_required"])
-
 @lru_cache(maxsize=1)
 def load_dl_model():
     if not TASK_DL_PATH.exists():
@@ -372,27 +338,3 @@ def predict_f001(title: str, task_model: str = "ml") -> dict:
 
 
 
-def main():
-    args = sys.argv[1:]
-
-    task_model = "ml"
-
-    if args and args[0] in {"ml", "dl"}:
-        task_model = args.pop(0)
-
-    title = (
-        " ".join(args)
-        if args
-        else "야간 배송기사 모집"
-    )
-
-    result = predict_f001(
-        title,
-        task_model=task_model,
-    )
-
-    print(json.dumps(
-        result,
-        ensure_ascii=False,
-        indent=2,
-    ))
