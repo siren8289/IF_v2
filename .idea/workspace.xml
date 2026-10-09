@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="129bac82-9f0a-494c-9b9d-7f098ada94eb" name="변경" comment="ai-f001 파일 이동">
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f002_risk/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f002_risk/notebooks/01_risk_experiments.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f002_risk/service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f002_risk/tests/test_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f002_risk/tests/test_data_quality.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f002_risk/tests/test_service.py" afterDir="false" />
+    <list default="true" id="129bac82-9f0a-494c-9b9d-7f098ada94eb" name="변경" comment="ai-f002 기능개발 완료">
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f003_explanation/notebooks/01_explanation_experiments.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f003_explanation/service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f003_explanation/tests/test_api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/features/f003_explanation/tests/test_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ai/src/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/ai/src/api/routes.py" afterDir="false" />
     </list>
@@ -30,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jupyter Notebook" />
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -56,61 +54,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.1815884120248263" />
-      <entry key="MS500" value="2.966818524644585" />
-      <entry key="S2" value="7.220649393405274" />
-      <entry key="S5" value="11.209620729837251" />
-      <entry key="S10" value="14.891409332849868" />
-      <entry key="S30" value="20.98918025984994" />
-      <entry key="S60" value="23.868546762850592" />
-      <entry key="M2" value="25.73258580835672" />
-      <entry key="M5" value="27.036907642469284" />
-      <entry key="M10" value="27.51186384534806" />
-      <entry key="M15" value="27.74854280560589" />
-      <entry key="M30" value="30.68291534087893" />
-      <entry key="H1" value="53.58904799023794" />
-      <entry key="H2" value="125.32053675127698" />
-      <entry key="H4" value="260.4732116994545" />
-      <entry key="D1" value="659.5266690689547" />
-      <entry key="W1" value="804.8295838465139" />
+      <entry key="MS100" value="1.0832762446312365" />
+      <entry key="MS500" value="2.4291428032604054" />
+      <entry key="S2" value="4.905439602949572" />
+      <entry key="S5" value="6.397635232387664" />
+      <entry key="S10" value="7.116537557927534" />
+      <entry key="S30" value="7.709584079883452" />
+      <entry key="S60" value="8.06325681873612" />
+      <entry key="M2" value="8.588036650977111" />
+      <entry key="M5" value="9.277598670158225" />
+      <entry key="M10" value="10.407596088678192" />
+      <entry key="M15" value="12.611658797378416" />
+      <entry key="M30" value="20.90914325594356" />
+      <entry key="H1" value="42.66527672926474" />
+      <entry key="H2" value="106.73358962151806" />
+      <entry key="H4" value="238.51860537942767" />
+      <entry key="D1" value="660.3620725165938" />
+      <entry key="W1" value="820.6322128869283" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="8.788512346747933E-200" />
-      <entry key="MS500" value="1.5444827902460232E-40" />
-      <entry key="S2" value="1.1147969410505309E-10" />
-      <entry key="S5" value="1.0444275215852078E-4" />
-      <entry key="S10" value="0.010219723683080703" />
-      <entry key="S30" value="0.2170099854755087" />
-      <entry key="S60" value="0.46584330571073884" />
-      <entry key="M2" value="0.6825271465009571" />
-      <entry key="M5" value="0.8583175088201314" />
-      <entry key="M10" value="0.9264542669879242" />
-      <entry key="M15" value="0.9503479828987027" />
-      <entry key="M30" value="0.9748614048026113" />
-      <entry key="H1" value="0.9892131320597469" />
-      <entry key="H2" value="1.0368306252318846" />
-      <entry key="H4" value="1.204611167713425" />
-      <entry key="D1" value="1.769079190509591" />
-      <entry key="W1" value="1.9632050547085855" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="8.373066690802692E-212" />
+      <entry key="S10" value="2.8936251814640207E-106" />
+      <entry key="S30" value="6.614252320967438E-36" />
+      <entry key="S60" value="2.5718188740592594E-18" />
+      <entry key="M2" value="1.6036891450836917E-9" />
+      <entry key="M5" value="3.034227050625246E-4" />
+      <entry key="M10" value="0.017419032839469734" />
+      <entry key="M15" value="0.06719691863602853" />
+      <entry key="M30" value="0.259224608647433" />
+      <entry key="H1" value="0.5101014387128133" />
+      <entry key="H2" value="0.7445453477256163" />
+      <entry key="H4" value="1.0207950465407347" />
+      <entry key="D1" value="1.7209274110207562" />
+      <entry key="W1" value="1.9554808192954347" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9911826435384871" />
-      <entry key="MS500" value="2.9172928379779157" />
-      <entry key="S2" value="7.192713929932993" />
-      <entry key="S5" value="11.103743058071878" />
-      <entry key="S10" value="14.71941626261022" />
-      <entry key="S30" value="21.0464040225438" />
-      <entry key="S60" value="24.22840816949372" />
-      <entry key="M2" value="26.3534011963331" />
-      <entry key="M5" value="27.868059603833906" />
-      <entry key="M10" value="28.42428344866149" />
-      <entry key="M15" value="28.689430119329096" />
-      <entry key="M30" value="31.652980414109873" />
-      <entry key="H1" value="54.575747789683376" />
-      <entry key="H2" value="126.35569787675364" />
-      <entry key="H4" value="261.6763546617675" />
-      <entry key="D1" value="661.2951731028498" />
-      <entry key="W1" value="806.7926907499814" />
+      <entry key="MS100" value="0.8285188207291261" />
+      <entry key="MS500" value="2.363275594525675" />
+      <entry key="S2" value="4.880564710172318" />
+      <entry key="S5" value="6.384742889268413" />
+      <entry key="S10" value="7.1093051549702855" />
+      <entry key="S30" value="7.706911340503057" />
+      <entry key="S60" value="8.061707794334643" />
+      <entry key="M2" value="8.58704990455139" />
+      <entry key="M5" value="9.277381368336192" />
+      <entry key="M10" value="10.424461110635585" />
+      <entry key="M15" value="12.677978213518406" />
+      <entry key="M30" value="21.166972308406105" />
+      <entry key="H1" value="43.174014317873635" />
+      <entry key="H2" value="107.47689939979504" />
+      <entry key="H4" value="239.53813705831718" />
+      <entry key="D1" value="662.082437092866" />
+      <entry key="W1" value="822.5875954615373" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -276,7 +274,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791546945863</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="ai-f002 기능개발 완료">
+      <option name="closed" value="true" />
+      <created>1791555657498</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1791555657498</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,7 +323,8 @@
     <MESSAGE value="ai 기능별 폴더 및 파일 정리" />
     <MESSAGE value="ai_f001 기능 개발 완료" />
     <MESSAGE value="ai-f001 파일 이동" />
-    <option name="LAST_COMMIT_MESSAGE" value="ai-f001 파일 이동" />
+    <MESSAGE value="ai-f002 기능개발 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="ai-f002 기능개발 완료" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

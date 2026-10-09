@@ -30,6 +30,10 @@ from src.features.f002_risk.service import get_risk_evidence
 from src.features.f002_risk.service import get_age_statistics
 from src.features.f002_risk.service import get_combined_risk_evidence
 
+from src.features.f003_explanation.service import explain_risk
+
+from src.features.f003_explanation.service import explain_risk_hybrid
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter(
@@ -308,4 +312,77 @@ def get_risk_summary_endpoint(
         raise HTTPException(
             status_code=503,
             detail="통계 근거 파일을 사용할 수 없습니다.",
+        ) from exc
+
+
+
+# ============================================================
+# AI-F-003 산업재해 통계 근거 설명 API
+# ============================================================
+
+@router.get(
+    "/jobs/{job_id}/risk-explanation",
+    tags=["AI-F-003 Explanation"],
+    summary="직무별 산업재해 통계 근거 설명",
+)
+def get_risk_explanation_endpoint(
+    job_id: str,
+    year: int | None = None,
+):
+    try:
+        return explain_risk(job_id=job_id, year=year)
+
+    except LookupError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    except FileNotFoundError as exc:
+        logger.error("F-003 근거 파일 없음: %s", exc)
+        raise HTTPException(
+            status_code=503,
+            detail="설명 근거 데이터를 사용할 수 없습니다.",
+        ) from exc
+
+
+
+@router.get(
+    "/jobs/{job_id}/risk-explanation-hybrid",
+    tags=["AI-F-003 Explanation"],
+    summary="Gemini + 검증된 통계 근거 설명",
+)
+def get_risk_explanation_hybrid_endpoint(
+    job_id: str,
+    year: int | None = None,
+):
+    try:
+        return explain_risk_hybrid(
+            job_id=job_id,
+            year=year,
+        )
+
+    except LookupError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    except FileNotFoundError as exc:
+        logger.error("F-003 데이터 없음: %s", exc)
+        raise HTTPException(
+            status_code=503,
+            detail="설명 근거 데이터를 사용할 수 없습니다.",
         ) from exc
