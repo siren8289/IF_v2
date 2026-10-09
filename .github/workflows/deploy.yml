@@ -31,42 +31,72 @@ jobs:
         run: |
           set -euo pipefail
 
-          test -n "$SSH_HOST" || {
-            echo "::error::EC2_HOST is missing"
+          test -n "${SSH_HOST:-}" || {
+            echo "::error::EC2_HOST secret is missing. Add repo secret EC2_HOST (EC2 public IP or DNS)."
             exit 1
           }
 
-          test -n "$SSH_USER" || {
-            echo "::error::EC2_USER is missing"
+          test -n "${SSH_USER:-}" || {
+            echo "::error::EC2_USER secret is missing. Add repo secret EC2_USER (usually ubuntu)."
             exit 1
           }
 
-          test -n "$SSH_KEY" || {
-            echo "::error::EC2_SSH_KEY is missing"
+          test -n "${SSH_KEY:-}" || {
+            echo "::error::EC2_SSH_KEY secret is missing. Add the EC2 private key (BEGIN ... PRIVATE KEY)."
             exit 1
           }
 
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
 
-          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
 
-          ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null
+          raw = os.environ["SSH_KEY"].strip()
+          # GitHub secrets sometimes store literal \n instead of real newlines.
+          if "BEGIN" in raw and raw.count("\n") < 2 and "\\n" in raw:
+              raw = raw.replace("\\n", "\n")
+          raw = raw.replace("\r\n", "\n").replace("\r", "\n").strip() + "\n"
+
+          path = Path.home() / ".ssh" / "deploy_key"
+          path.write_text(raw)
+          path.chmod(0o600)
+
+          upper = raw.upper()
+          if "PRIVATE KEY" not in upper:
+              raise SystemExit(
+                  "EC2_SSH_KEY does not look like a private key. "
+                  "Paste the full PEM/OpenSSH private key including "
+                  "-----BEGIN ... PRIVATE KEY----- lines."
+              )
+          if "PUBLIC KEY" in upper and "PRIVATE KEY" not in upper:
+              raise SystemExit(
+                  "EC2_SSH_KEY looks like a public key. Use the private key instead."
+              )
+
+          print(f"SSH key written ({path.stat().st_size} bytes).")
+          PY
+
+          if ! ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null 2>~/ssh-keygen.err; then
+            echo "::error::EC2_SSH_KEY is present but not a valid private key."
+            echo "ssh-keygen said:"
+            sed 's|/home/runner/.ssh/deploy_key|deploy_key|g' ~/ssh-keygen.err || true
+            echo "Fix: Settings → Secrets → EC2_SSH_KEY = full private key from the .pem file."
+            exit 1
+          fi
 
           echo "SSH key verified."
 
-          if ! timeout 15 bash -c \
-            'echo > /dev/tcp/"$1"/22' _ "$SSH_HOST"; then
-            echo "::error::EC2 SSH port 22 is unreachable"
+          if ! timeout 15 bash -c 'echo > /dev/tcp/"$1"/22' _ "$SSH_HOST"; then
+            echo "::error::EC2 SSH port 22 is unreachable from GitHub Actions (host=${SSH_HOST})."
+            echo "Check: EC2 is running, public IP/DNS is correct, and Security Group allows inbound TCP 22 from 0.0.0.0/0 (or GitHub Actions IP ranges)."
             exit 1
           fi
 
           echo "SSH port 22 reachable."
 
-          ssh-keyscan -T 10 -H "$SSH_HOST" \
-            > ~/.ssh/known_hosts
-
+          ssh-keyscan -T 10 -H "$SSH_HOST" > ~/.ssh/known_hosts
           test -s ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
@@ -75,6 +105,7 @@ jobs:
           SSH_HOST: ${{ secrets.EC2_HOST }}
           SSH_USER: ${{ secrets.EC2_USER }}
         run: |
+          set -euo pipefail
           ssh -i ~/.ssh/deploy_key \
             -o BatchMode=yes \
             -o StrictHostKeyChecking=yes \
@@ -87,6 +118,7 @@ jobs:
           SSH_HOST: ${{ secrets.EC2_HOST }}
           SSH_USER: ${{ secrets.EC2_USER }}
         run: |
+          set -euo pipefail
           ssh -i ~/.ssh/deploy_key \
             -o BatchMode=yes \
             -o StrictHostKeyChecking=yes \
