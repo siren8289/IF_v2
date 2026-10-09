@@ -4,28 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="admin, job, ai 폴더 스프링 수정완료">
-      <change afterPath="$PROJECT_DIR$/spring/src/test/java/demo/admin/AdminUserServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/test/java/demo/ai/AIRiskServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/test/java/demo/global/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/test/java/demo/job/JobServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/repository/JobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/repository/JobRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/DemoApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/OpenApiSmokeTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/ai/GradeOfTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/assessment/AssessmentServiceQueryCountTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/assessment/AssessmentStatusTransitionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/test/java/demo/assessment/AssessmentStatusTransitionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/global/exception/GlobalExceptionHandlerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/qa/QaRegressionGateTest.java" beforeDir="false" />
+    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="전체 유닛 테스트, api테스트 완료">
+      <change afterPath="$PROJECT_DIR$/ai/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/ai/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/ai/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/data/raw/★+2023년도+노인실태조사+보고서(최종본)★.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/data/raw/고용노동부 산업재해현황_20231231 (2).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/data/raw/국민건강보험공단_노인장기요양보험 등급판정 현황_20251231.CSV" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/data/raw/노인일자리사업 실태조사 참여노인 데이터 정보(2023).xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/data/raw/노인일자리사업 실태조사 참여노인 데이터 코드북(2023).xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/data/raw/한국노인인력개발원_노인일자리 통합정보_20201231 (1).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/ml/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/src/app/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/src/app/schemas.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/src/app/services/guardrails.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/src/app/services/llm_gemini_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/src/app/services/scoring_baseline.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/src/app/services/scoring_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/src/etl/00_convert_encoding.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/src/etl/01_build_job_risk_by_region.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/tests/test_ai_invariants.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/tests/test_chronic_disease_score.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/tests/test_ml_baseline.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +41,7 @@
     </colors>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="412" />
+    <option name="cachedIndexableFilesCount" value="470" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -57,79 +60,82 @@
     &quot;assignee&quot;: &quot;siren8289&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/siren8289/IF_v2.git&quot;,
-    &quot;accountId&quot;: &quot;8c505c11-8a43-47ad-93eb-84070cd25495&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/siren8289/IF_v2.git",
+    "accountId": "00d02ef8-407e-4386-b6dc-788810f9146e"
   }
-}</component>
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0071987376932086" />
-      <entry key="MS500" value="1.662469170416906" />
-      <entry key="S2" value="3.0025657721390817" />
-      <entry key="S5" value="3.554550934905884" />
-      <entry key="S10" value="3.9891339834115733" />
-      <entry key="S30" value="7.680469429529752" />
-      <entry key="S60" value="14.106010883716674" />
-      <entry key="M2" value="22.073966495123642" />
-      <entry key="M5" value="32.46758212581859" />
-      <entry key="M10" value="43.1821938824102" />
-      <entry key="M15" value="51.572408326499435" />
-      <entry key="M30" value="70.7947223291743" />
-      <entry key="H1" value="103.66815231269794" />
-      <entry key="H2" value="168.76529164719335" />
-      <entry key="H4" value="262.74292461469776" />
-      <entry key="D1" value="438.6833495295854" />
-      <entry key="W1" value="485.5333820387852" />
+      <entry key="MS100" value="1.007045640101404" />
+      <entry key="MS500" value="1.6607082615943245" />
+      <entry key="S2" value="3.424679601819609" />
+      <entry key="S5" value="5.361256585432336" />
+      <entry key="S10" value="6.757573000719955" />
+      <entry key="S30" value="8.127221359542808" />
+      <entry key="S60" value="8.545424336435524" />
+      <entry key="M2" value="8.767949716574773" />
+      <entry key="M5" value="8.906008044123848" />
+      <entry key="M10" value="8.954070691764048" />
+      <entry key="M15" value="9.017488177535244" />
+      <entry key="M30" value="11.166287459537537" />
+      <entry key="H1" value="27.192406841410197" />
+      <entry key="H2" value="79.70912803584196" />
+      <entry key="H4" value="179.072574446187" />
+      <entry key="D1" value="417.00816116742357" />
+      <entry key="W1" value="489.5312438519295" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
-      <entry key="S10" value="1.8363946458131626E-170" />
-      <entry key="S30" value="2.6382868083178516E-57" />
-      <entry key="S60" value="5.136425613515555E-29" />
-      <entry key="M2" value="7.166886083589965E-15" />
-      <entry key="M5" value="2.1985290100275758E-6" />
-      <entry key="M10" value="0.001482743743884146" />
-      <entry key="M15" value="0.013003015099522645" />
-      <entry key="M30" value="0.11403076382942741" />
-      <entry key="H1" value="0.3376844145491873" />
-      <entry key="H2" value="0.581106199028359" />
-      <entry key="H4" value="0.7623032198727482" />
-      <entry key="D1" value="0.9557727092607314" />
-      <entry key="W1" value="0.9935586711595484" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="5.6663696102729926E-148" />
+      <entry key="S60" value="2.380413747707112E-74" />
+      <entry key="M2" value="1.5428589526288887E-37" />
+      <entry key="M5" value="1.8850830566801437E-15" />
+      <entry key="M10" value="4.341754319028361E-8" />
+      <entry key="M15" value="1.2353124828299598E-5" />
+      <entry key="M30" value="0.0035147012431072443" />
+      <entry key="H1" value="0.059284915814288214" />
+      <entry key="H2" value="0.24348493960466663" />
+      <entry key="H4" value="0.4934419313401191" />
+      <entry key="D1" value="0.888940463705912" />
+      <entry key="W1" value="0.983322771342702" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.7140637919488286" />
-      <entry key="MS500" value="1.5902840703152032" />
-      <entry key="S2" value="2.9806487918087408" />
-      <entry key="S5" value="3.545106500811899" />
-      <entry key="S10" value="3.984004086465316" />
-      <entry key="S30" value="7.676494849933667" />
-      <entry key="S60" value="14.100887418715123" />
-      <entry key="M2" value="22.06819260111707" />
-      <entry key="M5" value="32.462316842677176" />
-      <entry key="M10" value="43.178713792684356" />
-      <entry key="M15" value="51.58019807505209" />
-      <entry key="M30" value="70.90275023962947" />
-      <entry key="H1" value="104.00017943480407" />
-      <entry key="H2" value="169.34223870531224" />
-      <entry key="H4" value="263.50264127325244" />
-      <entry key="D1" value="439.6385940717305" />
-      <entry key="W1" value="486.5268623705285" />
+      <entry key="MS100" value="0.9724263800179888" />
+      <entry key="MS500" value="1.6221216386824868" />
+      <entry key="S2" value="3.3808564506247767" />
+      <entry key="S5" value="5.329855532392673" />
+      <entry key="S10" value="6.73662814676245" />
+      <entry key="S30" value="8.118444237951024" />
+      <entry key="S60" value="8.540754479345699" />
+      <entry key="M2" value="8.76553931674482" />
+      <entry key="M5" value="8.905025069098606" />
+      <entry key="M10" value="8.95357590611084" />
+      <entry key="M15" value="9.017165073967975" />
+      <entry key="M30" value="11.169451527919257" />
+      <entry key="H1" value="27.25061565041541" />
+      <entry key="H2" value="79.95082881503089" />
+      <entry key="H4" value="179.5643213453609" />
+      <entry key="D1" value="417.8966069384532" />
+      <entry key="W1" value="490.51448859697314" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="39TfFKc7XvxWYHyqq8QrEoSUb9H" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -169,8 +175,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+        <option value="bundled-python-sdk-821f704e66d9-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.9437.214" />
       </set>
     </attachedChunks>
   </component>
@@ -222,7 +227,23 @@
       <option name="project" value="LOCAL" />
       <updated>1791522780453</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="전체 유닛 테스트, api테스트 완료">
+      <option name="closed" value="true" />
+      <created>1791531934207</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1791531934207</updated>
+    </task>
+    <task id="LOCAL-00007" summary="전체 유닛 테스트, api테스트 완료">
+      <option name="closed" value="true" />
+      <created>1791531962928</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1791531962928</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,6 +277,7 @@
     <MESSAGE value="assessment 수정" />
     <MESSAGE value="applicant back 수정" />
     <MESSAGE value="admin, job, ai 폴더 스프링 수정완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="admin, job, ai 폴더 스프링 수정완료" />
+    <MESSAGE value="전체 유닛 테스트, api테스트 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="전체 유닛 테스트, api테스트 완료" />
   </component>
 </project>
