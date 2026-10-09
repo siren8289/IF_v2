@@ -147,17 +147,31 @@ jobs:
           echo "=== Status ==="
           docker compose -f compose.yaml ps
 
+          wait_http() {
+            local url="$1"
+            local name="$2"
+            local i
+            for i in $(seq 1 40); do
+              if curl -fsS --connect-timeout 2 --max-time 5 \
+                "$url" > /dev/null 2>&1; then
+                echo "$name ready (attempt $i)"
+                return 0
+              fi
+              sleep 3
+            done
+            echo "::error::$name failed health check: $url"
+            docker compose -f compose.yaml logs --tail=80 \
+              spring fastapi frontend || true
+            return 1
+          }
+
           echo "=== FastAPI check ==="
-          curl -fsS --retry 10 --retry-delay 3 \
-            --retry-connrefused \
-            http://127.0.0.1:8000/openapi.json \
-            > /dev/null
+          wait_http http://127.0.0.1:8000/openapi.json FastAPI
 
           echo "=== Spring check ==="
-          curl -fsS --retry 10 --retry-delay 3 \
-            --retry-connrefused \
+          wait_http \
             "http://127.0.0.1:8080/api/assessments?size=1" \
-            > /dev/null
+            Spring
 
           echo "DEPLOYMENT SUCCESS"
           EOF
