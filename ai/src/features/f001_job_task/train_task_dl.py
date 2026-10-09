@@ -26,6 +26,7 @@ import torch
 
 from torch import nn
 from torch.utils.data import Dataset, DataLoader
+from .model import TaskCNN, encode_title
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import (
     f1_score,
@@ -34,8 +35,8 @@ from sklearn.metrics import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[3]
-DATA_DIR = ROOT / "artifacts" / "f001"
+FEATURE_DIR = Path(__file__).resolve().parent
+DATA_DIR = FEATURE_DIR / "artifacts"
 MODEL_DIR = DATA_DIR / "models"
 
 LABELS = [
@@ -111,16 +112,6 @@ def build_vocab(titles):
     }
 
 
-def encode_title(title, vocab):
-    encoded = [
-        vocab.get(char, 1)
-        for char in title[:MAX_LENGTH]
-    ]
-
-    encoded += [0] * (MAX_LENGTH - len(encoded))
-    return encoded
-
-
 class TaskDataset(Dataset):
     def __init__(self, frame, vocab):
         self.x = torch.tensor(
@@ -147,46 +138,6 @@ class TaskDataset(Dataset):
 
     def __getitem__(self, index):
         return self.x[index], self.y[index]
-
-
-class TaskCNN(nn.Module):
-    def __init__(self, vocab_size, num_labels):
-        super().__init__()
-
-        self.embedding = nn.Embedding(
-            vocab_size,
-            64,
-            padding_idx=0,
-        )
-
-        self.conv = nn.Conv1d(
-            in_channels=64,
-            out_channels=128,
-            kernel_size=3,
-            padding=1,
-        )
-
-        self.activation = nn.ReLU()
-
-        self.classifier = nn.Sequential(
-            nn.Linear(128, 64),
-            nn.ReLU(),
-            nn.Dropout(0.2),
-            nn.Linear(64, num_labels),
-        )
-
-    def forward(self, x):
-        x = self.embedding(x)
-        x = x.transpose(1, 2)
-
-        x = self.activation(self.conv(x))
-
-        # PAD 위치가 pooling 결과에 영향을 줄 수 있으므로
-        # 원래 입력의 유효 위치만 남긴다.
-        # Conv의 인접 문자 영향은 남으므로 근사적 마스킹이다.
-        x = torch.amax(x, dim=2)
-
-        return self.classifier(x)
 
 
 def evaluate(model, loader, device):
