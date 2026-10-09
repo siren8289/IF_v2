@@ -1,0 +1,46 @@
+﻿model,title,label,weak_label,predicted,score,correct_vs_weak
+LogisticRegression,계근업무 및 순찰담당자 모집(컴퓨터사용가능자),WALKING,1,0,0.08543273356251257,False
+LogisticRegression,"가스 검침 및 안전점검, 가스배달 모집",DRIVING,1,0,0.5254209071733585,False
+LogisticRegression,[서교동] 빌딩 운전가능 경비원 구인,DRIVING,1,0,0.5191996166077506,False
+LogisticRegression,[(사)부산항시설관리센터] 직원(단순계약직-미화) 채용 공고,CLEANING_TASK,1,0,0.12901352242237848,False
+LogisticRegression,부천시청역 인근 관리반장 모집(일근직/ 월급여 240만/ 부천시청역 도보2분거리/ 부천새롬프라자),CLEANING_TASK,0,1,0.3942612198119507,False
+LogisticRegression,부천시청역 인근 관리반장 모집(일근직/ 월급여 172만/ 부천시청역 도보2분거리/ 부천새롬프라자),CLEANING_TASK,0,1,0.41747300140528837,False
+LogisticRegression,제주특별자치도보조기기센터 신규인력 채용 계획 공고,WALKING,1,0,0.0742738534333694,False
+LogisticRegression,"[주말, 공휴일 휴무] 경기안산  우리조명 구내식당 야간찬모 모집",CLEANING_TASK,0,1,0.3948416307475183,False
+LogisticRegression,신문배달원 모집,CLEANING_TASK,0,1,0.6348343564657751,False
+LogisticRegression,신문배달원 모집,DRIVING,1,0,0.2931360129409419,False
+LogisticRegression,[충남연구원] 2026년 제1회 직원 공개채용 공고(환경미화),CLEANING_TASK,1,0,0.29222888027610994,False
+LogisticRegression,[함성월드빌2아파트] 망원역 도보5분거리 *건물관리원*,CLEANING_TASK,0,1,0.45790077353148945,False
+LogisticRegression,세종특별자치시 보람다함께돌봄센터 센터장 내정자 위촉공고,CLEANING_TASK,0,1,0.37706404949112315,False
+LogisticRegression,세종특별자치시 보람다함께돌봄센터 센터장 내정자 위촉공고,CARE_TASK,1,0,0.3570475216133626,False
+LogisticRegression,한전KPS(주) 동탄사업소 22년도 동탄 O/H 단기노무원 채용(사무보조),CLEANING_TASK,0,1,0.39372958313389445,False
+LogisticRegression,[컬리넥스트마일] 센터관리자(배송운영) 채용,CLEANING_TASK,0,1,0.3615542321478066,False
+LogisticRegression,[컬리넥스트마일] 센터관리자(배송운영) 채용,DRIVING,1,0,0.30852479725203746,False
+LogisticRegression,우리W타워 미화주간반 기사님 모십니다.,NIGHT_SHIFT,0,1,0.45641318678554976,False
+LogisticRegression,야간 콜센터(비대면 호텔 프론트 상담)직원 구인,CLEANING_TASK,0,1,0.49538119647296247,False
+LogisticRegression,부천시청역 인근 관리반장 모집(일근직/ 월급여 230만/ 부천시청역 도보2분거리/ 부천새롬프라자),CLEANING_TASK,0,1,0.38835342388934735,False
+LogisticRegression,현장 사무실 청소원 및 조리보조원,OFFICE_TASK,0,1,0.5645879421324839,False
+LogisticRegression,제주특별자치도보조기기센터 기간제 근로자 채용 계획 공고,WALKING,1,0,0.06322088043178192,False
+LogisticRegression,"평택 삼성반도체 P1 스막,건물청소 미화원 채용 ""10/2일(수) 13시 서정동행정복지센터 상설면접 채용행사  """,NIGHT_SHIFT,0,1,0.4916654323764613,False
+LogisticRegression,인력관리(경비/미화/시설 등) 및 영업관리 정직원 채용(서울/경기/인천 담당),CLEANING_TASK,1,0,0.23738562551526562,False
+LogisticRegression,인력관리(경비/미화/시설 등) 및 영업관리 정직원 채용(서울/경기/인천 담당),FACILITY_MAINTENANCE,0,1,0.6124903452577426,False
+LogisticRegression,"남원국민체육센터수영장 운영관리팀(시설관리,차량운송) 채용공고",DRIVING,1,0,0.3937604243522912,False
+LogisticRegression,"평택 삼성반도체 P1 라인청소,건물청소 미화원 채용 ""8/9일(금)13시 서정동행정복지센터 상설면접 채용행사  """,NIGHT_SHIFT,0,1,0.4539189264222529,False
+LogisticRegression,부천시청역 인근 관리반장 모집(일근직/ 월급여 183만/ 부천시청역 도보2분거리/ 부천새롬프라자),CLEANING_TASK,0,1,0.4113229134095629,False
+LogisticRegression,2022년 제4차 기간제 근로자 채용 공고(미화직),CLEANING_TASK,1,0,0.30226834607505637,False
+LogisticRegression,간호사 또는 간호조무사 채용 공고(운전필수자),CARE_TASK,0,1,0.6091581453409817,False
+LogisticRegression,간호사 또는 간호조무사 채용 공고(운전필수자),DRIVING,1,0,0.5232948123432616,False
+LogisticRegression,간병협회 사무보조 및 상담,CARE_TASK,1,0,0.07744684983035895,False
+LogisticRegression,황구지천체육시설(중보들공원체육시설) 관리사원(안내·미화) 채용공고,FACILITY_MAINTENANCE,0,1,0.58407880802896,False
+LogisticRegression,동대문구시설관리공단 시니어인턴(청소) 모집 공고,CLEANING_TASK,1,0,0.16650848746997832,False
+PyTorch_CharCNN,계근업무 및 순찰담당자 모집(컴퓨터사용가능자),WALKING,1,0,0.007272816263139248,False
+PyTorch_CharCNN,제주특별자치도보조기기센터 신규인력 채용 계획 공고,OFFICE_TASK,0,1,0.9686099886894226,False
+PyTorch_CharCNN,"[수내역도보 5분] 대명상가 시설대리 모집(월급275, 격일제, 영선업무가능자)",OFFICE_TASK,0,1,0.21873851120471954,False
+PyTorch_CharCNN,2025 제천시립치매전담요양？주야간보호센터 직원(영양사) 채용 공고,CARE_TASK,0,1,0.5349431037902832,False
+PyTorch_CharCNN,현장 사무실 청소원 및 조리보조원,OFFICE_TASK,0,1,0.2090725302696228,False
+PyTorch_CharCNN,제주특별자치도보조기기센터 기간제 근로자 채용 계획 공고,OFFICE_TASK,0,1,0.9608041644096375,False
+PyTorch_CharCNN,인력관리(경비/미화/시설 등) 및 영업관리 정직원 채용(서울/경기/인천 담당),FACILITY_MAINTENANCE,0,1,0.8233016133308411,False
+PyTorch_CharCNN,만석테니스장·인조잔디구장(만석공원체육시설) 관리사원(안내·미화) 채용공고,FACILITY_MAINTENANCE,0,1,0.47237429022789,False
+PyTorch_CharCNN,경북연구원 제8차 행정보조원 공개 채용,WALKING,0,1,0.26864880323410034,False
+PyTorch_CharCNN,간병협회 사무보조 및 상담,CARE_TASK,1,0,0.028804806992411613,False
+PyTorch_CharCNN,(인천/중구 항동) 냉동창고 상하차원(출하원) 모집,CLEANING_TASK,0,1,0.4214591383934021,False

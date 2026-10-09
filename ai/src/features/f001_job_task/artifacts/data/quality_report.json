@@ -1,0 +1,28 @@
+{
+  "total_rows": 5779,
+  "expected_total": 5779,
+  "counts_by_source": {
+    "PUB-001": 19,
+    "PUB-002A": 340,
+    "PUB-002B": 3935,
+    "PUB-003": 1485
+  },
+  "count_matches_expected": {
+    "PUB-001": true,
+    "PUB-002A": true,
+    "PUB-002B": true,
+    "PUB-003": true
+  },
+  "duplicate_source_keys": 0,
+  "missing_source_keys": 0,
+  "null_counts": {
+    "dataset_code": 0,
+    "source_record_key": 0,
+    "region_code": 5420,
+    "region_name": 5443,
+    "organization_code": 359,
+    "organization_name": 359,
+    "organization_type": 4294,
+    "source_endpoint": 0
+  }
+}

@@ -1,0 +1,8 @@
+﻿label,status,positive,negative,accuracy,precision,recall,f1
+CLEANING_TASK,SKIPPED,0,0,,,,
+CARE_TASK,SKIPPED,0,0,,,,
+DRIVING,SKIPPED,0,0,,,,
+FACILITY_MAINTENANCE,SKIPPED,0,0,,,,
+NIGHT_SHIFT,SKIPPED,0,0,,,,
+OFFICE_TASK,SKIPPED,0,0,,,,
+WALKING,SKIPPED,0,0,,,,
