@@ -6,6 +6,7 @@ import com.example.demo.ai.entity.AIRiskResult;
 import com.example.demo.ai.repository.AIRiskResultRepository;
 import com.example.demo.assessment.dto.AssessmentRiskDetailResponse;
 import com.example.demo.assessment.entity.Assessment;
+import com.example.demo.assessment.entity.AssessmentStatus;
 import com.example.demo.assessment.repository.AssessmentRepository;
 import com.example.demo.global.exception.ApiException;
 
@@ -24,26 +25,11 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.LinkedHashMap;
 
-/**
- * AI-F-002 / AI-F-003 통합 서비스.
- *
- * [처리 흐름]
- * Assessment 조회
- *   -> Job.externalJobId 확인
- *   -> FastAPI F-002 통계 근거 조회
- *   -> FastAPI F-003 설명 조회
- *   -> PostgreSQL 결과 저장
- *
- * [중요]
- * F-002는 개인 위험점수 산출 모델이 아니다.
- * 따라서 riskScore, riskGrade는 null로 유지한다.
- *
- * 통계 근거만 조회했을 때 Assessment 상태를
- * AI_COMPLETED로 변경하지 않는다.
- *
- * 외부 HTTP 호출 중 DB 트랜잭션을 유지하지 않는다.
- */
+/** F-004 개인 참고 지수를 저장한다. F-002/F-003 근거와 이전 결과 조회는 유지한다.
+ * 외부 추론은 DB 트랜잭션 밖에서 실행하며 점수는 사고 확률이 아니다. */
 @Service
 public class AIRiskService {
 
@@ -51,7 +37,7 @@ public class AIRiskService {
             LoggerFactory.getLogger(AIRiskService.class);
 
     private static final String MODEL_VERSION =
-            "EVIDENCE_ONLY_V1";
+            "PERSONAL_INDEX_V1";
 
     private final AIClient aiClient;
     private final AssessmentRepository assessmentRepository;
@@ -74,179 +60,94 @@ public class AIRiskService {
                 new TransactionTemplate(transactionManager);
     }
 
-    /**
-     * [기능] 통계 근거 및 설명 조회 후 저장.
-     *
-     * 기존 Controller의 computeAndSaveRisk() 호출을
-     * 유지하기 위해 메서드 이름은 변경하지 않는다.
-     */
     public void computeAndSaveRisk(Long assessmentId) {
-
-        // 1. DB에서 외부 공고 ID 조회
-        String externalJobId = transactionTemplate.execute(
-                status -> {
-                    Assessment assessment =
-                            findAssessment(assessmentId);
-
-                    if (assessment.getJob() == null) {
-                        throw ApiException.badRequest(
-                                "Assessment has no linked job"
-                        );
-                    }
-
-                    String externalId =
-                            assessment.getJob().getExternalJobId();
-
-                    if (externalId == null
-                            || externalId.isBlank()) {
-                        throw ApiException.badRequest(
-                                "Job has no externalJobId: "
-                                        + assessment.getJob().getId()
-                        );
-                    }
-
-                    return externalId.trim();
-                }
-        );
-
-        log.info(
-                "AI evidence lookup started: assessmentId={}, externalJobId={}",
-                assessmentId,
-                externalJobId
-        );
-
-        // 2. FastAPI F-002 호출 (트랜잭션 밖)
-        JsonNode evidence =
-                aiClient.getRiskEvidence(externalJobId);
-
-        if (evidence == null
-                || evidence.isNull()
-                || !evidence.isObject()) {
-            throw ApiException.badRequest(
-                    "Invalid F-002 evidence response"
-            );
-        }
-
-        // 응답의 공고 ID가 요청 ID와 일치하는지 확인
-        String returnedJobId =
-                evidence.path("job_id").asText("");
-
-        if (!externalJobId.equals(returnedJobId)) {
-            throw ApiException.badRequest(
-                    "F-002 job_id mismatch"
-            );
-        }
-
-        // 3. FastAPI F-003 호출
-        // 설명 호출에 실패해도 F-002 근거는 저장
-        JsonNode explanation = null;
-
-        try {
-            explanation =
-                    aiClient.explainRisk(externalJobId);
-
-        } catch (ApiException ex) {
-            String errorCode = ex.getErrorCode();
-
-            if (!"AI_SERVICE_TIMEOUT".equals(errorCode)
-                    && !"AI_SERVICE_UNAVAILABLE".equals(errorCode)) {
-                throw ex;
+        Map<String, Object> request = transactionTemplate.execute(status -> scoreInputs(findAssessment(assessmentId)));
+        JsonNode payload = aiClient.calculatePersonalRisk(request);
+        validateResult(payload, request);
+        transactionTemplate.executeWithoutResult(status -> {
+            Assessment assessment = assessmentRepository.findByIdForUpdate(assessmentId)
+                    .orElseThrow(() -> ApiException.notFound("Assessment not found: " + assessmentId));
+            if (!request.equals(scoreInputs(assessment))) {
+                throw ApiException.badRequest("Assessment inputs changed during scoring");
             }
-
-            log.warn(
-                    "F-003 explanation unavailable: assessmentId={}, error={}",
-                    assessmentId,
-                    errorCode
-            );
-        }
-
-        // 4. 저장할 JSON 구성
-        ObjectNode payload = objectMapper.createObjectNode();
-
-        payload.put("assessment_status", "EVIDENCE_ONLY");
-        payload.put("external_job_id", externalJobId);
-        payload.set("evidence", evidence);
-
-        if (explanation != null && explanation.isObject()) {
-            payload.set("explanation", explanation);
-        } else {
-            payload.putNull("explanation");
-        }
-
-        // 5. 별도 트랜잭션에서 저장
-        transactionTemplate.executeWithoutResult(status ->
-                saveEvidence(assessmentId, payload)
-        );
-
-        log.info(
-                "AI evidence saved: assessmentId={}, externalJobId={}",
-                assessmentId,
-                externalJobId
-        );
+            AIRiskResult result = riskResultRepository.findByAssessment_Id(assessmentId).orElseGet(AIRiskResult::new);
+            result.setAssessment(assessment);
+            result.setTotalRiskPercent(payload.get("risk_score").intValue());
+            result.setRiskGrade(payload.get("risk_grade").asText());
+            result.setModelVersion(MODEL_VERSION);
+            result.setGeneratedAt(OffsetDateTime.now(ZoneOffset.UTC));
+            result.setExplanationJson(payload.toString());
+            assessment.setAiRiskResult(riskResultRepository.save(result));
+            if (assessment.getStatus() == AssessmentStatus.PENDING_AI) {
+                assessment.setStatus(AssessmentStatus.AI_COMPLETED);
+            }
+            assessmentRepository.save(assessment);
+        });
     }
 
-    /**
-     * [기능] F-002 / F-003 결과 저장.
-     *
-     * 동일 Assessment에 기존 결과가 있으면 갱신한다.
-     */
-    private void saveEvidence(
-            Long assessmentId,
-            ObjectNode payload
-    ) {
-
-        Assessment assessment =
-                findAssessment(assessmentId);
-
-        // 외부 API 호출 중 공고가 변경되었는지 재확인
-        String currentExternalId =
-                assessment.getJob() == null
-                        ? null
-                        : assessment.getJob().getExternalJobId();
-
-        String requestedExternalId =
-                payload.path("external_job_id").asText("");
-
-        if (currentExternalId == null
-                || !currentExternalId.equals(requestedExternalId)) {
-            throw ApiException.badRequest(
-                    "Assessment job changed during evidence lookup"
-            );
+    private Map<String, Object> scoreInputs(Assessment assessment) {
+        if (assessment.getStatus() == AssessmentStatus.FINALIZED) {
+            throw ApiException.invalidTransition("Finalized assessment cannot be recalculated");
         }
+        if (assessment.getJob() == null || assessment.getApplicant() == null || assessment.getHealthSnapshot() == null) {
+            throw ApiException.badRequest("Job, applicant and health snapshot are required");
+        }
+        var health = assessment.getHealthSnapshot();
+        var job = assessment.getJob();
+        Integer age = assessment.getApplicant().getAge();
+        if (age == null || age < 1 || age > 120 || health.getPhysicalLevel() == null
+                || health.getPhysicalLevel() < 1 || health.getPhysicalLevel() > 5
+                || health.getChronicDiseaseFlag() == null || health.getWorkHourLimit() == null
+                || health.getWorkHourLimit() < 1 || health.getWorkHourLimit() > 24
+                || job.getJobTitle() == null || job.getJobTitle().isBlank() || job.getJobTitle().trim().length() > 300) {
+            throw ApiException.badRequest("Incomplete or invalid personal scoring inputs");
+        }
+        Map<String, Object> request = new LinkedHashMap<>();
+        String externalId = job.getExternalJobId();
+        request.put("job_id", externalId == null || externalId.isBlank() ? null : externalId.trim());
+        request.put("title", job.getJobTitle().trim());
+        request.put("age", age);
+        request.put("physical_level", health.getPhysicalLevel());
+        request.put("chronic_disease", health.getChronicDiseaseFlag());
+        request.put("work_hour_limit", health.getWorkHourLimit());
+        return request;
+    }
 
-        AIRiskResult result = riskResultRepository
-                .findByAssessment_Id(assessmentId)
-                .orElseGet(AIRiskResult::new);
+    private void validateResult(JsonNode payload, Map<String, Object> request) {
+        if (payload == null || !payload.isObject()) throw ApiException.invalidAiScore("Missing score response");
+        JsonNode score = payload.path("risk_score");
+        if (!score.isIntegralNumber() || !score.canConvertToInt() || score.intValue() < 0 || score.intValue() > 100
+                || !gradeOf(score.intValue()).equals(payload.path("risk_grade").asText())
+                || !"REFERENCE_INDEX".equals(payload.path("score_type").asText())
+                || !MODEL_VERSION.equals(payload.path("model_version").asText())
+                || !"SCORED_REVIEW_REQUIRED".equals(payload.path("assessment_status").asText())
+                || !payload.path("review_required").isBoolean() || !payload.path("review_required").booleanValue()
+                || !payload.has("risk_probability") || !payload.get("risk_probability").isNull()
+                || !objectMapper.valueToTree(request).equals(payload.path("inputs"))
+                || !payload.path("factors").isArray() || payload.path("factors").isEmpty()
+                || !payload.path("limitations").isArray() || payload.path("limitations").isEmpty()) {
+            throw ApiException.invalidAiScore("Invalid reference index response");
+        }
+    }
 
-        result.setAssessment(assessment);
+    public static String gradeOf(double score) {
+        if (!Double.isFinite(score) || score < 0 || score > 100) {
+            throw ApiException.invalidAiScore("Score must be finite and within 0~100");
+        }
+        return score <= 40 ? "LOW" : score <= 60 ? "MID" : "HIGH";
+    }
 
-        // F-002는 개인 위험점수를 계산하지 않는다.
-        result.setTotalRiskPercent(null);
-        result.setRiskGrade(null);
-
-        result.setGeneratedAt(
-                OffsetDateTime.now(ZoneOffset.UTC)
-        );
-
-        result.setModelVersion(MODEL_VERSION);
-
-        result.setExplanationJson(
-                payload.toString()
-        );
-
-        AIRiskResult saved =
-                riskResultRepository.save(result);
-
-        assessment.setAiRiskResult(saved);
-
-        // 통계 근거 확보만으로 평가를 완료 처리하지 않는다.
-        assessmentRepository.save(assessment);
+    /** 이전 한글 등급 표현과의 호환. 계산되지 않은 점수에는 사용하지 않는다. */
+    public static String gradeOfBand(String band) {
+        if ("낮음".equals(band)) return "LOW";
+        if ("높음".equals(band) || "매우 높음".equals(band)) return "HIGH";
+        return "MID";
     }
 
     /**
      * [기능] 저장된 통계 근거 및 설명 조회.
      *
-     * 기존 응답 DTO의 점수 관련 필드는 null로 유지한다.
+     * 이전 EVIDENCE_ONLY 데이터에서는 점수와 등급을 null로 유지한다.
      */
     public AssessmentRiskDetailResponse getRiskDetail(
             Long assessmentId
@@ -288,7 +189,28 @@ public class AIRiskService {
                 JsonNode payload =
                         objectMapper.readTree(storedJson);
 
-                // 현재 EVIDENCE_ONLY 구조
+                if ("SCORED_REVIEW_REQUIRED".equals(payload.path("assessment_status").asText())) {
+                    response.setDataStatus("SCORED_REVIEW_REQUIRED");
+                    response.setScoreType(payload.path("score_type").asText());
+                    response.setReviewRequired(true);
+                    response.setCalculation(payload);
+                    response.setEvidence(payload.get("evidence"));
+                    response.setExplanation(payload.get("explanation"));
+                    response.setSummary(payload.path("summary").asText());
+                    response.setGuidance(payload.path("guidance").asText());
+                    List<String> limitations = new ArrayList<>();
+                    payload.path("limitations").forEach(item -> limitations.add(item.asText()));
+                    response.setLimitations(limitations);
+                    response.setDisclaimer(String.join("\n", limitations));
+                    List<String> factors = new ArrayList<>();
+                    payload.path("factors").forEach(item -> factors.add(
+                            item.path("label").asText() + ": " + item.path("points").asText() + "점 / "
+                            + item.path("maximum").asText() + "점 — " + item.path("basis").asText()));
+                    response.setFactorSummaries(factors);
+                    return response;
+                }
+
+                // 이전 EVIDENCE_ONLY 구조
                 if ("EVIDENCE_ONLY".equals(
                         payload.path("assessment_status").asText()
                 )) {

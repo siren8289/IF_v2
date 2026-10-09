@@ -13,6 +13,7 @@ export default defineConfig({
   preview: { port: 3000, strictPort: true },
   // vitest는 jsdom 환경에서 실행하고 CSS는 처리하지 않는다.
   test: {
+    exclude: ["e2e/**", "node_modules/**"],
     environment: "jsdom",
     globals: true,
     setupFiles: ["./src/test/setup.ts"],

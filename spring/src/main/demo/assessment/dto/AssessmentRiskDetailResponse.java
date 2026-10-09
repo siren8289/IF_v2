@@ -18,6 +18,7 @@ import java.util.List;
  *
  * [현재 정책]
  * F-002 / F-003은 개인 위험점수를 산출하지 않는다.
+ * F-004는 PERSONAL_INDEX_V1 정책으로 0~100점 참고 지수를 산출한다.
  *
  * 따라서 EVIDENCE_ONLY 결과에서는
  * riskScore, riskBand, riskGrade가 null이다.
@@ -26,6 +27,21 @@ import java.util.List;
  */
 public class AssessmentRiskDetailResponse {
 
+    /** F-004 정책 참고 지수. 사고 확률은 제공하지 않는다. */
+    private String scoreType;
+    private Boolean reviewRequired;
+    private List<String> limitations = new ArrayList<>();
+    private JsonNode calculation;
+
+    public String getScoreType() { return scoreType; }
+    public void setScoreType(String value) { scoreType = value; }
+    public Boolean getReviewRequired() { return reviewRequired; }
+    public void setReviewRequired(Boolean value) { reviewRequired = value; }
+    public List<String> getLimitations() { return limitations; }
+    public void setLimitations(List<String> value) { limitations = value; }
+    public JsonNode getCalculation() { return calculation; }
+    public void setCalculation(JsonNode value) { calculation = value; }
+
     // ========================================================
     // 1. 기존 위험도 응답 필드
     // ========================================================
@@ -33,7 +49,7 @@ public class AssessmentRiskDetailResponse {
     /**
      * 개인 위험점수.
      *
-     * 현재 F-002에서는 계산하지 않으므로 null.
+     * F-004 결과는 0~100점 지수이며 이전 F-002 전용 결과는 null.
      */
     private Integer riskScore;
 

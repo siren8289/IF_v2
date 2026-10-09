@@ -9,11 +9,11 @@ import {
 
 // 서버 값 <-> 화면 값 변환 규칙이 기존 동작과 같은지 확인한다.
 describe("assessment model", () => {
-  it("서버 등급을 화면 등급으로 변환하고 값이 없으면 Medium", () => {
+  it("서버 등급을 화면 등급으로 변환하고 값이 없으면 Unknown", () => {
     expect(riskGradeToLevel("HIGH")).toBe("High");
     expect(riskGradeToLevel("MID")).toBe("Medium");
     expect(riskGradeToLevel("LOW")).toBe("Low");
-    expect(riskGradeToLevel(null)).toBe("Medium");
+    expect(riskGradeToLevel(null)).toBe("Unknown");
   });
 
   it("상태를 서버 값과 상호 변환", () => {

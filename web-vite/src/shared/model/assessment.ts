@@ -1,5 +1,5 @@
 // 화면 도메인 모델과 서버 값 <-> 화면 값 변환 규칙. 여러 기능(대시보드/평가/위험도)이 공유한다.
-export type RiskLevel = "Low" | "Medium" | "High";
+export type RiskLevel = "Low" | "Medium" | "High" | "Unknown";
 export type AssessmentStatus = "Draft" | "Analyzed" | "Completed";
 export type HealthStatus = "good" | "average" | "bad";
 
@@ -10,7 +10,7 @@ export interface Assessment {
   applicantName: string;
   age: number;
   healthStatus: string;
-  riskScore: number;
+  riskScore: number | null;
   riskLevel: RiskLevel;
   riskFactors: string[];
   status: AssessmentStatus;
@@ -42,11 +42,12 @@ export function statusToApi(status: AssessmentStatus): string {
   return "FINALIZED";
 }
 
-/** 서버 등급(LOW/MID/HIGH)을 화면 등급으로 변환. 값이 없으면 Medium. */
+/** 서버 등급(LOW/MID/HIGH)을 화면 등급으로 변환. 값이 없으면 Unknown. */
 export function riskGradeToLevel(grade: string | null | undefined): RiskLevel {
   if (grade === "HIGH") return "High";
   if (grade === "LOW") return "Low";
-  return "Medium";
+  if (grade === "MID") return "Medium";
+  return "Unknown";
 }
 
 /** 입력 폼의 건강 상태를 서버 physicalLevel(1~5)로 변환. */

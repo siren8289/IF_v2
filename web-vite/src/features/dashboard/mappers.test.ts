@@ -28,7 +28,7 @@ describe("mapRecordToAssessment", () => {
     });
   });
 
-  it("점수/등급이 없으면 0점 Medium으로 표시한다", () => {
+  it("점수/등급이 없으면 미산출로 표시한다", () => {
     const result = mapRecordToAssessment({
       id: 1,
       applicantName: "김",
@@ -40,6 +40,6 @@ describe("mapRecordToAssessment", () => {
       riskGrade: null,
       assessedAt: "2026-01-02T00:00:00",
     });
-    expect(result).toMatchObject({ riskScore: 0, riskLevel: "Medium", healthStatus: "정보 없음", status: "Draft" });
+    expect(result).toMatchObject({ riskScore: null, riskLevel: "Unknown", healthStatus: "정보 없음", status: "Draft" });
   });
 });

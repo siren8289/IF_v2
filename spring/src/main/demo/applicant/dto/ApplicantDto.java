@@ -55,6 +55,7 @@ public final class ApplicantDto {
 
             @NotNull(message = "근무 가능 시간은 필수입니다.")
             @Positive
+            @Max(24)
             Integer workHourLimit
     ) {}
 

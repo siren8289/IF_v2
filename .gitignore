@@ -2,6 +2,8 @@ node_modules/
 .DS_Store
 dist/
 build/
+playwright-report/
+test-results/
 
 # API 키 등 비밀값 (복사 후 .env에 실제 값 입력)
 .env

@@ -81,7 +81,7 @@ export function AssessmentTable({
                     <span className="text-gray-600 font-medium">{item.age}세 <span className="text-gray-300 mx-2">|</span> {item.healthStatus}</span>
                   </td>
                   <td className="px-8 py-5 hidden md:table-cell">
-                    <span className={`text-sm font-bold ${riskColor(item.riskLevel)}`}>{item.riskLevel}</span>
+                    <span className={`text-sm font-bold ${riskColor(item.riskLevel)}`}>{item.riskScore === null ? "미산출" : `${item.riskScore}점 (${item.riskLevel})`}</span>
                   </td>
                   <td className="px-8 py-5 hidden md:table-cell text-gray-500">
                     {new Date(item.date).toLocaleDateString()}

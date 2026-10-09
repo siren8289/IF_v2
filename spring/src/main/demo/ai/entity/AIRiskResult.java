@@ -19,6 +19,7 @@ public class AIRiskResult {
     private Assessment assessment;
 
     @Column(name = "total_risk_percent")
+    // 기존 DB 컬럼명 유지. PERSONAL_INDEX_V1에서는 확률(%)이 아닌 0~100점 지수.
     private Integer totalRiskPercent;
 
     @Column(name = "risk_grade")
@@ -92,4 +93,3 @@ public class AIRiskResult {
         this.explanationJson = explanationJson;
     }
 }
-

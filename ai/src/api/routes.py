@@ -33,6 +33,7 @@ from src.features.f002_risk.service import get_combined_risk_evidence
 from src.features.f003_explanation.service import explain_risk
 
 from src.features.f003_explanation.service import explain_risk_hybrid
+from src.features.f004_personal_risk.service import PersonalRiskRequest, calculate_personal_risk
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,18 @@ router = APIRouter(
     prefix="/api/v1",
     tags=["AI-F-001 Job Task Analysis"],
 )
+
+
+@router.post("/risk/personal-score", tags=["AI-F-004 Personal Risk Index"])
+def personal_risk_score(request: PersonalRiskRequest):
+    try:
+        return calculate_personal_risk(request)
+    except FileNotFoundError as exc:
+        logger.error("개인 지수 모델 파일 없음: %s", exc)
+        raise HTTPException(503, "개인 지수 산출 모델을 사용할 수 없습니다.") from exc
+    except Exception as exc:
+        logger.exception("개인 지수 산출 실패")
+        raise HTTPException(502, "개인 지수를 산출할 수 없습니다.") from exc
 
 
 # ============================================================

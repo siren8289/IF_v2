@@ -20,7 +20,7 @@ import java.util.concurrent.TimeoutException;
  * F-002 : 통계 근거
  * F-003 : 근거 기반 설명
  *
- * 점수 산출 API는 사용하지 않는다.
+ * F-004 : 개인 참고 위험 지수 (사고 확률이 아님)
  */
 @Component
 public class AIClient {
@@ -55,6 +55,15 @@ public class AIClient {
             );
         } catch (RestClientException ex) {
             throw mapException("F-001 직무 분석 실패", ex);
+        }
+    }
+
+    public JsonNode calculatePersonalRisk(Map<String, Object> request) {
+        try {
+            return restTemplate.postForObject(
+                    baseUrl + "/api/v1/risk/personal-score", request, JsonNode.class);
+        } catch (RestClientException ex) {
+            throw mapException("개인 참고 위험 지수 산출 실패", ex);
         }
     }
 

@@ -57,9 +57,20 @@ export interface JobResponse {
 
 /** GET /api/assessments/{id}/risk-detail: FastAPI 점수/설명을 Spring이 합쳐 내려준 결과 */
 export interface AssessmentRiskDetailResponse {
-  riskScore: number;
-  riskBand: string;
-  riskGrade: string;
+  scoreType?: string | null;
+  reviewRequired?: boolean | null;
+  modelVersion?: string | null;
+  dataStatus?: string | null;
+  limitations?: string[];
+  calculation?: {
+    evidence_status: string;
+    evidence?: { job: { industry_candidate: string | null; evidence_year: number | null; industry_accident_count: number | null }; age_reference: { statistic_year: number } } | null;
+    explanation?: { summary?: string } | null;
+    task_basis: { label: string; ml_score: number; dl_score: number; weight: number; weighted_points: number }[];
+  } | null;
+  riskScore: number | null;
+  riskBand: string | null;
+  riskGrade: string | null;
   summary: string;
   factorSummaries: string[];
   guidance: string;

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.info.Info;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
@@ -31,13 +32,14 @@ public class AppConfig {
      * 연결 및 응답 제한 시간을 설정해
      * 외부 AI 서버 장애가 Spring 요청을 무기한 점유하지 않도록 한다.
      *
-     * 주의: 3초 제한은 NFR 목표를 자동 보장하지 않는다.
+     * ML/DL 첫 추론의 모델 로딩을 고려해 읽기 제한은 설정 가능하게 한다.
      */
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+    public RestTemplate restTemplate(RestTemplateBuilder builder,
+            @Value("${app.ai.read-timeout-ms:30000}") long readTimeoutMs) {
         return builder
                 .setConnectTimeout(Duration.ofSeconds(3))
-                .setReadTimeout(Duration.ofSeconds(3))
+                .setReadTimeout(Duration.ofMillis(readTimeoutMs))
                 .build();
     }
 

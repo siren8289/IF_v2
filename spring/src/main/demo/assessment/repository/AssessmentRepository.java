@@ -7,10 +7,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Lock;
+import jakarta.persistence.LockModeType;
+import java.util.Optional;
 
 import java.util.List;
 
 public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select a from Assessment a where a.id = :id")
+    Optional<Assessment> findByIdForUpdate(Long id);
 
     List<Assessment> findByApplicant_IdOrderByAssessedAtDesc(Long applicantId);
 

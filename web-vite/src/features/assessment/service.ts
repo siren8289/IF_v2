@@ -11,6 +11,8 @@ export interface NewAssessmentInput {
   age: number;
   healthStatus: HealthStatus;
   jobId: number;
+  chronicDiseaseFlag: boolean;
+  workHourLimit: number;
 }
 
 /** 신청자 -> 건강 스냅샷 -> 평가 순으로 등록하고 생성된 평가 ID를 반환한다. */
@@ -22,9 +24,8 @@ export async function registerAssessment(input: NewAssessmentInput): Promise<num
   });
   const health = await createHealthSnapshot(applicant.id, {
     physicalLevel: healthStatusToPhysicalLevel(input.healthStatus),
-    // 만성질환/근무시간 입력 UI가 없어 기존 동작과 같은 고정값을 보낸다.
-    chronicDiseaseFlag: false,
-    workHourLimit: 8,
+    chronicDiseaseFlag: input.chronicDiseaseFlag,
+    workHourLimit: input.workHourLimit,
   });
   const created = await createAssessment(applicant.id, {
     jobId: input.jobId,
@@ -39,12 +40,16 @@ export interface AssessmentFormValues {
   age: string;
   healthStatus: HealthStatus;
   jobId: number | "";
+  chronicDisease: "" | "yes" | "no";
+  workHourLimit: string;
 }
 
 export function validateAssessmentForm(values: AssessmentFormValues): Record<string, string> {
   const errors: Record<string, string> = {};
   if (!values.applicantName) errors.applicantName = "이름을 입력해주세요";
-  if (!values.age || isNaN(Number(values.age))) errors.age = "유효한 연령을 입력해주세요";
+  if (!Number.isInteger(Number(values.age)) || Number(values.age) < 1 || Number(values.age) > 120) errors.age = "유효한 연령을 입력해주세요";
   if (!values.jobId) errors.job = "직무를 선택해주세요";
+  if (!values.chronicDisease) errors.chronicDisease = "만성질환 여부를 선택해주세요";
+  if (!Number.isInteger(Number(values.workHourLimit)) || Number(values.workHourLimit) < 1 || Number(values.workHourLimit) > 24) errors.workHourLimit = "근무 가능 시간을 1~24의 정수로 입력해주세요";
   return errors;
 }

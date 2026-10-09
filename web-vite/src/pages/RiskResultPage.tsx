@@ -19,10 +19,13 @@ export default function RiskResultPage() {
     <div className="max-w-4xl mx-auto pb-24 pt-8">
       <div className="mb-10 text-center">
         <h2 className="text-xl font-medium text-slate-600">
-          AI가 분석한 신청자의 안전 위험도입니다.
+          입력 정보와 작업 특성에 기반한 개인 참고 위험 지수입니다.
         </h2>
       </div>
 
+      {(location.state as { computationError?: string } | null)?.computationError && (
+        <p role="alert" className="text-red-700 mb-4">계산 실패: {(location.state as { computationError: string }).computationError}</p>
+      )}
       <RiskResultCard view={view} />
 
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-10">

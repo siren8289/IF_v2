@@ -10,8 +10,8 @@ export default function RiskAnalysisPage() {
   const assessmentId = parseAssessmentId(id);
 
   // 계산이 끝나면(실패 포함) 결과 화면으로 replace 이동해, 뒤로가기로 재계산되지 않게 한다.
-  useComputeRisk(assessmentId, () =>
-    navigate(`/assessments/${assessmentId}/result`, { replace: true })
+  useComputeRisk(assessmentId, (error) =>
+    navigate(`/assessments/${assessmentId}/result`, { replace: true, state: { computationError: error } })
   );
 
   if (assessmentId === null) return <Navigate to="/dashboard" replace />;

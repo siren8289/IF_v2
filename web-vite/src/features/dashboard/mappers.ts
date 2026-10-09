@@ -14,7 +14,7 @@ export function mapRecordToAssessment(record: AssessmentRecordResponse): Assessm
     applicantName: record.applicantName,
     age: record.age,
     healthStatus: physicalLevelToLabel(record.physicalLevel),
-    riskScore: record.riskScore ?? 0,
+    riskScore: record.riskScore ?? null,
     riskLevel: riskGradeToLevel(record.riskGrade),
     riskFactors: [],
     status: statusFromApi(record.status),

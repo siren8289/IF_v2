@@ -27,6 +27,8 @@ export function AssessmentForm({ onCreated }: AssessmentFormProps) {
     age: "",
     healthStatus: "average",
     jobId: "",
+    chronicDisease: "",
+    workHourLimit: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -46,6 +48,8 @@ export function AssessmentForm({ onCreated }: AssessmentFormProps) {
         age: Number(values.age),
         healthStatus: values.healthStatus,
         jobId: Number(values.jobId),
+        chronicDiseaseFlag: values.chronicDisease === "yes",
+        workHourLimit: Number(values.workHourLimit),
       });
       onCreated(id);
     } catch (e) {
@@ -141,6 +145,24 @@ export function AssessmentForm({ onCreated }: AssessmentFormProps) {
               <p className="text-gray-500 text-sm mt-1">백엔드에 직무가 없으면 먼저 DB에 등록해주세요.</p>
             )}
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <label htmlFor="chronic-disease" className="block text-sm font-bold mb-3">만성질환 여부 (자기보고)</label>
+              <select id="chronic-disease" className={inputBase} value={values.chronicDisease}
+                onChange={e => setValues({ ...values, chronicDisease: e.target.value as "" | "yes" | "no" })}>
+                <option value="">선택하세요</option><option value="no">없음</option><option value="yes">있음</option>
+              </select>
+              {errors.chronicDisease && <p className="text-red-500 text-xs mt-2">{errors.chronicDisease}</p>}
+            </div>
+            <div>
+              <label htmlFor="work-hour-limit" className="block text-sm font-bold mb-3">하루 근무 가능 시간</label>
+              <input id="work-hour-limit" type="number" min="1" max="24" step="1" className={inputBase}
+                value={values.workHourLimit} onChange={e => setValues({ ...values, workHourLimit: e.target.value })} />
+              {errors.workHourLimit && <p className="text-red-500 text-xs mt-2">{errors.workHourLimit}</p>}
+            </div>
+          </div>
+          <p className="text-sm text-gray-500">결과는 0~100점 참고 지수이며 사고 확률·진단이 아닙니다. 건강 상태는 1=좋음, 3=보통, 5=나쁨으로 반영하며 담당자 검토가 필요합니다.</p>
 
           {submitError && (
             <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
