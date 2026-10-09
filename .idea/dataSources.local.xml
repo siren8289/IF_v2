@@ -16,6 +16,7 @@
             </node>
             <node kind="database" qname="if_spring">
               <node kind="schema">
+                <name qname="ai" />
                 <name qname="external_ref" />
                 <name qname="staging" />
               </node>

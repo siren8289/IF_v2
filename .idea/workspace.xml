@@ -4,31 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="전체 유닛 테스트, api테스트 완료">
-      <change afterPath="$PROJECT_DIR$/ai/.gitignore" afterDir="false" />
+    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="ai 폴더 정리 완료">
+      <change afterPath="$PROJECT_DIR$/ai/notebooks/01_job_task_baseline.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/api/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/api/routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/models/baseline.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/src/services/job_analysis_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/tests/test_baseline.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ai/tests/test_job_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/IF.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IF.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/ai/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/ai/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/data/raw/★+2023년도+노인실태조사+보고서(최종본)★.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/data/raw/고용노동부 산업재해현황_20231231 (2).csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/data/raw/국민건강보험공단_노인장기요양보험 등급판정 현황_20251231.CSV" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/data/raw/노인일자리사업 실태조사 참여노인 데이터 정보(2023).xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/data/raw/노인일자리사업 실태조사 참여노인 데이터 코드북(2023).xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/data/raw/한국노인인력개발원_노인일자리 통합정보_20201231 (1).csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/ml/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/run.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/app/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/app/schemas.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/app/services/guardrails.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/app/services/llm_gemini_service.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/app/services/scoring_baseline.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/app/services/scoring_service.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/etl/00_convert_encoding.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/etl/01_build_job_risk_by_region.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/tests/test_ai_invariants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/tests/test_chronic_disease_score.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/tests/test_ml_baseline.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ai/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -60,35 +49,35 @@
     &quot;assignee&quot;: &quot;siren8289&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/siren8289/IF_v2.git",
-    "accountId": "00d02ef8-407e-4386-b6dc-788810f9146e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/siren8289/IF_v2.git&quot;,
+    &quot;accountId&quot;: &quot;00d02ef8-407e-4386-b6dc-788810f9146e&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.007045640101404" />
-      <entry key="MS500" value="1.6607082615943245" />
-      <entry key="S2" value="3.424679601819609" />
-      <entry key="S5" value="5.361256585432336" />
-      <entry key="S10" value="6.757573000719955" />
-      <entry key="S30" value="8.127221359542808" />
-      <entry key="S60" value="8.545424336435524" />
-      <entry key="M2" value="8.767949716574773" />
-      <entry key="M5" value="8.906008044123848" />
-      <entry key="M10" value="8.954070691764048" />
-      <entry key="M15" value="9.017488177535244" />
-      <entry key="M30" value="11.166287459537537" />
-      <entry key="H1" value="27.192406841410197" />
-      <entry key="H2" value="79.70912803584196" />
-      <entry key="H4" value="179.072574446187" />
-      <entry key="D1" value="417.00816116742357" />
-      <entry key="W1" value="489.5312438519295" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000000000112945" />
+      <entry key="S60" value="1.0000103242460223" />
+      <entry key="M2" value="1.0126239254586344" />
+      <entry key="M5" value="1.9705015446135667" />
+      <entry key="M10" value="5.170518731869971" />
+      <entry key="M15" value="7.80482069650256" />
+      <entry key="M30" value="13.3774829678117" />
+      <entry key="H1" value="29.297914101866354" />
+      <entry key="H2" value="79.38270965205237" />
+      <entry key="H4" value="177.76416438288808" />
+      <entry key="D1" value="422.62333644165034" />
+      <entry key="W1" value="498.79485881667813" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -96,37 +85,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="5.6663696102729926E-148" />
-      <entry key="S60" value="2.380413747707112E-74" />
-      <entry key="M2" value="1.5428589526288887E-37" />
-      <entry key="M5" value="1.8850830566801437E-15" />
-      <entry key="M10" value="4.341754319028361E-8" />
-      <entry key="M15" value="1.2353124828299598E-5" />
-      <entry key="M30" value="0.0035147012431072443" />
-      <entry key="H1" value="0.059284915814288214" />
-      <entry key="H2" value="0.24348493960466663" />
-      <entry key="H4" value="0.4934419313401191" />
-      <entry key="D1" value="0.888940463705912" />
-      <entry key="W1" value="0.983322771342702" />
+      <entry key="S30" value="6.337687875284998E-161" />
+      <entry key="S60" value="7.960959662807636E-81" />
+      <entry key="M2" value="8.922421007107677E-41" />
+      <entry key="M5" value="9.554172643067809E-17" />
+      <entry key="M10" value="9.774544819615803E-9" />
+      <entry key="M15" value="4.571559341763356E-6" />
+      <entry key="M30" value="0.0021381205161925183" />
+      <entry key="H1" value="0.0462398152698788" />
+      <entry key="H2" value="0.215034451355774" />
+      <entry key="H4" value="0.46371807313902946" />
+      <entry key="D1" value="0.8797832118153247" />
+      <entry key="W1" value="0.9818692683546362" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9724263800179888" />
-      <entry key="MS500" value="1.6221216386824868" />
-      <entry key="S2" value="3.3808564506247767" />
-      <entry key="S5" value="5.329855532392673" />
-      <entry key="S10" value="6.73662814676245" />
-      <entry key="S30" value="8.118444237951024" />
-      <entry key="S60" value="8.540754479345699" />
-      <entry key="M2" value="8.76553931674482" />
-      <entry key="M5" value="8.905025069098606" />
-      <entry key="M10" value="8.95357590611084" />
-      <entry key="M15" value="9.017165073967975" />
-      <entry key="M30" value="11.169451527919257" />
-      <entry key="H1" value="27.25061565041541" />
-      <entry key="H2" value="79.95082881503089" />
-      <entry key="H4" value="179.5643213453609" />
-      <entry key="D1" value="417.8966069384532" />
-      <entry key="W1" value="490.51448859697314" />
+      <entry key="MS100" value="0.4322686156539326" />
+      <entry key="MS500" value="0.8455722873775164" />
+      <entry key="S2" value="0.9589317213189155" />
+      <entry key="S5" value="0.9833657411384051" />
+      <entry key="S10" value="0.9916479925550221" />
+      <entry key="S30" value="0.9972082106951967" />
+      <entry key="S60" value="0.9986134515017971" />
+      <entry key="M2" value="1.011923354173469" />
+      <entry key="M5" value="1.9701577438805569" />
+      <entry key="M10" value="5.170237073300793" />
+      <entry key="M15" value="7.804575047165034" />
+      <entry key="M30" value="13.379334566654386" />
+      <entry key="H1" value="29.343274358306676" />
+      <entry key="H2" value="79.59614721122193" />
+      <entry key="H4" value="178.22627862898364" />
+      <entry key="D1" value="423.5026281965107" />
+      <entry key="W1" value="499.7766499072169" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -243,7 +232,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791531962928</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ai 폴더 정리 완료">
+      <option name="closed" value="true" />
+      <created>1791534261650</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1791534261650</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,6 +275,18 @@
     <MESSAGE value="applicant back 수정" />
     <MESSAGE value="admin, job, ai 폴더 스프링 수정완료" />
     <MESSAGE value="전체 유닛 테스트, api테스트 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="전체 유닛 테스트, api테스트 완료" />
+    <MESSAGE value="ai 폴더 정리 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="ai 폴더 정리 완료" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ai/tests/test_job_analysis.py</url>
+          <line>377</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
