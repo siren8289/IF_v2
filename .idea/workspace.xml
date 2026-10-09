@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="ai 폴더 정리 완료">
-      <change afterPath="$PROJECT_DIR$/ai/notebooks/01_job_task_baseline.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/api/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/api/routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/models/baseline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/services/job_analysis_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/tests/test_baseline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/tests/test_job_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/IF.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IF.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="ai 001, 002, 003 기능 데이터 스키마 적재 및 생성 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ai/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,23 +49,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0000000000112945" />
-      <entry key="S60" value="1.0000103242460223" />
-      <entry key="M2" value="1.0126239254586344" />
-      <entry key="M5" value="1.9705015446135667" />
-      <entry key="M10" value="5.170518731869971" />
-      <entry key="M15" value="7.80482069650256" />
-      <entry key="M30" value="13.3774829678117" />
-      <entry key="H1" value="29.297914101866354" />
-      <entry key="H2" value="79.38270965205237" />
-      <entry key="H4" value="177.76416438288808" />
-      <entry key="D1" value="422.62333644165034" />
-      <entry key="W1" value="498.79485881667813" />
+      <entry key="MS100" value="1.0286124017318012" />
+      <entry key="MS500" value="1.7177211248698752" />
+      <entry key="S2" value="4.2315233551736355" />
+      <entry key="S5" value="6.398205464692742" />
+      <entry key="S10" value="7.54204823340194" />
+      <entry key="S30" value="9.43109125932603" />
+      <entry key="S60" value="12.642172035902984" />
+      <entry key="M2" value="16.77796301918982" />
+      <entry key="M5" value="21.735213892335246" />
+      <entry key="M10" value="26.46383213078848" />
+      <entry key="M15" value="29.710133584147993" />
+      <entry key="M30" value="36.03644442069137" />
+      <entry key="H1" value="52.23055819205305" />
+      <entry key="H2" value="102.23041747616108" />
+      <entry key="H4" value="200.5799879260917" />
+      <entry key="D1" value="446.17333211202856" />
+      <entry key="W1" value="522.7193342058096" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -85,37 +73,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="6.337687875284998E-161" />
-      <entry key="S60" value="7.960959662807636E-81" />
-      <entry key="M2" value="8.922421007107677E-41" />
-      <entry key="M5" value="9.554172643067809E-17" />
-      <entry key="M10" value="9.774544819615803E-9" />
-      <entry key="M15" value="4.571559341763356E-6" />
-      <entry key="M30" value="0.0021381205161925183" />
-      <entry key="H1" value="0.0462398152698788" />
-      <entry key="H2" value="0.215034451355774" />
-      <entry key="H4" value="0.46371807313902946" />
-      <entry key="D1" value="0.8797832118153247" />
-      <entry key="W1" value="0.9818692683546362" />
+      <entry key="S30" value="3.260857444161372E-162" />
+      <entry key="S60" value="1.8057844401149824E-81" />
+      <entry key="M2" value="4.2494522471901985E-41" />
+      <entry key="M5" value="7.101223495015E-17" />
+      <entry key="M10" value="8.426875752623275E-9" />
+      <entry key="M15" value="4.141055588807369E-6" />
+      <entry key="M30" value="0.002034958375202642" />
+      <entry key="H1" value="0.0451105129122097" />
+      <entry key="H2" value="0.2123923560588037" />
+      <entry key="H4" value="0.4608604518276698" />
+      <entry key="D1" value="0.8788772852880279" />
+      <entry key="W1" value="0.9817247694115314" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.4322686156539326" />
-      <entry key="MS500" value="0.8455722873775164" />
-      <entry key="S2" value="0.9589317213189155" />
-      <entry key="S5" value="0.9833657411384051" />
-      <entry key="S10" value="0.9916479925550221" />
-      <entry key="S30" value="0.9972082106951967" />
-      <entry key="S60" value="0.9986134515017971" />
-      <entry key="M2" value="1.011923354173469" />
-      <entry key="M5" value="1.9701577438805569" />
-      <entry key="M10" value="5.170237073300793" />
-      <entry key="M15" value="7.804575047165034" />
-      <entry key="M30" value="13.379334566654386" />
-      <entry key="H1" value="29.343274358306676" />
-      <entry key="H2" value="79.59614721122193" />
-      <entry key="H4" value="178.22627862898364" />
-      <entry key="D1" value="423.5026281965107" />
-      <entry key="W1" value="499.7766499072169" />
+      <entry key="MS100" value="0.15842895311576782" />
+      <entry key="MS500" value="1.0805963427202945" />
+      <entry key="S2" value="3.908705166086511" />
+      <entry key="S5" value="6.236933942168237" />
+      <entry key="S10" value="7.454202228570355" />
+      <entry key="S30" value="9.399454458333038" />
+      <entry key="S60" value="12.625246341642496" />
+      <entry key="M2" value="16.768832398692084" />
+      <entry key="M5" value="21.731242322444615" />
+      <entry key="M10" value="26.461688431568156" />
+      <entry key="M15" value="29.708633388256366" />
+      <entry key="M30" value="36.037562381761134" />
+      <entry key="H1" value="52.2744870643498" />
+      <entry key="H2" value="102.4410704198846" />
+      <entry key="H4" value="201.03917327322375" />
+      <entry key="D1" value="447.05170490691864" />
+      <entry key="W1" value="523.7009788743849" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -129,30 +117,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jeong-yelim/IF_portfolio&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jeong-yelim/IF_portfolio",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "vcs.log"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/spring/src/test/java" />
@@ -250,11 +238,23 @@
     <option name="OPEN_GENERIC_TABS">
       <map>
         <entry key="f28b3f3d-7b39-4e69-a095-d396a5ac9b54" value="TOOL_WINDOW" />
+        <entry key="f014e8a0-763b-48d3-abae-24bb5c670684" value="TOOL_WINDOW" />
+        <entry key="a82255bc-f5c4-4a5e-9460-a3b25aa5779f" value="TOOL_WINDOW" />
       </map>
     </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="a82255bc-f5c4-4a5e-9460-a3b25aa5779f">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="f014e8a0-763b-48d3-abae-24bb5c670684">
           <value>
             <State />
           </value>
@@ -276,7 +276,8 @@
     <MESSAGE value="admin, job, ai 폴더 스프링 수정완료" />
     <MESSAGE value="전체 유닛 테스트, api테스트 완료" />
     <MESSAGE value="ai 폴더 정리 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="ai 폴더 정리 완료" />
+    <MESSAGE value="ai 001, 002, 003 기능 데이터 스키마 적재 및 생성 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="ai 001, 002, 003 기능 데이터 스키마 적재 및 생성 완료" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -288,5 +289,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
