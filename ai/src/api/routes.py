@@ -71,10 +71,33 @@ def analyze_job_integrated(
     AI-F-001 통합 추론:
     LinearSVC 직무군 + ML/DL 작업 특성.
     """
-    return predict_f001(
-        title=request.title,
-        task_model=request.task_model,
-    )
+    try:
+        return predict_f001(
+            title=request.title,
+            task_model=request.task_model,
+        )
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    except FileNotFoundError as exc:
+        logger.error("AI-F-001 모델 파일 없음: %s", exc)
+
+        raise HTTPException(
+            status_code=503,
+            detail="직무 분류 모델을 사용할 수 없습니다.",
+        ) from exc
+
+    except Exception as exc:
+        logger.exception("AI-F-001 통합 추론 실패")
+
+        raise HTTPException(
+            status_code=500,
+            detail="통합 추론 중 오류가 발생했습니다.",
+        ) from exc
 
 # ============================================================
 # 2. 규칙 기반 직무 작업 특성 분석 API
