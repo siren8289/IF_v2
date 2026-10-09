@@ -4,28 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="applicant back 수정">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/checksums/sha1-checksums.bin" afterDir="false" />
+    <list default="true" id="f35a363a-817e-43a3-aff0-322ec96edea6" name="Changes" comment="admin, job, ai 폴더 스프링 수정완료">
+      <change afterPath="$PROJECT_DIR$/spring/src/test/java/demo/admin/AdminUserServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/test/java/demo/ai/AIRiskServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/test/java/demo/global/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/test/java/demo/job/JobServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/spring/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/admin/entity/AdminUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/admin/entity/AdminUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/admin/repository/AdminUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/admin/repository/AdminUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/ai/service/AIRiskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/service/AIRiskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/assessment/service/AssessmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/service/AssessmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/controller/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/controller/JobController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/dto/JobResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/dto/JobResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/entity/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/entity/Job.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/repository/JobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/repository/JobRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/DemoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/OpenApiSmokeTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/ai/GradeOfTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/assessment/AssessmentServiceQueryCountTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/assessment/AssessmentStatusTransitionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/test/java/demo/assessment/AssessmentStatusTransitionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/global/exception/GlobalExceptionHandlerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/test/java/com/example/demo/qa/QaRegressionGateTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +38,7 @@
     </colors>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="363" />
+    <option name="cachedIndexableFilesCount" value="412" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -69,61 +69,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000045720833022" />
-      <entry key="MS500" value="1.1613598174555397" />
-      <entry key="S2" value="3.0146485404279137" />
-      <entry key="S5" value="4.801127556680872" />
-      <entry key="S10" value="5.75953198122883" />
-      <entry key="S30" value="6.565268611135306" />
-      <entry key="S60" value="7.01420304735869" />
-      <entry key="M2" value="7.9164632732205735" />
-      <entry key="M5" value="11.563387256597629" />
-      <entry key="M10" value="19.661406780735458" />
-      <entry key="M15" value="27.02932999031133" />
-      <entry key="M30" value="44.974901941160866" />
-      <entry key="H1" value="77.09222320667139" />
-      <entry key="H2" value="141.8109069913807" />
-      <entry key="H4" value="235.36794901753166" />
-      <entry key="D1" value="410.14190131622706" />
-      <entry key="W1" value="456.60602453291216" />
+      <entry key="MS100" value="1.0071987376932086" />
+      <entry key="MS500" value="1.662469170416906" />
+      <entry key="S2" value="3.0025657721390817" />
+      <entry key="S5" value="3.554550934905884" />
+      <entry key="S10" value="3.9891339834115733" />
+      <entry key="S30" value="7.680469429529752" />
+      <entry key="S60" value="14.106010883716674" />
+      <entry key="M2" value="22.073966495123642" />
+      <entry key="M5" value="32.46758212581859" />
+      <entry key="M10" value="43.1821938824102" />
+      <entry key="M15" value="51.572408326499435" />
+      <entry key="M30" value="70.7947223291743" />
+      <entry key="H1" value="103.66815231269794" />
+      <entry key="H2" value="168.76529164719335" />
+      <entry key="H4" value="262.74292461469776" />
+      <entry key="D1" value="438.6833495295854" />
+      <entry key="W1" value="485.5333820387852" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
-      <entry key="S10" value="1.909326397707018E-166" />
-      <entry key="S30" value="5.758288133528939E-56" />
-      <entry key="S60" value="2.399643334649749E-28" />
-      <entry key="M2" value="1.54907822095908E-14" />
-      <entry key="M5" value="2.99246678911153E-6" />
-      <entry key="M10" value="0.0017298747900098227" />
-      <entry key="M15" value="0.014410413617582963" />
-      <entry key="M30" value="0.12004338223152067" />
-      <entry key="H1" value="0.34647277271312465" />
-      <entry key="H2" value="0.5886193784723065" />
-      <entry key="H4" value="0.7672153403525681" />
-      <entry key="D1" value="0.9567964302412888" />
-      <entry key="W1" value="0.9937106290249371" />
+      <entry key="S10" value="1.8363946458131626E-170" />
+      <entry key="S30" value="2.6382868083178516E-57" />
+      <entry key="S60" value="5.136425613515555E-29" />
+      <entry key="M2" value="7.166886083589965E-15" />
+      <entry key="M5" value="2.1985290100275758E-6" />
+      <entry key="M10" value="0.001482743743884146" />
+      <entry key="M15" value="0.013003015099522645" />
+      <entry key="M30" value="0.11403076382942741" />
+      <entry key="H1" value="0.3376844145491873" />
+      <entry key="H2" value="0.581106199028359" />
+      <entry key="H4" value="0.7623032198727482" />
+      <entry key="D1" value="0.9557727092607314" />
+      <entry key="W1" value="0.9935586711595484" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9592679921357782" />
-      <entry key="MS500" value="1.1169788094216055" />
-      <entry key="S2" value="2.9009156485678793" />
-      <entry key="S5" value="4.725110656473296" />
-      <entry key="S10" value="5.714295207069766" />
-      <entry key="S30" value="6.548125774936295" />
-      <entry key="S60" value="7.003912134839005" />
-      <entry key="M2" value="7.908851487001985" />
-      <entry key="M5" value="11.557876291390064" />
-      <entry key="M10" value="19.658135792683122" />
-      <entry key="M15" value="27.038480959291906" />
-      <entry key="M30" value="45.0888811345917" />
-      <entry key="H1" value="77.4330181060068" />
-      <entry key="H2" value="142.39537654930845" />
-      <entry key="H4" value="236.13259261891216" />
-      <entry key="D1" value="411.0981742539421" />
-      <entry key="W1" value="457.59965755895973" />
+      <entry key="MS100" value="0.7140637919488286" />
+      <entry key="MS500" value="1.5902840703152032" />
+      <entry key="S2" value="2.9806487918087408" />
+      <entry key="S5" value="3.545106500811899" />
+      <entry key="S10" value="3.984004086465316" />
+      <entry key="S30" value="7.676494849933667" />
+      <entry key="S60" value="14.100887418715123" />
+      <entry key="M2" value="22.06819260111707" />
+      <entry key="M5" value="32.462316842677176" />
+      <entry key="M10" value="43.178713792684356" />
+      <entry key="M15" value="51.58019807505209" />
+      <entry key="M30" value="70.90275023962947" />
+      <entry key="H1" value="104.00017943480407" />
+      <entry key="H2" value="169.34223870531224" />
+      <entry key="H4" value="263.50264127325244" />
+      <entry key="D1" value="439.6385940717305" />
+      <entry key="W1" value="486.5268623705285" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -160,6 +160,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/spring/src/test/java" />
       <recent name="$PROJECT_DIR$/spring/src/main" />
       <recent name="$PROJECT_DIR$/spring/src" />
       <recent name="$PROJECT_DIR$/data/analytics" />
@@ -213,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791482491712</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="admin, job, ai 폴더 스프링 수정완료">
+      <option name="closed" value="true" />
+      <created>1791522780453</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1791522780453</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +255,7 @@
     <MESSAGE value="공공데이터 디비 적재 완료" />
     <MESSAGE value="assessment 수정" />
     <MESSAGE value="applicant back 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="applicant back 수정" />
+    <MESSAGE value="admin, job, ai 폴더 스프링 수정완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="admin, job, ai 폴더 스프링 수정완료" />
   </component>
 </project>
