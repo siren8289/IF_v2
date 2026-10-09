@@ -1,0 +1,38 @@
+name: if-app-stack
+
+services:
+  spring:
+    image: if-spring:local
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://if_portfolio-postgres-1:5432/if_spring
+      SPRING_DATASOURCE_USERNAME: if_user
+      APP_AI_BASE_URL: http://fastapi:8000
+      APP_CORS_ALLOWED_ORIGINS: http://localhost:8089,http://127.0.0.1:8089,http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173
+      SPRING_DATASOURCE_PASSWORD: ${IF_DB_PASSWORD:?IF_DB_PASSWORD_not_set}
+    networks:
+      - if-network
+    restart: unless-stopped
+
+  fastapi:
+    image: if-fastapi:local
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks:
+      - if-network
+    restart: unless-stopped
+
+  frontend:
+    image: if-frontend:local
+    ports:
+      - "127.0.0.1:8089:80"
+    networks:
+      - if-network
+    restart: unless-stopped
+
+networks:
+  if-network:
+    external: true
+    name: if-app-network

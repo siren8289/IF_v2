@@ -4,13 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="129bac82-9f0a-494c-9b9d-7f098ada94eb" name="변경" comment="ai-f002 기능개발 완료">
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f003_explanation/notebooks/01_explanation_experiments.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f003_explanation/service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f003_explanation/tests/test_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai/src/features/f003_explanation/tests/test_service.py" afterDir="false" />
+    <list default="true" id="129bac82-9f0a-494c-9b9d-7f098ada94eb" name="변경" comment="ai-f003 기능개발 완료">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/ai.KAwAAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/ai.KAwAAA.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/external_ref.H25prQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/external_ref.H25prQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/staging.Oxjmjg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a3c71b5-2c89-4fed-94a7-c94dcef6b693/storage_v2/_src_/database/if_spring.b2fWnw/schema/staging.Oxjmjg.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai/src/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/ai/src/api/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/ai/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/ai/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ai/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/db/migrations/002_add_external_job_id.sql" beforeDir="false" afterPath="$PROJECT_DIR$/data/db/migrations/002_add_external_job_id.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/8.9/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/spring/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/ai/client/AIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/client/AIClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/ai/service/AIRiskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/ai/service/AIRiskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/assessment/dto/AssessmentRiskDetailResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/assessment/dto/AssessmentRiskDetailResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/dto/JobResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/dto/JobResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/entity/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/entity/Job.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/demo/job/service/JobService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-vite/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/web-vite/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-vite/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/web-vite/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-vite/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/web-vite/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-vite/src/shared/api/client.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-vite/src/shared/api/client.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-vite/src/shared/api/jobs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-vite/src/shared/api/jobs.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,61 +79,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0832762446312365" />
-      <entry key="MS500" value="2.4291428032604054" />
-      <entry key="S2" value="4.905439602949572" />
-      <entry key="S5" value="6.397635232387664" />
-      <entry key="S10" value="7.116537557927534" />
-      <entry key="S30" value="7.709584079883452" />
-      <entry key="S60" value="8.06325681873612" />
-      <entry key="M2" value="8.588036650977111" />
-      <entry key="M5" value="9.277598670158225" />
-      <entry key="M10" value="10.407596088678192" />
-      <entry key="M15" value="12.611658797378416" />
-      <entry key="M30" value="20.90914325594356" />
-      <entry key="H1" value="42.66527672926474" />
-      <entry key="H2" value="106.73358962151806" />
-      <entry key="H4" value="238.51860537942767" />
-      <entry key="D1" value="660.3620725165938" />
-      <entry key="W1" value="820.6322128869283" />
+      <entry key="MS100" value="1.1366085351746817" />
+      <entry key="MS500" value="2.5488414152571406" />
+      <entry key="S2" value="4.064017549127695" />
+      <entry key="S5" value="4.796392231011879" />
+      <entry key="S10" value="5.813667376234786" />
+      <entry key="S30" value="7.878809846027762" />
+      <entry key="S60" value="8.855496686510838" />
+      <entry key="M2" value="10.129636408400584" />
+      <entry key="M5" value="17.59113602907616" />
+      <entry key="M10" value="29.689301406124375" />
+      <entry key="M15" value="38.153990504596045" />
+      <entry key="M30" value="55.15469936955592" />
+      <entry key="H1" value="82.44766341739536" />
+      <entry key="H2" value="139.77280325475348" />
+      <entry key="H4" value="264.01451708371087" />
+      <entry key="D1" value="761.2745176501611" />
+      <entry key="W1" value="978.9401459119839" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="8.373066690802692E-212" />
-      <entry key="S10" value="2.8936251814640207E-106" />
-      <entry key="S30" value="6.614252320967438E-36" />
-      <entry key="S60" value="2.5718188740592594E-18" />
-      <entry key="M2" value="1.6036891450836917E-9" />
-      <entry key="M5" value="3.034227050625246E-4" />
-      <entry key="M10" value="0.017419032839469734" />
-      <entry key="M15" value="0.06719691863602853" />
-      <entry key="M30" value="0.259224608647433" />
-      <entry key="H1" value="0.5101014387128133" />
-      <entry key="H2" value="0.7445453477256163" />
-      <entry key="H4" value="1.0207950465407347" />
-      <entry key="D1" value="1.7209274110207562" />
-      <entry key="W1" value="1.9554808192954347" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="2.7761044476710808E-160" />
+      <entry key="S60" value="1.6661645920109669E-80" />
+      <entry key="M2" value="1.2907999814111272E-40" />
+      <entry key="M5" value="1.1074996054871851E-16" />
+      <entry key="M10" value="1.0523780715537496E-8" />
+      <entry key="M15" value="4.802284221738861E-6" />
+      <entry key="M30" value="0.00219141927993677" />
+      <entry key="H1" value="0.04690089969272752" />
+      <entry key="H2" value="0.2257633636293226" />
+      <entry key="H4" value="0.5621079275321726" />
+      <entry key="D1" value="1.5580309412494358" />
+      <entry key="W1" value="1.9278980504862675" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8285188207291261" />
-      <entry key="MS500" value="2.363275594525675" />
-      <entry key="S2" value="4.880564710172318" />
-      <entry key="S5" value="6.384742889268413" />
-      <entry key="S10" value="7.1093051549702855" />
-      <entry key="S30" value="7.706911340503057" />
-      <entry key="S60" value="8.061707794334643" />
-      <entry key="M2" value="8.58704990455139" />
-      <entry key="M5" value="9.277381368336192" />
-      <entry key="M10" value="10.424461110635585" />
-      <entry key="M15" value="12.677978213518406" />
-      <entry key="M30" value="21.166972308406105" />
-      <entry key="H1" value="43.174014317873635" />
-      <entry key="H2" value="107.47689939979504" />
-      <entry key="H4" value="239.53813705831718" />
-      <entry key="D1" value="662.082437092866" />
-      <entry key="W1" value="822.5875954615373" />
+      <entry key="MS100" value="0.9017383616837084" />
+      <entry key="MS500" value="2.488483019735711" />
+      <entry key="S2" value="4.04590455226149" />
+      <entry key="S5" value="4.788222403201069" />
+      <entry key="S10" value="5.8085773941824375" />
+      <entry key="S30" value="7.876381784089751" />
+      <entry key="S60" value="8.854095743444246" />
+      <entry key="M2" value="10.128719512920476" />
+      <entry key="M5" value="17.59006442869591" />
+      <entry key="M10" value="29.688184899793143" />
+      <entry key="M15" value="38.152996826347064" />
+      <entry key="M30" value="55.156140048482555" />
+      <entry key="H1" value="82.49387058728651" />
+      <entry key="H2" value="139.9977658414869" />
+      <entry key="H4" value="264.5756501222701" />
+      <entry key="D1" value="762.8319786455685" />
+      <entry key="W1" value="980.8679380549943" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -143,7 +168,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.log&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.database.main&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -164,7 +189,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="" name="Changes" comment="" />
       <created>1770724876612</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -282,7 +306,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791555657498</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ai-f003 기능개발 완료">
+      <option name="closed" value="true" />
+      <created>1791560653580</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1791560653580</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,7 +356,8 @@
     <MESSAGE value="ai_f001 기능 개발 완료" />
     <MESSAGE value="ai-f001 파일 이동" />
     <MESSAGE value="ai-f002 기능개발 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="ai-f002 기능개발 완료" />
+    <MESSAGE value="ai-f003 기능개발 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="ai-f003 기능개발 완료" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

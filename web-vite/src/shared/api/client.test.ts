@@ -1,5 +1,6 @@
 import { apiRequest } from "./client";
 import { listAssessmentRecords, updateAssessment } from "./assessments";
+import { listJobs } from "./jobs";
 import { mockApi } from "@/test/mockApi";
 
 // fetch를 목으로 바꿔 API Client의 요청 형식과 오류 처리를 확인한다.
@@ -32,5 +33,17 @@ describe("assessments API 계약", () => {
     });
     await listAssessmentRecords(2, 20);
     expect(String(fetchMock.mock.calls[0][0])).toContain("?page=2&size=20&sort=assessedAt,desc");
+  });
+});
+
+describe("jobs API 계약", () => {
+  it("Spring 페이지 응답에서 직무 목록을 반환한다", async () => {
+    const jobs = [{ id: 1, jobTitle: "배송기사" }];
+    mockApi({
+      "GET /api/jobs": {
+        json: { content: jobs, totalElements: 1, totalPages: 1, number: 0, size: 20 },
+      },
+    });
+    await expect(listJobs()).resolves.toEqual(jobs);
   });
 });

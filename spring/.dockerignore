@@ -1,8 +1,11 @@
-build/
-bin/
-target/
 .gradle/
-*.log
+build/
+target/
+bin/
 .idea/
 .vscode/
-*.iml
+.git/
+*.log
+.env
+.env.*
+test-backup/

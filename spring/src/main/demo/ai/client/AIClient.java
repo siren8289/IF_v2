@@ -1,31 +1,26 @@
 
 package com.example.demo.ai.client;
 
-import com.example.demo.ai.dto.ExplainRequestDto;
-import com.example.demo.ai.dto.ExplainResponseDto;
-import com.example.demo.ai.dto.ScoreRequestDto;
-import com.example.demo.ai.dto.ScoreResponseDto;
 import com.example.demo.global.exception.ApiException;
+import com.fasterxml.jackson.databind.JsonNode;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.SocketTimeoutException;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Spring Boot와 FastAPI 간 HTTP 통신 담당.
+ * Spring Boot -> FastAPI HTTP 통신.
  *
- * [역할]
- * - /score : 위험도 계산 요청
- * - /explain : 위험도 설명 요청
+ * F-001 : 직무 분석
+ * F-002 : 통계 근거
+ * F-003 : 근거 기반 설명
  *
- * [예외 처리]
- * - 타임아웃 : HTTP 504
- * - 연결 및 응답 오류 : HTTP 502
- *
- * 업무 데이터 저장은 담당하지 않는다.
+ * 점수 산출 API는 사용하지 않는다.
  */
 @Component
 public class AIClient {
@@ -33,99 +28,180 @@ public class AIClient {
     private final RestTemplate restTemplate;
     private final String baseUrl;
 
-    /**
-     * FastAPI 서버 주소를 주입한다.
-     * 마지막 슬래시는 제거해 URL 중복을 방지한다.
-     */
     public AIClient(
             RestTemplate restTemplate,
             @Value("${app.ai.base-url:http://localhost:8000}")
             String baseUrl
     ) {
         this.restTemplate = restTemplate;
-        this.baseUrl = baseUrl.endsWith("/")
-                ? baseUrl.substring(0, baseUrl.length() - 1)
-                : baseUrl;
+        this.baseUrl = baseUrl.replaceAll("/+$", "");
     }
 
     /**
-     * FastAPI /score 호출.
-     *
-     * @param request 신청자 및 일자리 평가 입력
-     * @return FastAPI가 계산한 위험도 결과
+     * F-001 통합 직무 분석.
      */
-    public ScoreResponseDto score(ScoreRequestDto request) {
+    public JsonNode analyzeJob(
+            String title,
+            String taskModel
+    ) {
         try {
             return restTemplate.postForObject(
-                    baseUrl + "/score",
-                    request,
-                    ScoreResponseDto.class
+                    baseUrl + "/api/v1/jobs/analyze-integrated",
+                    Map.of(
+                            "title", title,
+                            "task_model", taskModel
+                    ),
+                    JsonNode.class
             );
-        } catch (RestClientException e) {
-            throw mapAiException("AI score API 호출 실패", e);
+        } catch (RestClientException ex) {
+            throw mapException("F-001 직무 분석 실패", ex);
         }
     }
 
     /**
-     * FastAPI /explain 호출.
-     *
-     * @param request 위험도 점수 및 설명 생성 입력
-     * @return AI 설명 결과
+     * F-001 직무 예측.
      */
-    public ExplainResponseDto explain(ExplainRequestDto request) {
+    public JsonNode predictJob(String title) {
         try {
             return restTemplate.postForObject(
-                    baseUrl + "/explain",
-                    request,
-                    ExplainResponseDto.class
+                    baseUrl + "/api/v1/jobs/predict",
+                    Map.of("title", title),
+                    JsonNode.class
             );
-        } catch (RestClientException e) {
-            throw mapAiException("AI explain API 호출 실패", e);
+        } catch (RestClientException ex) {
+            throw mapException("F-001 직무 예측 실패", ex);
         }
     }
 
     /**
-     * HTTP 클라이언트 예외를 서비스 공통 예외로 변환한다.
-     *
-     * 타임아웃 여부를 원인 예외 체인에서 확인한다.
+     * F-002 직무별 산업재해 통계 근거.
      */
-    private static ApiException mapAiException(
+    public JsonNode getRiskEvidence(String jobId) {
+        try {
+            return restTemplate.getForObject(
+                    jobUrl(jobId) + "/risk-evidence",
+                    JsonNode.class
+            );
+        } catch (RestClientException ex) {
+            throw mapException("F-002 통계 근거 조회 실패", ex);
+        }
+    }
+
+    /**
+     * F-002 통합 통계 근거.
+     */
+    public JsonNode getRiskSummary(String jobId) {
+        try {
+            return restTemplate.getForObject(
+                    jobUrl(jobId) + "/risk-summary",
+                    JsonNode.class
+            );
+        } catch (RestClientException ex) {
+            throw mapException("F-002 통합 근거 조회 실패", ex);
+        }
+    }
+
+    /**
+     * F-002 연령별 통계.
+     */
+    public JsonNode getAgeStatistics(int year) {
+        try {
+            return restTemplate.getForObject(
+                    baseUrl + "/api/v1/risk/age-statistics?year={year}",
+                    JsonNode.class,
+                    year
+            );
+        } catch (RestClientException ex) {
+            throw mapException("F-002 연령별 통계 조회 실패", ex);
+        }
+    }
+
+    /**
+     * F-003 규칙 기반 설명.
+     */
+    public JsonNode explainRisk(String jobId) {
+        try {
+            return restTemplate.getForObject(
+                    jobUrl(jobId) + "/risk-explanation",
+                    JsonNode.class
+            );
+        } catch (RestClientException ex) {
+            throw mapException("F-003 설명 조회 실패", ex);
+        }
+    }
+
+    /**
+     * F-003 LLM 혼합 설명.
+     */
+    public JsonNode explainRiskHybrid(String jobId) {
+        try {
+            return restTemplate.getForObject(
+                    jobUrl(jobId) + "/risk-explanation-hybrid",
+                    JsonNode.class
+            );
+        } catch (RestClientException ex) {
+            throw mapException("F-003 혼합 설명 조회 실패", ex);
+        }
+    }
+
+    /**
+     * FastAPI 헬스 체크.
+     */
+    public boolean isHealthy() {
+        try {
+            restTemplate.getForObject(
+                    baseUrl + "/health",
+                    String.class
+            );
+            return true;
+        } catch (RestClientException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * 외부 공고 ID를 안전하게 URL에 사용.
+     */
+    private String jobUrl(String jobId) {
+        if (jobId == null
+                || !jobId.matches("[A-Za-z0-9_-]+")) {
+            throw ApiException.badRequest(
+                    "Invalid external job ID"
+            );
+        }
+
+        return baseUrl + "/api/v1/jobs/" + jobId;
+    }
+
+    /**
+     * HTTP 오류를 공통 예외로 변환.
+     */
+    private static ApiException mapException(
             String message,
             RestClientException cause
     ) {
-        if (isTimeout(cause)) {
-            return ApiException.aiTimeout(message, cause);
-        }
-
-        return ApiException.aiUnavailable(message, cause);
-    }
-
-    /**
-     * 중첩된 예외 원인까지 검사해 타임아웃 여부를 판별한다.
-     */
-    private static boolean isTimeout(Throwable throwable) {
-        Throwable current = throwable;
+        Throwable current = cause;
 
         while (current != null) {
             if (current instanceof SocketTimeoutException
                     || current instanceof TimeoutException) {
-                return true;
+                return ApiException.aiTimeout(message, cause);
             }
 
-            String message = current.getMessage();
+            String detail = current.getMessage();
 
-            if (message != null) {
-                String lower = message.toLowerCase();
+            if (detail != null) {
+                String lower = detail.toLowerCase();
 
                 if (lower.contains("timed out")
                         || lower.contains("timeout")) {
-                    return true;
+                    return ApiException.aiTimeout(message, cause);
                 }
             }
 
             current = current.getCause();
         }
 
-        return false;
+        return ApiException.aiUnavailable(message, cause);
     }
 }
