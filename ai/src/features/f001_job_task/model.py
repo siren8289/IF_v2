@@ -100,3 +100,61 @@ def analyze_job(job: JobInput) -> dict:
         "modelVersion": "keyword-baseline-v0.1",
         "status": "REVIEW_REQUIRED",
     }
+
+
+# PyTorch CharCNN 모델 정의: 학습과 추론에서 공통 사용
+import torch
+from torch import nn
+
+MAX_LENGTH = 100
+
+def encode_title(title, vocab):
+    encoded = [
+        vocab.get(char, 1)
+        for char in title[:MAX_LENGTH]
+    ]
+
+    encoded += [0] * (MAX_LENGTH - len(encoded))
+    return encoded
+
+
+class TaskCNN(nn.Module):
+    def __init__(self, vocab_size, num_labels):
+        super().__init__()
+
+        self.embedding = nn.Embedding(
+            vocab_size,
+            64,
+            padding_idx=0,
+        )
+
+        self.conv = nn.Conv1d(
+            in_channels=64,
+            out_channels=128,
+            kernel_size=3,
+            padding=1,
+        )
+
+        self.activation = nn.ReLU()
+
+        self.classifier = nn.Sequential(
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(64, num_labels),
+        )
+
+    def forward(self, x):
+        x = self.embedding(x)
+        x = x.transpose(1, 2)
+
+        x = self.activation(self.conv(x))
+
+        # PAD 위치가 pooling 결과에 영향을 줄 수 있으므로
+        # 원래 입력의 유효 위치만 남긴다.
+        # Conv의 인접 문자 영향은 남으므로 근사적 마스킹이다.
+        x = torch.amax(x, dim=2)
+
+        return self.classifier(x)
+
+
