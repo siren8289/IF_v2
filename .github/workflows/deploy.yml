@@ -24,7 +24,7 @@ jobs:
   deploy:
     name: Deploy to If_v3
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     if: >-
       github.event_name == 'workflow_dispatch' ||
@@ -69,11 +69,9 @@ jobs:
               "runuser -u ubuntu -- git fetch origin main",
               "runuser -u ubuntu -- git checkout main",
               "runuser -u ubuntu -- git merge --ff-only origin/main",
-              "runuser -u ubuntu -- docker compose config --quiet",
-              "echo 'Deployment preflight successful'",
-              "echo 'Docker rollout is disabled until DB connectivity is verified'"
+              "bash scripts/deploy.sh"
             ],
-            "executionTimeout": ["1200"]
+            "executionTimeout": ["2400"]
           }
           JSON
 
@@ -94,22 +92,24 @@ jobs:
         run: |
           set -euo pipefail
 
-          if aws ssm wait command-executed \
-            --command-id "$COMMAND_ID" \
-            --instance-id "$EC2_INSTANCE_ID"; then
-            echo "SSM command finished successfully"
-          else
-            echo "SSM command failed"
-            aws ssm get-command-invocation \
+          # 빌드가 몇 분 걸려서 기본 waiter(약 100초) 대신 직접 기다린다.
+          STATUS=Pending
+          for i in $(seq 1 160); do
+            STATUS=$(aws ssm get-command-invocation \
               --command-id "$COMMAND_ID" \
               --instance-id "$EC2_INSTANCE_ID" \
-              --query '{Status:Status,Output:StandardOutputContent,Error:StandardErrorContent}' \
-              --output json || true
-            exit 1
-          fi
+              --query Status --output text 2>/dev/null || echo Pending)
+            case "$STATUS" in
+              Pending|InProgress|Delayed) sleep 15 ;;
+              *) break ;;
+            esac
+          done
 
           aws ssm get-command-invocation \
             --command-id "$COMMAND_ID" \
             --instance-id "$EC2_INSTANCE_ID" \
-            --query '{Status:Status,Output:StandardOutputContent,Error:StandardErrorContent}' \
-            --output json
+            --query '[StandardOutputContent, StandardErrorContent]' \
+            --output text
+
+          echo "SSM status: $STATUS"
+          test "$STATUS" = "Success"
