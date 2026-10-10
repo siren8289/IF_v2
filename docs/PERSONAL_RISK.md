@@ -56,7 +56,7 @@ AI 호출이 실패하면 평가는 `PENDING_AI` 상태로 남고 화면에 오�
 # FastAPI
 cd ai
 python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
+.venv/bin/pip install -r requirements-dev.txt
 .venv/bin/pip install torch --index-url https://download.pytorch.org/whl/cpu
 .venv/bin/python -m uvicorn src.main:app --port 8000
 
