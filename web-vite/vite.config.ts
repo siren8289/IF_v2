@@ -8,12 +8,8 @@ export default defineConfig({
   resolve: {
     alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
   },
-  // Spring CORS가 localhost:3000만 허용하므로 기존 Next.js와 같은 포트를 유지한다.
   server: { port: 3000, strictPort: true },
-  preview: { port: 3000, strictPort: true },
-  // vitest는 jsdom 환경에서 실행하고 CSS는 처리하지 않는다.
   test: {
-    exclude: ["e2e/**", "node_modules/**"],
     environment: "jsdom",
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
