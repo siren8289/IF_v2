@@ -1,46 +1,112 @@
-import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
-import { RiskResultCard } from "@/features/risk/components/RiskResultCard";
-import { useRiskDetail } from "@/features/risk/useRiskDetail";
-import { parseAssessmentId, type Assessment } from "@/shared/model/assessment";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getResult, GRADE_COLOR, GRADE_TEXT, type AssessmentResult } from "@/shared/api/api";
 
-// 라우트 /assessments/:id/result: risk-detail 조회 결과를 카드로 보여주고 목록으로 돌아간다.
+const CARD = "bg-white p-6 rounded-2xl shadow-sm border border-gray-100";
+
 export default function RiskResultPage() {
-  const navigate = useNavigate();
   const { id } = useParams();
-  const location = useLocation();
-  const assessmentId = parseAssessmentId(id);
-  // 대시보드에서 넘긴 값은 risk-detail 조회가 실패했을 때만 표시용으로 쓴다.
-  const fallback = (location.state as { assessment?: Assessment } | null)?.assessment;
-  const view = useRiskDetail(assessmentId, fallback);
+  const navigate = useNavigate();
+  const [result, setResult] = useState<AssessmentResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  if (assessmentId === null) return <Navigate to="/dashboard" replace />;
+  useEffect(() => {
+    getResult(Number(id))
+      .then(setResult)
+      .catch((e) => setError(e instanceof Error ? e.message : "결과를 불러오지 못했습니다."));
+  }, [id]);
+
+  if (error) {
+    return <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700">{error}</div>;
+  }
+  if (!result) {
+    return <p className="text-gray-500 text-center py-12">불러오는 중...</p>;
+  }
 
   return (
-    <div className="max-w-4xl mx-auto pb-24 pt-8">
-      <div className="mb-10 text-center">
-        <h2 className="text-xl font-medium text-slate-600">
-          입력 정보와 작업 특성에 기반한 개인 참고 위험 지수입니다.
-        </h2>
+    <div className="max-w-3xl mx-auto pb-12 pt-6 space-y-6">
+      <div className={CARD}>
+        <p className="text-sm text-gray-500">
+          {result.applicantName} · {result.age}세 · {result.jobTitle}
+        </p>
+
+        {result.riskScore === null ? (
+          <p className="mt-4 text-gray-600">아직 AI 분석 결과가 없습니다.</p>
+        ) : (
+          <div className="mt-4 flex items-center gap-4">
+            <span className="text-5xl font-bold text-gray-800">{result.riskScore}점</span>
+            {result.riskGrade && (
+              <span className={`px-3 py-1 rounded-full text-sm font-bold ${GRADE_COLOR[result.riskGrade]}`}>
+                위험도 {GRADE_TEXT[result.riskGrade] ?? result.riskGrade}
+              </span>
+            )}
+          </div>
+        )}
       </div>
 
-      {(location.state as { computationError?: string } | null)?.computationError && (
-        <p role="alert" className="text-red-700 mb-4">계산 실패: {(location.state as { computationError: string }).computationError}</p>
-      )}
-      <RiskResultCard view={view} />
-
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-10">
-        <div className="max-w-4xl mx-auto flex gap-4">
-          <button
-            type="button"
-            onClick={() => navigate("/dashboard")}
-            className="flex-1 bg-[#2F8F6B] hover:bg-[#257A5A] text-white font-bold py-4 rounded-xl shadow-lg shadow-[#2F8F6B]/20 transition-all"
-          >
-            목록으로 돌아가기
-          </button>
+      {result.explanation && (
+        <div className={CARD}>
+          <h3 className="font-bold mb-2">AI 설명</h3>
+          <p className="text-gray-700 whitespace-pre-line">{result.explanation}</p>
+          <p className="text-xs text-gray-400 mt-2">
+            {result.explanationSource === "gemini" ? "생성형 AI(Gemini)가 작성" : "기본 설명 (생성형 AI 미사용)"}
+          </p>
         </div>
-      </div>
+      )}
 
-      <div className="h-20"></div>
+      {result.factors.length > 0 && (
+        <div className={CARD}>
+          <h3 className="font-bold mb-4">점수 구성</h3>
+          <ul className="space-y-3">
+            {result.factors.map((factor) => (
+              <li key={factor.name}>
+                <div className="flex justify-between text-sm">
+                  <span>{factor.name}</span>
+                  <span>{factor.points} / {factor.max}점</span>
+                </div>
+                <div className="h-2 bg-gray-100 rounded-full mt-1">
+                  <div
+                    className="h-2 bg-[#2F8F6B] rounded-full"
+                    style={{ width: `${factor.max > 0 ? (factor.points / factor.max) * 100 : 0}%` }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {result.taskScores.length > 0 && (
+        <div className={CARD}>
+          <h3 className="font-bold mb-4">직무 특성 분석 (ML / DL)</h3>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-gray-500 border-b">
+                <th className="text-left py-2">특성</th>
+                <th className="text-right">ML</th>
+                <th className="text-right">DL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {result.taskScores.map((task) => (
+                <tr key={task.name} className="border-b last:border-0">
+                  <td className="py-2">{task.name}</td>
+                  <td className="text-right">{Math.round(task.mlScore * 100)}%</td>
+                  <td className="text-right">{Math.round(task.dlScore * 100)}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <button
+        type="button"
+        onClick={() => navigate("/dashboard")}
+        className="w-full border border-gray-200 bg-white py-3 rounded-xl font-bold text-gray-600"
+      >
+        목록으로 돌아가기
+      </button>
     </div>
   );
 }

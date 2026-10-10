@@ -1,318 +1,213 @@
-
 package com.example.demo.assessment.service;
 
-import com.example.demo.admin.entity.AdminUser;
-import com.example.demo.admin.repository.AdminUserRepository;
+import com.example.demo.ai.client.AIClient;
+import com.example.demo.ai.entity.AIRiskResult;
 import com.example.demo.ai.repository.AIRiskResultRepository;
 import com.example.demo.applicant.entity.Applicant;
 import com.example.demo.applicant.entity.HealthSnapshot;
 import com.example.demo.applicant.repository.ApplicantRepository;
 import com.example.demo.applicant.repository.HealthSnapshotRepository;
-import com.example.demo.assessment.dto.*;
+import com.example.demo.assessment.dto.AssessmentCreateRequest;
+import com.example.demo.assessment.dto.AssessmentRecordResponse;
+import com.example.demo.assessment.dto.AssessmentResultResponse;
+import com.example.demo.assessment.dto.AssessmentResultResponse.Factor;
+import com.example.demo.assessment.dto.AssessmentResultResponse.TaskScore;
+import com.example.demo.assessment.dto.AssessmentSummaryResponse;
 import com.example.demo.assessment.entity.Assessment;
 import com.example.demo.assessment.entity.AssessmentStatus;
 import com.example.demo.assessment.repository.AssessmentRepository;
 import com.example.demo.global.exception.ApiException;
 import com.example.demo.job.entity.Job;
 import com.example.demo.job.repository.JobRepository;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * 평가(Assessment) 업무 서비스.
- *
- * [주요 역할]
- * 1. 신청자별 평가 생성
- * 2. 평가 목록 및 대시보드 조회
- * 3. 평가 상태 변경
- * 4. 평가 기록 삭제
- *
- * [연관 모듈]
- * applicant  : 신청자 및 건강정보
- * job        : 평가 대상 일자리
- * ai         : AI 위험도 결과
- * admin      : 평가 담당 관리자
- *
- * [설계 원칙]
- * - Controller: HTTP 요청/응답 처리
- * - Service: 업무 규칙 및 트랜잭션
- * - Repository: DB 조회 및 저장
- * - 예외: 공통 ApiException 사용
- */
 @Service
-@Transactional(readOnly = true)
 public class AssessmentService {
 
     private final AssessmentRepository assessmentRepository;
     private final ApplicantRepository applicantRepository;
     private final HealthSnapshotRepository healthRepository;
     private final JobRepository jobRepository;
-    private final AdminUserRepository adminRepository;
-    private final AIRiskResultRepository riskRepository;
+    private final AIRiskResultRepository riskResultRepository;
+    private final AIClient aiClient;
+    private final ObjectMapper objectMapper;
 
-    public AssessmentService(
-            AssessmentRepository assessmentRepository,
-            ApplicantRepository applicantRepository,
-            HealthSnapshotRepository healthRepository,
-            JobRepository jobRepository,
-            AdminUserRepository adminRepository,
-            AIRiskResultRepository riskRepository
-    ) {
+    public AssessmentService(AssessmentRepository assessmentRepository,
+                             ApplicantRepository applicantRepository,
+                             HealthSnapshotRepository healthRepository,
+                             JobRepository jobRepository,
+                             AIRiskResultRepository riskResultRepository,
+                             AIClient aiClient,
+                             ObjectMapper objectMapper) {
         this.assessmentRepository = assessmentRepository;
         this.applicantRepository = applicantRepository;
         this.healthRepository = healthRepository;
         this.jobRepository = jobRepository;
-        this.adminRepository = adminRepository;
-        this.riskRepository = riskRepository;
+        this.riskResultRepository = riskResultRepository;
+        this.aiClient = aiClient;
+        this.objectMapper = objectMapper;
     }
 
     /**
-     * [기능] 신규 평가 생성
-     *
-     * [입력]
-     * applicantId : 신청자 ID
-     * request     : 일자리 ID, 건강정보 ID
-     *
-     * [처리 흐름]
-     * 1. 신청자 존재 확인
-     * 2. 일자리 존재 확인
-     * 3. 건강정보 존재 확인
-     * 4. 건강정보 소유자 검증
-     * 5. 평가 초기 상태 설정
-     * 6. DB 저장
-     *
-     * [초기 상태]
-     * PENDING_AI
+     * 평가를 저장하고 AI 분석까지 한 번에 한다.
+     * AI 호출이 실패해도 평가는 남고 상태는 PENDING_AI로 유지된다.
      */
-    @Transactional
-    public AssessmentResponse createAssessment(
-            Long applicantId,
-            AssessmentCreateRequest request
-    ) {
+    public Long createAndAnalyze(AssessmentCreateRequest request) {
+        Job job = jobRepository.findById(request.jobId())
+                .orElseThrow(() -> ApiException.notFound("직무를 찾을 수 없습니다: " + request.jobId()));
 
-        Applicant applicant = applicantRepository.findById(applicantId)
-                .orElseThrow(() -> ApiException.notFound(
-                        "Applicant not found: " + applicantId
-                ));
+        // 1. 신청자, 건강 정보, 평가 저장
+        Applicant applicant = applicantRepository.save(
+                new Applicant(request.applicantName().trim(), request.age()));
 
-        Job job = jobRepository.findById(request.getJobId())
-                .orElseThrow(() -> ApiException.notFound(
-                        "Job not found: " + request.getJobId()
-                ));
-
-        HealthSnapshot health = healthRepository
-                .findById(request.getHealthId())
-                .orElseThrow(() -> ApiException.notFound(
-                        "HealthSnapshot not found: "
-                                + request.getHealthId()
-                ));
-
-        // 다른 신청자의 건강정보 사용을 차단한다.
-        if (!health.getApplicant().getId().equals(applicantId)) {
-            throw ApiException.badRequest(
-                    "HealthSnapshot does not belong to applicant"
-            );
-        }
+        HealthSnapshot health = healthRepository.save(new HealthSnapshot(
+                applicant, request.physicalLevel(), request.chronicDisease(), request.workHourLimit()));
 
         Assessment assessment = new Assessment();
-
         assessment.setApplicant(applicant);
         assessment.setJob(job);
         assessment.setHealthSnapshot(health);
-
-        // 관리자 자동 배정은 하지 않는다.
-        // 인증/담당자 지정 기능 구현 후 명시적으로 설정한다.
-        assessment.setAdminUser(null);
-
         assessment.setStatus(AssessmentStatus.PENDING_AI);
-        assessment.setAssessedAt(
-                OffsetDateTime.now(ZoneOffset.UTC)
-        );
+        assessment.setAssessedAt(OffsetDateTime.now(ZoneOffset.UTC));
+        assessment = assessmentRepository.save(assessment);
 
-        Assessment saved = assessmentRepository.save(assessment);
+        // 2. AI 서버 호출 (ML + DL + 점수 + 생성형 AI 설명)
+        Map<String, Object> body = new HashMap<>();
+        body.put("title", job.getJobTitle());
+        body.put("age", request.age());
+        body.put("physical_level", request.physicalLevel());
+        body.put("chronic_disease", request.chronicDisease());
+        body.put("work_hour_limit", request.workHourLimit());
 
-        return toResponse(saved);
+        JsonNode aiResult = aiClient.analyze(body);
+        checkAiResult(aiResult);
+
+        // 3. AI 결과 저장
+        AIRiskResult result = new AIRiskResult();
+        result.setAssessment(assessment);
+        result.setTotalRiskPercent(aiResult.get("risk_score").asInt());
+        result.setRiskGrade(aiResult.get("risk_grade").asText());
+        result.setModelVersion(aiResult.path("model_version").asText("SIMPLE_V1"));
+        result.setGeneratedAt(OffsetDateTime.now(ZoneOffset.UTC));
+        result.setExplanationJson(aiResult.toString());
+        result = riskResultRepository.save(result);
+
+        assessment.setAiRiskResult(result);
+        assessment.setStatus(AssessmentStatus.AI_COMPLETED);
+        assessmentRepository.save(assessment);
+
+        return assessment.getId();
     }
 
-    /**
-     * [기능] 신청자별 평가 목록 조회
-     *
-     * 최신 평가부터 반환한다.
-     */
-    public List<AssessmentResponse> listByApplicantId(Long applicantId) {
-
-        if (!applicantRepository.existsById(applicantId)) {
-            throw ApiException.notFound(
-                    "Applicant not found: " + applicantId
-            );
+    private void checkAiResult(JsonNode aiResult) {
+        if (aiResult == null) {
+            throw ApiException.aiError("AI 응답이 비어 있습니다.", null);
         }
-
-        return assessmentRepository
-                .findByApplicant_IdOrderByAssessedAtDesc(applicantId)
-                .stream()
-                .map(this::toResponse)
-                .toList();
+        JsonNode score = aiResult.get("risk_score");
+        if (score == null || !score.isIntegralNumber() || score.asInt() < 0 || score.asInt() > 100) {
+            throw ApiException.aiError("AI 점수가 0~100 범위가 아닙니다.", null);
+        }
+        String grade = aiResult.path("risk_grade").asText();
+        if (!grade.equals("LOW") && !grade.equals("MID") && !grade.equals("HIGH")) {
+            throw ApiException.aiError("AI 등급 값이 올바르지 않습니다.", null);
+        }
     }
 
-    /**
-     * [기능] 관리자 대시보드 평가 목록
-     *
-     * [특징]
-     * - 페이지네이션
-     * - DTO Projection
-     * - 필요한 컬럼만 조회
-     */
-    public Page<AssessmentRecordResponse> listAllRecords(
-            Pageable pageable
-    ) {
+    @Transactional(readOnly = true)
+    public Page<AssessmentRecordResponse> list(Pageable pageable) {
         return assessmentRepository.findAllRecords(pageable);
     }
 
-    /**
-     * [기능] 대시보드 요약 통계
-     *
-     * 전체 평가 / 고위험 / 최종 완료 건수
-     */
-    public AssessmentSummaryResponse getSummary() {
-
-        long total = assessmentRepository.count();
-
-        long highRisk =
-                assessmentRepository
-                        .countByAiRiskResult_RiskGrade("HIGH");
-
-        long finalized =
-                assessmentRepository
-                        .countByStatus(AssessmentStatus.FINALIZED);
-
+    @Transactional(readOnly = true)
+    public AssessmentSummaryResponse summary() {
         return new AssessmentSummaryResponse(
-                total,
-                highRisk,
-                finalized
-        );
+                assessmentRepository.count(),
+                assessmentRepository.countByAiRiskResult_RiskGrade("HIGH"),
+                assessmentRepository.countByAiRiskResultIsNotNull());
     }
 
-    /**
-     * [기능] 평가 상태 변경
-     *
-     * [허용 상태 전이]
-     * PENDING_AI → AI_COMPLETED
-     * AI_COMPLETED → FINALIZED
-     *
-     * 그 외 상태 변경은 거부한다.
-     */
-    @Transactional
-    public void updateAssessment(
-            Long assessmentId,
-            AssessmentUpdateRequest request
-    ) {
+    @Transactional(readOnly = true)
+    public AssessmentResultResponse getResult(Long id) {
+        Assessment assessment = findAssessment(id);
+        AIRiskResult ai = assessment.getAiRiskResult();
 
-        Assessment assessment = findAssessment(assessmentId);
+        Integer score = null;
+        String grade = null;
+        String explanation = null;
+        String source = null;
+        List<Factor> factors = new ArrayList<>();
+        List<TaskScore> taskScores = new ArrayList<>();
 
-        if (request == null
-                || request.getStatus() == null
-                || request.getStatus().isBlank()) {
+        if (ai != null) {
+            score = ai.getTotalRiskPercent();
+            grade = ai.getRiskGrade();
 
-            throw ApiException.badRequest(
-                    "Assessment status is required"
-            );
+            JsonNode json = readJson(ai.getExplanationJson());
+            // 이전 버전에서 저장한 데이터는 필드 이름이 달라서 둘 다 읽는다.
+            explanation = json.has("explanation")
+                    ? json.get("explanation").asText()
+                    : json.path("summary").asText(null);
+            source = json.path("explanation_source").asText("basic");
+
+            for (JsonNode f : json.path("factors")) {
+                String name = f.has("name") ? f.get("name").asText() : f.path("label").asText();
+                int max = f.has("max") ? f.get("max").asInt() : f.path("maximum").asInt();
+                factors.add(new Factor(name, f.path("points").asDouble(), max));
+            }
+
+            JsonNode tasks = json.has("task_scores") ? json.get("task_scores") : json.path("task_basis");
+            for (JsonNode t : tasks) {
+                String name = t.has("name") ? t.get("name").asText() : t.path("label").asText();
+                taskScores.add(new TaskScore(name, t.path("ml_score").asDouble(), t.path("dl_score").asDouble()));
+            }
         }
 
-        AssessmentStatus target;
-
-        try {
-            target = AssessmentStatus.valueOf(
-                    request.getStatus().trim()
-            );
-        } catch (IllegalArgumentException ex) {
-            throw ApiException.badRequest(
-                    "Unknown assessment status: "
-                            + request.getStatus()
-            );
-        }
-
-        AssessmentStatus current = assessment.getStatus();
-
-        if (!current.canTransitionTo(target)) {
-            throw ApiException.invalidTransition(
-                    "Invalid transition: "
-                            + current + " -> " + target
-            );
-        }
-
-        assessment.setStatus(target);
+        return new AssessmentResultResponse(
+                assessment.getId(),
+                assessment.getApplicant().getDisplayName(),
+                assessment.getApplicant().getAge(),
+                assessment.getJob().getJobTitle(),
+                assessment.getStatus().name(),
+                score, grade, explanation, source, factors, taskScores);
     }
 
-    /**
-     * [기능] 평가 기록 삭제
-     *
-     * [처리 흐름]
-     * 1. 평가 조회
-     * 2. 연결된 AI 결과 확인
-     * 3. AI 결과 연결 해제 및 삭제
-     * 4. 평가 삭제
-     *
-     * [트랜잭션]
-     * 삭제 과정에서 오류 발생 시 전체 롤백.
-     */
     @Transactional
-    public void deleteAssessment(Long assessmentId) {
+    public void delete(Long id) {
+        Assessment assessment = findAssessment(id);
 
-        Assessment assessment = findAssessment(assessmentId);
-
-        if (assessment.getAiRiskResult() != null) {
-
-            var riskResult = assessment.getAiRiskResult();
-
+        // assessment ↔ ai_risk_result 가 서로를 참조하므로 연결을 먼저 끊고 지운다.
+        AIRiskResult ai = assessment.getAiRiskResult();
+        if (ai != null) {
             assessment.setAiRiskResult(null);
-
             assessmentRepository.saveAndFlush(assessment);
-
-            riskRepository.delete(riskResult);
+            riskResultRepository.delete(ai);
         }
-
         assessmentRepository.delete(assessment);
     }
 
-    /**
-     * [공통] 평가 ID 조회 및 404 처리
-     */
     private Assessment findAssessment(Long id) {
-
         return assessmentRepository.findById(id)
-                .orElseThrow(() -> ApiException.notFound(
-                        "Assessment not found: " + id
-                ));
+                .orElseThrow(() -> ApiException.notFound("평가를 찾을 수 없습니다: " + id));
     }
 
-    /**
-     * [공통] Entity → Response DTO 변환
-     *
-     * Entity를 Controller에 직접 반환하지 않는다.
-     */
-    private AssessmentResponse toResponse(Assessment assessment) {
-
-        AssessmentResponse response = new AssessmentResponse();
-
-        response.setId(assessment.getId());
-        response.setApplicantId(
-                assessment.getApplicant().getId()
-        );
-        response.setStatus(
-                assessment.getStatus().name()
-        );
-        response.setAssessedAt(
-                assessment.getAssessedAt()
-        );
-
-        return response;
+    private JsonNode readJson(String text) {
+        try {
+            return objectMapper.readTree(text == null ? "{}" : text);
+        } catch (JsonProcessingException e) {
+            return objectMapper.createObjectNode();
+        }
     }
 }

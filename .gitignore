@@ -25,9 +25,11 @@ data/.venv/
 # Python caches
 __pycache__/
 *.py[cod]
-# Python cache
-__pycache__/
-*.py[cod]
+
+# Spring/Gradle build outputs
+.gradle/
+bin/
+target/
 
 # Local environment
 .venv/

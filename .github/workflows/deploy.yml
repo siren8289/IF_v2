@@ -17,7 +17,7 @@ jobs:
   deploy:
     name: Deploy to AWS EC2
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - name: Checkout
@@ -122,6 +122,8 @@ jobs:
           ssh -i ~/.ssh/deploy_key \
             -o BatchMode=yes \
             -o StrictHostKeyChecking=yes \
+            -o ServerAliveInterval=30 \
+            -o ServerAliveCountMax=120 \
             "$SSH_USER@$SSH_HOST" 'bash -se' <<'EOF'
           set -euo pipefail
 
@@ -132,12 +134,27 @@ jobs:
           git checkout main
           git merge --ff-only origin/main
 
+          echo "=== Ensure swap (t3.small) ==="
+          if ! swapon --show | grep -q .; then
+            sudo fallocate -l 2G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+            sudo chmod 600 /swapfile
+            sudo mkswap /swapfile
+            sudo swapon /swapfile
+          fi
+          free -h
+
           echo "=== Validate Compose ==="
           docker compose -f compose.yaml config --quiet
 
-          echo "=== Build ==="
-          docker compose -f compose.yaml build \
-            spring fastapi frontend
+          echo "=== Free RAM before build ==="
+          docker compose -f compose.yaml stop \
+            spring fastapi frontend || true
+
+          echo "=== Build sequentially ==="
+          export COMPOSE_PARALLEL_LIMIT=1
+          docker compose -f compose.yaml build frontend
+          docker compose -f compose.yaml build spring
+          docker compose -f compose.yaml build fastapi
 
           echo "=== Deploy ==="
           docker compose -f compose.yaml up \

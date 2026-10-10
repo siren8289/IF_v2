@@ -1,143 +1,158 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FileText, Plus } from "lucide-react";
-import { AssessmentTable } from "@/features/dashboard/components/AssessmentTable";
-import { StatusEditModal } from "@/features/dashboard/components/StatusEditModal";
-import { SummaryCards } from "@/features/dashboard/components/SummaryCards";
-import { useAssessmentRecords } from "@/features/dashboard/useAssessmentRecords";
-import { statusToApi, type Assessment } from "@/shared/model/assessment";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  deleteAssessment,
+  getAssessments,
+  getSummary,
+  GRADE_COLOR,
+  GRADE_TEXT,
+  type AssessmentRecord,
+  type Summary,
+} from "@/shared/api/api";
 
-// 라우트 /dashboard: 목록·요약 조회(useAssessmentRecords)와 화면 이동/모달 상태를 조합한다.
+const CARD = "bg-white p-6 rounded-2xl shadow-sm border border-gray-100";
+
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const {
-    assessments,
-    summary,
-    pageIndex,
-    totalPages,
-    loading,
-    error,
-    reload,
-    goToPage,
-    remove,
-    changeStatus,
-  } = useAssessmentRecords();
-  // 펼친 행과 수정 대상은 화면 전용 상태라 훅이 아닌 페이지에서 관리한다.
-  const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [editing, setEditing] = useState<Assessment | null>(null);
+  const [records, setRecords] = useState<AssessmentRecord[]>([]);
+  const [summary, setSummary] = useState<Summary | null>(null);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const startNew = () => navigate("/assessments/new");
+  async function load(pageNumber: number) {
+    setLoading(true);
+    setError(null);
+    try {
+      const list = await getAssessments(pageNumber);
+      const sum = await getSummary();
+      setRecords(list.content);
+      setTotalPages(list.totalPages);
+      setSummary(sum);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "목록을 불러오지 못했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
-  const handleDelete = async (item: Assessment) => {
-    if (!window.confirm(`「${item.applicantName}」 평가 기록을 삭제하시겠습니까?`)) return;
-    setExpandedId((id) => (id === item.id ? null : id));
-    await remove(item.id);
-  };
+  useEffect(() => {
+    load(page);
+  }, [page]);
 
-  // 저장 시 모달을 먼저 닫고 PATCH -> 목록·요약 재조회를 한다.
-  const handleSaveStatus = async (status: string) => {
-    if (!editing) return;
-    const id = editing.id;
-    setEditing(null);
-    await changeStatus(id, status);
-  };
+  async function handleDelete(item: AssessmentRecord) {
+    if (!window.confirm(`「${item.applicantName}」 평가 기록을 삭제할까요?`)) return;
+    try {
+      await deleteAssessment(item.id);
+      load(page);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "삭제하지 못했습니다.");
+    }
+  }
 
   return (
     <div className="max-w-7xl mx-auto pb-12">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+      <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">안녕하세요, 관리자님</h2>
-          <p className="text-gray-500 mt-1">오늘의 위험도 판단 업무 현황입니다.</p>
+          <h2 className="text-2xl font-bold text-gray-800">평가 대시보드</h2>
+          <p className="text-gray-500 mt-1">등록된 평가와 위험도 결과입니다.</p>
         </div>
         <button
           type="button"
-          onClick={startNew}
-          className="flex items-center gap-2 bg-[#2F8F6B] hover:bg-[#257A5A] text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-[#2F8F6B]/20 transition-all active:scale-[0.98]"
+          onClick={() => navigate("/assessments/new")}
+          className="bg-[#2F8F6B] hover:bg-[#257A5A] text-white px-6 py-3 rounded-xl font-bold"
         >
-          <Plus size={20} />
-          <span>새로운 평가 시작</span>
+          새로운 평가 시작
         </button>
       </div>
 
       {error && (
         <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700">
           {error}
-          <button type="button" onClick={reload} className="ml-2 underline">다시 시도</button>
         </div>
       )}
-      {loading && <div className="mb-8 text-center py-12 text-gray-500">불러오는 중...</div>}
 
-      {!loading && (
-        <>
-          <SummaryCards summary={summary} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className={CARD}>
+          <p className="text-sm text-gray-500">총 평가 건수</p>
+          <p className="text-3xl font-bold">{summary?.totalCount ?? 0}건</p>
+        </div>
+        <div className={CARD}>
+          <p className="text-sm text-gray-500">고위험</p>
+          <p className="text-3xl font-bold text-red-600">{summary?.highRiskCount ?? 0}건</p>
+        </div>
+        <div className={CARD}>
+          <p className="text-sm text-gray-500">AI 분석 완료</p>
+          <p className="text-3xl font-bold text-[#2F8F6B]">{summary?.analyzedCount ?? 0}건</p>
+        </div>
+      </div>
 
-          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden">
-            <div className="p-8 border-b border-gray-100 flex justify-between items-center">
-              <h3 className="font-bold text-xl text-gray-800">최근 평가 기록</h3>
-              <span className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                총 {summary?.totalCount ?? 0}건
-              </span>
-            </div>
+      <div className={CARD}>
+        <h3 className="font-bold text-lg mb-4">최근 평가 기록</h3>
 
-            {assessments.length === 0 ? (
-              <div className="text-center py-24">
-                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-300">
-                  <FileText size={40} />
-                </div>
-                <p className="text-lg text-gray-500 font-medium">아직 등록된 평가 기록이 없습니다.</p>
-                <p className="text-gray-400 mt-2 mb-8">새로운 신청자의 위험도를 평가해보세요.</p>
-                <button type="button" onClick={startNew} className="text-[#2F8F6B] font-bold hover:underline">
-                  평가 시작하기
-                </button>
-              </div>
-            ) : (
-              <AssessmentTable
-                items={assessments}
-                expandedId={expandedId}
-                onToggle={(item) => setExpandedId((id) => (id === item.id ? null : item.id))}
-                // 목록에서 이미 가진 값을 router state로 넘겨 결과 화면의 fallback으로 쓴다.
-                onViewReport={(item) =>
-                  navigate(`/assessments/${item.id}/result`, { state: { assessment: item } })
-                }
-                onEdit={setEditing}
-                onDelete={handleDelete}
-              />
-            )}
+        {loading && <p className="text-gray-500 py-8 text-center">불러오는 중...</p>}
 
-            {totalPages > 1 && (
-              <div className="flex items-center justify-between px-8 py-5 border-t border-gray-100">
-                <span className="text-sm text-gray-500">{pageIndex + 1} / {totalPages} 페이지</span>
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    disabled={pageIndex === 0}
-                    onClick={() => goToPage(pageIndex - 1)}
-                    className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-bold text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
-                  >
-                    이전
-                  </button>
-                  <button
-                    type="button"
-                    disabled={pageIndex + 1 >= totalPages}
-                    onClick={() => goToPage(pageIndex + 1)}
-                    className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-bold text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
-                  >
-                    다음
-                  </button>
-                </div>
-              </div>
-            )}
+        {!loading && records.length === 0 && (
+          <p className="text-gray-500 py-8 text-center">아직 등록된 평가 기록이 없습니다.</p>
+        )}
+
+        {!loading && records.length > 0 && (
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b text-sm text-gray-500">
+                <th className="py-3">이름</th>
+                <th>나이</th>
+                <th>직무</th>
+                <th>점수</th>
+                <th>등급</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {records.map((item) => (
+                <tr key={item.id} className="border-b last:border-0">
+                  <td className="py-3 font-medium">{item.applicantName}</td>
+                  <td>{item.age}세</td>
+                  <td>{item.jobTitle}</td>
+                  <td>{item.riskScore === null ? "-" : `${item.riskScore}점`}</td>
+                  <td>
+                    {item.riskGrade ? (
+                      <span className={`px-2 py-1 rounded-full text-xs font-bold ${GRADE_COLOR[item.riskGrade]}`}>
+                        {GRADE_TEXT[item.riskGrade] ?? item.riskGrade}
+                      </span>
+                    ) : (
+                      <span className="text-gray-400 text-sm">분석 전</span>
+                    )}
+                  </td>
+                  <td className="text-right space-x-3">
+                    <Link to={`/assessments/${item.id}/result`} className="text-[#2F8F6B] font-bold text-sm">
+                      결과 보기
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(item)}
+                      className="text-red-500 text-sm"
+                    >
+                      삭제
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
+        {totalPages > 1 && (
+          <div className="flex justify-end gap-2 mt-4">
+            <button type="button" disabled={page === 0} onClick={() => setPage(page - 1)}
+              className="px-3 py-1 border rounded disabled:opacity-40">이전</button>
+            <span className="px-2 py-1 text-sm text-gray-500">{page + 1} / {totalPages}</span>
+            <button type="button" disabled={page + 1 >= totalPages} onClick={() => setPage(page + 1)}
+              className="px-3 py-1 border rounded disabled:opacity-40">다음</button>
           </div>
-        </>
-      )}
-
-      {editing && (
-        <StatusEditModal
-          initialStatus={statusToApi(editing.status)}
-          onSave={handleSaveStatus}
-          onClose={() => setEditing(null)}
-        />
-      )}
+        )}
+      </div>
     </div>
   );
 }
