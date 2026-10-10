@@ -1,5 +1,5 @@
 
-name: Deploy IF_v2 to AWS
+name: CD - Deploy IF_v2 to If_v3 EC2
 
 on:
   workflow_run:
