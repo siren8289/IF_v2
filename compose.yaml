@@ -1,6 +1,21 @@
 name: if-app-stack
 
 services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: if_spring
+      POSTGRES_USER: if_user
+      POSTGRES_PASSWORD: ${IF_DB_PASSWORD:?IF_DB_PASSWORD_not_set}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U if_user -d if_spring"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
   spring:
     image: if-spring:local
     build:
@@ -8,13 +23,16 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://if_portfolio-postgres-1:5432/if_spring
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/if_spring
       SPRING_DATASOURCE_USERNAME: if_user
+      SPRING_DATASOURCE_PASSWORD: ${IF_DB_PASSWORD:?IF_DB_PASSWORD_not_set}
+      # 새 DB에서도 테이블을 자동으로 만든다. (있으면 그대로 사용)
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
       APP_AI_BASE_URL: http://fastapi:8000
       APP_CORS_ALLOWED_ORIGINS: http://localhost:8089,http://127.0.0.1:8089,http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173
-      SPRING_DATASOURCE_PASSWORD: ${IF_DB_PASSWORD:?IF_DB_PASSWORD_not_set}
-    networks:
-      - if-network
+    depends_on:
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
 
   fastapi:
@@ -26,8 +44,6 @@ services:
     environment:
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
       GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash}
-    networks:
-      - if-network
     restart: unless-stopped
 
   frontend:
@@ -36,11 +52,7 @@ services:
       context: ./web-vite
     ports:
       - "127.0.0.1:8089:80"
-    networks:
-      - if-network
     restart: unless-stopped
 
-networks:
-  if-network:
-    external: true
-    name: if-app-network
+volumes:
+  postgres-data:
