@@ -67,9 +67,23 @@ wait_http() {
   return 1
 }
 
+wait_frontend() {
+  local service="frontend"
+  for i in $(seq 1 60); do
+    if curl -fsS --max-time 5 "http://127.0.0.1/" > /dev/null 2>&1 || curl -fsS --max-time 5 "http://127.0.0.1:8089/" > /dev/null 2>&1; then
+      echo "Frontend OK"
+      return 0
+    fi
+    sleep 3
+  done
+  echo "ERROR: Frontend 응답 없음 (http://127.0.0.1/ 또는 http://127.0.0.1:8089/)"
+  compose logs --tail=60 "$service"
+  return 1
+}
+
 wait_http http://127.0.0.1:8000/health FastAPI fastapi
 wait_http http://127.0.0.1:8080/api/jobs Spring spring
-wait_http http://127.0.0.1:8089/ Frontend frontend
+wait_frontend
 
 docker image prune -f > /dev/null
 echo "DEPLOYMENT SUCCESS"
