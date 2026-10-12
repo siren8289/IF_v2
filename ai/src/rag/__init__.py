@@ -9,7 +9,9 @@
 - generate_rag_explanation: 근거 기반 설명, 인용 및 답변 보류
 - build_safety_rag_graph: LangGraph 상태 기반 흐름 제어
 - run_safety_rag: RAG 파이프라인 통합 실행
+- rag_router, rag_app: 독립 FastAPI 라우터 및 애플리케이션
 """
+from src.rag.api import rag_app, rag_router
 from src.rag.chunker import chunk_documents, split_text_into_chunks
 from src.rag.embedder import cosine_similarity, embed_text, embed_texts
 from src.rag.evidence_explainer import (
@@ -56,4 +58,6 @@ __all__ = [
     "execute_with_harness",
     "ValidationError",
     "run_safety_rag",
+    "rag_router",
+    "rag_app",
 ]

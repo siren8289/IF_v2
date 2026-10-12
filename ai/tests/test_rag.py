@@ -270,3 +270,51 @@ def test_full_pipeline_end_to_end():
     assert response["explanation"]
     assert isinstance(response["citations"], list)
     assert isinstance(response["is_abstained"], bool)
+
+
+# 11. FastAPI REST API 엔드포인트 테스트 (HTTP TestClient)
+from fastapi.testclient import TestClient
+from src.rag.api import rag_app
+
+api_client = TestClient(rag_app)
+
+
+def test_rag_api_health_endpoint():
+    """GET /api/v1/rag/health 상태 확인 API 테스트"""
+    res = api_client.get("/api/v1/rag/health")
+    assert res.status_code == 200
+    assert res.json() == {"status": "ok", "service": "rag_safety_guidelines"}
+
+
+def test_rag_api_search_endpoint():
+    """POST /api/v1/rag/search 지침 검색 API 테스트"""
+    payload = {"query": "바닥 물청소 미끄럼 방지", "top_k": 2}
+    res = api_client.post("/api/v1/rag/search", json=payload)
+    assert res.status_code == 200
+    body = res.json()
+    assert body["query"] == "바닥 물청소 미끄럼 방지"
+    assert body["count"] <= 2
+    assert len(body["results"]) > 0
+
+
+def test_rag_api_explain_endpoint_success():
+    """POST /api/v1/rag/explain 근거 기반 설명 생성 API 테스트"""
+    payload = {
+        "title": "야간 아파트 경비원 순찰",
+        "risk_score": 65,
+        "risk_grade": "HIGH",
+    }
+    res = api_client.post("/api/v1/rag/explain", json=payload)
+    assert res.status_code == 200
+    body = res.json()
+    assert "explanation" in body
+    assert "citations" in body
+    assert body["model_version"] == "RAG_V1"
+    assert body["status"] in ("COMPLETED", "ABSTAINED")
+
+
+def test_rag_api_explain_rejects_empty_title():
+    """POST /api/v1/rag/explain 유효하지 않은 입력(빈 제목) 422 검증 테스트"""
+    res = api_client.post("/api/v1/rag/explain", json={"title": "", "risk_score": 50})
+    assert res.status_code == 422
+
