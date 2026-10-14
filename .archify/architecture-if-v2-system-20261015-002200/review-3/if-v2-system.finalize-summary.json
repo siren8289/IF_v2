@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/candidate.json",
+    "sha256": "a1fecfcc103b56c1126813abac6e12dedec4a817077a697136b07510747be299",
+    "bytes": 10183
+  },
+  "artifact": {
+    "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+    "sha256": "f5f04a47ce43e378d6ed530255b949896b69c0faee2aabd51b1b41c21c360d9d",
+    "bytes": 837428
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/review-3/if-v2-system.finalize.json",
+    "summaryReceipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/review-3/if-v2-system.finalize-summary.json",
+    "browserCheckReceipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/review-3/if-v2-system.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 5249
+}

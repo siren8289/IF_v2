@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "IF v2 고령자 일자리 위험도 평가 시스템 아키텍처",
+    "locale": "ko",
+    "output": ".archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/siren8289/IF_v2.git",
+      "revision": "8e8b08ed12b4c5fabb5759c0d9e94230504969f5",
+      "provider": "github",
+      "link_mode": "web"
+    },
+    "views": [
+      {
+        "id": "view-overview",
+        "label": "전체 아키텍처",
+        "focus": [
+          "browser",
+          "nginx",
+          "react_spa",
+          "spring_boot",
+          "postgres_db",
+          "fastapi_ai",
+          "ai_models",
+          "gemini_llm",
+          "public_data",
+          "etl_pipeline"
+        ],
+        "note": "전체 웹, 비즈니스, AI 추론 및 데이터 수집 파이프라인의 통합 구조"
+      },
+      {
+        "id": "view-assessment-flow",
+        "label": "평가 & AI 추론 흐름",
+        "focus": [
+          "browser",
+          "nginx",
+          "spring_boot",
+          "fastapi_ai",
+          "ai_models",
+          "gemini_llm"
+        ],
+        "note": "사용자 신청 → Nginx 프록시 → Spring Boot 오케스트레이션 → FastAPI ML/DL 추론 및 Gemini 설명 생성"
+      },
+      {
+        "id": "view-data-pipeline",
+        "label": "공공데이터 ETL 파이프라인",
+        "focus": [
+          "public_data",
+          "etl_pipeline",
+          "postgres_db",
+          "spring_boot"
+        ],
+        "note": "공공데이터 포털 수집 → 정제/검증 → PostgreSQL 적재 → Spring Boot 조회 흐름"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "browser",
+      "type": "external",
+      "icon": "person",
+      "label": "사용자 브라우저",
+      "sublabel": "Web Client :80",
+      "tag": "상담 신청 & 결과 확인",
+      "pos": [40, 60],
+      "size": [140, 60]
+    },
+    {
+      "id": "nginx",
+      "type": "frontend",
+      "label": "Nginx 웹 서버",
+      "sublabel": "Alpine Nginx :80",
+      "tag": "정적 서빙 & 리버스 프록시",
+      "pos": [260, 60],
+      "size": [150, 60],
+      "sources": [
+        {
+          "path": "web-vite/nginx.conf",
+          "line": 1,
+          "end_line": 19,
+          "label": "Nginx 프록시 설정"
+        }
+      ]
+    },
+    {
+      "id": "react_spa",
+      "type": "frontend",
+      "label": "React 프론트엔드",
+      "sublabel": "Vite + TypeScript SPA",
+      "tag": "대시보드 / 평가 / 결과 UI",
+      "pos": [260, 190],
+      "size": [150, 60],
+      "sources": [
+        {
+          "path": "web-vite/src/shared/api/api.ts",
+          "line": 61,
+          "end_line": 88,
+          "label": "API 클라이언트"
+        },
+        {
+          "path": "web-vite/src/pages/AssessmentFormPage.tsx",
+          "line": 15,
+          "end_line": 50,
+          "label": "평가 입력 화면"
+        }
+      ]
+    },
+    {
+      "id": "spring_boot",
+      "type": "backend",
+      "label": "Spring Boot 백엔드",
+      "sublabel": "Java 21 / Spring 3 :8080",
+      "tag": "핵심 비즈니스 & 오케스트레이션",
+      "pos": [520, 60],
+      "size": [160, 60],
+      "sources": [
+        {
+          "path": "spring/src/main/demo/assessment/service/AssessmentService.java",
+          "line": 68,
+          "end_line": 113,
+          "label": "평가 저장 및 AI 호출"
+        },
+        {
+          "path": "spring/src/main/demo/ai/client/AIClient.java",
+          "line": 17,
+          "end_line": 35,
+          "label": "FastAPI REST 통신"
+        }
+      ]
+    },
+    {
+      "id": "postgres_db",
+      "type": "database",
+      "label": "PostgreSQL DB",
+      "sublabel": "postgres:16-alpine :5432",
+      "tag": "if_spring 데이터 영속화",
+      "pos": [520, 190],
+      "size": [160, 60],
+      "sources": [
+        {
+          "path": "compose.yaml",
+          "line": 4,
+          "end_line": 17,
+          "label": "PostgreSQL 컨테이너"
+        },
+        {
+          "path": "spring/src/main/resources/application.yml",
+          "line": 6,
+          "end_line": 14,
+          "label": "JPA/DataSource 설정"
+        }
+      ]
+    },
+    {
+      "id": "fastapi_ai",
+      "type": "backend",
+      "label": "FastAPI AI 엔진",
+      "sublabel": "Python / Uvicorn :8000",
+      "tag": "위험도 추론 & RAG 연계",
+      "pos": [800, 60],
+      "size": [160, 60],
+      "sources": [
+        {
+          "path": "ai/src/main.py",
+          "line": 33,
+          "end_line": 55,
+          "label": "POST /risk/analyze"
+        },
+        {
+          "path": "ai/src/risk_score.py",
+          "line": 26,
+          "end_line": 60,
+          "label": "가중치 점수 산출 로직"
+        }
+      ]
+    },
+    {
+      "id": "ai_models",
+      "type": "backend",
+      "label": "작업 특성 추론 모델",
+      "sublabel": "scikit-learn & PyTorch CNN",
+      "tag": "task_ml & task_cnn",
+      "pos": [800, 190],
+      "size": [160, 60],
+      "sources": [
+        {
+          "path": "ai/src/ml_model.py",
+          "line": 20,
+          "end_line": 27,
+          "label": "scikit-learn 예측"
+        },
+        {
+          "path": "ai/src/dl_model.py",
+          "line": 58,
+          "end_line": 70,
+          "label": "PyTorch CNN 예측"
+        }
+      ]
+    },
+    {
+      "id": "gemini_llm",
+      "type": "external",
+      "icon": "cloud",
+      "label": "Google Gemini 2.5",
+      "sublabel": "생성형 AI 설명 API",
+      "tag": "맞춤형 상담 설명 생성",
+      "pos": [1080, 60],
+      "size": [140, 60],
+      "sources": [
+        {
+          "path": "ai/src/ai_explain.py",
+          "line": 35,
+          "end_line": 58,
+          "label": "Gemini 설명 생성 및 폴백"
+        }
+      ]
+    },
+    {
+      "id": "public_data",
+      "type": "external",
+      "icon": "external",
+      "label": "공공데이터 포털",
+      "sublabel": "노인일자리 공공 API",
+      "tag": "OpenAPI (XML / JSON)",
+      "pos": [250, 320],
+      "size": [150, 60],
+      "sources": [
+        {
+          "path": "data/sources.json",
+          "line": 1,
+          "end_line": 30,
+          "label": "공공 데이터 카탈로그"
+        }
+      ]
+    },
+    {
+      "id": "etl_pipeline",
+      "type": "backend",
+      "label": "공공데이터 ETL",
+      "sublabel": "Python 배치 수집기",
+      "tag": "API 수집 · 정제 · DB 적재",
+      "pos": [520, 320],
+      "size": [160, 60],
+      "sources": [
+        {
+          "path": "data/etl/run.py",
+          "line": 13,
+          "end_line": 40,
+          "label": "ETL 파이프라인"
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Docker Compose 네트워크 (if-app-stack)",
+      "wraps": [
+        "nginx",
+        "react_spa",
+        "spring_boot",
+        "postgres_db",
+        "fastapi_ai",
+        "ai_models"
+      ]
+    },
+    {
+      "kind": "security-group",
+      "label": "AI 추론 및 모델 계층",
+      "wraps": [
+        "fastapi_ai",
+        "ai_models"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "browser-to-nginx",
+      "from": "browser",
+      "to": "nginx",
+      "label": "HTTP :80",
+      "variant": "emphasis"
+    },
+    {
+      "id": "nginx-to-spa",
+      "from": "nginx",
+      "to": "react_spa",
+      "label": "정적 에셋 서빙",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "nginx-to-spring",
+      "from": "nginx",
+      "to": "spring_boot",
+      "label": "API 프록시",
+      "variant": "emphasis"
+    },
+    {
+      "id": "spring-to-db",
+      "from": "spring_boot",
+      "to": "postgres_db",
+      "label": "JPA / SQL 저장",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "spring-to-fastapi",
+      "from": "spring_boot",
+      "to": "fastapi_ai",
+      "label": "위험도 분석 요청",
+      "variant": "emphasis"
+    },
+    {
+      "id": "fastapi-to-models",
+      "from": "fastapi_ai",
+      "to": "ai_models",
+      "label": "작업 특성 추론",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "fastapi-to-gemini",
+      "from": "fastapi_ai",
+      "to": "gemini_llm",
+      "label": "AI 설명 생성",
+      "variant": "dashed"
+    },
+    {
+      "id": "public-to-etl",
+      "from": "public_data",
+      "to": "etl_pipeline",
+      "label": "API 데이터 수집"
+    },
+    {
+      "id": "etl-to-db",
+      "from": "etl_pipeline",
+      "to": "postgres_db",
+      "label": "정제 데이터 적재",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "프론트엔드 & 웹 서버 계층",
+      "items": [
+        "Vite 기반 React SPA가 구직자 평가 입력 폼 및 위험도 결과 대시보드 제공",
+        "Alpine Nginx가 80번 포트에서 정적 파일 서빙과 SPA 라우팅(try_files) 지원",
+        "/api/* 경로의 클라이언트 요청을 Spring Boot 백엔드(:8080)로 리버스 프록시"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "비즈니스 로직 & 데이터 계층",
+      "items": [
+        "Spring Boot 3가 구직자, 건강 스냅샷, 평가 상태 생명주기 관리",
+        "AssessmentService가 평가 저장 후 AIClient(RestTemplate)로 FastAPI 동기 호출",
+        "PostgreSQL 16 Alpine에 JPA/Hibernate로 if_spring 데이터 영속화",
+        "Python ETL 배치가 공공 노인일자리 API 데이터를 수집·정제하여 DB에 적재"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "AI 위험도 분석 & 생성형 설명 계층",
+      "items": [
+        "FastAPI가 scikit-learn(ML) 및 PyTorch CNN(DL) 앙상블로 6대 작업 특성 추론",
+        "개인 연령/건강 지표와 모델 예측값을 가중 합산하여 0~100점 위험 지수 산출",
+        "Google Gemini 2.5 Flash를 호출하여 상담사용 쉬운 한국어 설명 자동 생성",
+        "향후 확장용 RAG(VectorStore, PDF Reader, Hybrid Retriever) 모듈 탑재"
+      ]
+    }
+  ]
+}

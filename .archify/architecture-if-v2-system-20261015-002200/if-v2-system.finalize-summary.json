@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/candidate.json",
+    "sha256": "e72543ce4ac4777517d0dc8c11e0b0476b51b4900ef039a060abcc7fec1d0f3a",
+    "bytes": 10188
+  },
+  "artifact": {
+    "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+    "sha256": "a2fb7d71f105b88fab8c26734c75bfc6cfc997827dfdec218e0a989e76afdd07",
+    "bytes": 837486
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "fail"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/browser-check-runtime",
+      "severity": "error",
+      "message": "browser-check could not complete its Chrome inspection.",
+      "subject": {
+        "artifact": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html"
+      },
+      "evidence": {
+        "reason": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nChrome stderr:\n[1015/002449.569429:ERROR:third_party/crashpad/crashpad/util/mach/bootstrap.cc:65] bootstrap_check_in org.chromium.crashpad.child_port_handshake.95200.2114515.GFPBMTMHDGMNDXNZ: Permission denied (1100)\n[1015/002449.571415:ERROR:third_party/crashpad/crashpad/util/file/file_io.cc:103] ReadExactly: expected 4, observed 0\n[1015/002449.576721:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/jeong-yelim/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)\n[1015/002449.577216:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/jeong-yelim/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)\n[95197:2114579:1015/002450.473949:FATAL:base/apple/mach_port_rendezvous_mac.cc:159] Check failed: kr == KERN_SUCCESS. bootstrap_check_in com.google.Chrome.MachPortRendezvousServer.95197: Permission denied (1100)\nChrome transport: Node v26.3.0, libuv 1.52.1, darwin; pid=95197, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=true, ended=false, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+      },
+      "supportedFixes": [
+        "resolve the reported Chrome inspection error, then rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.finalize.json",
+    "summaryReceipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.finalize-summary.json",
+    "browserCheckReceipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 3607
+}

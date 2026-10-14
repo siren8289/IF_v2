@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/candidate.json",
+    "sha256": "e72543ce4ac4777517d0dc8c11e0b0476b51b4900ef039a060abcc7fec1d0f3a",
+    "bytes": 10188
+  },
+  "artifact": {
+    "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+    "sha256": "a2fb7d71f105b88fab8c26734c75bfc6cfc997827dfdec218e0a989e76afdd07",
+    "bytes": 837486
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/review-2/if-v2-system.finalize.json",
+    "summaryReceipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/review-2/if-v2-system.finalize-summary.json",
+    "browserCheckReceipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/review-2/if-v2-system.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 6117,
+  "layoutReviewRecommendation": {
+    "action": "inspect-leading-space",
+    "evidence": {
+      "measured": true,
+      "emptyTopPx": 130,
+      "emptyTopRatio": 0.237,
+      "occupiedTop": 130,
+      "viewBoxTop": 0,
+      "canvasHeight": 548,
+      "typicalNodeHeight": 60,
+      "reviewSuggested": true
+    },
+    "reason": "Measured content, including routes and labels, leaves a large empty area above the diagram. This is a composition suggestion, not a failed gate.",
+    "repair": "Check whether that leading space is intentional. If not, reposition the connected scene nearer the canvas origin while retaining room for its actual boundaries, labels and return routes. Preserve all meaning and user-fixed geometry, then rerun finalize. No screenshot is required."
+  }
+}

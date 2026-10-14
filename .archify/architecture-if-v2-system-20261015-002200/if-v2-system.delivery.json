@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "2c0180d0-68f0-4c62-b701-269e13b09b67",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/candidate.json",
+  "output": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+  "specification": {
+    "sha256": "a1fecfcc103b56c1126813abac6e12dedec4a817077a697136b07510747be299",
+    "bytes": 10183
+  },
+  "artifact": {
+    "sha256": "f5f04a47ce43e378d6ed530255b949896b69c0faee2aabd51b1b41c21c360d9d",
+    "bytes": 837428
+  }
+}

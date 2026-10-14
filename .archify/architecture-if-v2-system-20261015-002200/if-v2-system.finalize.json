@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-14T15:24:46.903Z",
+  "specification": {
+    "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/candidate.json",
+    "sha256": "e72543ce4ac4777517d0dc8c11e0b0476b51b4900ef039a060abcc7fec1d0f3a",
+    "bytes": 10188
+  },
+  "artifact": {
+    "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+    "sha256": "a2fb7d71f105b88fab8c26734c75bfc6cfc997827dfdec218e0a989e76afdd07",
+    "bytes": 837486
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/opt/homebrew/Cellar/node/26.3.0/bin/node",
+        "/Users/jeong-yelim/.gemini/config/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/candidate.json",
+        "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "e72543ce4ac4777517d0dc8c11e0b0476b51b4900ef039a060abcc7fec1d0f3a",
+          "bytes": 10188
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 700,
+      "command": [
+        "/opt/homebrew/Cellar/node/26.3.0/bin/node",
+        "/Users/jeong-yelim/.gemini/config/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/candidate.json",
+        "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "7a25fa20-e73d-4b9c-86e0-e9b2683ccc09",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/candidate.json",
+        "output": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+        "specification": {
+          "sha256": "e72543ce4ac4777517d0dc8c11e0b0476b51b4900ef039a060abcc7fec1d0f3a",
+          "bytes": 10188
+        },
+        "artifact": {
+          "sha256": "a2fb7d71f105b88fab8c26734c75bfc6cfc997827dfdec218e0a989e76afdd07",
+          "bytes": 837486
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "evidence": {
+          "verified": true,
+          "repository": "https://github.com/siren8289/IF_v2",
+          "revision": "8e8b08ed12b4c5fabb5759c0d9e94230504969f5",
+          "references": 14
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 245,
+      "command": [
+        "/opt/homebrew/Cellar/node/26.3.0/bin/node",
+        "/Users/jeong-yelim/.gemini/config/skills/archify/bin/archify.mjs",
+        "check",
+        "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+        "artifact": {
+          "sha256": "a2fb7d71f105b88fab8c26734c75bfc6cfc997827dfdec218e0a989e76afdd07",
+          "bytes": 837486
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 0,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 51.3,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 7.5,
+            "maxBends": 0,
+            "routesOverSuggestedBends": 0,
+            "maxStretch": 1,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 70,
+            "minInteriorSegmentPx": null,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [],
+            "detours": []
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 130,
+            "emptyTopRatio": 0.237,
+            "occupiedTop": 130,
+            "viewBoxTop": 0,
+            "canvasHeight": 548,
+            "typicalNodeHeight": 60,
+            "reviewSuggested": true
+          },
+          "desktopReadability": {
+            "budgetBasis": "recognized-declared-wide",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 1181.25,
+            "actualBudgetPx": 1181.25,
+            "actualReaderWidth": 1211.25,
+            "desiredReaderWidth": 1211.25,
+            "viewportCap": 1376,
+            "limit": "source-size",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": true,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "edge",
+              "id": "browser-to-nginx",
+              "from": "browser",
+              "to": "nginx"
+            },
+            "minimumSourceTextPx": 8,
+            "minimumProjectedTextPx": 7.5,
+            "semanticTextCount": 31
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "7a25fa20-e73d-4b9c-86e0-e9b2683ccc09"
+      }
+    },
+    "browser-check": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 2456,
+      "command": [
+        "/opt/homebrew/Cellar/node/26.3.0/bin/node",
+        "/Users/jeong-yelim/.gemini/config/skills/archify/bin/archify.mjs",
+        "browser-check",
+        "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "fail",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "7a25fa20-e73d-4b9c-86e0-e9b2683ccc09",
+        "artifact": {
+          "path": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html",
+          "sha256": "a2fb7d71f105b88fab8c26734c75bfc6cfc997827dfdec218e0a989e76afdd07",
+          "bytes": 837486
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "available",
+          "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/browser-check-runtime",
+            "severity": "error",
+            "message": "browser-check could not complete its Chrome inspection.",
+            "subject": {
+              "artifact": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html"
+            },
+            "evidence": {
+              "reason": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nChrome stderr:\n[1015/002449.569429:ERROR:third_party/crashpad/crashpad/util/mach/bootstrap.cc:65] bootstrap_check_in org.chromium.crashpad.child_port_handshake.95200.2114515.GFPBMTMHDGMNDXNZ: Permission denied (1100)\n[1015/002449.571415:ERROR:third_party/crashpad/crashpad/util/file/file_io.cc:103] ReadExactly: expected 4, observed 0\n[1015/002449.576721:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/jeong-yelim/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)\n[1015/002449.577216:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/jeong-yelim/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)\n[95197:2114579:1015/002450.473949:FATAL:base/apple/mach_port_rendezvous_mac.cc:159] Check failed: kr == KERN_SUCCESS. bootstrap_check_in com.google.Chrome.MachPortRendezvousServer.95197: Permission denied (1100)\nChrome transport: Node v26.3.0, libuv 1.52.1, darwin; pid=95197, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=true, ended=false, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+            },
+            "supportedFixes": [
+              "resolve the reported Chrome inspection error, then rerun browser-check"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "fail",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "fail",
+          "viewports": []
+        },
+        "readability": {
+          "status": "fail",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "fail",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "if-v2-system.browser-check.json",
+          "files": []
+        },
+        "error": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nChrome stderr:\n[1015/002449.569429:ERROR:third_party/crashpad/crashpad/util/mach/bootstrap.cc:65] bootstrap_check_in org.chromium.crashpad.child_port_handshake.95200.2114515.GFPBMTMHDGMNDXNZ: Permission denied (1100)\n[1015/002449.571415:ERROR:third_party/crashpad/crashpad/util/file/file_io.cc:103] ReadExactly: expected 4, observed 0\n[1015/002449.576721:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/jeong-yelim/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)\n[1015/002449.577216:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/jeong-yelim/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)\n[95197:2114579:1015/002450.473949:FATAL:base/apple/mach_port_rendezvous_mac.cc:159] Check failed: kr == KERN_SUCCESS. bootstrap_check_in com.google.Chrome.MachPortRendezvousServer.95197: Permission denied (1100)\nChrome transport: Node v26.3.0, libuv 1.52.1, darwin; pid=95197, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=true, ended=false, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/browser-check-runtime",
+      "severity": "error",
+      "message": "browser-check could not complete its Chrome inspection.",
+      "subject": {
+        "artifact": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.html"
+      },
+      "evidence": {
+        "reason": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nChrome stderr:\n[1015/002449.569429:ERROR:third_party/crashpad/crashpad/util/mach/bootstrap.cc:65] bootstrap_check_in org.chromium.crashpad.child_port_handshake.95200.2114515.GFPBMTMHDGMNDXNZ: Permission denied (1100)\n[1015/002449.571415:ERROR:third_party/crashpad/crashpad/util/file/file_io.cc:103] ReadExactly: expected 4, observed 0\n[1015/002449.576721:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/jeong-yelim/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)\n[1015/002449.577216:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/jeong-yelim/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)\n[95197:2114579:1015/002450.473949:FATAL:base/apple/mach_port_rendezvous_mac.cc:159] Check failed: kr == KERN_SUCCESS. bootstrap_check_in com.google.Chrome.MachPortRendezvousServer.95197: Permission denied (1100)\nChrome transport: Node v26.3.0, libuv 1.52.1, darwin; pid=95197, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=true, ended=false, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+      },
+      "supportedFixes": [
+        "resolve the reported Chrome inspection error, then rerun browser-check"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.finalize.json",
+    "summaryReceipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.finalize-summary.json",
+    "browserCheckReceipt": "/Users/jeong-yelim/.gemini/antigravity/scratch/IF_v2/.archify/architecture-if-v2-system-20261015-002200/if-v2-system.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-10-14T15:24:50.511Z",
+  "durationMs": 3607,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-valid"
+  }
+}
