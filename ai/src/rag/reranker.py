@@ -1,7 +1,8 @@
 """검색 결과 재순위화(Reranking) 모듈.
 
-1차 벡터 검색 결과에 대해 고령자 위험 키워드 및 질의 연관성을 종합 평가하여
-가장 적절하고 중요한 안전 지침이 상위에 오르도록 순위를 다시 매깁니다.
+1차로 벡터 검색이 "비슷한 문장"을 골라 오면, 그중에서
+질문 단어가 실제로 들어 있는지, 낙상·야간 같은 위험 단어가 있는지를
+다시 점수로 매긴다. 숫자만 비슷한 엉뚱한 문단이 1등으로 올라오는 것을 줄인다.
 """
 import re
 
@@ -23,11 +24,11 @@ def calculate_keyword_score(query: str, content: str) -> float:
     if not query_words:
         return 0.0
 
-    # 1. 질의 단어 일치도
+    # 1. 질문 속 단어가 본문에 몇 개나 들어 있는지. 전부 있으면 1.0이다.
     matched_query = sum(1 for word in query_words if word in content_lower)
     query_ratio = matched_query / len(query_words) if query_words else 0.0
 
-    # 2. 고령자 핵심 위험 키워드 포함도
+    # 2. 위험 단어 하나당 0.2점. 5개 이상이면 1.0에서 멈춘다.
     matched_risk = sum(1 for kw in HIGH_RISK_KEYWORDS if kw in content_lower)
     risk_boost = min(1.0, matched_risk * 0.2)
 

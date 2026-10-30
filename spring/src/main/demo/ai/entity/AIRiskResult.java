@@ -5,6 +5,13 @@ import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
 
+/**
+ * AI 서버가 돌려준 결과 한 건. 테이블 이름은 ai_risk_result.
+ *
+ * 점수와 등급은 컬럼으로 두고, 설명·항목·ML/DL 점수는
+ * explanation_json 문자열에 JSON 통째로 넣어 둔다.
+ * 화면이 나중에 그 JSON을 다시 풀어 막대그래프를 그린다.
+ */
 @Entity
 @Table(name = "ai_risk_result")
 public class AIRiskResult {

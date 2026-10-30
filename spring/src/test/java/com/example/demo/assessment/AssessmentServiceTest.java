@@ -1,5 +1,8 @@
 package com.example.demo.assessment;
 
+// 평가 서비스가 AI 응답을 저장하고, 잘못된 점수·없는 직무를 거절하는지 본다.
+// DB와 AI 서버는 가짜(mock)라서 이 테스트만으로 실제 분석은 하지 않는다.
+
 import com.example.demo.ai.client.AIClient;
 import com.example.demo.assessment.dto.AssessmentCreateRequest;
 import com.example.demo.assessment.dto.AssessmentResultResponse;

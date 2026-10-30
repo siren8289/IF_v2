@@ -1,3 +1,4 @@
+# transform.py가 JSON/XML/CSV를 행으로 바꾸고, 빈 값과 중복을 빼는지 확인한다.
 import unittest
 
 from data.etl.transform import parse_data, normalize_rows

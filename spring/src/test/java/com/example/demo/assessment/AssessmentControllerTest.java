@@ -1,5 +1,8 @@
 package com.example.demo.assessment;
 
+// 컨트롤러 주소를 실제로 두드려 HTTP 상태와 JSON 모양을 확인한다.
+// AI 클라이언트만 가짜로 바꾸고, DB는 테스트용 H2를 쓴다.
+
 import com.example.demo.ai.client.AIClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

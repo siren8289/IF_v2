@@ -1,7 +1,11 @@
 """PDF 문서 읽기 모듈.
 
-고령자 직무 안전 지침 PDF 파일에서 페이지별 텍스트를 읽어옵니다.
-외부 라이브러리(pypdf)가 있으면 사용하고, 없으면 내장 파서와 기본 지침 데이터를 활용합니다.
+고령자 직무 안전 지침 PDF에서 페이지별 텍스트를 읽는다.
+pypdf가 설치돼 있으면 그걸 쓰고, 없으면 PDF 안의 글자 조각을
+정규식으로 긁어 온다. 그 방법도 실패하면 빈 목록이 돌아온다.
+
+실제 파일이 없어도 RAG를 시험할 수 있게,
+get_default_safety_guidelines()가 공단 지침을 요약한 기본 문서를 갖고 있다.
 """
 import os
 import re
@@ -46,7 +50,8 @@ def extract_text_from_pdf(pdf_path: str) -> list[dict]:
         with open(pdf_path, "rb") as file:
             content = file.read().decode("latin-1", errors="ignore")
 
-        # PDF 내부의 텍스트 블록 (BT ... ET) 사이의 문자열 추출
+        # PDF는 글자를 (괄호) 안에 넣어 둔다. 그 안만 골라 이어 붙인다.
+        # 압축된 PDF는 이 방법으로 안 읽힐 수 있다. 그때는 pypdf가 필요하다.
         text_blocks = re.findall(r"\((.*?)\)", content)
         combined_text = " ".join(block for block in text_blocks if len(block.strip()) > 1)
 

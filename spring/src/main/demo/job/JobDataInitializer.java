@@ -26,6 +26,7 @@ public class JobDataInitializer implements CommandLineRunner {
         this.jobRepository = jobRepository;
     }
 
+    /** 서버가 켜진 직후 한 번 실행된다. 직무가 이미 있으면 아무것도 하지 않는다. */
     @Override
     public void run(String... args) {
         if (jobRepository.count() > 0) {

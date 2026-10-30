@@ -1,7 +1,9 @@
 """텍스트 청킹(Chunking) 모듈.
 
 긴 지침 문서를 검색에 적합한 작은 덩어리(청크)로 나눕니다.
-문맥이 끊기지 않도록 일정한 글자 수만큼 겹치게(overlap) 처리합니다.
+한 번에 문서 전체를 비교하면 엉뚱한 문장까지 같이 딸려 온다.
+그래서 250자 정도의 조각으로 자르고, 문장이 딱 잘리지 않게
+앞 조각의 끝 50자를 다음 조각의 앞에 겹친다(overlap).
 """
 
 
@@ -30,6 +32,7 @@ def split_text_into_chunks(
 
     chunks = []
     start = 0
+    # 다음 조각이 시작할 위치. 250자 조각에 50자를 겹치면 200자씩 앞으로 간다.
     step = chunk_size - chunk_overlap
 
     while start < len(clean_text):

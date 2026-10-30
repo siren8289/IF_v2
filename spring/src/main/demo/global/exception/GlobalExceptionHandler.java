@@ -10,12 +10,19 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-/** 모든 오류를 { success:false, errorCode, message } 형태로 돌려준다. */
+/**
+ * 컨트롤러 밖으로 새어 나온 예외를 JSON 오류로 바꾼다.
+ * 모양은 { success:false, data:null, message, errorCode }.
+ *
+ * 화면의 apiRequest는 이 message만 꺼내 빨간 안내 문구로 보여 준다.
+ * 예상 못 한 오류는 원인 문장을 숨기고 "서버 오류"만 돌려, 내부 정보를 노출하지 않는다.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    /** 서비스가 의도적으로 던진 오류. 없는 평가(404), AI 실패(502) 등. */
     @ExceptionHandler(ApiException.class)
     public ResponseEntity<ApiResponse<Void>> handleApiException(ApiException e) {
         if (e.getStatus().is5xxServerError()) {
@@ -24,6 +31,7 @@ public class GlobalExceptionHandler {
         return error(e.getStatus(), e.getErrorCode(), e.getMessage());
     }
 
+    /** 나이 범위, 빈 이름처럼 @Valid 검사에 걸린 경우. 칸 이름과 이유를 이어 붙인다. */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Void>> handleValidation(MethodArgumentNotValidException e) {
         StringBuilder message = new StringBuilder();

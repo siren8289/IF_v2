@@ -1,7 +1,10 @@
 """통합 고령자 직무 안전 RAG 파이프라인.
 
-입력 검증 -> LangGraph 실행 흐름 -> 하네스 오류 격리 -> 근거 기반 설명 및 인용 생성을
-단 하나의 함수로 간결하게 실행할 수 있는 메인 진입점 모듈입니다.
+밖에서 부를 함수는 run_safety_rag() 하나다.
+  입력 검사 → 지침이 들어 있는 저장소 준비 → 검색/재순위/설명 그래프 실행
+  → 중간에 오류가 나면 대체 문장으로 마무리.
+
+기본 지침은 서버가 처음 이 함수를 부를 때 한 번만 메모리에 올린다.
 """
 from typing import Optional
 
@@ -54,23 +57,23 @@ def run_safety_rag(
             "model_version": "RAG_V1"
         }
     """
-    # 1. 하네스 입력 검증
+    # 1. 제목이 비었거나 점수가 0~100 밖이면 여기서 예외가 난다.
     clean_title, validated_risk = validate_rag_input(title, risk_info)
 
-    # 2. 벡터 저장소 준비
+    # 2. 호출자가 저장소를 안 주면, 기본 안전 지침이 들어 있는 메모리 저장소를 쓴다.
     active_store = vector_store or get_initialized_vector_store()
 
-    # 3. LangGraph 워크플로우 구성 및 초기 상태 준비
+    # 3. 검색 → 재순위 → 근거 판단 → 설명 또는 보류. 시작 상태에 질문과 저장소를 넣는다.
     rag_graph = build_safety_rag_graph()
     initial_state = {
         "query": clean_title,
         "risk_info": validated_risk,
         "vector_store": active_store,
-        "retrieve_top_k": 5,
-        "rerank_top_k": 3,
+        "retrieve_top_k": 5,   # 1차로 5개를 찾고
+        "rerank_top_k": 3,     # 그중 상위 3개만 설명에 쓴다.
     }
 
-    # 4. 하네스 오류 격리 실행
+    # 4. 그래프 실행. 예외가 나면 시스템 전체를 죽이지 않고 아래 대체 답을 쓴다.
     def run_workflow():
         return rag_graph.invoke(initial_state)
 

@@ -10,17 +10,22 @@ import {
   type Summary,
 } from "@/shared/api/api";
 
+// 카드 세 개와 표가 같이 쓰는 흰 상자 모양.
 const CARD = "bg-white p-6 rounded-2xl shadow-sm border border-gray-100";
 
+// 저장된 평가 목록과 요약 카드를 보여 주는 첫 화면.
 export default function DashboardPage() {
   const navigate = useNavigate();
   const [records, setRecords] = useState<AssessmentRecord[]>([]);
+  // summary가 null이면 아직 서버 응답 전이다. 화면은 0건으로 보여 준다.
   const [summary, setSummary] = useState<Summary | null>(null);
+  // Spring 페이지 번호는 0부터다. 화면의 "1 / N"은 page + 1 로 보여 준다.
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // 목록과 요약 카드를 같이 다시 읽는다. 삭제 후에도 이 함수를 다시 부른다.
   async function load(pageNumber: number) {
     setLoading(true);
     setError(null);
@@ -37,10 +42,12 @@ export default function DashboardPage() {
     }
   }
 
+  // page가 바뀌면(이전/다음) 그 페이지를 다시 불러온다.
   useEffect(() => {
     load(page);
   }, [page]);
 
+  // 삭제 전에 브라우저 확인 창을 띄운다. 취소를 누르면 아무것도 하지 않는다.
   async function handleDelete(item: AssessmentRecord) {
     if (!window.confirm(`「${item.applicantName}」 평가 기록을 삭제할까요?`)) return;
     try {
@@ -76,6 +83,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className={CARD}>
           <p className="text-sm text-gray-500">총 평가 건수</p>
+          {/* summary가 아직 없으면(null) 0으로 보여 준다. ?. 와 ?? 가 그 처리다. */}
           <p className="text-3xl font-bold">{summary?.totalCount ?? 0}건</p>
         </div>
         <div className={CARD}>
@@ -115,6 +123,7 @@ export default function DashboardPage() {
                   <td className="py-3 font-medium">{item.applicantName}</td>
                   <td>{item.age}세</td>
                   <td>{item.jobTitle}</td>
+                  {/* AI가 실패해 점수가 없으면 null이다. 그때는 대시(-)만 보여 준다. */}
                   <td>{item.riskScore === null ? "-" : `${item.riskScore}점`}</td>
                   <td>
                     {item.riskGrade ? (

@@ -7,6 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+/**
+ * 평가 테이블 조회.
+ * JpaRepository를 상속하면 save, findById, delete, count가 자동으로 생긴다.
+ * 메서드 이름(countByAiRiskResult_RiskGrade)만 적어도 Spring이 SQL을 만든다.
+ */
 public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
 
     long countByAiRiskResult_RiskGrade(String riskGrade);

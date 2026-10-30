@@ -1,3 +1,4 @@
+// fetch를 가짜로 바꿔, 주소 조합과 오류 메시지 파싱만 확인한다. 실제 서버는 안 켠다.
 import { apiRequest } from "./client";
 import { createAssessment, deleteAssessment } from "./api";
 import { mockApi, callsTo } from "@/test/mockApi";

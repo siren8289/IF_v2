@@ -1,3 +1,5 @@
+// 화면 세 개를 사용자처럼 눌러 본다. 서버 대신 mockApi가 응답을 대신한다.
+// 대시보드 표시, 평가 제출 후 결과 이동, 삭제를 확인한다.
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderApp } from "@/test/renderApp";

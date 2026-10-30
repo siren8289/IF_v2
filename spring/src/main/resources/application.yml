@@ -11,4 +11,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate   # DB 테이블은 만들지 않고, 엔티티와 맞는지만 확인한다.
+    # 요청이 끝난 뒤에도 DB 연결을 붙잡아 두지 않는다.
+    # 화면용 데이터는 서비스 안에서 미리 꺼내 둔다.
     open-in-view: false

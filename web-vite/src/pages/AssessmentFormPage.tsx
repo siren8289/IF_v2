@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createAssessment, getJobs, type Job } from "@/shared/api/api";
 
+// 입력칸에 반복해서 쓰는 Tailwind 클래스. 칸의 생김새만 모아 둔 것이다.
 const INPUT = "w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2F8F6B]";
 
 const HEALTH_OPTIONS = [
@@ -12,20 +13,28 @@ const HEALTH_OPTIONS = [
   { value: 5, label: "5 - 매우 나쁨" },
 ];
 
+// 새 평가를 입력하는 화면. 제출하면 Spring이 AI 분석을 하고, 결과 페이지로 이동한다.
 export default function AssessmentFormPage() {
+  // navigate: 코드에서 주소만 바꾸는 함수. 폼 제출 성공 후 결과 화면으로 간다.
   const navigate = useNavigate();
+  // jobs: 서버에서 받아 온 직무 목록. 처음엔 빈 배열이다.
   const [jobs, setJobs] = useState<Job[]>([]);
 
+  // 입력값은 전부 이 컴포넌트가 기억한다. 글자가 바뀔 때마다 set 함수로 다시 그린다.
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
+  // 건강은 기본 "보통"(3). 셀렉트 박스의 value와 맞춘다.
   const [physicalLevel, setPhysicalLevel] = useState(3);
+  // 셀렉트는 문자열만 다루기 쉬워서 "yes" / "no"로 두고, 보낼 때만 true/false로 바꾼다.
   const [chronicDisease, setChronicDisease] = useState("no");
   const [workHourLimit, setWorkHourLimit] = useState("8");
   const [jobId, setJobId] = useState("");
 
   const [error, setError] = useState<string | null>(null);
+  // 분석 요청 중에는 버튼을 막고 "AI 분석 중..."을 보여 준다. 두 번 누르는 것을 막는다.
   const [submitting, setSubmitting] = useState(false);
 
+  // 화면이 처음 나타날 때 직무 목록을 한 번만 가져온다. [] 는 "마운트 때 한 번"이라는 뜻이다.
   useEffect(() => {
     getJobs()
       .then(setJobs)
@@ -43,6 +52,7 @@ export default function AssessmentFormPage() {
     return null;
   }
 
+  // 버튼 클릭. 검사에 걸리면 서버로 보내지 않는다.
   async function handleSubmit() {
     const message = validate();
     if (message) {
@@ -61,6 +71,7 @@ export default function AssessmentFormPage() {
         workHourLimit: Number(workHourLimit),
         jobId: Number(jobId),
       });
+      // 서버가 만든 평가 번호로 결과 주소에 간다. 예: /assessments/12/result
       navigate(`/assessments/${id}/result`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "분석에 실패했습니다.");

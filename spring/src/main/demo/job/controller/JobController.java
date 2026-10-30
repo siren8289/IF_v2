@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-/** GET /api/jobs  평가 입력 화면의 직무 선택 목록 */
+/**
+ * GET /api/jobs
+ * 평가 입력 화면의 직무 선택 상자. DB에 있는 직무를 앞에서 50개만 돌려준다.
+ */
 @RestController
 @RequestMapping("/api/jobs")
 public class JobController {

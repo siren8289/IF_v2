@@ -1,7 +1,13 @@
 """RAG 전용 독립 FastAPI 라우터 및 API 모듈.
 
-기존 main.py나 API를 변경하지 않고 독립적으로 동작하는 RAG REST API입니다.
-독립 FastAPI 앱으로 단독 실행하거나, 기존 FastAPI 앱에 include_router로 연동할 수 있습니다.
+main.py의 점수 API와는 별도 주소다. 점수 계산은 하지 않고,
+이미 나온 점수와 직무 제목으로 안전 지침을 찾아 설명을 만든다.
+
+  GET  /api/v1/rag/health   살아 있는지
+  POST /api/v1/rag/search   지침 검색만
+  POST /api/v1/rag/explain  검색 + 설명 + 인용
+
+단독으로 켜거나, 기존 FastAPI 앱에 include_router로 붙일 수 있다.
 """
 from fastapi import APIRouter, FastAPI, HTTPException
 from pydantic import BaseModel, Field
@@ -40,6 +46,7 @@ def search_guidelines_api(request: RagSearchRequest):
     from src.rag.reranker import rerank_chunks
 
     store = get_initialized_vector_store()
+    # 재순위에서 떨어질 것을 감안해, 요청한 개수의 두 배를 먼저 찾는다.
     raw_results = store.search(request.query, top_k=request.top_k * 2)
     reranked = rerank_chunks(request.query, raw_results, top_k=request.top_k)
     return {"query": request.query, "count": len(reranked), "results": reranked}

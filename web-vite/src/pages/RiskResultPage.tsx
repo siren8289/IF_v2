@@ -4,12 +4,16 @@ import { getResult, GRADE_COLOR, GRADE_TEXT, type AssessmentResult } from "@/sha
 
 const CARD = "bg-white p-6 rounded-2xl shadow-sm border border-gray-100";
 
+// 평가 한 건의 점수, 설명, 항목별 막대, ML/DL 표를 보여 준다.
 export default function RiskResultPage() {
+  // 주소의 :id. 문자열이라 서버에 보내기 전에 숫자로 바꾼다.
   const { id } = useParams();
   const navigate = useNavigate();
+  // result가 null인 동안은 "불러오는 중"이다. 오류가 나면 error에 문장을 담는다.
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // 주소의 평가 번호가 바뀌면 그 결과를 다시 읽는다.
   useEffect(() => {
     getResult(Number(id))
       .then(setResult)
@@ -64,6 +68,7 @@ export default function RiskResultPage() {
                   <span>{factor.name}</span>
                   <span>{factor.points} / {factor.max}점</span>
                 </div>
+                {/* 막대 너비 = 받은 점수 / 만점. 만점이 0이면 0%로 둔다. */}
                 <div className="h-2 bg-gray-100 rounded-full mt-1">
                   <div
                     className="h-2 bg-[#2F8F6B] rounded-full"
@@ -91,6 +96,7 @@ export default function RiskResultPage() {
               {result.taskScores.map((task) => (
                 <tr key={task.name} className="border-b last:border-0">
                   <td className="py-2">{task.name}</td>
+                  {/* 모델 점수는 0~1이다. 화면에선 퍼센트로 보여 준다. */}
                   <td className="text-right">{Math.round(task.mlScore * 100)}%</td>
                   <td className="text-right">{Math.round(task.dlScore * 100)}%</td>
                 </tr>

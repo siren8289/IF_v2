@@ -1,8 +1,11 @@
 """텍스트 임베딩(Embedding) 모듈.
 
-텍스트를 의미 기반의 숫자 벡터(vector)로 변환합니다.
+임베딩은 문장을 긴 숫자 목록(벡터)으로 바꾸는 일이다.
+뜻이 비슷한 문장은 숫자도 비슷해져서, 나중에 "이 질문과 가까운 지침"을 찾을 수 있다.
+
 GEMINI_API_KEY가 있으면 Gemini 임베딩 모델(text-embedding-004)을 사용하고,
-API 키가 없거나 테스트 환경에서는 일관된 로컬 벡터 변환기(Fallback)를 사용합니다.
+API 키가 없거나 호출이 실패하면 같은 문장은 항상 같은 숫자가 나오는
+로컬 변환기를 쓴다. 로컬 변환기는 진짜 의미 분석이 아니라 단어 일치에 가깝다.
 """
 import hashlib
 import os
@@ -23,14 +26,14 @@ def _local_fallback_embedding(text: str, dimension: int = 768) -> list[float]:
         return vector.tolist()
 
     for word in words:
-        # 단어 해시값으로 벡터 인덱스들을 결정하여 값을 누적
+        # 같은 단어는 항상 같은 칸에 1을 더한다. md5는 단어를 고정된 숫자로 바꾸는 함수다.
         seed = int(hashlib.md5(word.encode("utf-8")).hexdigest(), 16)
         index = seed % dimension
         vector[index] += 1.0
-        # 인접 인덱스에도 약간의 분산 효과 부여
+        # 바로 옆 칸에도 조금 더해, 완전히 한 칸에만 몰리지 않게 한다.
         vector[(index + 1) % dimension] += 0.5
 
-    # L2 정규화 (길이가 1인 단위 벡터로 변환)
+    # 벡터 길이를 1로 맞춘다. 그래야 긴 문장이 짧다는 이유만으로 점수가 커지지 않는다.
     norm = np.linalg.norm(vector)
     if norm > 0:
         vector = vector / norm
@@ -71,7 +74,10 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
 
 
 def cosine_similarity(vector_a: list[float], vector_b: list[float]) -> float:
-    """두 벡터 사이의 코사인 유사도를 계산합니다 (-1.0 ~ 1.0)."""
+    """두 벡터가 같은 방향을 가리키는 정도. 1에 가까우면 비슷하고, 0이면 관계없다.
+
+    길이는 무시하고 방향만 본다. 단어가 겹치는 문장일수록 값이 커진다.
+    """
     a = np.array(vector_a, dtype=np.float32)
     b = np.array(vector_b, dtype=np.float32)
     norm_a = np.linalg.norm(a)

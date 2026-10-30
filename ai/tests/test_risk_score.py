@@ -1,3 +1,5 @@
+# 점수 규칙과 /api/v1/risk/analyze 응답이 기대와 같은지 확인한다.
+# 등급 경계(40/41, 60/61)와 다섯 항목의 만점 합이 100인지를 본다.
 from fastapi.testclient import TestClient
 
 from src.main import app

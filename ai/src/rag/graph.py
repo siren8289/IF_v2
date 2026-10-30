@@ -1,12 +1,15 @@
-"""LangGraph 기반 RAG 실행 흐름(Workflow Graph) 모듈.
+"""RAG 실행 순서를 상태 그래프로 적은 모듈.
 
-RAG 파이프라인을 상태 그래프(StateGraph) 방식으로 제어합니다.
-흐름: [검색] -> [재순위] -> [근거 평가] -> 조건부 분기:
-       - 근거 충분 -> [답변 및 인용 생성] -> 종료
-       - 근거 부족 -> [답변 보류] -> 종료
+그래프는 "함수 여러 개를 화살표로 연결한 것"이다.
+한 함수가 끝나면 결과(state 딕셔너리)를 다음 함수에 넘긴다.
 
-외부 langgraph 패키지 설치 여부와 상관없이 완전히 동일한 방식으로 동작하는
-가볍고 직관적인 순수 파이썬 StateGraph 엔진을 내장하고 있습니다.
+흐름:
+  [검색] → [재순위] → [근거가 충분한가?]
+       충분하면 → [설명과 인용 생성] → 끝
+       부족하면 → [답변 보류] → 끝
+
+langgraph 패키지를 설치하지 않아도 되도록, 같은 개념의 작은 엔진을
+이 파일의 SimpleStateGraph에 직접 적어 두었다.
 """
 from typing import Any, Callable
 
@@ -69,7 +72,8 @@ class SimpleStateGraph:
             if current_node not in self.nodes:
                 break
 
-            # 현재 노드 함수 실행
+            # 현재 칸의 함수를 실행하고, 돌려준 키만 상태에 덮어쓴다.
+            # 함수가 건드리지 않은 키(질문, 저장소 등)는 그대로 남는다.
             node_func = self.nodes[current_node]
             updates = node_func(state)
             if updates and isinstance(updates, dict):

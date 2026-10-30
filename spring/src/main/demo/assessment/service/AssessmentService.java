@@ -34,6 +34,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 평가의 실제 일처리.
+ *
+ * 화면은 컨트롤러만 부르고, 컨트롤러는 이 클래스만 부른다.
+ * 여기서 하는 일:
+ *   1. 신청자, 건강 정보, 평가를 DB에 저장
+ *   2. AI 서버(FastAPI)에 분석을 요청
+ *   3. 점수와 설명을 다시 DB에 저장
+ * AI 호출이 실패하면 예외가 나고, 평가는 PENDING_AI 상태로 남는다.
+ * (저장과 AI 호출이 한 트랜잭션이 아니라서, 1번 저장은 롤백되지 않는다.)
+ */
 @Service
 public class AssessmentService {
 
@@ -66,10 +77,12 @@ public class AssessmentService {
      * AI 호출이 실패해도 평가는 남고 상태는 PENDING_AI로 유지된다.
      */
     public Long createAndAnalyze(AssessmentCreateRequest request) {
+        // 없는 직무 번호면 404. 화면의 선택 목록에 있는 번호만 통과한다.
         Job job = jobRepository.findById(request.jobId())
                 .orElseThrow(() -> ApiException.notFound("직무를 찾을 수 없습니다: " + request.jobId()));
 
-        // 1. 신청자, 건강 정보, 평가 저장
+        // 1. 신청자, 그 시점의 건강 정보, 평가 행을 각각 저장한다.
+        //    건강 정보는 나중에 바꿔도 과거 평가가 흔들리지 않게 스냅샷으로 남긴다.
         Applicant applicant = applicantRepository.save(
                 new Applicant(request.applicantName().trim(), request.age()));
 
@@ -80,11 +93,12 @@ public class AssessmentService {
         assessment.setApplicant(applicant);
         assessment.setJob(job);
         assessment.setHealthSnapshot(health);
+        // AI가 끝나기 전에는 "분석 대기"다. 호출이 실패하면 이 상태로 남는다.
         assessment.setStatus(AssessmentStatus.PENDING_AI);
         assessment.setAssessedAt(OffsetDateTime.now(ZoneOffset.UTC));
         assessment = assessmentRepository.save(assessment);
 
-        // 2. AI 서버 호출 (ML + DL + 점수 + 생성형 AI 설명)
+        // 2. AI 서버가 이해하는 키 이름으로 요청을 만든다. (snake_case)
         Map<String, Object> body = new HashMap<>();
         body.put("title", job.getJobTitle());
         body.put("age", request.age());
@@ -93,9 +107,11 @@ public class AssessmentService {
         body.put("work_hour_limit", request.workHourLimit());
 
         JsonNode aiResult = aiClient.analyze(body);
+        // 점수나 등급이 빠지거나 범위 밖이면 저장하지 않고 오류로 돌린다.
         checkAiResult(aiResult);
 
-        // 3. AI 결과 저장
+        // 3. AI가 돌려준 JSON 전체를 문자열로 보관한다.
+        //    화면은 나중에 이 JSON에서 설명, 항목 점수, ML/DL 점수를 꺼낸다.
         AIRiskResult result = new AIRiskResult();
         result.setAssessment(assessment);
         result.setTotalRiskPercent(aiResult.get("risk_score").asInt());
@@ -112,6 +128,7 @@ public class AssessmentService {
         return assessment.getId();
     }
 
+    /** AI JSON에 0~100 정수 점수와 LOW/MID/HIGH 등급이 있는지 확인한다. */
     private void checkAiResult(JsonNode aiResult) {
         if (aiResult == null) {
             throw ApiException.aiError("AI 응답이 비어 있습니다.", null);
@@ -126,11 +143,13 @@ public class AssessmentService {
         }
     }
 
+    /** 대시보드 표. pageable이 페이지 번호, 크기, 정렬을 들고 있다. 읽기만 한다. */
     @Transactional(readOnly = true)
     public Page<AssessmentRecordResponse> list(Pageable pageable) {
         return assessmentRepository.findAllRecords(pageable);
     }
 
+    /** 대시보드 카드 세 개: 전체 건수, HIGH 등급 건수, AI 결과가 있는 건수. */
     @Transactional(readOnly = true)
     public AssessmentSummaryResponse summary() {
         return new AssessmentSummaryResponse(
@@ -139,6 +158,11 @@ public class AssessmentService {
                 assessmentRepository.countByAiRiskResultIsNotNull());
     }
 
+    /**
+     * 결과 화면용 데이터.
+     * AI 결과가 아직 없으면 점수와 설명은 null로 두고, 이름·직무만 돌려준다.
+     * 예전 저장분은 키 이름이 summary, maximum, task_basis 라서 새 이름과 둘 다 읽는다.
+     */
     @Transactional(readOnly = true)
     public AssessmentResultResponse getResult(Long id) {
         Assessment assessment = findAssessment(id);
@@ -184,6 +208,10 @@ public class AssessmentService {
                 score, grade, explanation, source, factors, taskScores);
     }
 
+    /**
+     * 평가 삭제.
+     * 평가와 AI 결과가 서로를 가리키므로, 줄을 먼저 끊지 않으면 DB가 삭제를 거절한다.
+     */
     @Transactional
     public void delete(Long id) {
         Assessment assessment = findAssessment(id);

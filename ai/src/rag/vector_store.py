@@ -1,8 +1,13 @@
-"""PostgreSQL + pgvector 벡터 검색 및 인메모리 저장소 모듈.
+"""벡터 저장소 모듈.
 
-고령자 안전 지침 청크와 임베딩 벡터를 저장하고 유사도 검색을 수행합니다.
-PostgreSQL 및 pgvector 환경이 연결되어 있으면 실제 DB를 사용하고,
-DB 연결이 없거나 테스트 환경일 때는 자체 인메모리(In-Memory) 저장소를 사용합니다.
+청크(지침 조각)와 그 숫자 벡터를 저장하고, 질문과 가장 비슷한 조각을 찾는다.
+저장소는 두 종류다.
+
+  InMemoryVectorStore: 파이썬 리스트에 담아 둔다. DB가 없어도 동작한다.
+  PgVectorStore: PostgreSQL의 pgvector 확장에 영구 저장한다.
+
+get_vector_store()는 DB 접속이 되면 Pg, 안 되면 메모리로 자동으로 고른다.
+지금 파이프라인의 기본 경로는 get_initialized_vector_store()라서 메모리를 쓴다.
 """
 import json
 import os
@@ -27,6 +32,8 @@ CREATE TABLE IF NOT EXISTS safety_guideline_vectors (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- ivfflat: 벡터가 아주 많아도 전부 비교하지 않게 나눠 두는 색인.
+-- lists = 100 은 그 묶음 개수다. 데이터가 적을 때는 색인 없이 전체를 봐도 된다.
 CREATE INDEX IF NOT EXISTS idx_safety_vectors_cosine 
 ON safety_guideline_vectors USING ivfflat (embedding vector_cosine_ops)
 WITH (lists = 100);
@@ -70,6 +77,7 @@ class InMemoryVectorStore:
         if not self.records or not query.strip():
             return []
 
+        # 질문도 지침과 같은 방식으로 숫자 벡터로 바꾼 뒤 하나씩 비교한다.
         query_vector = embed_text(query)
         scored_results = []
 
@@ -162,7 +170,10 @@ class PgVectorStore:
         return len(records)
 
     def search(self, query: str, top_k: int = 5, min_similarity: float = 0.0) -> list[dict]:
-        """pgvector의 코사인 거리 연산자(<=>)를 사용하여 가장 유사한 지침을 검색합니다."""
+        """pgvector의 코사인 거리 연산자(<=>)로 가장 비슷한 지침을 찾는다.
+
+        <=> 는 거리가 작을수록 가깝다. 1에서 거리를 빼면 1에 가까울수록 비슷한 유사도가 된다.
+        """
         query_vector = embed_text(query)
         vector_str = f"[{','.join(str(x) for x in query_vector)}]"
 

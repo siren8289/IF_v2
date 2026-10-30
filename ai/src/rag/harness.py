@@ -1,11 +1,15 @@
 """안정성 보장을 위한 하네스(Harness) 모듈.
 
-다음 5가지 필수 안정성 기능을 제공합니다:
-1. 입력 검증 (Validation)
-2. 타임아웃 제어 (Timeout)
-3. 재시도 (Retry with Backoff)
-4. 단계별 상세 로깅 (Logging)
-5. 오류 격리 및 폴백 (Error Handling & Fallback)
+하네스는 본 작업 바깥에 두르는 안전장치다. 검색이 실패해도
+서버 전체가 죽지 않게, 입력을 검사하고 실패를 기록하고 대체 답을 준다.
+
+이 파일이 실제로 쓰는 기능:
+1. 입력 검증 — 제목과 점수가 비었거나 범위를 벗어나면 바로 거절
+2. 재시도 — 실패하면 기다렸다가 다시 시도 (지수 백오프: 0.5초, 1초, 2초...)
+3. 로그 — 언제 시작했고 얼마나 걸렸는지 콘솔에 남김
+4. 오류 격리 — 예외가 나도 호출자가 준 대체 답을 돌려줌
+
+타임아웃은 이 장식자 안에 따로 없고, Gemini 호출 쪽 15초 제한이 그 역할을 한다.
 """
 import functools
 import logging
@@ -69,6 +73,7 @@ def retry_with_backoff(
                         f"[{func.__name__}] 시도 {attempt}/{max_retries} 실패: {error}. "
                         f"{delay:.2f}초 후 재시도합니다."
                     )
+                    # 마지막 시도가 아니면 기다린 뒤, 다음 대기 시간을 두 배로 늘린다.
                     if attempt < max_retries:
                         time.sleep(delay)
                         delay *= backoff_factor
