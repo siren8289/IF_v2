@@ -1,0 +1,480 @@
+{
+  "browser": "156.0.8078.79",
+  "base": "http://localhost",
+  "ranAt": "2026-10-30T05:18:24.944Z",
+  "pass": 28,
+  "fail": 1,
+  "cleanup": [
+    {
+      "id": 3,
+      "status": 204
+    },
+    {
+      "id": 4,
+      "status": 204
+    },
+    {
+      "id": 5,
+      "status": 204
+    },
+    {
+      "id": 6,
+      "status": 204
+    },
+    {
+      "id": 7,
+      "status": 204
+    },
+    {
+      "id": 8,
+      "status": 204
+    },
+    {
+      "id": 9,
+      "status": 204
+    },
+    {
+      "id": 10,
+      "status": 204
+    },
+    {
+      "id": 11,
+      "status": 204
+    },
+    {
+      "id": 12,
+      "status": 204
+    },
+    {
+      "id": 13,
+      "status": 204
+    },
+    {
+      "id": 14,
+      "status": 204
+    },
+    {
+      "id": 15,
+      "status": 204
+    },
+    {
+      "id": 16,
+      "status": 204
+    },
+    {
+      "id": 17,
+      "status": 204
+    },
+    {
+      "id": 18,
+      "status": 204
+    },
+    {
+      "id": 19,
+      "status": 204
+    },
+    {
+      "id": 20,
+      "status": 204
+    }
+  ],
+  "results": [
+    {
+      "id": "UI-001",
+      "title": "첫 화면 열기",
+      "expected": "메인 화면이 오류 없이 표시",
+      "status": "PASS",
+      "steps": [
+        "Chrome으로 http://localhost 접속 (waitUntil=networkidle)",
+        "문서 응답 HTTP 200, 최종 URL http://localhost/dashboard",
+        "콘솔 오류 0건, pageerror 0건",
+        "화면에 '평가 대시보드', 요약 카드, '새로운 평가 시작' 버튼이 있는지 확인"
+      ],
+      "actual": "HTTP 200 후 http://localhost/dashboard 로 이동. 대시보드 제목, 요약 카드(총 평가/고위험/AI 분석 완료), 새 평가 버튼이 보이고 role=alert 는 없다. pageerror 0.",
+      "notes": "콘솔 오류 없음.",
+      "screenshot": "screenshots/UI-001.png",
+      "ms": 6363
+    },
+    {
+      "id": "UI-002",
+      "title": "새 평가 페이지 이동",
+      "expected": "입력 폼 렌더링",
+      "status": "PASS",
+      "steps": [
+        "대시보드에서 '새로운 평가 시작' 클릭"
+      ],
+      "actual": "http://localhost/assessments/new 에 폼이 렌더링됨. 라벨: 이름, 연령, 건강 상태, 만성질환, 하루 근무 가능 시간, 직무. 제출 버튼 '위험도 분석 시작' 표시.",
+      "notes": "화면의 진입 컨트롤은 메뉴가 아니라 대시보드 버튼 '새로운 평가 시작'이다.",
+      "screenshot": "screenshots/UI-002.png",
+      "ms": 7069
+    },
+    {
+      "id": "UI-003",
+      "title": "직무 8개 표시",
+      "expected": "API 응답과 동일한 8개 직무 표시",
+      "status": "PASS",
+      "steps": [
+        "GET /api/jobs → 8건"
+      ],
+      "actual": "플레이스홀더 '선택하세요' 제외 옵션 8개. API도 8개.",
+      "notes": "아파트 야간 경비원 (서울 강남구) / 택배 배송 기사 (경기 성남시) / 건물 청소원 (서울 종로구) / 요양보호사 (인천 남동구) / 시설 관리원 (부산 해운대구) / 주차 관리원 (대구 수성구) / 학교 급식 보조원 (광주 북구) / 사무 보조원 (대전 서구)",
+      "screenshot": "screenshots/UI-003.png",
+      "ms": 5753
+    },
+    {
+      "id": "UI-004",
+      "title": "직무 명칭과 위치 표시",
+      "expected": "jobTitle/workplace 일치",
+      "status": "PASS",
+      "steps": [],
+      "actual": "8개 옵션의 value(id)와 표시 문구 'jobTitle (workplace)'가 GET /api/jobs 와 일치.",
+      "notes": "1:아파트 야간 경비원 (서울 강남구) | 2:택배 배송 기사 (경기 성남시) | 3:건물 청소원 (서울 종로구) | 4:요양보호사 (인천 남동구) | 5:시설 관리원 (부산 해운대구) | 6:주차 관리원 (대구 수성구) | 7:학교 급식 보조원 (광주 북구) | 8:사무 보조원 (대전 서구)",
+      "screenshot": "screenshots/UI-004.png",
+      "ms": 2810
+    },
+    {
+      "id": "UI-005",
+      "title": "직무 전환",
+      "expected": "현재 선택값만 변경",
+      "status": "PASS",
+      "steps": [
+        "직무 1 선택 후 상태 {\"name\":\"전환테스트\",\"age\":\"65\",\"health\":\"2\",\"chronic\":\"yes\",\"hours\":\"6\",\"job\":\"1\"}",
+        "직무 2 선택 후 상태 {\"name\":\"전환테스트\",\"age\":\"65\",\"health\":\"2\",\"chronic\":\"yes\",\"hours\":\"6\",\"job\":\"2\"}"
+      ],
+      "actual": "job만 1 → 2 로 바뀌고 이름·연령·건강·만성질환·근무시간은 그대로다.",
+      "notes": "",
+      "screenshot": "screenshots/UI-005.png",
+      "ms": 2483
+    },
+    {
+      "id": "UI-006",
+      "title": "필수 이름 빈값",
+      "expected": "이름 입력 요청, POST 미발생",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"\",\"age\":\"70\",\"hours\":\"8\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '이름을 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-006.png",
+      "ms": 2493
+    },
+    {
+      "id": "UI-007",
+      "title": "공백 이름",
+      "expected": "이름 필수 오류, POST 미발생",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"   \",\"age\":\"70\",\"hours\":\"8\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '이름을 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-007.png",
+      "ms": 2099
+    },
+    {
+      "id": "UI-008",
+      "title": "이름 앞뒤 공백",
+      "expected": "trim 처리된 이름 전송",
+      "status": "PASS",
+      "steps": [
+        "평가 폼에 이름 '  홍길동  ', 나이 70, 건강 3, 만성질환 없음, 근무 8, 직무 1을 입력",
+        "요청 감시를 먼저 건 뒤 '위험도 분석 시작' 클릭",
+        "POST body의 applicantName이 trim 됐는지 확인"
+      ],
+      "actual": "POST 1건, HTTP 201, body.applicantName='홍길동', 전체 body={\"applicantName\":\"홍길동\",\"age\":70,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 클릭 직후 검증 alert=없음.",
+      "notes": "1차 실행은 요청 대기를 클릭 뒤에 걸어서 타임아웃이 났다. 이번엔 클릭 전에 요청을 기다렸고, 서버로 실제 전송된 JSON을 확인했다.",
+      "screenshot": null,
+      "ms": 6059,
+      "rerun": true
+    },
+    {
+      "id": "UI-009",
+      "title": "연령 입력 0",
+      "expected": "1~120 검증 실패",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"테스트사용자\",\"age\":\"0\",\"health\":\"3\",\"chronic\":\"no\",\"hours\":\"8\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '연령은 1~120 사이로 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-009.png",
+      "ms": 3435
+    },
+    {
+      "id": "UI-010",
+      "title": "연령 입력 1",
+      "expected": "프론트 입력 검증 통과",
+      "status": "PASS",
+      "steps": [
+        "정상값에 age만 경계값으로 넣고 제출",
+        "클라이언트 검증 문구가 없는지, POST 본문 숫자가 기대값인지 확인"
+      ],
+      "actual": "검증 alert 없이 POST 1건. HTTP 201. body={\"applicantName\":\"나이1\",\"age\":1,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}.",
+      "notes": "1차 실행은 클릭 후에 요청을 기다려 타임아웃이 났다. 재실행에서 실제 POST 본문으로 프론트 검증 통과를 확인했다.",
+      "screenshot": null,
+      "ms": 9721,
+      "rerun": true
+    },
+    {
+      "id": "UI-011",
+      "title": "연령 입력 120",
+      "expected": "프론트 입력 검증 통과",
+      "status": "PASS",
+      "steps": [
+        "정상값에 age만 경계값으로 넣고 제출",
+        "클라이언트 검증 문구가 없는지, POST 본문 숫자가 기대값인지 확인"
+      ],
+      "actual": "검증 alert 없이 POST 1건. HTTP 201. body={\"applicantName\":\"나이120\",\"age\":120,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}.",
+      "notes": "1차 실행은 클릭 후에 요청을 기다려 타임아웃이 났다. 재실행에서 실제 POST 본문으로 프론트 검증 통과를 확인했다.",
+      "screenshot": null,
+      "ms": 9195,
+      "rerun": true
+    },
+    {
+      "id": "UI-012",
+      "title": "연령 입력 121",
+      "expected": "검증 실패",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"테스트사용자\",\"age\":\"121\",\"health\":\"3\",\"chronic\":\"no\",\"hours\":\"8\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '연령은 1~120 사이로 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-012.png",
+      "ms": 3683
+    },
+    {
+      "id": "UI-013",
+      "title": "연령 음수",
+      "expected": "검증 실패",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"테스트사용자\",\"age\":\"-1\",\"health\":\"3\",\"chronic\":\"no\",\"hours\":\"8\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '연령은 1~120 사이로 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-013.png",
+      "ms": 4079
+    },
+    {
+      "id": "UI-014",
+      "title": "연령 소수",
+      "expected": "검증 실패",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"테스트사용자\",\"age\":\"60.5\",\"health\":\"3\",\"chronic\":\"no\",\"hours\":\"8\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '연령은 1~120 사이로 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-014.png",
+      "ms": 3479
+    },
+    {
+      "id": "UI-015",
+      "title": "근무시간 0",
+      "expected": "1~24 검증 실패",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"테스트사용자\",\"age\":\"70\",\"health\":\"3\",\"chronic\":\"no\",\"hours\":\"0\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '근무 가능 시간은 1~24 사이로 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-015.png",
+      "ms": 2846
+    },
+    {
+      "id": "UI-016",
+      "title": "근무시간 1",
+      "expected": "프론트 입력 검증 통과",
+      "status": "PASS",
+      "steps": [
+        "정상값에 workHourLimit만 경계값으로 넣고 제출",
+        "클라이언트 검증 문구가 없는지, POST 본문 숫자가 기대값인지 확인"
+      ],
+      "actual": "검증 alert 없이 POST 1건. HTTP 201. body={\"applicantName\":\"시간1\",\"age\":70,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":1,\"jobId\":1}.",
+      "notes": "1차 실행은 클릭 후에 요청을 기다려 타임아웃이 났다. 재실행에서 실제 POST 본문으로 프론트 검증 통과를 확인했다.",
+      "screenshot": null,
+      "ms": 6752,
+      "rerun": true
+    },
+    {
+      "id": "UI-017",
+      "title": "근무시간 24",
+      "expected": "프론트 입력 검증 통과",
+      "status": "PASS",
+      "steps": [
+        "정상값에 workHourLimit만 경계값으로 넣고 제출",
+        "클라이언트 검증 문구가 없는지, POST 본문 숫자가 기대값인지 확인"
+      ],
+      "actual": "검증 alert 없이 POST 1건. HTTP 201. body={\"applicantName\":\"시간24\",\"age\":70,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":24,\"jobId\":1}.",
+      "notes": "1차 실행은 클릭 후에 요청을 기다려 타임아웃이 났다. 재실행에서 실제 POST 본문으로 프론트 검증 통과를 확인했다.",
+      "screenshot": null,
+      "ms": 7175,
+      "rerun": true
+    },
+    {
+      "id": "UI-018",
+      "title": "근무시간 25",
+      "expected": "검증 실패",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"테스트사용자\",\"age\":\"70\",\"health\":\"3\",\"chronic\":\"no\",\"hours\":\"25\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '근무 가능 시간은 1~24 사이로 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-018.png",
+      "ms": 2083
+    },
+    {
+      "id": "UI-019",
+      "title": "근무시간 소수",
+      "expected": "검증 실패",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"테스트사용자\",\"age\":\"70\",\"health\":\"3\",\"chronic\":\"no\",\"hours\":\"7.5\",\"job\":\"1\"} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '근무 가능 시간은 1~24 사이로 입력해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-019.png",
+      "ms": 1923
+    },
+    {
+      "id": "UI-020",
+      "title": "직무 미선택",
+      "expected": "직무 선택 요청, POST 미발생",
+      "status": "PASS",
+      "steps": [
+        "입력 {\"name\":\"테스트사용자\",\"age\":\"70\",\"health\":\"3\",\"chronic\":\"no\",\"hours\":\"8\",\"job\":null} 후 '위험도 분석 시작' 클릭"
+      ],
+      "actual": "alert '직무를 선택해주세요.'. POST /api/assessments 0건.",
+      "notes": "",
+      "screenshot": "screenshots/UI-020.png",
+      "ms": 1779
+    },
+    {
+      "id": "UI-021",
+      "title": "건강 상태 옵션",
+      "expected": "다섯 단계가 정확히 표시",
+      "status": "PASS",
+      "steps": [
+        "건강 상태 select의 option 텍스트와 value를 위에서부터 읽음"
+      ],
+      "actual": "1 - 매우 좋음 → 2 - 좋음 → 3 - 보통 → 4 - 나쁨 → 5 - 매우 나쁨",
+      "notes": "",
+      "screenshot": "screenshots/UI-021.png",
+      "ms": 963
+    },
+    {
+      "id": "UI-022",
+      "title": "만성질환 토글",
+      "expected": "boolean true/false 정확히 전송",
+      "status": "PASS",
+      "steps": [
+        "다른 값은 정상으로 두고 만성질환만 '있음'으로 제출, body.chronicDisease 확인",
+        "같은 방식으로 '없음' 제출, body.chronicDisease 확인"
+      ],
+      "actual": "있음 선택 → chronicDisease true, 없음 선택 → chronicDisease false. 둘 다 실제 POST.",
+      "notes": "1차는 요청 대기 타이밍이 늦어 실패로 집계됐다. 재실행에서 두 본문을 확인했다.",
+      "screenshot": "screenshots/UI-022-yes.png",
+      "ms": 20928,
+      "rerun": true
+    },
+    {
+      "id": "UI-023",
+      "title": "중복 클릭",
+      "expected": "분석 중 버튼 비활성 및 중복 제출 방지",
+      "status": "FAIL",
+      "steps": [
+        "정상 입력 후 한 번 클릭하고, 'AI 분석 중...' 버튼이 비활성인지 확인",
+        "그 버튼을 다시 클릭해 추가 POST가 없는지 확인",
+        "별도로 같은 실행 턴에서 button.click()을 두 번 호출해 POST 횟수를 센다"
+      ],
+      "actual": "한 번 클릭 후 버튼 disabled=true, 그때까지 POST 1건, 추가 클릭 'TimeoutError: locator.click: Timeout 1500ms exceeded.'. 같은 순간에 click() 두 번은 POST 2건, 직후 버튼 'AI 분석 중...' disabled=true.",
+      "notes": "화면이 다시 그려진 뒤의 버튼은 비활성이라 두 번째 클릭은 막힌다. 다만 첫 클릭 처리가 끝나 버튼이 막히기 전에 click()을 한 번 더 부르면 요청이 두 번 나간다.",
+      "screenshot": "screenshots/UI-023.png",
+      "ms": 51859,
+      "rerun": true
+    },
+    {
+      "id": "UI-024",
+      "title": "처리 중 표시",
+      "expected": "AI 분석 중 표시",
+      "status": "PASS",
+      "steps": [
+        "정상 입력 후 분석 클릭, 응답 전에 버튼 문구를 확인"
+      ],
+      "actual": "클릭 직후 버튼 문구가 'AI 분석 중...'으로 바뀌고 disabled 상태다.",
+      "notes": "",
+      "screenshot": "screenshots/UI-024.png",
+      "ms": 2831
+    },
+    {
+      "id": "UI-025",
+      "title": "API 오류 안내",
+      "expected": "사용자가 이해할 수 있는 오류 표시",
+      "status": "PASS",
+      "steps": [
+        "POST /api/assessments 만 502 JSON으로 응답. 화면과 나머지 API는 실제 서버."
+      ],
+      "actual": "폼에 남고 role=alert 문구: 'API 502: AI 서버 호출에 실패했습니다.'",
+      "notes": "실제 AI를 죽이지 않고, 브라우저가 보낸 POST에 대해 Spring과 같은 502 JSON을 돌려 화면 처리만 확인했다.",
+      "screenshot": "screenshots/UI-025.png",
+      "ms": 1072
+    },
+    {
+      "id": "UI-026",
+      "title": "새로고침 복구",
+      "expected": "SPA 화면 정상 복구",
+      "status": "PASS",
+      "steps": [
+        "http://localhost/ 직접 열고 새로고침",
+        "http://localhost/dashboard 직접 열고 새로고침",
+        "http://localhost/assessments/new 직접 열고 새로고침",
+        "http://localhost/assessments/2/result 직접 열고 새로고침"
+      ],
+      "actual": "http://localhost/ → reload HTTP 200 (첫 응답 200), 최종 http://localhost/dashboard, 헤더 true, 404페이지 false\nhttp://localhost/dashboard → reload HTTP 200 (첫 응답 200), 최종 http://localhost/dashboard, 헤더 true, 404페이지 false\nhttp://localhost/assessments/new → reload HTTP 200 (첫 응답 200), 최종 http://localhost/assessments/new, 헤더 true, 404페이지 false\nhttp://localhost/assessments/2/result → reload HTTP 200 (첫 응답 200), 최종 http://localhost/assessments/2/result, 헤더 true, 404페이지 false",
+      "notes": "결과 페이지는 테스트 전에 있던 평가 id=2(홍길동)를 새로고침했다. 이번 테스트로 만든 데이터는 쓰지 않았다.",
+      "screenshot": "screenshots/UI-026.png",
+      "ms": 4972
+    },
+    {
+      "id": "UI-027",
+      "title": "모바일 레이아웃",
+      "expected": "가로 넘침 및 입력 조작 불편 없음",
+      "status": "PASS",
+      "steps": [
+        "뷰포트 375x812 (iPhone 폭)로 평가 폼을 연다"
+      ],
+      "actual": "375px에서 scrollWidth 375 = clientWidth 375. 화면보다 넓은 요소 없음. 이름 칸 너비 277px, 버튼 너비 277px. 이름 입력과 직무 선택(건물 청소원)이 동작.",
+      "notes": "버튼은 폼 아래라 첫 화면 높이 안에는 없다. 세로 스크롤로 도달한다. 가로 스크롤은 없다.",
+      "screenshot": "screenshots/UI-027.png",
+      "ms": 1539
+    },
+    {
+      "id": "UI-028",
+      "title": "키보드 탐색",
+      "expected": "입력/선택/제출 접근 가능",
+      "status": "PASS",
+      "steps": [
+        "Tab 순서: name → age → health → chronic → hours → job → BUTTON"
+      ],
+      "actual": "Tab 순서 name → age → health → chronic → hours → job → BUTTON. 키보드로 이름 '키보드' 입력, 건강 value=3, 직무 value=. 제출 버튼에서 Enter 시 alert '연령은 1~120 사이로 입력해주세요.'.",
+      "notes": "제출 버튼은 type=button 이라 입력칸에서 Enter를 눌러도 폼 제출은 되지 않는다. 버튼까지 Tab한 뒤 Enter로는 제출된다. 나이를 안 채워서 연령 검증 문구가 나온 것이 키보드 제출이 됐다는 증거다.",
+      "screenshot": "screenshots/UI-028.png",
+      "ms": 960
+    },
+    {
+      "id": "UI-029",
+      "title": "오류 메시지 접근성",
+      "expected": "오류 문구가 안내용 속성으로 렌더링",
+      "status": "PASS",
+      "steps": [],
+      "actual": "<div role=\"alert\">이름을 입력해주세요.</div>",
+      "notes": "",
+      "screenshot": "screenshots/UI-029.png",
+      "ms": 1040
+    }
+  ],
+  "rerunAt": "2026-10-30T05:20:00.462Z"
+}
