@@ -1,0 +1,8 @@
+# 적용 예시. terraform apply 는 승인 없이 실행하지 않는다.
+# existing_instance_id 는 .github/workflows/deploy.yml 에 이미 있는 값이다.
+aws_region           = "ap-northeast-2"
+github_repository    = "siren8289/IF_v2"
+existing_instance_id = "i-0b400ab5f6fa756af"
+account_id           = "000000000000"
+enable_iam           = false
+manage_ec2           = false

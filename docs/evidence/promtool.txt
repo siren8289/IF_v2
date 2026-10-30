@@ -1,0 +1,3 @@
+Checking /alerts.yml
+  SUCCESS: 4 rules found
+

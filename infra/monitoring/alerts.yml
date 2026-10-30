@@ -1,0 +1,34 @@
+groups:
+  - name: if-v2
+    rules:
+      - alert: HostCpuHigh
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: CPU 사용률이 5분 동안 80%를 넘었다.
+
+      - alert: HostMemoryHigh
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 사용 가능한 메모리가 15% 미만이다.
+
+      - alert: HttpProbeFailing
+        expr: probe_success == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: HTTP 확인이 2분 동안 실패했다.
+
+      - alert: HttpLatencyHigh
+        expr: probe_duration_seconds > 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: HTTP 확인 시간이 5분 동안 1초를 넘었다.

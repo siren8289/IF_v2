@@ -1,0 +1,22 @@
+start 2026-10-31T01:43:31+0900
+frontend before 200
+if-app-stack-frontend-1
+curl: (7) Failed to connect to 127.0.0.1 port 80 after 0 ms: Couldn't connect to server
+frontend stopped 000
+if-app-stack-frontend-1
+curl: (56) Recv failure: Connection reset by peer
+frontend restored 200 after 1s
+fastapi before 200
+if-app-stack-fastapi-1
+curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Couldn't connect to server
+fastapi stopped 000
+if-app-stack-fastapi-1
+curl: (52) Empty reply from server
+curl: (52) Empty reply from server
+curl: (52) Empty reply from server
+curl: (52) Empty reply from server
+curl: (52) Empty reply from server
+curl: (52) Empty reply from server
+fastapi restored 200 after 6s
+spring still 200
+end 2026-10-31T01:43:41+0900

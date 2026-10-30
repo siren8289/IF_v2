@@ -32,3 +32,9 @@ target/
 # Local environment
 .venv/
 .env
+
+# Terraform local cache and state. The lock file stays tracked.
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.*
+infra/terraform/crash.log

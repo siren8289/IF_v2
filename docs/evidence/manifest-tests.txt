@@ -1,0 +1,11 @@
+test_alerts_cover_cpu_memory_errors_and_latency (test_manifests.ManifestTests.test_alerts_cover_cpu_memory_errors_and_latency) ... ok
+test_default_terraform_does_not_create_resources (test_manifests.ManifestTests.test_default_terraform_does_not_create_resources) ... ok
+test_deploy_workflow_uses_oidc_without_static_keys (test_manifests.ManifestTests.test_deploy_workflow_uses_oidc_without_static_keys) ... ok
+test_each_deployment_has_probes_resources_and_secret_refs (test_manifests.ManifestTests.test_each_deployment_has_probes_resources_and_secret_refs) ... ok
+test_k6_script_and_fault_script_exist (test_manifests.ManifestTests.test_k6_script_and_fault_script_exist) ... ok
+test_secret_is_only_a_local_placeholder (test_manifests.ManifestTests.test_secret_is_only_a_local_placeholder) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.014s
+
+OK

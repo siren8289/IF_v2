@@ -1,0 +1,5 @@
+ConfigMap 1
+Deployment 4
+Namespace 1
+Secret 1
+Service 4

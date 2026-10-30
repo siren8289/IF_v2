@@ -1,0 +1,29 @@
+# 기본 compose.yaml 에 넣지 않는다. 관측이 필요할 때만 따로 띄운다.
+# docker compose -f infra/monitoring/compose.yaml up -d
+name: if-observability
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./alerts.yml:/etc/prometheus/alerts.yml:ro
+    ports:
+      - "127.0.0.1:9090:9090"
+
+  alertmanager:
+    image: prom/alertmanager:v0.27.0
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    ports:
+      - "127.0.0.1:9093:9093"
+
+  node-exporter:
+    image: prom/node-exporter:v1.8.2
+    ports:
+      - "127.0.0.1:9100:9100"
+
+  blackbox:
+    image: prom/blackbox-exporter:v0.25.0
+    ports:
+      - "127.0.0.1:9115:9115"

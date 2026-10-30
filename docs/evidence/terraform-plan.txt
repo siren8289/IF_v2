@@ -1,0 +1,13 @@
+
+Changes to Outputs:
+  + apply_creates_resources = false
+
+You can apply this plan to save these new output values to the Terraform
+state, without changing any real infrastructure.
+
+Error: Retrieving AWS account details: validating provider credentials: retrieving caller identity from STS: operation error STS: GetCallerIdentity, https response error StatusCode: 403, RequestID: ac94bea0-29c0-40d7-8dcd-d2a6e8f22a45, api error InvalidClientTokenId: The security token included in the request is invalid.
+
+  with provider["registry.terraform.io/hashicorp/aws"],
+  on versions.tf line 16, in provider "aws":
+  16: provider "aws" {
+

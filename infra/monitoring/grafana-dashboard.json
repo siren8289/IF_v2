@@ -1,0 +1,47 @@
+{
+  "title": "IF_v2",
+  "uid": "if-v2",
+  "schemaVersion": 39,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "CPU percent",
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+      "targets": [
+        {
+          "expr": "100 - (avg(rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Memory percent",
+      "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+      "targets": [
+        {
+          "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Probe failures",
+      "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
+      "targets": [
+        {
+          "expr": "count(probe_success == 0)"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Probe duration seconds",
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 4},
+      "targets": [
+        {
+          "expr": "probe_duration_seconds"
+        }
+      ]
+    }
+  ]
+}

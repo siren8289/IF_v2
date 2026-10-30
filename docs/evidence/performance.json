@@ -1,0 +1,35 @@
+{
+  "spring_jobs": {
+    "requests": 30,
+    "workers": 5,
+    "errors": 0,
+    "error_rate": 0.0,
+    "rps": 101.20323597898525,
+    "p50_ms": 21.16,
+    "p95_ms": 173.77,
+    "max_ms": 224.6,
+    "mean_ms": 45.64
+  },
+  "fastapi_health": {
+    "requests": 30,
+    "workers": 5,
+    "errors": 0,
+    "error_rate": 0.0,
+    "rps": 782.1393990015735,
+    "p50_ms": 4.33,
+    "p95_ms": 17.91,
+    "max_ms": 17.93,
+    "mean_ms": 6.18
+  },
+  "frontend": {
+    "requests": 30,
+    "workers": 5,
+    "errors": 0,
+    "error_rate": 0.0,
+    "rps": 443.9270821527972,
+    "p50_ms": 5.12,
+    "p95_ms": 30.74,
+    "max_ms": 37.95,
+    "mean_ms": 11.0
+  }
+}
