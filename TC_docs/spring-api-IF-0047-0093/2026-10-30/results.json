@@ -1,0 +1,1180 @@
+{
+  "results": [
+    {
+      "id": "IF-0047",
+      "priority": "P0",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → applicantName",
+      "condition": "applicantName 필드 누락",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"applicantName: must not be blank\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "이름 필드 없음. HTTP 400 VALIDATION_ERROR applicantName: must not be blank. 네 테이블 증가 0"
+    },
+    {
+      "id": "IF-0048",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → applicantName",
+      "condition": "applicantName ''",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"applicantName: must not be blank\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "이름 빈 문자열. HTTP 400 applicantName: must not be blank. 증가 0"
+    },
+    {
+      "id": "IF-0049",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → applicantName",
+      "condition": "applicantName ' '",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \" \", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"applicantName: must not be blank\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "이름 공백 한 칸. HTTP 400 applicantName: must not be blank. 증가 0"
+    },
+    {
+      "id": "IF-0050",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → applicantName",
+      "condition": "applicantName 50자",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":22}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 22,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "이름 50자. HTTP 201 {\"id\":22}. 평가·신청자·건강·AI 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0051",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → applicantName",
+      "condition": "applicantName 51자",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"applicantName: size must be between 0 and 50\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "이름 51자. HTTP 400 applicantName: size must be between 0 and 50. 증가 0"
+    },
+    {
+      "id": "IF-0052",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → applicantName",
+      "condition": "applicantName 17",
+      "expect_kind": "accept_or_type",
+      "rule": "문자/숫자가 정상 타입으로 바뀌면 201로 저장된다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": 17, \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":23}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 23,
+      "sheet_status": "실패",
+      "bug_id": "BUG-IF-0052",
+      "sheet_actual": "이름 JSON 숫자 17. HTTP 201 {\"id\":23}. display_name은 17. 타입 오류인데 4xx가 아님"
+    },
+    {
+      "id": "IF-0053",
+      "priority": "P0",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → age",
+      "condition": "age 필드 누락",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0053\", \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"age: must not be null\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "나이 필드 없음. HTTP 400 age: must not be null. 증가 0"
+    },
+    {
+      "id": "IF-0054",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → age",
+      "condition": "age -1",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0054\", \"age\": -1, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"age: must be greater than or equal to 1\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "나이 -1. HTTP 400 age: must be greater than or equal to 1. 증가 0"
+    },
+    {
+      "id": "IF-0055",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → age",
+      "condition": "age 0",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0055\", \"age\": 0, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"age: must be greater than or equal to 1\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "나이 0. HTTP 400 age: must be greater than or equal to 1. 증가 0"
+    },
+    {
+      "id": "IF-0056",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → age",
+      "condition": "age 1",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0056\", \"age\": 1, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":24}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 24,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "나이 1. HTTP 201 {\"id\":24}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0057",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → age",
+      "condition": "age 120",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0057\", \"age\": 120, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":25}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 25,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "나이 120. HTTP 201 {\"id\":25}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0058",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → age",
+      "condition": "age 121",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0058\", \"age\": 121, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"age: must be less than or equal to 120\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "나이 121. HTTP 400 age: must be less than or equal to 120. 증가 0"
+    },
+    {
+      "id": "IF-0059",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → age",
+      "condition": "age 60.5",
+      "expect_kind": "accept_or_type",
+      "rule": "문자/숫자가 정상 타입으로 바뀌면 201로 저장된다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0059\", \"age\": 60.5, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":26}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 26,
+      "sheet_status": "실패",
+      "bug_id": "BUG-IF-0059",
+      "sheet_actual": "나이 60.5. HTTP 201 {\"id\":26}. 추가 확인에서 저장된 age는 60. 타입 오류인데 4xx가 아님"
+    },
+    {
+      "id": "IF-0060",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → age",
+      "condition": "age '70'",
+      "expect_kind": "accept_or_type",
+      "rule": "문자/숫자가 정상 타입으로 바뀌면 201로 저장된다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0060\", \"age\": \"70\", \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":27}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 27,
+      "sheet_status": "실패",
+      "bug_id": "BUG-IF-0060",
+      "sheet_actual": "나이 문자열 70. HTTP 201 {\"id\":27}. 추가 확인에서 저장된 age는 70. 타입 오류인데 4xx가 아님"
+    },
+    {
+      "id": "IF-0061",
+      "priority": "P0",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → physicalLevel",
+      "condition": "physicalLevel 필드 누락",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0061\", \"age\": 70, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"physicalLevel: must not be null\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "건강 상태 없음. HTTP 400 physicalLevel: must not be null. 증가 0"
+    },
+    {
+      "id": "IF-0062",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → physicalLevel",
+      "condition": "physicalLevel 0",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0062\", \"age\": 70, \"physicalLevel\": 0, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"physicalLevel: must be greater than or equal to 1\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "건강 상태 0. HTTP 400 physicalLevel: must be greater than or equal to 1. 증가 0"
+    },
+    {
+      "id": "IF-0063",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → physicalLevel",
+      "condition": "physicalLevel 1",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0063\", \"age\": 70, \"physicalLevel\": 1, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":28}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 28,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "건강 상태 1. HTTP 201 {\"id\":28}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0064",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → physicalLevel",
+      "condition": "physicalLevel 3",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0064\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":29}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 29,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "건강 상태 3. HTTP 201 {\"id\":29}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0065",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → physicalLevel",
+      "condition": "physicalLevel 5",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0065\", \"age\": 70, \"physicalLevel\": 5, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":30}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 30,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "건강 상태 5. HTTP 201 {\"id\":30}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0066",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → physicalLevel",
+      "condition": "physicalLevel 6",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0066\", \"age\": 70, \"physicalLevel\": 6, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"physicalLevel: must be less than or equal to 5\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "건강 상태 6. HTTP 400 physicalLevel: must be less than or equal to 5. 증가 0"
+    },
+    {
+      "id": "IF-0067",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → physicalLevel",
+      "condition": "physicalLevel '3'",
+      "expect_kind": "accept_or_type",
+      "rule": "문자/숫자가 정상 타입으로 바뀌면 201로 저장된다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0067\", \"age\": 70, \"physicalLevel\": \"3\", \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":31}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 31,
+      "sheet_status": "실패",
+      "bug_id": "BUG-IF-0067",
+      "sheet_actual": "건강 상태 문자열 3. HTTP 201 {\"id\":31}. 추가 확인에서 physical_level은 3. 타입 오류인데 4xx가 아님"
+    },
+    {
+      "id": "IF-0068",
+      "priority": "P0",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → chronicDisease",
+      "condition": "chronicDisease 필드 누락",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0068\", \"age\": 70, \"physicalLevel\": 3, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"chronicDisease: must not be null\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "만성질환 없음. HTTP 400 chronicDisease: must not be null. 증가 0"
+    },
+    {
+      "id": "IF-0069",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → chronicDisease",
+      "condition": "chronicDisease true",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0069\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": true, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":32}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 32,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "만성질환 true. HTTP 201 {\"id\":32}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0070",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → chronicDisease",
+      "condition": "chronicDisease false",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0070\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":33}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 33,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "만성질환 false. HTTP 201 {\"id\":33}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0071",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → chronicDisease",
+      "condition": "chronicDisease 'yes'",
+      "expect_kind": "accept_or_type",
+      "rule": "타입 오류면 4xx이고 저장되지 않아야 한다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0071\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": \"yes\", \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"요청 JSON 형식이 올바르지 않습니다.\",\"errorCode\":\"INVALID_JSON\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "만성질환 yes. HTTP 400 INVALID_JSON. 증가 0"
+    },
+    {
+      "id": "IF-0072",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → chronicDisease",
+      "condition": "chronicDisease 1",
+      "expect_kind": "accept_or_type",
+      "rule": "문자/숫자가 정상 타입으로 바뀌면 201로 저장된다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0072\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": 1, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":34}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 34,
+      "sheet_status": "실패",
+      "bug_id": "BUG-IF-0072",
+      "sheet_actual": "만성질환 숫자 1. HTTP 201 {\"id\":34}. 추가 확인에서 chronic_disease_flag는 true. 타입 오류인데 4xx가 아님"
+    },
+    {
+      "id": "IF-0073",
+      "priority": "P0",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → workHourLimit",
+      "condition": "workHourLimit 필드 누락",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0073\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"workHourLimit: must not be null\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "근무시간 없음. HTTP 400 workHourLimit: must not be null. 증가 0"
+    },
+    {
+      "id": "IF-0074",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → workHourLimit",
+      "condition": "workHourLimit 0",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0074\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 0, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"workHourLimit: must be greater than or equal to 1\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "근무시간 0. HTTP 400 workHourLimit: must be greater than or equal to 1. 증가 0"
+    },
+    {
+      "id": "IF-0075",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → workHourLimit",
+      "condition": "workHourLimit 1",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0075\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 1, \"jobId\": 1}",
+      "response": "{\"id\":35}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 35,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "근무시간 1. HTTP 201 {\"id\":35}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0076",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → workHourLimit",
+      "condition": "workHourLimit 8",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0076\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":36}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 36,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "근무시간 8. HTTP 201 {\"id\":36}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0077",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → workHourLimit",
+      "condition": "workHourLimit 24",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0077\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 24, \"jobId\": 1}",
+      "response": "{\"id\":37}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 37,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "근무시간 24. HTTP 201 {\"id\":37}. 각 +1. DELETE 204"
+    },
+    {
+      "id": "IF-0078",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → workHourLimit",
+      "condition": "workHourLimit 25",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0078\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 25, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"workHourLimit: must be less than or equal to 24\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "근무시간 25. HTTP 400 workHourLimit: must be less than or equal to 24. 증가 0"
+    },
+    {
+      "id": "IF-0079",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → workHourLimit",
+      "condition": "workHourLimit 2.5",
+      "expect_kind": "accept_or_type",
+      "rule": "문자/숫자가 정상 타입으로 바뀌면 201로 저장된다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0079\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 2.5, \"jobId\": 1}",
+      "response": "{\"id\":38}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 38,
+      "sheet_status": "실패",
+      "bug_id": "BUG-IF-0079",
+      "sheet_actual": "근무시간 2.5. HTTP 201 {\"id\":38}. 추가 확인에서 work_hour_limit은 2. 타입 오류인데 4xx가 아님"
+    },
+    {
+      "id": "IF-0080",
+      "priority": "P0",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → jobId",
+      "condition": "jobId 필드 누락",
+      "expect_kind": "reject",
+      "rule": "제약/타입 위반은 4xx이고 저장되면 안 된다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0080\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"jobId: must not be null\",\"errorCode\":\"VALIDATION_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "직무 없음. HTTP 400 jobId: must not be null. 증가 0"
+    },
+    {
+      "id": "IF-0081",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → jobId",
+      "condition": "jobId 1",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0081\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"id\":39}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 39,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "직무 1. HTTP 201 {\"id\":39}. 각 +1. 목록에서 아파트 야간 경비원, 29점 LOW. DELETE 204"
+    },
+    {
+      "id": "IF-0082",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → jobId",
+      "condition": "jobId 2",
+      "expect_kind": "accept",
+      "rule": "DTO를 통과하면 서비스가 평가를 저장하고 201을 준다",
+      "status": "통과",
+      "http": 201,
+      "request": "{\"applicantName\": \"IF-0082\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 2}",
+      "response": "{\"id\":40}",
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 1
+      },
+      "new_id": 40,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "직무 2. HTTP 201 {\"id\":40}. 각 +1. 목록에서 택배 배송 기사, 31점 LOW. DELETE 204"
+    },
+    {
+      "id": "IF-0083",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → jobId",
+      "condition": "jobId 999999",
+      "expect_kind": "service404",
+      "rule": "DTO에는 걸리지 않고, 없는 직무는 저장 전에 404",
+      "status": "통과",
+      "http": 404,
+      "request": "{\"applicantName\": \"IF-0083\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 999999}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"직무를 찾을 수 없습니다: 999999\",\"errorCode\":\"NOT_FOUND\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "직무 999999. HTTP 404 NOT_FOUND 직무를 찾을 수 없습니다: 999999. 증가 0"
+    },
+    {
+      "id": "IF-0084",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → jobId",
+      "condition": "jobId -1",
+      "expect_kind": "service404",
+      "rule": "DTO에는 걸리지 않고, 없는 직무는 저장 전에 404",
+      "status": "통과",
+      "http": 404,
+      "request": "{\"applicantName\": \"IF-0084\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": -1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"직무를 찾을 수 없습니다: -1\",\"errorCode\":\"NOT_FOUND\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "직무 -1. HTTP 404 직무를 찾을 수 없습니다: -1. 증가 0"
+    },
+    {
+      "id": "IF-0085",
+      "priority": "P1",
+      "layer": "DTO 검증",
+      "branch": "@Valid DTO → jobId",
+      "condition": "jobId 'abc'",
+      "expect_kind": "accept_or_type",
+      "rule": "타입 오류면 4xx이고 저장되지 않아야 한다",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"applicantName\": \"IF-0085\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": \"abc\"}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"요청 JSON 형식이 올바르지 않습니다.\",\"errorCode\":\"INVALID_JSON\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "직무 abc. HTTP 400 INVALID_JSON. 증가 0"
+    },
+    {
+      "id": "IF-0086",
+      "priority": "P1",
+      "layer": "HTTP 역직렬화/페이징",
+      "branch": "HTTP body",
+      "condition": "malformed {\"age\":",
+      "expect_kind": "read4xx",
+      "rule": "잘못된 요청은 5xx가 아닌 4xx이고 DB는 그대로",
+      "status": "통과",
+      "http": 400,
+      "request": "{\"age\":",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"요청 JSON 형식이 올바르지 않습니다.\",\"errorCode\":\"INVALID_JSON\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "본문 {\"age\": . HTTP 400 INVALID_JSON. 증가 0"
+    },
+    {
+      "id": "IF-0087",
+      "priority": "P1",
+      "layer": "HTTP 역직렬화/페이징",
+      "branch": "Content-Type",
+      "condition": "text/plain",
+      "expect_kind": "read4xx",
+      "rule": "잘못된 요청은 5xx가 아닌 4xx이고 DB는 그대로",
+      "status": "실패",
+      "http": 500,
+      "request": "{\"applicantName\": \"기준이름\", \"age\": 70, \"physicalLevel\": 3, \"chronicDisease\": false, \"workHourLimit\": 8, \"jobId\": 1}",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"서버 오류가 발생했습니다.\",\"errorCode\":\"INTERNAL_ERROR\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "실패",
+      "bug_id": "BUG-IF-0087",
+      "sheet_actual": "정상 JSON을 text/plain으로 전송. HTTP 500 INTERNAL_ERROR. 증가 0. 로그는 HttpMediaTypeNotSupportedException"
+    },
+    {
+      "id": "IF-0088",
+      "priority": "P1",
+      "layer": "HTTP 역직렬화/페이징",
+      "branch": "HTTP body",
+      "condition": "POST body = []",
+      "expect_kind": "read4xx",
+      "rule": "잘못된 요청은 5xx가 아닌 4xx이고 DB는 그대로",
+      "status": "통과",
+      "http": 400,
+      "request": "[]",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"요청 JSON 형식이 올바르지 않습니다.\",\"errorCode\":\"INVALID_JSON\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "본문 []. HTTP 400 INVALID_JSON. 증가 0"
+    },
+    {
+      "id": "IF-0089",
+      "priority": "P1",
+      "layer": "HTTP 역직렬화/페이징",
+      "branch": "HTTP body",
+      "condition": "POST body=null",
+      "expect_kind": "read4xx",
+      "rule": "잘못된 요청은 5xx가 아닌 4xx이고 DB는 그대로",
+      "status": "통과",
+      "http": 400,
+      "request": "",
+      "response": "{\"success\":false,\"data\":null,\"message\":\"요청 JSON 형식이 올바르지 않습니다.\",\"errorCode\":\"INVALID_JSON\"}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "빈 본문, Content-Type application/json. HTTP 400 INVALID_JSON. 두 번 모두 400, 증가 0. JSON null도 400"
+    },
+    {
+      "id": "IF-0090",
+      "priority": "P1",
+      "layer": "HTTP 역직렬화/페이징",
+      "branch": "Pageable",
+      "condition": "page=-1",
+      "expect_kind": "read4xx",
+      "rule": "잘못된 요청은 5xx가 아닌 4xx이고 DB는 그대로",
+      "status": "실패",
+      "http": 200,
+      "request": "/api/assessments?page=-1&size=20",
+      "response": "{\"content\":[{\"id\":40,\"applicantName\":\"IF-0082\",\"age\":70,\"jobTitle\":\"택배 배송 기사\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskScore\":31,\"riskGrade\":\"LOW\",\"assessedAt\":\"2026-10-30T05:59:47.340784Z\"},{\"id\":39,\"applicantName\":\"IF-0081\",\"age\":70,\"jobTitle\":\"아파트 야간 경비원\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskScore\":29,\"riskGrade\":\"LOW\",\"assessedAt\":\"2026-10-30T05:59:46.203804Z\"},{\"id\":38,\"applicantName\":\"IF-0079\",\"age\":70,\"jobTitle\":\"아파트 야간 경비원\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskS...",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "page=-1&size=20. HTTP 200. 페이지가 0으로 보정되어 첫 페이지. 실행 당시 첫 행 id 40. 증가 0"
+    },
+    {
+      "id": "IF-0091",
+      "priority": "P1",
+      "layer": "HTTP 역직렬화/페이징",
+      "branch": "Pageable",
+      "condition": "size=0",
+      "expect_kind": "read4xx",
+      "rule": "잘못된 요청은 5xx가 아닌 4xx이고 DB는 그대로",
+      "status": "실패",
+      "http": 200,
+      "request": "/api/assessments?page=0&size=0",
+      "response": "{\"content\":[{\"id\":40,\"applicantName\":\"IF-0082\",\"age\":70,\"jobTitle\":\"택배 배송 기사\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskScore\":31,\"riskGrade\":\"LOW\",\"assessedAt\":\"2026-10-30T05:59:47.340784Z\"},{\"id\":39,\"applicantName\":\"IF-0081\",\"age\":70,\"jobTitle\":\"아파트 야간 경비원\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskScore\":29,\"riskGrade\":\"LOW\",\"assessedAt\":\"2026-10-30T05:59:46.203804Z\"},{\"id\":38,\"applicantName\":\"IF-0079\",\"age\":70,\"jobTitle\":\"아파트 야간 경비원\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskS...",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "page=0&size=0. HTTP 200. size 0이 기본 20으로 바뀌어 첫 페이지. 실행 당시 첫 행 id 40. 증가 0"
+    },
+    {
+      "id": "IF-0092",
+      "priority": "P1",
+      "layer": "HTTP 역직렬화/페이징",
+      "branch": "Pageable",
+      "condition": "size=20",
+      "expect_kind": "read200",
+      "rule": "정상 페이지 조회는 200이고 DB는 그대로",
+      "status": "통과",
+      "http": 200,
+      "request": "/api/assessments?page=0&size=20",
+      "response": "{\"content\":[{\"id\":40,\"applicantName\":\"IF-0082\",\"age\":70,\"jobTitle\":\"택배 배송 기사\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskScore\":31,\"riskGrade\":\"LOW\",\"assessedAt\":\"2026-10-30T05:59:47.340784Z\"},{\"id\":39,\"applicantName\":\"IF-0081\",\"age\":70,\"jobTitle\":\"아파트 야간 경비원\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskScore\":29,\"riskGrade\":\"LOW\",\"assessedAt\":\"2026-10-30T05:59:46.203804Z\"},{\"id\":38,\"applicantName\":\"IF-0079\",\"age\":70,\"jobTitle\":\"아파트 야간 경비원\",\"physicalLevel\":3,\"status\":\"AI_COMPLETED\",\"riskS...",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "page=0&size=20. HTTP 200, size 20, 첫 페이지. 증가 0"
+    },
+    {
+      "id": "IF-0093",
+      "priority": "P1",
+      "layer": "HTTP 역직렬화/페이징",
+      "branch": "Pageable",
+      "condition": "page=9999",
+      "expect_kind": "read200",
+      "rule": "정상 페이지 조회는 200이고 DB는 그대로",
+      "status": "통과",
+      "http": 200,
+      "request": "/api/assessments?page=9999&size=20",
+      "response": "{\"content\":[],\"pageable\":{\"pageNumber\":9999,\"pageSize\":20,\"sort\":{\"empty\":false,\"sorted\":true,\"unsorted\":false},\"offset\":199980,\"paged\":true,\"unpaged\":false},\"last\":true,\"totalPages\":1,\"totalElements\":20,\"size\":20,\"number\":9999,\"sort\":{\"empty\":false,\"sorted\":true,\"unsorted\":false},\"first\":false,\"numberOfElements\":0,\"empty\":true}",
+      "delta": {
+        "assessment": 0,
+        "applicant": 0,
+        "health_snapshot": 0,
+        "ai_risk_result": 0
+      },
+      "new_id": null,
+      "sheet_status": "통과",
+      "bug_id": "",
+      "sheet_actual": "page=9999&size=20. HTTP 200, content 빈 배열, pageNumber 9999, totalElements 20, numberOfElements 0. 증가 0"
+    }
+  ],
+  "cleanup": [
+    {
+      "id": 22,
+      "http": 204
+    },
+    {
+      "id": 23,
+      "http": 204
+    },
+    {
+      "id": 24,
+      "http": 204
+    },
+    {
+      "id": 25,
+      "http": 204
+    },
+    {
+      "id": 26,
+      "http": 204
+    },
+    {
+      "id": 27,
+      "http": 204
+    },
+    {
+      "id": 28,
+      "http": 204
+    },
+    {
+      "id": 29,
+      "http": 204
+    },
+    {
+      "id": 30,
+      "http": 204
+    },
+    {
+      "id": 31,
+      "http": 204
+    },
+    {
+      "id": 32,
+      "http": 204
+    },
+    {
+      "id": 33,
+      "http": 204
+    },
+    {
+      "id": 34,
+      "http": 204
+    },
+    {
+      "id": 35,
+      "http": 204
+    },
+    {
+      "id": 36,
+      "http": 204
+    },
+    {
+      "id": 37,
+      "http": 204
+    },
+    {
+      "id": 38,
+      "http": 204
+    },
+    {
+      "id": 39,
+      "http": 204
+    },
+    {
+      "id": 40,
+      "http": 204
+    }
+  ],
+  "final_counts": {
+    "assessment": 1,
+    "applicant": 22,
+    "health_snapshot": 22,
+    "ai_risk_result": 1
+  },
+  "sheet_summary": {
+    "pass": 40,
+    "fail": 7,
+    "note": "sheet_status는 시트 기대 문장 기준. status는 실행 스크립트 기준.",
+    "final_db_after_cleanup": {
+      "assessment": 1,
+      "applicant": 21,
+      "health_snapshot": 21,
+      "ai_risk_result": 1
+    }
+  }
+}

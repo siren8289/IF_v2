@@ -1,0 +1,1088 @@
+{
+  "phases": [
+    "fastapi stopped",
+    {
+      "mock_spring_boot_s": 10.4,
+      "mode_file": "/tmp/log-ai-control/mode"
+    }
+  ],
+  "cases": {
+    "LOG-002": {
+      "a": {
+        "http": 201,
+        "body": "{\"id\":67}",
+        "elapsed": 3.374,
+        "db": [
+          {
+            "assessment_id": "67",
+            "status": "AI_COMPLETED",
+            "applicant_id": "67",
+            "display_name": "LOG002A",
+            "age": "70",
+            "health_id": "67",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "67",
+            "score": "29",
+            "grade": "LOW",
+            "model": "SIMPLE_V1"
+          }
+        ],
+        "result": "{\"id\":67,\"applicantName\":\"LOG002A\",\"age\":70,\"jobTitle\":\"아파트 야간 경비원\",\"status\":\"AI_COMPLETED\",\"riskScore\":29,\"riskGrade\":\"LOW\",\"explanation\":\"참고 지수는 29점(낮음)입니다. 가장 크게 반영된 항목은 '건강 상태'입니다. 이 점수는 사고 확률이 아니므로 담당자가 실제 작업 조건을 함께 확인해 주세요.\",\"explanationSource\":\"basic\",\"factors\":[{\"name\":\"나이\",\"points\":6.67,\"max\":20},{\"name\":\"건강 상태\",\"points\":12.5,\"max\":25},{\"name\":\"만성질환\",\"points\":0.0,\"max\":15},{\"name\":\"근무 가능 시간\",\"points\":0.0,\"max\":10},{\"name\":\"작업 특성 (ML+DL)\",\"points\":10.14,\"max\":30}],\"taskScores\":[{\"name\":\"운전\",\"mlScore\":0.0793,\"dlScore\":0.0026},{\"name\":\"야간 근무\",\"mlScore\":0.9984,\"dlScore\":0.9996},{\"name\":\"장시간 보행\",\"mlScore\":0.0685,\"dlScore\":0.0049},{\"name\":\"청소\",\"mlScore\":0.1264,\"dlScore\":0.1477},{\"name\":\"돌봄\",\"mlScore\":0.0428,\"dlScore\":0.0021},{\"name\":\"시설 관리\",\"mlScore\":0.0525,\"dlScore\":0.001}]}"
+      },
+      "b": {
+        "http": 201,
+        "body": "{\"id\":68}",
+        "elapsed": 0.469,
+        "db": [
+          {
+            "assessment_id": "68",
+            "status": "AI_COMPLETED",
+            "applicant_id": "68",
+            "display_name": "LOG002B",
+            "age": "70",
+            "health_id": "68",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "2",
+            "job_title": "택배 배송 기사",
+            "ai_id": "68",
+            "score": "31",
+            "grade": "LOW",
+            "model": "SIMPLE_V1"
+          }
+        ],
+        "result": "{\"id\":68,\"applicantName\":\"LOG002B\",\"age\":70,\"jobTitle\":\"택배 배송 기사\",\"status\":\"AI_COMPLETED\",\"riskScore\":31,\"riskGrade\":\"LOW\",\"explanation\":\"참고 지수는 31점(낮음)입니다. 가장 크게 반영된 항목은 '건강 상태'입니다. 이 점수는 사고 확률이 아니므로 담당자가 실제 작업 조건을 함께 확인해 주세요.\",\"explanationSource\":\"basic\",\"factors\":[{\"name\":\"나이\",\"points\":6.67,\"max\":20},{\"name\":\"건강 상태\",\"points\":12.5,\"max\":25},{\"name\":\"만성질환\",\"points\":0.0,\"max\":15},{\"name\":\"근무 가능 시간\",\"points\":0.0,\"max\":10},{\"name\":\"작업 특성 (ML+DL)\",\"points\":11.53,\"max\":30}],\"taskScores\":[{\"name\":\"운전\",\"mlScore\":0.9441,\"dlScore\":0.9998},{\"name\":\"야간 근무\",\"mlScore\":0.0958,\"dlScore\":0.0014},{\"name\":\"장시간 보행\",\"mlScore\":0.0521,\"dlScore\":0.0068},{\"name\":\"청소\",\"mlScore\":0.1456,\"dlScore\":0.0028},{\"name\":\"돌봄\",\"mlScore\":0.0694,\"dlScore\":0.0184},{\"name\":\"시설 관리\",\"mlScore\":0.0827,\"dlScore\":3.0E-4}]}"
+      }
+    },
+    "LOG-003": {
+      "true": {
+        "http": 201,
+        "body": "{\"id\":69}",
+        "elapsed": 0.437,
+        "db": [
+          {
+            "assessment_id": "69",
+            "status": "AI_COMPLETED",
+            "applicant_id": "69",
+            "display_name": "LOG003T",
+            "age": "70",
+            "health_id": "69",
+            "chronic": "t",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "69",
+            "score": "44",
+            "grade": "MID",
+            "model": "SIMPLE_V1"
+          }
+        ]
+      },
+      "false": {
+        "http": 201,
+        "body": "{\"id\":70}",
+        "elapsed": 0.397,
+        "db": [
+          {
+            "assessment_id": "70",
+            "status": "AI_COMPLETED",
+            "applicant_id": "70",
+            "display_name": "LOG003F",
+            "age": "70",
+            "health_id": "70",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "70",
+            "score": "29",
+            "grade": "LOW",
+            "model": "SIMPLE_V1"
+          }
+        ]
+      }
+    },
+    "LOG-004": {
+      "http": 201,
+      "body": "{\"id\":71}",
+      "elapsed": 0.42,
+      "db_trimmed": [
+        {
+          "assessment_id": "71",
+          "status": "AI_COMPLETED",
+          "applicant_id": "71",
+          "display_name": "LOG004",
+          "age": "70",
+          "health_id": "71",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "71",
+          "score": "29",
+          "grade": "LOW",
+          "model": "SIMPLE_V1"
+        }
+      ],
+      "db_raw": []
+    },
+    "LOG-006": {
+      "http": 201,
+      "body": "{\"id\":72}",
+      "elapsed": 0.398,
+      "db": [
+        {
+          "assessment_id": "72",
+          "status": "AI_COMPLETED",
+          "applicant_id": "72",
+          "display_name": "LOG006",
+          "age": "70",
+          "health_id": "72",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "72",
+          "score": "29",
+          "grade": "LOW",
+          "model": "SIMPLE_V1"
+        }
+      ],
+      "result": "{\"id\":72,\"applicantName\":\"LOG006\",\"age\":70,\"jobTitle\":\"아파트 야간 경비원\",\"status\":\"AI_COMPLETED\",\"riskScore\":29,\"riskGrade\":\"LOW\",\"explanation\":\"참고 지수는 29점(낮음)입니다. 가장 크게 반영된 항목은 '건강 상태'입니다. 이 점수는 사고 확률이 아니므로 담당자가 실제 작업 조건을 함께 확인해 주세요.\",\"explanationSource\":\"basic\",\"factors\":[{\"name\":\"나이\",\"points\":6.67,\"max\":20},{\"name\":\"건강 상태\",\"points\":12.5,\"max\":25},{\"name\":\"만성질환\",\"points\":0.0,\"max\":15},{\"name\":\"근무 가능 시간\",\"points\":0.0,\"max\":10},{\"name\":\"작업 특성 (ML+DL)\",\"points\":10.14,\"max\":30}],\"taskScores\":[{\"name\":\"운전\",\"mlScore\":0.0793,\"dlScore\":0.0026},{\"name\":\"야간 근무\",\"mlScore\":0.9984,\"dlScore\":0.9996},{\"name\":\"장시간 보행\",\"mlScore\":0.0685,\"dlScore\":0.0049},{\"name\":\"청소\",\"mlScore\":0.1264,\"dlScore\":0.1477},{\"name\":\"돌봄\",\"mlScore\":0.0428,\"dlScore\":0.0021},{\"name\":\"시설 관리\",\"mlScore\":0.0525,\"dlScore\":0.001}]}"
+    },
+    "LOG-016": {
+      "http": 201,
+      "body": "{\"id\":73}",
+      "delete": 204,
+      "before": [
+        {
+          "assessment_id": "73",
+          "status": "AI_COMPLETED",
+          "applicant_id": "73",
+          "display_name": "LOG016",
+          "age": "70",
+          "health_id": "73",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "73",
+          "score": "29",
+          "grade": "LOW",
+          "model": "SIMPLE_V1"
+        }
+      ],
+      "assessment_left": [],
+      "ai_left": [],
+      "applicant_left": [
+        "73\tLOG016"
+      ],
+      "health_left": [
+        "73\t73"
+      ]
+    },
+    "LOG-017": {
+      "injection": {
+        "http": 201,
+        "body": "{\"id\":74}",
+        "db": [
+          {
+            "assessment_id": "74",
+            "status": "AI_COMPLETED",
+            "applicant_id": "74",
+            "display_name": "'; DROP TABLE assessment;--",
+            "age": "70",
+            "health_id": "74",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "74",
+            "score": "29",
+            "grade": "LOW",
+            "model": "SIMPLE_V1"
+          }
+        ],
+        "elapsed": 0.389
+      },
+      "script": {
+        "http": 201,
+        "body": "{\"id\":75}",
+        "db": [
+          {
+            "assessment_id": "75",
+            "status": "AI_COMPLETED",
+            "applicant_id": "75",
+            "display_name": "<script>alert(1)</script>",
+            "age": "70",
+            "health_id": "75",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "75",
+            "score": "29",
+            "grade": "LOW",
+            "model": "SIMPLE_V1"
+          }
+        ],
+        "elapsed": 0.426
+      },
+      "age999": {
+        "http": 400,
+        "body": "{\"success\":false,\"data\":null,\"message\":\"age: must be less than or equal to 120\",\"errorCode\":\"VALIDATION_ERROR\"}"
+      },
+      "job_text": {
+        "http": 400,
+        "body": "{\"success\":false,\"data\":null,\"message\":\"요청 JSON 형식이 올바르지 않습니다.\",\"errorCode\":\"INVALID_JSON\"}"
+      },
+      "table": [
+        "assessment"
+      ],
+      "id2": [
+        "2\tAI_COMPLETED"
+      ],
+      "counts": {
+        "assessment": 9,
+        "applicant": 30,
+        "health_snapshot": 30,
+        "ai_risk_result": 9
+      }
+    },
+    "LOG-015": {
+      "a": {
+        "http": 201,
+        "body": "{\"id\":76}",
+        "elapsed": 0.369,
+        "db": [
+          {
+            "assessment_id": "76",
+            "status": "AI_COMPLETED",
+            "applicant_id": "76",
+            "display_name": "LOG015A",
+            "age": "70",
+            "health_id": "76",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "76",
+            "score": "29",
+            "grade": "LOW",
+            "model": "SIMPLE_V1"
+          }
+        ]
+      },
+      "b": {
+        "http": 201,
+        "body": "{\"id\":77}",
+        "elapsed": 0.575,
+        "db": [
+          {
+            "assessment_id": "77",
+            "status": "AI_COMPLETED",
+            "applicant_id": "77",
+            "display_name": "LOG015B",
+            "age": "70",
+            "health_id": "77",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "77",
+            "score": "29",
+            "grade": "LOW",
+            "model": "SIMPLE_V1"
+          }
+        ]
+      }
+    },
+    "LOG-011": {
+      "http": 502,
+      "body": "{\"success\":false,\"data\":null,\"message\":\"AI 서버 호출에 실패했습니다.\",\"errorCode\":\"AI_ERROR\"}",
+      "elapsed": 3.309,
+      "db": [
+        {
+          "assessment_id": "78",
+          "status": "PENDING_AI",
+          "applicant_id": "78",
+          "display_name": "LOG011",
+          "age": "70",
+          "health_id": "78",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "",
+          "score": "",
+          "grade": "",
+          "model": ""
+        }
+      ],
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 0
+      }
+    },
+    "LOG-018": {
+      "elapsed_request": 3.309,
+      "log_has_message": true,
+      "log_has_caused": true,
+      "log_excerpt": "2026-10-30T07:45:40.139Z ERROR 1 --- [io-8080-exec-10] c.e.d.g.e.GlobalExceptionHandler         : API error: AI 서버 호출에 실패했습니다.\ncom.example.demo.global.exception.ApiException: AI 서버 호출에 실패했습니다.\nCaused by: org.springframework.web.client.ResourceAccessException: I/O error on POST request for \"http://fastapi:8000/api/v1/risk/analyze\": Connect timed out\n\tat org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915) ~[spring-web-6.1.6.jar!/:6.1.6]\nCaused by: java.net.SocketTimeoutException: Connect timed out"
+    },
+    "LOG-007": {
+      "http": 201,
+      "body": "{\"id\":79}",
+      "elapsed": 0.294,
+      "db": [
+        {
+          "assessment_id": "79",
+          "status": "AI_COMPLETED",
+          "applicant_id": "79",
+          "display_name": "LOG007",
+          "age": "70",
+          "health_id": "79",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "78",
+          "score": "42",
+          "grade": "MID",
+          "model": "MOCK_LOG"
+        }
+      ]
+    },
+    "LOG-001": {
+      "http": 201,
+      "body": "{\"id\":80}",
+      "elapsed": 3.082,
+      "seen_during": [
+        {
+          "t": 0.193,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 0.683,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 1.107,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 1.545,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 1.983,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 2.361,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 2.765,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 3.141,
+          "row": {
+            "assessment_id": "80",
+            "status": "AI_COMPLETED",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "79",
+            "score": "42",
+            "grade": "MID",
+            "model": "MOCK_LOG"
+          }
+        }
+      ],
+      "after": [
+        {
+          "assessment_id": "80",
+          "status": "AI_COMPLETED",
+          "applicant_id": "80",
+          "display_name": "LOG001",
+          "age": "70",
+          "health_id": "80",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "79",
+          "score": "42",
+          "grade": "MID",
+          "model": "MOCK_LOG"
+        }
+      ],
+      "bad_job": {
+        "http": 404,
+        "body": "{\"success\":false,\"data\":null,\"message\":\"직무를 찾을 수 없습니다: 999999\",\"errorCode\":\"NOT_FOUND\"}",
+        "elapsed": 0.026,
+        "delta": {
+          "assessment": 0,
+          "applicant": 0,
+          "health_snapshot": 0,
+          "ai_risk_result": 0
+        }
+      }
+    },
+    "LOG-005": {
+      "seen_during": [
+        {
+          "t": 0.193,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 0.683,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 1.107,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 1.545,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 1.983,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 2.361,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 2.765,
+          "row": {
+            "assessment_id": "80",
+            "status": "PENDING_AI",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "",
+            "score": "",
+            "grade": "",
+            "model": ""
+          }
+        },
+        {
+          "t": 3.141,
+          "row": {
+            "assessment_id": "80",
+            "status": "AI_COMPLETED",
+            "applicant_id": "80",
+            "display_name": "LOG001",
+            "age": "70",
+            "health_id": "80",
+            "chronic": "f",
+            "physical": "3",
+            "hours": "8",
+            "job_id": "1",
+            "job_title": "아파트 야간 경비원",
+            "ai_id": "79",
+            "score": "42",
+            "grade": "MID",
+            "model": "MOCK_LOG"
+          }
+        }
+      ],
+      "after": [
+        {
+          "assessment_id": "80",
+          "status": "AI_COMPLETED",
+          "applicant_id": "80",
+          "display_name": "LOG001",
+          "age": "70",
+          "health_id": "80",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "79",
+          "score": "42",
+          "grade": "MID",
+          "model": "MOCK_LOG"
+        }
+      ],
+      "http": 201,
+      "elapsed": 3.082
+    },
+    "LOG-008": {
+      "http": 502,
+      "body": "{\"success\":false,\"data\":null,\"message\":\"AI 점수가 0~100 범위가 아닙니다.\",\"errorCode\":\"AI_ERROR\"}",
+      "elapsed": 0.032,
+      "db": [
+        {
+          "assessment_id": "81",
+          "status": "PENDING_AI",
+          "applicant_id": "81",
+          "display_name": "LOG008",
+          "age": "70",
+          "health_id": "81",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "",
+          "score": "",
+          "grade": "",
+          "model": ""
+        }
+      ],
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 0
+      }
+    },
+    "LOG-009": {
+      "http": 502,
+      "body": "{\"success\":false,\"data\":null,\"message\":\"AI 점수가 0~100 범위가 아닙니다.\",\"errorCode\":\"AI_ERROR\"}",
+      "elapsed": 0.015,
+      "db": [
+        {
+          "assessment_id": "82",
+          "status": "PENDING_AI",
+          "applicant_id": "82",
+          "display_name": "LOG009",
+          "age": "70",
+          "health_id": "82",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "",
+          "score": "",
+          "grade": "",
+          "model": ""
+        }
+      ],
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 0
+      }
+    },
+    "LOG-010": {
+      "http": 502,
+      "body": "{\"success\":false,\"data\":null,\"message\":\"AI 등급 값이 올바르지 않습니다.\",\"errorCode\":\"AI_ERROR\"}",
+      "elapsed": 0.057,
+      "db": [
+        {
+          "assessment_id": "83",
+          "status": "PENDING_AI",
+          "applicant_id": "83",
+          "display_name": "LOG010",
+          "age": "70",
+          "health_id": "83",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "",
+          "score": "",
+          "grade": "",
+          "model": ""
+        }
+      ],
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 0
+      }
+    },
+    "LOG-013": {
+      "http": 502,
+      "body": "{\"success\":false,\"data\":null,\"message\":\"AI 점수가 0~100 범위가 아닙니다.\",\"errorCode\":\"AI_ERROR\"}",
+      "elapsed": 0.016,
+      "db": [
+        {
+          "assessment_id": "84",
+          "status": "PENDING_AI",
+          "applicant_id": "84",
+          "display_name": "LOG013",
+          "age": "70",
+          "health_id": "84",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "",
+          "score": "",
+          "grade": "",
+          "model": ""
+        }
+      ],
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 0
+      }
+    },
+    "LOG-014": {
+      "source": "LOG-013",
+      "db": [
+        {
+          "assessment_id": "84",
+          "status": "PENDING_AI",
+          "applicant_id": "84",
+          "display_name": "LOG013",
+          "age": "70",
+          "health_id": "84",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "",
+          "score": "",
+          "grade": "",
+          "model": ""
+        }
+      ],
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 0
+      },
+      "also_log011": [
+        {
+          "assessment_id": "78",
+          "status": "PENDING_AI",
+          "applicant_id": "78",
+          "display_name": "LOG011",
+          "age": "70",
+          "health_id": "78",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "",
+          "score": "",
+          "grade": "",
+          "model": ""
+        }
+      ]
+    },
+    "LOG-012": {
+      "http": 502,
+      "body": "{\"success\":false,\"data\":null,\"message\":\"AI 서버 호출에 실패했습니다.\",\"errorCode\":\"AI_ERROR\"}",
+      "elapsed": 40.099,
+      "db": [
+        {
+          "assessment_id": "85",
+          "status": "PENDING_AI",
+          "applicant_id": "85",
+          "display_name": "LOG012",
+          "age": "70",
+          "health_id": "85",
+          "chronic": "f",
+          "physical": "3",
+          "hours": "8",
+          "job_id": "1",
+          "job_title": "아파트 야간 경비원",
+          "ai_id": "",
+          "score": "",
+          "grade": "",
+          "model": ""
+        }
+      ],
+      "delta": {
+        "assessment": 1,
+        "applicant": 1,
+        "health_snapshot": 1,
+        "ai_risk_result": 0
+      }
+    }
+  },
+  "started": "2026-10-30T16:45:23+0900",
+  "baseline": {
+    "assessment": 1,
+    "applicant": 21,
+    "health_snapshot": 21,
+    "ai_risk_result": 1
+  },
+  "jobs": [
+    "1\t아파트 야간 경비원",
+    "2\t택배 배송 기사",
+    "3\t건물 청소원",
+    "4\t요양보호사",
+    "5\t시설 관리원",
+    "6\t주차 관리원",
+    "7\t학교 급식 보조원",
+    "8\t사무 보조원"
+  ],
+  "after_real": {
+    "assessment": 11,
+    "applicant": 32,
+    "health_snapshot": 32,
+    "ai_risk_result": 11
+  },
+  "delta_real_from_baseline": {
+    "assessment": 10,
+    "applicant": 11,
+    "health_snapshot": 11,
+    "ai_risk_result": 10
+  },
+  "before_cleanup": {
+    "assessment": 19,
+    "applicant": 40,
+    "health_snapshot": 40,
+    "ai_risk_result": 13
+  },
+  "created": [
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    74,
+    75,
+    76,
+    77,
+    79,
+    80
+  ],
+  "cleanup": {
+    "deletes": [
+      {
+        "id": 67,
+        "status": 204
+      },
+      {
+        "id": 68,
+        "status": 204
+      },
+      {
+        "id": 69,
+        "status": 204
+      },
+      {
+        "id": 70,
+        "status": 204
+      },
+      {
+        "id": 71,
+        "status": 204
+      },
+      {
+        "id": 72,
+        "status": 204
+      },
+      {
+        "id": 74,
+        "status": 204
+      },
+      {
+        "id": 75,
+        "status": 204
+      },
+      {
+        "id": 76,
+        "status": 204
+      },
+      {
+        "id": 77,
+        "status": 204
+      },
+      {
+        "id": 78,
+        "status": 204
+      },
+      {
+        "id": 79,
+        "status": 204
+      },
+      {
+        "id": 80,
+        "status": 204
+      },
+      {
+        "id": 81,
+        "status": 204
+      },
+      {
+        "id": 82,
+        "status": 204
+      },
+      {
+        "id": 83,
+        "status": 204
+      },
+      {
+        "id": 84,
+        "status": 204
+      },
+      {
+        "id": 85,
+        "status": 204
+      }
+    ],
+    "counts": {
+      "assessment": 1,
+      "applicant": 21,
+      "health_snapshot": 21,
+      "ai_risk_result": 1
+    }
+  },
+  "restore_s": 6.3,
+  "restore_jobs": 200,
+  "finished": "2026-10-30T16:46:49+0900"
+}
