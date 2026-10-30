@@ -1,0 +1,827 @@
+{
+  "ranAt": "2026-10-30T06:22:39.697Z",
+  "results": [
+    {
+      "id": "IF-0001",
+      "status": "통과",
+      "actual": "입력값 표시 「」. alert 「이름을 입력해주세요.」. POST 0건. 평가 건수 1→1.",
+      "shot": "screenshots/IF-0001.png",
+      "posts": 0,
+      "shown": "",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「」. alert 「이름을 입력해주세요.」. POST 0건. 평가 건수 1→1.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0002",
+      "status": "통과",
+      "actual": "typed    . 입력값 표시 「   」. alert 「이름을 입력해주세요.」. POST 0건. 평가 건수 1→1.",
+      "shot": "screenshots/IF-0002.png",
+      "posts": 0,
+      "shown": "   ",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「   」. alert 「이름을 입력해주세요.」. POST 0건. 평가 건수 1→1.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0003",
+      "status": "통과",
+      "actual": "typed 홍길동. POST 1건 HTTP 201. payload {\"applicantName\":\"홍길동\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":43}. 평가 1→2.",
+      "shot": "screenshots/IF-0003.png",
+      "posts": 1,
+      "shown": "홍길동",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"홍길동\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":43}. 평가 1→2.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0004",
+      "status": "통과",
+      "actual": "typed  홍길동 . POST 1건 HTTP 201. payload {\"applicantName\":\"홍길동\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":44}. 평가 2→3. DB 홍길동|72|3|false|8|아파트 야간 경비원.",
+      "shot": "screenshots/IF-0004.png",
+      "posts": 1,
+      "shown": " 홍길동 ",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"홍길동\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":44}. 평가 2→3. DB 홍길동|72|3|false|8|아파트 야간 경비원.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0005",
+      "status": "통과",
+      "actual": "typed aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa. POST 1건 HTTP 201. payload {\"applicantName\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":45}. 평가 3→4.",
+      "shot": "screenshots/IF-0005.png",
+      "posts": 1,
+      "shown": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":45}. 평가 3→4.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0006",
+      "status": "통과",
+      "actual": "typed aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa. POST 1건 HTTP 400. payload {\"applicantName\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"success\":false,\"data\":null,\"message\":\"applicantName: 크기가 0에서 50 사이여야 합니다\",\"errorCode\":\"VALIDATION_ERROR\"}. 평가 4→4. 프론트는 길이를 막지 않고, 백엔드 50자 제한 응답을 확인한다.",
+      "shot": "screenshots/IF-0006.png",
+      "posts": 1,
+      "shown": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 400. payload {\"applicantName\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"success\":false,\"data\":null,\"message\":\"applicantName: 크기가 0에서 50 사이여야 합니다\",\"errorCode\":\"VALIDATION_ERROR\"}. 평가 4→4. 프론트는 길이를 막지 않고, 백엔드 50자 제한 응답을 확인한다.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0007",
+      "status": "통과",
+      "actual": "typed 한글😀. POST 1건 HTTP 201. payload {\"applicantName\":\"한글😀\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":46}. 평가 4→5.",
+      "shot": "screenshots/IF-0007.png",
+      "posts": 1,
+      "shown": "한글😀",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"한글😀\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":46}. 평가 4→5.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0008",
+      "status": "통과",
+      "actual": "입력값 표시 「-1」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 5→5.",
+      "shot": "screenshots/IF-0008.png",
+      "posts": 0,
+      "shown": "-1",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「-1」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 5→5.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0009",
+      "status": "통과",
+      "actual": "입력값 표시 「0」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 5→5.",
+      "shot": "screenshots/IF-0009.png",
+      "posts": 0,
+      "shown": "0",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「0」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 5→5.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0010",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":1,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":47}. 평가 5→6.",
+      "shot": "screenshots/IF-0010.png",
+      "posts": 1,
+      "shown": "1",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":1,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":47}. 평가 5→6.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0011",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":2,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":48}. 평가 6→7.",
+      "shot": "screenshots/IF-0011.png",
+      "posts": 1,
+      "shown": "2",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":2,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":48}. 평가 6→7.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0012",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":60,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":49}. 평가 7→8.",
+      "shot": "screenshots/IF-0012.png",
+      "posts": 1,
+      "shown": "60",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":60,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":49}. 평가 7→8.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0013",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":90,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":50}. 평가 8→9.",
+      "shot": "screenshots/IF-0013.png",
+      "posts": 1,
+      "shown": "90",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":90,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":50}. 평가 8→9.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0014",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":119,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":51}. 평가 9→10.",
+      "shot": "screenshots/IF-0014.png",
+      "posts": 1,
+      "shown": "119",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":119,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":51}. 평가 9→10.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0015",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":120,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":52}. 평가 10→11.",
+      "shot": "screenshots/IF-0015.png",
+      "posts": 1,
+      "shown": "120",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":120,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":52}. 평가 10→11.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0016",
+      "status": "통과",
+      "actual": "입력값 표시 「121」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "shot": "screenshots/IF-0016.png",
+      "posts": 0,
+      "shown": "121",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「121」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0017",
+      "status": "통과",
+      "actual": "입력값 표시 「60.5」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "shot": "screenshots/IF-0017.png",
+      "posts": 0,
+      "shown": "60.5",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「60.5」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0018",
+      "status": "통과",
+      "actual": "입력값 표시 「」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "shot": "screenshots/IF-0018.png",
+      "posts": 0,
+      "shown": "",
+      "sheet_status": "통과",
+      "sheet_actual": "숫자 입력칸은 abc를 남기지 않아 표시값은 빈 문자열. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 변화 없음.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0019",
+      "status": "통과",
+      "actual": "입력값 표시 「」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "shot": "screenshots/IF-0019.png",
+      "posts": 0,
+      "shown": "",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「」. alert 「연령은 1~120 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0020",
+      "status": "통과",
+      "actual": "입력값 표시 「-1」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "shot": "screenshots/IF-0020.png",
+      "posts": 0,
+      "shown": "-1",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「-1」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0021",
+      "status": "통과",
+      "actual": "입력값 표시 「0」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "shot": "screenshots/IF-0021.png",
+      "posts": 0,
+      "shown": "0",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「0」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 11→11.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0022",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":1,\"jobId\":1}. 응답 {\"id\":53}. 평가 11→12.",
+      "shot": "screenshots/IF-0022.png",
+      "posts": 1,
+      "shown": "1",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":1,\"jobId\":1}. 응답 {\"id\":53}. 평가 11→12.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0023",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":7,\"jobId\":1}. 응답 {\"id\":54}. 평가 12→13.",
+      "shot": "screenshots/IF-0023.png",
+      "posts": 1,
+      "shown": "7",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":7,\"jobId\":1}. 응답 {\"id\":54}. 평가 12→13.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0024",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":55}. 평가 13→14.",
+      "shot": "screenshots/IF-0024.png",
+      "posts": 1,
+      "shown": "8",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":8,\"jobId\":1}. 응답 {\"id\":55}. 평가 13→14.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0025",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":23,\"jobId\":1}. 응답 {\"id\":56}. 평가 14→15.",
+      "shot": "screenshots/IF-0025.png",
+      "posts": 1,
+      "shown": "23",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":23,\"jobId\":1}. 응답 {\"id\":56}. 평가 14→15.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0026",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":24,\"jobId\":1}. 응답 {\"id\":57}. 평가 15→16.",
+      "shot": "screenshots/IF-0026.png",
+      "posts": 1,
+      "shown": "24",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload {\"applicantName\":\"QA_CASE\",\"age\":72,\"physicalLevel\":3,\"chronicDisease\":false,\"workHourLimit\":24,\"jobId\":1}. 응답 {\"id\":57}. 평가 15→16.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0027",
+      "status": "통과",
+      "actual": "입력값 표시 「25」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 16→16.",
+      "shot": "screenshots/IF-0027.png",
+      "posts": 0,
+      "shown": "25",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「25」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 16→16.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0028",
+      "status": "통과",
+      "actual": "입력값 표시 「7.5」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 16→16.",
+      "shot": "screenshots/IF-0028.png",
+      "posts": 0,
+      "shown": "7.5",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「7.5」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 16→16.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0029",
+      "status": "통과",
+      "actual": "입력값 표시 「」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 16→16.",
+      "shot": "screenshots/IF-0029.png",
+      "posts": 0,
+      "shown": "",
+      "sheet_status": "통과",
+      "sheet_actual": "숫자 입력칸은 abc를 남기지 않아 표시값은 빈 문자열. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 변화 없음.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0030",
+      "status": "통과",
+      "actual": "입력값 표시 「」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 16→16.",
+      "shot": "screenshots/IF-0030.png",
+      "posts": 0,
+      "shown": "",
+      "sheet_status": "통과",
+      "sheet_actual": "입력값 표시 「」. alert 「근무 가능 시간은 1~24 사이로 입력해주세요.」. POST 0건. 평가 건수 16→16.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0031",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload.physicalLevel=1. DB physical_level=1. 평가 16→17.",
+      "shot": "screenshots/IF-0031.png",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload.physicalLevel=1. DB physical_level=1. 평가 16→17.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0032",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload.physicalLevel=2. DB physical_level=2. 평가 17→18.",
+      "shot": "screenshots/IF-0032.png",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload.physicalLevel=2. DB physical_level=2. 평가 17→18.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0033",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload.physicalLevel=3. DB physical_level=3. 평가 18→19.",
+      "shot": "screenshots/IF-0033.png",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload.physicalLevel=3. DB physical_level=3. 평가 18→19.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0034",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload.physicalLevel=4. DB physical_level=4. 평가 19→20.",
+      "shot": "screenshots/IF-0034.png",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload.physicalLevel=4. DB physical_level=4. 평가 19→20.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0035",
+      "status": "통과",
+      "actual": "POST 1건 HTTP 201. payload.physicalLevel=5. DB physical_level=5. 평가 20→21.",
+      "shot": "screenshots/IF-0035.png",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건 HTTP 201. payload.physicalLevel=5. DB physical_level=5. 평가 20→21.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0036",
+      "status": "실패",
+      "actual": "HTTP 201. payload.chronicDisease=false. DB chronic_disease_flag=false.",
+      "shot": "screenshots/IF-0036.png",
+      "sheet_status": "통과",
+      "sheet_actual": "HTTP 201. payload.chronicDisease=false. DB chronic_disease_flag=false.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0037",
+      "status": "실패",
+      "actual": "HTTP 201. payload.chronicDisease=true. DB chronic_disease_flag=true.",
+      "shot": "screenshots/IF-0037.png",
+      "sheet_status": "통과",
+      "sheet_actual": "HTTP 201. payload.chronicDisease=true. DB chronic_disease_flag=true.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0038",
+      "status": "통과",
+      "actual": "alert 「직무를 선택해주세요.」. POST 0건.",
+      "shot": "screenshots/IF-0038.png",
+      "sheet_status": "통과",
+      "sheet_actual": "alert 「직무를 선택해주세요.」. POST 0건.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0039",
+      "status": "통과",
+      "actual": "HTTP 201. payload.jobId=1. 결과 화면 「IF-0039 · 72세 · 아파트 야간 경비원」. 기대 직무명 아파트 야간 경비원.",
+      "shot": "screenshots/IF-0039.png",
+      "sheet_status": "통과",
+      "sheet_actual": "HTTP 201. payload.jobId=1. 결과 화면 「IF-0039 · 72세 · 아파트 야간 경비원」. 기대 직무명 아파트 야간 경비원.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0040",
+      "status": "통과",
+      "actual": "HTTP 201. payload.jobId=2. 결과 화면 「IF-0040 · 72세 · 택배 배송 기사」. 기대 직무명 택배 배송 기사.",
+      "shot": "screenshots/IF-0040.png",
+      "sheet_status": "통과",
+      "sheet_actual": "HTTP 201. payload.jobId=2. 결과 화면 「IF-0040 · 72세 · 택배 배송 기사」. 기대 직무명 택배 배송 기사.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0041",
+      "status": "통과",
+      "actual": "응답 전 옵션 1개 「선택하세요」. 응답 후 9개.",
+      "shot": "screenshots/IF-0041.png",
+      "sheet_status": "통과",
+      "sheet_actual": "응답 전 옵션 1개 「선택하세요」. 응답 후 9개.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0042",
+      "status": "통과",
+      "actual": "alert 「직무 목록을 불러오지 못했습니다.」. 직무 옵션 1개.",
+      "shot": "screenshots/IF-0042.png",
+      "sheet_status": "통과",
+      "sheet_actual": "alert 「직무 목록을 불러오지 못했습니다.」. 직무 옵션 1개.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0043",
+      "status": "실패",
+      "actual": "같은 차례 click() 2회 후 POST 2건. 버튼 「AI 분석 중...」 disabled=true.",
+      "shot": "screenshots/IF-0043.png",
+      "bug": "BUG-IF-0043",
+      "sheet_status": "실패",
+      "sheet_actual": "같은 차례 click() 2회 후 POST 2건. 버튼 「AI 분석 중...」 disabled=true.",
+      "bug_id": "BUG-IF-0043"
+    },
+    {
+      "id": "IF-0044",
+      "status": "통과",
+      "actual": "POST 1건. alert 「API 500: 서버 오류가 발생했습니다.」. 버튼 「위험도 분석 시작」 enabled=true.",
+      "shot": "screenshots/IF-0044.png",
+      "sheet_status": "통과",
+      "sheet_actual": "POST 1건. alert 「API 500: 서버 오류가 발생했습니다.」. 버튼 「위험도 분석 시작」 enabled=true.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0045",
+      "status": "통과",
+      "actual": "이동 주소 http://localhost/assessments/845/result.",
+      "shot": "screenshots/IF-0045.png",
+      "sheet_status": "통과",
+      "sheet_actual": "이동 주소 http://localhost/assessments/845/result.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0046",
+      "status": "통과",
+      "actual": "201 본문 {} 이면 id가 없어 주소는 http://localhost/assessments/undefined/result. alert 「API 500: 서버 오류가 발생했습니다.」.",
+      "shot": "screenshots/IF-0046.png",
+      "sheet_status": "통과",
+      "sheet_actual": "201 본문 {} 이면 id가 없어 주소는 http://localhost/assessments/undefined/result. alert 「API 500: 서버 오류가 발생했습니다.」.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0269",
+      "status": "통과",
+      "actual": "지연 중 「불러오는 중...」 표시=true. 응답 후 이름 표시.",
+      "shot": "screenshots/IF-0269.png",
+      "sheet_status": "통과",
+      "sheet_actual": "지연 중 「불러오는 중...」 표시=true. 응답 후 이름 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0270",
+      "status": "통과",
+      "actual": "alert 「API 404: 평가를 찾을 수 없습니다.」.",
+      "shot": "screenshots/IF-0270.png",
+      "sheet_status": "통과",
+      "sheet_actual": "alert 「API 404: 평가를 찾을 수 없습니다.」.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0271",
+      "status": "통과",
+      "actual": "문구 「아직 AI 분석 결과가 없습니다.」 표시.",
+      "shot": "screenshots/IF-0271.png",
+      "sheet_status": "통과",
+      "sheet_actual": "문구 「아직 AI 분석 결과가 없습니다.」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0272",
+      "status": "통과",
+      "actual": "배지 「위험도 낮음」 표시.",
+      "shot": "screenshots/IF-0272.png",
+      "sheet_status": "통과",
+      "sheet_actual": "배지 「위험도 낮음」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0273",
+      "status": "통과",
+      "actual": "배지 「위험도 보통」 표시.",
+      "shot": "screenshots/IF-0273.png",
+      "sheet_status": "통과",
+      "sheet_actual": "배지 「위험도 보통」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0274",
+      "status": "통과",
+      "actual": "배지 「위험도 높음」 표시.",
+      "shot": "screenshots/IF-0274.png",
+      "sheet_status": "통과",
+      "sheet_actual": "배지 「위험도 높음」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0275",
+      "status": "통과",
+      "actual": "「기본 설명 (생성형 AI 미사용)」 표시.",
+      "shot": "screenshots/IF-0275.png",
+      "sheet_status": "통과",
+      "sheet_actual": "「기본 설명 (생성형 AI 미사용)」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0276",
+      "status": "통과",
+      "actual": "「생성형 AI(Gemini)가 작성」 표시.",
+      "shot": "screenshots/IF-0276.png",
+      "sheet_status": "통과",
+      "sheet_actual": "「생성형 AI(Gemini)가 작성」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0277",
+      "status": "통과",
+      "actual": "요인 0개. 점수 구성 카드 없음.",
+      "shot": "screenshots/IF-0277.png",
+      "sheet_status": "통과",
+      "sheet_actual": "요인 0개. 점수 구성 카드 없음.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0278",
+      "status": "통과",
+      "actual": "요인 「연령」과 「10 / 20점」 표시.",
+      "shot": "screenshots/IF-0278.png",
+      "sheet_status": "통과",
+      "sheet_actual": "요인 「연령」과 「10 / 20점」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0279",
+      "status": "통과",
+      "actual": "만점 0 막대 width=0%.",
+      "shot": "screenshots/IF-0279.png",
+      "sheet_status": "통과",
+      "sheet_actual": "만점 0 막대 width=0%.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0280",
+      "status": "통과",
+      "actual": "태스크 0개. ML/DL 표 없음.",
+      "shot": "screenshots/IF-0280.png",
+      "sheet_status": "통과",
+      "sheet_actual": "태스크 0개. ML/DL 표 없음.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0281",
+      "status": "통과",
+      "actual": "표 칸 야간 | 12% | 0%.",
+      "shot": "screenshots/IF-0281.png",
+      "sheet_status": "통과",
+      "sheet_actual": "표 칸 야간 | 12% | 0%.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0282",
+      "status": "통과",
+      "actual": "이동 주소 http://localhost/dashboard.",
+      "shot": "screenshots/IF-0282.png",
+      "sheet_status": "통과",
+      "sheet_actual": "이동 주소 http://localhost/dashboard.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0283",
+      "status": "통과",
+      "actual": "목록 지연 중 「불러오는 중...」 표시=true.",
+      "shot": "screenshots/IF-0283.png",
+      "sheet_status": "통과",
+      "sheet_actual": "목록 지연 중 「불러오는 중...」 표시=true.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0284",
+      "status": "통과",
+      "actual": "빈 content. 「아직 등록된 평가 기록이 없습니다.」 표시.",
+      "shot": "screenshots/IF-0284.png",
+      "sheet_status": "통과",
+      "sheet_actual": "빈 content. 「아직 등록된 평가 기록이 없습니다.」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0285",
+      "status": "통과",
+      "actual": "alert 「API 500: 목록 실패」.",
+      "shot": "screenshots/IF-0285.png",
+      "sheet_status": "통과",
+      "sheet_actual": "alert 「API 500: 목록 실패」.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0286",
+      "status": "통과",
+      "actual": "summary null. 카드 0건, 0건, 0건.",
+      "shot": "screenshots/IF-0286.png",
+      "sheet_status": "통과",
+      "sheet_actual": "summary null. 카드 0건, 0건, 0건.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0287",
+      "status": "통과",
+      "actual": "카드 3건, 1건, 2건.",
+      "shot": "screenshots/IF-0287.png",
+      "sheet_status": "통과",
+      "sheet_actual": "카드 3건, 1건, 2건.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0288",
+      "status": "통과",
+      "actual": "행 QA_CASE | 72세 | 아파트 야간 경비원 | - | 낮음 | 결과 보기삭제.",
+      "shot": "screenshots/IF-0288.png",
+      "sheet_status": "통과",
+      "sheet_actual": "행 QA_CASE | 72세 | 아파트 야간 경비원 | - | 낮음 | 결과 보기삭제.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0289",
+      "status": "통과",
+      "actual": "등급 null. 「분석 전」 표시.",
+      "shot": "screenshots/IF-0289.png",
+      "sheet_status": "통과",
+      "sheet_actual": "등급 null. 「분석 전」 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0290",
+      "status": "통과",
+      "actual": "첫 목록 요청 GET http://localhost/api/assessments?page=0&size=20.",
+      "shot": "screenshots/IF-0290.png",
+      "sheet_status": "통과",
+      "sheet_actual": "첫 목록 요청 GET http://localhost/api/assessments?page=0&size=20.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0291",
+      "status": "통과",
+      "actual": "page=1 요청 1건. GET http://localhost/api/assessments?page=1&size=20",
+      "shot": "screenshots/IF-0291.png",
+      "sheet_status": "통과",
+      "sheet_actual": "page=1 요청 1건. GET http://localhost/api/assessments?page=1&size=20",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0292",
+      "status": "통과",
+      "actual": "첫 페이지 이전 버튼 disabled=true.",
+      "shot": "screenshots/IF-0292.png",
+      "sheet_status": "통과",
+      "sheet_actual": "첫 페이지 이전 버튼 disabled=true.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0293",
+      "status": "통과",
+      "actual": "마지막 페이지 다음 버튼 disabled=true.",
+      "shot": "screenshots/IF-0293.png",
+      "sheet_status": "통과",
+      "sheet_actual": "마지막 페이지 다음 버튼 disabled=true.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0294",
+      "status": "통과",
+      "actual": "confirm 취소. DELETE 0건.",
+      "shot": "screenshots/IF-0294.png",
+      "sheet_status": "통과",
+      "sheet_actual": "confirm 취소. DELETE 0건.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0295",
+      "status": "통과",
+      "actual": "confirm 승인. DELETE 1건. 목록 요청 2회. 화면에 갱신됨 표시.",
+      "shot": "screenshots/IF-0295.png",
+      "sheet_status": "통과",
+      "sheet_actual": "confirm 승인. DELETE 1건. 목록 요청 2회. 화면에 갱신됨 표시.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0296",
+      "status": "통과",
+      "actual": "alert 「API 500: 삭제 실패」. 행 유지=1.",
+      "shot": "screenshots/IF-0296.png",
+      "sheet_status": "통과",
+      "sheet_actual": "alert 「API 500: 삭제 실패」. 행 유지=1.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0297",
+      "status": "실패",
+      "actual": "실행 오류: page.evaluate: SyntaxError: Unexpected token ':'\n    at new Function (<anonymous>)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "sheet_status": "통과",
+      "sheet_actual": "반환 {\"ok\":true,\"n\":7}.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0298",
+      "status": "실패",
+      "actual": "실행 오류: page.evaluate: SyntaxError: Unexpected token ':'\n    at new Function (<anonymous>)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "sheet_status": "통과",
+      "sheet_actual": "204 반환 undefined.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0299",
+      "status": "실패",
+      "actual": "실행 오류: page.evaluate: SyntaxError: Unexpected token ':'\n    at new Function (<anonymous>)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "sheet_status": "통과",
+      "sheet_actual": "content-length 0 반환 undefined.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0300",
+      "status": "실패",
+      "actual": "실행 오류: page.evaluate: SyntaxError: Unexpected token ':'\n    at new Function (<anonymous>)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "sheet_status": "통과",
+      "sheet_actual": "예외 「API 400: 실패」.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0301",
+      "status": "실패",
+      "actual": "실행 오류: page.evaluate: SyntaxError: Unexpected token ':'\n    at new Function (<anonymous>)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "sheet_status": "통과",
+      "sheet_actual": "예외 「API 500: Error」.",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0302",
+      "status": "실패",
+      "actual": "실행 오류: page.evaluate: SyntaxError: Unexpected token ':'\n    at new Function (<anonymous>)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "sheet_status": "통과",
+      "sheet_actual": "SyntaxError: Unexpected token 'o', \"not-json\" is not valid JSON",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0303",
+      "status": "실패",
+      "actual": "실행 오류: page.evaluate: SyntaxError: Unexpected token ':'\n    at new Function (<anonymous>)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "sheet_status": "통과",
+      "sheet_actual": "TypeError: Failed to fetch",
+      "bug_id": ""
+    },
+    {
+      "id": "IF-0304",
+      "status": "실패",
+      "actual": "실행 오류: page.evaluate: SyntaxError: Unexpected token ':'\n    at new Function (<anonymous>)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "sheet_status": "통과",
+      "sheet_actual": "요청 Content-Type 「application/json」.",
+      "bug_id": ""
+    }
+  ],
+  "createdIds": [
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66
+  ],
+  "sheet_summary": {
+    "pass": 81,
+    "fail": 1,
+    "note": "IF-0036/0037 runner 실패는 boolean 표기 f/t 비교 오류. 저장값은 false/true로 일치. IF-0297~0304 1차 실행은 하네스가 타입 문법을 남겨 SyntaxError. 같은 함수를 다시 넣어 통과."
+  }
+}
