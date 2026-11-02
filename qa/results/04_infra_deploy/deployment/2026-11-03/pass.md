@@ -104,3 +104,38 @@
 1차: compose_config 기대=PASS 실제=PASS
 2차: curl_smoke 기대=PASS 실제=PASS
 최종=PASS. 미실행을 PASS로 처리하지 않음.
+
+## 20261103T040956-523c5ec792 / TC-INFRA-COMPOSE-001
+- RUN_ID: 20261103T040956-523c5ec792
+- TC_ID: TC-INFRA-COMPOSE-001
+- FEATURE_ID: FEAT-COMPOSE
+- timestamp_start: 2026-11-03T04:16:14+09:00
+- timestamp_end: 2026-11-03T04:16:16+09:00
+- area: 04_infra_deploy
+- section: deployment
+- scenario: Compose 설정/health 계약 + curl HTTP 스모크(스택 미기동 시 BLOCKED, PASS 아님).
+- tool_a: compose_config
+- command_a: python3 scripts/qa/probes/compose_ready.py
+- result_a: PASS
+- expected_a: PASS
+- actual_a: OK compose config; postgres healthcheck present
+- tool_b: curl_smoke
+- command_b: python3 scripts/qa/probes/http_blackbox.py --base http://127.0.0.1:8000 --path /docs --allow-blocked
+- result_b: PASS
+- expected_b: PASS
+- actual_b: OK 200 http://127.0.0.1:8000/docs bytes=200
+- status: PASS
+- git_commit: aad712788755
+- dirty: true
+- code_file: UNKNOWN
+- function: UNKNOWN
+- line: UNKNOWN
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261103T040956-523c5ec792/compose_config.log#0b36de23f1313960;qa/.runtime/20261103T040956-523c5ec792/curl_smoke.log#edb22dffb2e58a9d
+
+시나리오: Compose 설정/health 계약 + curl HTTP 스모크(스택 미기동 시 BLOCKED, PASS 아님).
+비교: Compose 설정/health 계약 + curl HTTP 스모크(스택 미기동 시 BLOCKED, PASS 아님).
+1차: compose_config 기대=PASS 실제=PASS
+2차: curl_smoke 기대=PASS 실제=PASS
+최종=PASS. 미실행을 PASS로 처리하지 않음.

@@ -244,3 +244,73 @@
 1차: unittest 기대=PASS 실제=PASS
 2차: pytest 기대=PASS 실제=PASS
 최종=PASS. 미실행을 PASS로 처리하지 않음.
+
+## 20261103T041553-7a118e45b0 / TC-INFRA-RUNNER-001
+- RUN_ID: 20261103T041553-7a118e45b0
+- TC_ID: TC-INFRA-RUNNER-001
+- FEATURE_ID: FEAT-QA-RUNNER
+- timestamp_start: 2026-11-03T04:15:54+09:00
+- timestamp_end: 2026-11-03T04:15:59+09:00
+- area: 04_infra_deploy
+- section: qa_runner
+- scenario: 실행기 계약을 unittest와 pytest로 교차 검증.
+- tool_a: unittest
+- command_a: python3 -m unittest discover -s scripts/qa -p test_*.py -v
+- result_a: PASS
+- expected_a: PASS
+- actual_a: failed_ci_blocks_deploy) ... ok test_json_roundtrip_fixture (test_workflows.DeployGateTests.test_json_roundtrip_fixture) ... ok test_missing_sha_blocks (test_workflows.DeployGateTests.test_missing_sha_blocks) ... ok test_success_allows_deploy (test_workflows.DeployGateTests.test_success_allows_deplo
+- tool_b: pytest
+- command_b: python3 -m pytest scripts/qa -q --junitxml=./qa/.runtime/20261103T041553-7a118e45b0/TC-INFRA-RUNNER-001-b.xml
+- result_b: PASS
+- expected_b: PASS
+- actual_b: ......... [100%] 9 passed in 0.18s
+- status: PASS
+- git_commit: 3862d7fcc723
+- dirty: true
+- code_file: UNKNOWN
+- function: UNKNOWN
+- line: UNKNOWN
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261103T041553-7a118e45b0/unittest.log#86632f2af825175f;qa/.runtime/20261103T041553-7a118e45b0/pytest.log#afbe903dd450f06a
+
+시나리오: 실행기 계약을 unittest와 pytest로 교차 검증.
+비교: 실행기 계약을 unittest와 pytest로 교차 검증.
+1차: unittest 기대=PASS 실제=PASS
+2차: pytest 기대=PASS 실제=PASS
+최종=PASS. 미실행을 PASS로 처리하지 않음.
+
+## 20261103T040956-523c5ec792 / TC-INFRA-RUNNER-001
+- RUN_ID: 20261103T040956-523c5ec792
+- TC_ID: TC-INFRA-RUNNER-001
+- FEATURE_ID: FEAT-QA-RUNNER
+- timestamp_start: 2026-11-03T04:16:16+09:00
+- timestamp_end: 2026-11-03T04:16:18+09:00
+- area: 04_infra_deploy
+- section: qa_runner
+- scenario: 실행기 계약을 unittest와 pytest로 교차 검증.
+- tool_a: unittest
+- command_a: python3 -m unittest discover -s scripts/qa -p test_*.py -v
+- result_a: PASS
+- expected_a: PASS
+- actual_a: failed_ci_blocks_deploy) ... ok test_json_roundtrip_fixture (test_workflows.DeployGateTests.test_json_roundtrip_fixture) ... ok test_missing_sha_blocks (test_workflows.DeployGateTests.test_missing_sha_blocks) ... ok test_success_allows_deploy (test_workflows.DeployGateTests.test_success_allows_deplo
+- tool_b: pytest
+- command_b: python3 -m pytest scripts/qa -q --junitxml=./qa/.runtime/20261103T040956-523c5ec792/TC-INFRA-RUNNER-001-b.xml
+- result_b: PASS
+- expected_b: PASS
+- actual_b: ......... [100%] 9 passed in 0.10s
+- status: PASS
+- git_commit: aad712788755
+- dirty: true
+- code_file: UNKNOWN
+- function: UNKNOWN
+- line: UNKNOWN
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261103T040956-523c5ec792/unittest.log#3006e3b4d7e3b703;qa/.runtime/20261103T040956-523c5ec792/pytest.log#52e49ed99f2b1e76
+
+시나리오: 실행기 계약을 unittest와 pytest로 교차 검증.
+비교: 실행기 계약을 unittest와 pytest로 교차 검증.
+1차: unittest 기대=PASS 실제=PASS
+2차: pytest 기대=PASS 실제=PASS
+최종=PASS. 미실행을 PASS로 처리하지 않음.

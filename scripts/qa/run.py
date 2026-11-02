@@ -156,6 +156,9 @@ def record_tc(tc_id: str, meta: dict, tc_def: dict | None, run_id: str, commit: 
     tool_b, result_b, log_b, actual_b = run_tool(meta["b"], run_id)
     end = seoul_now()
     status = final_status(result_a, result_b)
+    if os.environ.get("QA_PRECOMMIT") == "1":
+        # Hook only needs exit status; avoid dirtying tracked report files on every commit.
+        return status
     risk_id = ""
     if tc_id == "TC-SEC-SAST-001" and result_b in {"NOT_RUN", "PASS"} and "CodeQL" not in actual_b:
         risk_id = "RISK-V30-002"
