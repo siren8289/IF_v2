@@ -1808,3 +1808,218 @@ Expected/Actual: 라벨 행 합은 48이고 factor는 min(48, 30)=30. factors 0,
 - evidence: qa/.runtime/20261102T130018-a7c3e91b04/if0178-junit.xml sha256=ee513738f31beff392b68cd6220144e19a42ba89af15e33c2c31d00ffd45e625; qa/.runtime/20261102T130018-a7c3e91b04/source-review.txt sha256=995353333bde94c657eca877b5def52dd7be3134b8e824dd8bb8500e2f21a6f8; qa/.runtime/20261102T130018-a7c3e91b04/pytest-summary.txt sha256=68ac9be2c9308e752fb077695484a1cf6325ac407c4b4d2f938a70de4f8b9027
 
 Expected/Actual: factors 20, 25, 15, 10, 30. 작업 원합 48은 factor에서 30으로 잘린다. score 100. HIGH. pytest 통과. 소스 112-124행. DB 변화 없음.
+## 20261102T131137-c6d14f0a82 / IF-0247
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0247
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: API 키 없음
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: explain
+- line: 51
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: source=basic. 한국어 기본 설명에 참고 지수와 낮음이 있다. pytest 통과. 소스 51-53행, 21-25행. DB 없음. Gemini 실호출 없음.
+
+## 20261102T131137-c6d14f0a82 / IF-0248
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0248
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: Gemini 정상 trim
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: explain
+- line: 72
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: source=gemini. mock 텍스트의 앞뒤 공백이 strip된다. pytest 통과. 소스 71-72행. DB 없음. Gemini 실호출 없음.
+
+## 20261102T131137-c6d14f0a82 / IF-0249
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0249
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: Gemini 빈 텍스트
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: explain
+- line: 71
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: response.text=None이면 source=basic. mock 호출은 확인했다. pytest 통과. 소스 71행, 78행. DB 없음. Gemini 실호출 없음.
+
+## 20261102T131137-c6d14f0a82 / IF-0250
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0250
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: Gemini 예외
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: explain
+- line: 73
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: generate_content 예외면 source=basic. mock 호출은 확인했다. pytest 통과. 소스 73-78행. DB 없음. Gemini 실호출 없음.
+
+## 20261102T131137-c6d14f0a82 / IF-0251
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0251
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: 최대 요인 동률
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: basic_explanation
+- line: 20
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: points가 같은 첫 항목 나이를 고른다. pytest 통과. 소스 20행 max. DB 없음. Gemini 실호출 없음.
+
+## 20261102T131137-c6d14f0a82 / IF-0252
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0252
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: 등급 LOW
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: basic_explanation
+- line: 18
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: 기본 설명에 낮음이 있다. pytest 통과. 소스 9행, 18행. DB 없음. Gemini 실호출 없음.
+
+## 20261102T131137-c6d14f0a82 / IF-0253
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0253
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: 등급 MID
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: basic_explanation
+- line: 18
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: 기본 설명에 보통이 있다. pytest 통과. 소스 9행, 18행. DB 없음. Gemini 실호출 없음.
+
+## 20261102T131137-c6d14f0a82 / IF-0254
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0254
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: 등급 HIGH
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: basic_explanation
+- line: 18
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: 기본 설명에 높음이 있다. pytest 통과. 소스 9행, 18행. DB 없음. Gemini 실호출 없음.
+
+## 20261102T131137-c6d14f0a82 / IF-0255
+- RUN_ID: 20261102T131137-c6d14f0a82
+- TC_ID: IF-0255
+- timestamp: 2026-11-02T13:11:37+09:00
+- feature: 사고 확률 경고
+- test_type: unit
+- tool_a: pytest monkeypatch
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_ai_explain_if0247.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ai_explain.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 005e2044a275ac0e2cb454dbe2d6139a657a2823
+- dirty: True
+- files: ai/src/ai_explain.py, ai/tests/test_ai_explain_if0247.py
+- function: basic_explanation
+- line: 24
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
+
+Expected/Actual: 문장에 '이 점수는 사고 확률이 아니므로'가 있다. pytest 통과. 소스 24행. DB 없음. Gemini 실호출 없음.
