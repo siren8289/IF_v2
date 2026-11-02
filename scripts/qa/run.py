@@ -344,9 +344,10 @@ def main() -> int:
     counts["total"] = len(statuses)
     counts["RISK_OPEN_HIGH"] = len(blocking)
     tc_ok = all(s == "PASS" for s in statuses)
-    # Full gate (PR/deploy): also require no open HIGH/CRITICAL risks.
-    # --changed (local hook): fail only on TC outcomes so known ledger risks don't block every commit.
-    ok = tc_ok if args.changed else (tc_ok and not blocking)
+    # Full default run (PR/deploy CI): also require no open HIGH/CRITICAL risks.
+    # --changed / explicit --tc (local hook): fail only on selected TC outcomes.
+    full_gate = not args.changed and not args.tc and not args.suite
+    ok = (tc_ok and not blocking) if full_gate else tc_ok
     write_pointer(
         QA_ROOT,
         {

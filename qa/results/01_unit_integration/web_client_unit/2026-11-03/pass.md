@@ -34,3 +34,38 @@
 1차: Vitest 기대=PASS 실제=PASS
 2차: TypeScript 기대=PASS 실제=PASS
 최종=PASS. 미실행을 PASS로 처리하지 않음.
+
+## 20261103T040956-523c5ec792 / TC-UNIT-WEB-001
+- RUN_ID: 20261103T040956-523c5ec792
+- TC_ID: TC-UNIT-WEB-001
+- FEATURE_ID: FEAT-WEB-UNIT
+- timestamp_start: 2026-11-03T04:14:58+09:00
+- timestamp_end: 2026-11-03T04:15:17+09:00
+- area: 01_unit_integration
+- section: web_client_unit
+- scenario: Vitest 동작 + tsc 정적. UI E2E는 TC-WEBAPI-UI-001(Playwright)로 분리.
+- tool_a: Vitest
+- command_a: npm test -- --reporter=default --reporter=junit --outputFile=../qa/.runtime/20261103T040956-523c5ec792/TC-UNIT-WEB-001-a.xml
+- result_a: PASS
+- expected_a: PASS
+- actual_a: -a.xml RUN v5.0.3 /Users/jeong-yelim/orca/IF_v2/web-vite ✓ src/shared/api/client.test.ts (4 tests) 45ms ✓ src/pages/pages.test.tsx (3 tests) 1327ms ✓ 화면 (3) ✓ 평가 입력 후 POST 한 번 하고 결과 화면으로 이동한다 944ms Test Files 2 passed (2) Tests 7 passed (7) Start at 04:15:01 Duration
+- tool_b: TypeScript
+- command_b: npm run typecheck
+- result_b: PASS
+- expected_b: PASS
+- actual_b: > if-web-vite@0.2.0 typecheck > tsc --noEmit
+- status: PASS
+- git_commit: aad712788755
+- dirty: true
+- code_file: UNKNOWN
+- function: UNKNOWN
+- line: UNKNOWN
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261103T040956-523c5ec792/Vitest.log#5e20c09047b93815;qa/.runtime/20261103T040956-523c5ec792/TypeScript.log#03d193eb3ee4ef77
+
+시나리오: Vitest 동작 + tsc 정적. UI E2E는 TC-WEBAPI-UI-001(Playwright)로 분리.
+비교: Vitest 동작 + tsc 정적. UI E2E는 TC-WEBAPI-UI-001(Playwright)로 분리.
+1차: Vitest 기대=PASS 실제=PASS
+2차: TypeScript 기대=PASS 실제=PASS
+최종=PASS. 미실행을 PASS로 처리하지 않음.

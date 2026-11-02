@@ -5,5 +5,7 @@ if [ -x .venv/bin/python3 ]; then
   PATH="$PWD/.venv/bin:$PATH"
   export PATH
 fi
-# Related TCs for staged/changed files (debounced full gate remains CI/PR).
-exec python3 scripts/qa/run.py --changed
+# Commit hook: verify wiring + runner contract (fast).
+# Full sheet/regression gate runs in CI and via: python3 scripts/qa/run.py
+python3 scripts/qa/run.py --verify-automation
+exec python3 scripts/qa/run.py --tc TC-INFRA-RUNNER-001
