@@ -27,7 +27,7 @@ def _local_fallback_embedding(text: str, dimension: int = 768) -> list[float]:
 
     for word in words:
         # 같은 단어는 항상 같은 칸에 1을 더한다. md5는 단어를 고정된 숫자로 바꾸는 함수다.
-        seed = int(hashlib.md5(word.encode("utf-8")).hexdigest(), 16)
+        seed = int(hashlib.md5(word.encode("utf-8"), usedforsecurity=False).hexdigest(), 16)
         index = seed % dimension
         vector[index] += 1.0
         # 바로 옆 칸에도 조금 더해, 완전히 한 칸에만 몰리지 않게 한다.

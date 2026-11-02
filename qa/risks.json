@@ -1,0 +1,105 @@
+[
+  {
+    "id": "RISK-001",
+    "severity": "HIGH",
+    "likelihood": "MEDIUM",
+    "impact": "수동 배포가 필수 CI 검사를 우회할 수 있음",
+    "recommendation": "수동 실행에서도 동일 SHA의 성공한 CI 확인",
+    "status": "RESOLVED",
+    "file": ".github/workflows/deploy.yml",
+    "function": "jobs.deploy.if",
+    "line": 33,
+    "resolution": "실제 배포 셸의 실패/다른 SHA/다른 브랜치/PR 차단 및 성공 조건 테스트 PASS; actionlint 재검증 예정"
+  },
+  {
+    "id": "RISK-002",
+    "severity": "MEDIUM",
+    "likelihood": "MEDIUM",
+    "impact": "권한 요구사항 및 실제 배포 환경 E2E/성능 기준이 확정되지 않아 전체 보안 보증 불가",
+    "recommendation": "역할별 권한 명세, 테스트 환경 URL, 부하 및 지연 기준 확정 후 TC 추가",
+    "status": "OPEN",
+    "file": "UNKNOWN",
+    "function": "UNKNOWN",
+    "line": "UNKNOWN"
+  },
+  {
+    "id": "RISK-003",
+    "severity": "MEDIUM",
+    "likelihood": "MEDIUM",
+    "impact": "로컬 훅은 우회 가능하고 원격 브랜치 보호 설정은 저장소 파일만으로 강제할 수 없음",
+    "recommendation": "GitHub ruleset에서 CI / QA gate 필수 및 관리자 우회 제한 설정",
+    "status": "OPEN",
+    "file": "UNKNOWN",
+    "function": "UNKNOWN",
+    "line": "UNKNOWN"
+  },
+  {
+    "id": "RISK-004",
+    "severity": "HIGH",
+    "likelihood": "LOW",
+    "impact": "Bandit B324: MD5 사용 목적이 비보안 임베딩임을 코드에서 명시하지 않음",
+    "recommendation": "usedforsecurity=False를 명시해 기존 임베딩 호환 유지; 정적 검사와 RAG 회귀 재실행",
+    "status": "RESOLVED",
+    "file": "ai/src/rag/embedder.py",
+    "function": "_local_fallback_embedding",
+    "line": 30,
+    "resolution": "ai/src/rag/embedder.py:30 usedforsecurity=False; QA-AI pytest/Ruff 및 QA-SECURITY Bandit/Secret-policy 재검증 20261030T172701-24c6ce0dc2 모두 PASS"
+  },
+  {
+    "id": "RISK-005",
+    "severity": "MEDIUM",
+    "likelihood": "HIGH",
+    "impact": "기존 .agents 스킬이 존재하지 않는 qa/run_qa.py를 참조하고 hook 명령 경로도 실제 파일과 다름",
+    "recommendation": "기존 파일을 보존하며 실제 실행기로 연결; host가 이 hook 계약을 지원하는지는 별도 확인",
+    "status": "RESOLVED",
+    "file": ".agents/skills/qa-security-v25/SKILL.md",
+    "function": "UNKNOWN",
+    "line": 12,
+    "resolution": "기존 스킬 및 hooks.json을 실제 경로로 연결; host hook 지원 자체는 검증 범위 제외"
+  },
+  {
+    "id": "RISK-006",
+    "severity": "MEDIUM",
+    "likelihood": "MEDIUM",
+    "impact": "Bandit B314/B405: 외부 XML을 표준 ElementTree로 파싱",
+    "recommendation": "defusedxml 전환 및 엔티티 확장/대형 XML 거절 TC 추가",
+    "status": "OPEN",
+    "file": "data/etl/transform.py",
+    "function": "parse_data",
+    "line": 70
+  },
+  {
+    "id": "RISK-007",
+    "severity": "HIGH",
+    "likelihood": "HIGH",
+    "impact": "병행 추가된 qa/run_qa.py 및 recorder.py가 현재 보고서와 다른 TSV 스키마로 동일 경로에 기록; CI가 서로 다른 게이트를 호출",
+    "recommendation": "파일은 보존하고 CI/스킬을 단일 검증 실행기로 연결; 보조 실행기는 검토 전 공용 보고서 기록 금지",
+    "status": "RESOLVED",
+    "file": "qa/recorder.py",
+    "function": "write_test_type_reports",
+    "line": 159,
+    "resolution": "서로 다른 TSV writer 헤더 차단 테스트 PASS; CI 단일 실행기 연결. 혼합 이력은 원본 SHA256 보존 아카이브를 만든 뒤 열 정규화; qa/archives 참조"
+  },
+  {
+    "id": "RISK-SEC-001",
+    "severity": "HIGH",
+    "likelihood": "MEDIUM",
+    "impact": "평가 API에 인증/인가 설정 부재; 기존 동시 실행 보고서는 무인증 쓰기/삭제도 보고함",
+    "recommendation": "사용자 접근 정책 확정 후 인증·인가 및 권한 TC 구현. 동적 삭제 재현은 이번 세션에서 실행하지 않음",
+    "status": "OPEN",
+    "file": "spring/src/main/demo/assessment/controller/AssessmentController.java",
+    "function": "delete",
+    "line": 67
+  },
+  {
+    "id": "RISK-LEGACY-FAILS",
+    "severity": "HIGH",
+    "likelihood": "HIGH",
+    "impact": "병행 실행 RUN-20261030-001에서 기능 및 보안 FAIL 보고; 아직 수정·재검증되지 않음",
+    "recommendation": "docs/ERROR_LOG.md와 날짜별 fail.md의 요구사항/실제 증거 대조 후 필수 TC 편입 및 수정·두 도구 재검증. 원본 결과 보존",
+    "status": "OPEN",
+    "file": "docs/ERROR_LOG.md",
+    "function": "UNKNOWN",
+    "line": "UNKNOWN"
+  }
+]

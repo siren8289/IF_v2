@@ -33,6 +33,10 @@ target/
 .venv/
 .env
 
+# QA raw logs may contain sensitive payloads; tracked reports retain digests.
+qa/reports/**/evidence/
+qa/.runtime/
+
 # Terraform local cache and state. The lock file stays tracked.
 infra/terraform/.terraform/
 infra/terraform/*.tfstate

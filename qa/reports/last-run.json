@@ -1,0 +1,20 @@
+{
+  "run_id": "RUN-20261102-001",
+  "started_at": "2026-11-02T11:57:51+09:00",
+  "finished_at": "2026-11-02T11:58:10+09:00",
+  "git_commit": "69f74c49c8a9",
+  "types": [
+    "unit",
+    "security"
+  ],
+  "mode": "local",
+  "blocking": [
+    "QA-UNIT-SPRING FAIL",
+    "SEC-SQL-001 ERROR",
+    "SEC-AUTH-001 ERROR",
+    "SEC-DEPLOY-001 ERROR",
+    "SEC-UI-023 ERROR",
+    "SEC-NPM-001 FAIL",
+    "RISK-QA-AUTH HIGH OPEN"
+  ]
+}

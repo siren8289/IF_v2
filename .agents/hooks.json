@@ -1,0 +1,19 @@
+{
+  "qa-security-v25-gate": {
+    "enabled": true,
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "python3 .agents/hooks/qa_lifecycle_hook.py --event SessionStart",
+        "timeout": 10
+      }
+    ],
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "python3 .agents/hooks/qa_lifecycle_hook.py --event PreInvocation",
+        "timeout": 10
+      }
+    ]
+  }
+}

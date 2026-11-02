@@ -1,0 +1,242 @@
+[
+  {
+    "id": "QA-WEB",
+    "type": "unit",
+    "purpose": "기존 UI/API 클라이언트 TC 회귀",
+    "files": [
+      "web-vite/src/pages/pages.test.tsx",
+      "web-vite/src/shared/api/client.test.ts"
+    ],
+    "a": {
+      "name": "Vitest",
+      "cwd": "web-vite",
+      "command": [
+        "npm",
+        "test",
+        "--",
+        "--reporter=default",
+        "--reporter=junit",
+        "--outputFile=../qa/.runtime/{run_id}/web.xml"
+      ],
+      "junit": "qa/.runtime/{run_id}/web.xml"
+    },
+    "b": {
+      "name": "TypeScript",
+      "cwd": "web-vite",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ]
+    },
+    "comparison": "Vitest는 동작, TypeScript는 정적 타입. 타입 검사는 동작 재실행을 대체하지 않음."
+  },
+  {
+    "id": "QA-DATA",
+    "type": "unit",
+    "purpose": "JSON/XML 변환 및 중복 제거",
+    "files": [
+      "data/tests/test_transform.py"
+    ],
+    "a": {
+      "name": "unittest",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "data/tests",
+        "-v"
+      ]
+    },
+    "b": {
+      "name": "pytest",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "data/tests",
+        "-q",
+        "--junitxml=./qa/.runtime/{run_id}/QA-DATA.xml"
+      ],
+      "junit": "qa/.runtime/{run_id}/QA-DATA.xml"
+    },
+    "comparison": "동일 기존 TC를 서로 다른 발견/실행 엔진으로 검증; 독립적인 요구사항 oracle은 아님."
+  },
+  {
+    "id": "QA-AI",
+    "type": "api",
+    "purpose": "위험 점수 경계 및 FastAPI/RAG 회귀",
+    "files": [
+      "ai/tests/test_risk_score.py",
+      "ai/tests/test_rag.py"
+    ],
+    "a": {
+      "name": "pytest",
+      "cwd": "ai",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests",
+        "-q",
+        "--junitxml=../qa/.runtime/{run_id}/QA-AI.xml"
+      ],
+      "junit": "qa/.runtime/{run_id}/QA-AI.xml"
+    },
+    "b": {
+      "name": "Ruff",
+      "cwd": "ai",
+      "command": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "--select",
+        "E9,F63,F7,F82"
+      ]
+    },
+    "comparison": "pytest 동작 및 Ruff의 문법/미정의 이름 분석. 외부 모델/운영 API 보안 보증 제외."
+  },
+  {
+    "id": "QA-SPRING",
+    "type": "integration",
+    "purpose": "기존 Controller/Service TC 회귀",
+    "files": [
+      "spring/src/test/java/com/example/demo/assessment/AssessmentControllerTest.java",
+      "spring/src/test/java/com/example/demo/assessment/AssessmentServiceTest.java"
+    ],
+    "a": {
+      "name": "JUnit/Gradle",
+      "cwd": "spring",
+      "command": [
+        "./gradlew",
+        "test",
+        "--rerun-tasks",
+        "--console=plain"
+      ],
+      "junit": "spring/build/test-results/test/TEST-*.xml"
+    },
+    "b": {
+      "name": "javac/Gradle",
+      "cwd": "spring",
+      "command": [
+        "./gradlew",
+        "classes",
+        "--rerun-tasks",
+        "--console=plain"
+      ]
+    },
+    "comparison": "JUnit 컨트롤러/서비스 동작 및 javac 컴파일 검증. 실 DB/운영 통합 검증 제외."
+  },
+  {
+    "id": "QA-SECURITY",
+    "type": "security",
+    "purpose": "Python SAST 및 추적 파일 비밀키 패턴 검사",
+    "files": [
+      "ai/src",
+      "data/etl"
+    ],
+    "a": {
+      "name": "Bandit",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "-m",
+        "bandit",
+        "-r",
+        "ai/src",
+        "data/etl",
+        "-lll",
+        "-q"
+      ]
+    },
+    "b": {
+      "name": "Secret-policy",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "scripts/qa/security.py"
+      ]
+    },
+    "comparison": "Bandit HIGH SAST 및 별도 추적 파일 private key/키 패턴 검사. 의존성 CVE/침투 테스트 제외."
+  },
+  {
+    "id": "QA-REGRESSION",
+    "type": "regression",
+    "purpose": "QA 실행기 실패 차단·누적·상태·한글 검증",
+    "files": [
+      "scripts/qa/run.py",
+      "scripts/qa/test_runner.py"
+    ],
+    "a": {
+      "name": "unittest",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/qa",
+        "-p",
+        "test_*.py",
+        "-v"
+      ]
+    },
+    "b": {
+      "name": "pytest",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "scripts/qa",
+        "-q",
+        "--junitxml=./qa/.runtime/{run_id}/QA-REGRESSION.xml"
+      ],
+      "junit": "qa/.runtime/{run_id}/QA-REGRESSION.xml"
+    },
+    "comparison": "두 테스트 엔진에서 실행기 계약과 오류 주입 검증."
+  },
+  {
+    "id": "QA-CONFIG",
+    "type": "regression",
+    "purpose": "CI 구성 및 실제 배포 셸 게이트 오류 주입",
+    "files": [
+      ".github/workflows/deploy.yml",
+      ".github/workflows/githubactions.yml",
+      "scripts/qa/test_workflows.py"
+    ],
+    "a": {
+      "name": "actionlint/ShellCheck",
+      "cwd": ".",
+      "command": [
+        "actionlint",
+        ".github/workflows/githubactions.yml",
+        ".github/workflows/deploy.yml"
+      ]
+    },
+    "b": {
+      "name": "unittest deployment simulation",
+      "cwd": ".",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/qa",
+        "-p",
+        "test_workflows.py",
+        "-v"
+      ]
+    },
+    "comparison": "actionlint/ShellCheck 구문/셸 분석과 실제 gate 셸의 GitHub API 응답 오류 주입. AWS 배포 자체는 미실행."
+  }
+]

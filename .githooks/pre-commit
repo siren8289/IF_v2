@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+cd "$(git rev-parse --show-toplevel)"
+if [ -x .venv/bin/python3 ]; then
+  PATH="$PWD/.venv/bin:$PATH"
+  export PATH
+fi
+exec python3 scripts/qa/run.py
