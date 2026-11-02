@@ -2023,3 +2023,266 @@ Expected/Actual: 기본 설명에 높음이 있다. pytest 통과. 소스 9행, 
 - evidence: qa/.runtime/20261102T131137-c6d14f0a82/if0247-junit.xml sha256=08b10eefad4911f649aeb82de7d2909d5c2f09dc7e3ac5cffdc7cc35450df114; qa/.runtime/20261102T131137-c6d14f0a82/source-review.txt sha256=8d877ca429b53ad1e8f31fecdaf509609aea6d556ff03634a00182b649d57a24; qa/.runtime/20261102T131137-c6d14f0a82/pytest-summary.txt sha256=79f7ac18f530aaaff8744079c41615097c250f84dfce5ad0841e1b1dfe8fe635
 
 Expected/Actual: 문장에 '이 점수는 사고 확률이 아니므로'가 있다. pytest 통과. 소스 24행. DB 없음. Gemini 실호출 없음.
+## 20261102T131746-e5a91c7b20 / IF-0256
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0256
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: ML 최초 로드
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/ml_model.py, ai/tests/test_model_if0256.py
+- function: load_ml_models
+- line: 22
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: joblib.load 1회. 반환 딕셔너리가 _models와 같다. pytest 통과. 소스 25-29행. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0257
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0257
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: ML 재호출 캐시
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/ml_model.py, ai/tests/test_model_if0256.py
+- function: load_ml_models
+- line: 25
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 두 번째 호출은 같은 객체이고 joblib.load는 여전히 1회다. pytest 통과. 소스 25행. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0258
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0258
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: ML 확률 0~1
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/ml_model.py, ai/tests/test_model_if0256.py
+- function: predict_ml
+- line: 32
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 제목 운전기사. 라벨 점수 0.75와 0.0으로 0~1 안이다. pytest 통과. 소스 42-44행. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0260
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0260
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: DL 빈 제목 패딩
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/dl_model.py, ai/tests/test_model_if0256.py
+- function: encode_title
+- line: 54
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 빈 문자열은 0이 100개다. pytest 통과. 소스 59-60행. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0261
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0261
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: DL 1글자
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/dl_model.py, ai/tests/test_model_if0256.py
+- function: encode_title
+- line: 54
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 토큰 1개와 패딩 99개. 길이 100. pytest 통과. 소스 59-60행. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0262
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0262
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: DL 100글자
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/dl_model.py, ai/tests/test_model_if0256.py
+- function: encode_title
+- line: 54
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 길이 100이 유지된다. pytest 통과. 소스 59행 title[:100]. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0263
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0263
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: DL 101글자
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/dl_model.py, ai/tests/test_model_if0256.py
+- function: encode_title
+- line: 54
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 101번째 글자는 잘리고 길이는 100이다. pytest 통과. 소스 59행. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0264
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0264
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: DL 미등록 문자
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/dl_model.py, ai/tests/test_model_if0256.py
+- function: encode_title
+- line: 59
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 사전에 없는 글자는 ID 1이다. pytest 통과. 소스 59행 vocab.get(char, 1). 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0265
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0265
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: DL 최초 로드
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/dl_model.py, ai/tests/test_model_if0256.py
+- function: load_dl_model
+- line: 70
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: torch.load 1회, map_location=cpu, weights_only=True, 이어서 eval. pytest 통과. 소스 76행, 83행. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0266
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0266
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: DL 재호출 캐시
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/dl_model.py, ai/tests/test_model_if0256.py
+- function: load_dl_model
+- line: 73
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 두 번째 호출은 같은 모델, 사전, 라벨이고 torch.load는 1회다. pytest 통과. 소스 73행. 실제 모델 파일은 열지 않음. DB 없음.
+
+## 20261102T131746-e5a91c7b20 / IF-0267
+- RUN_ID: 20261102T131746-e5a91c7b20
+- TC_ID: IF-0267
+- timestamp: 2026-11-02T13:17:46+09:00
+- feature: DL sigmoid 0~1
+- test_type: unit
+- tool_a: pytest mock
+- command_a: ["../.venv/bin/python", "-m", "pytest", "tests/test_model_if0256.py", "-q"]
+- result_a: PASS
+- tool_b: 소스 대조
+- command_b: ["read", "ai/src/ml_model.py", "ai/src/dl_model.py"]
+- result_b: PASS
+- status: PASS
+- git_commit: 82d6829e9232acd1ca77ffde59be3b5a0f06419d
+- dirty: True
+- files: ai/src/dl_model.py, ai/tests/test_model_if0256.py
+- function: predict_dl
+- line: 87
+- ISSUE_ID: 
+- RISK_ID: 
+- evidence: qa/.runtime/20261102T131746-e5a91c7b20/if0256-junit.xml sha256=c78151b88ea48b5ec220c1786bfbf0407b06d8a7d6be5d73d8a25560aabdd874; qa/.runtime/20261102T131746-e5a91c7b20/source-review.txt sha256=61605d25b4198547bdbd6b7b90798fc356c5c4704cb3d9cd72fd8ebe9ca0e555; qa/.runtime/20261102T131746-e5a91c7b20/pytest-summary.txt sha256=fb5474fc786f8b81f119cad990c701038529b66033227d17b6224efefebdc2c9
+
+Expected/Actual: 제목 운전기사. sigmoid 후 소수 넷째 자리가 0~1 안이다. pytest 통과. 소스 98행, 102행. 실제 모델 파일은 열지 않음. DB 없음.

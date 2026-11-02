@@ -17,3 +17,12 @@
 - 공식 게이트 scripts/qa/run.py는 파일이 없어 실행하지 않았다.
 - RISK-SEC-001, RISK-LEGACY-FAILS, RISK-QA-AUTH는 이 실행에서 다시 검증하지 않았다.
 - 제품 코드는 수정하지 않았다. Postgres는 호출하지 않았다.
+
+## 20261102T131746-e5a91c7b20
+- IF-0259, IF-0268은 FAIL이다. 새 RISK ID는 만들지 않았다.
+- 없는 모델 파일은 FileNotFoundError가 된다. 로그 레코드와 서버 오류 기록은 없다.
+- 원인 위치는 ml_model.py load_ml_models 27행, dl_model.py load_dl_model 76행이다. 제품 코드는 수정하지 않았다.
+- 실제 ai/models/task_ml.joblib, task_cnn.pt의 크기와 mtime은 테스트 전후가 같다.
+- Ruff는 문법 검사이므로 이 실패의 재검증으로 세지 않는다.
+- 공식 게이트 scripts/qa/run.py는 파일이 없어 실행하지 않았다.
+- RISK-SEC-001, RISK-LEGACY-FAILS, RISK-QA-AUTH는 이 실행에서 다시 검증하지 않았다.
