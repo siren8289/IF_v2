@@ -351,23 +351,24 @@ def main() -> int:
     # --changed / explicit --tc (local hook): fail only on selected TC outcomes.
     full_gate = not args.changed and not args.tc and not args.suite
     ok = (tc_ok and not blocking) if full_gate else tc_ok
-    write_pointer(
-        QA_ROOT,
-        {
-            "run_id": run_id,
-            "finished_at": seoul_now().isoformat(timespec="seconds"),
-            "duration_sec": round(time.time() - started, 2),
-            "tcs": selected,
-            "statuses": statuses,
-            "counts": counts,
-            "blocking_risks": [r.get("id") for r in blocking],
-            "blocking": not ok,
-            "mode": "changed" if args.changed else "full",
-            "git_commit": commit,
-            "dirty": dirty,
-            "areas": list(AREAS),
-        },
-    )
+    if os.environ.get("QA_PRECOMMIT") != "1":
+        write_pointer(
+            QA_ROOT,
+            {
+                "run_id": run_id,
+                "finished_at": seoul_now().isoformat(timespec="seconds"),
+                "duration_sec": round(time.time() - started, 2),
+                "tcs": selected,
+                "statuses": statuses,
+                "counts": counts,
+                "blocking_risks": [r.get("id") for r in blocking],
+                "blocking": not ok,
+                "mode": "changed" if args.changed else "full",
+                "git_commit": commit,
+                "dirty": dirty,
+                "areas": list(AREAS),
+            },
+        )
     return 0 if ok else 1
 
 
