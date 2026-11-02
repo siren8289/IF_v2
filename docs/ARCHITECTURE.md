@@ -26,7 +26,7 @@ flowchart TD
         SkillHook[".agents/skills/qa-security-v25/SKILL.md<br/>& .agents/hooks.json"]
         Runner["qa/run_qa.py<br/>(교차 검증 테스트 실행기)"]
         Recorder["qa/recorder.py<br/>(MD·TSV 누적 기록 생성기)"]
-        Reports["qa/reports/{test-type}/{YYYY-MM-DD}/<br/>pass.md | fail.md | risk.md | results.tsv"]
+        Reports["qa/results/{area}/{section}/{YYYY-MM-DD}/<br/>test_sheet.xlsx | pass.md | fail.md | risk.md | results.tsv"]
         CIGate[".github/workflows/githubactions.yml<br/>(qa-security-gate Job)"]
 
         AgentsMD --> Runner

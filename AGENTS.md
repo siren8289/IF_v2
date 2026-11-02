@@ -1,12 +1,68 @@
-# 상시 QA·Security 규칙 V2.5
+# Always-on QA·Security Rules V3.0
 
-이 저장소의 최초 개발, 모든 기능 추가·수정·유지보수·버그 수정·리팩터링·배포 설정 변경에 적용한다. 사용자의 별도 QA 요청은 필요 없다.
+Apply to every feature add/change, maintenance, bugfix, refactor, and API/DB/UI/infra/deploy change. Users must not need to request QA each time.
 
-1. 작업 전 `qa-policy.md`, `qa/suites.json`, `qa/risks.json`, `qa/reports/`의 기존 기록 및 관련 테스트를 읽고 요구사항·변경 파일·영향 범위를 분석한다.
-2. 기존 TC를 재사용한다. 정상/예외/NULL/빈 값/경계/중복/오류 응답/권한/보안/회귀를 검토하고 필요한 TC만 추가한다. 불명확한 요구사항은 추측하지 않고 위험으로 등록한다.
-3. 변경 직후 관련 suite를 실행하고 완료 전에 전체 `PATH="$PWD/.venv/bin:$PATH" python3 scripts/qa/run.py`를 실행한다. 최소 두 도구의 범위·명령·결과를 비교한다. 정적 검사를 기능 테스트로 해석하지 않는다.
-4. FAIL/RISK 발견 시 코드 수정 전에 날짜별 MD·TSV에 기록하고 사용자에게 보고한다. 원인·입력·오류·재현·기대/실제·실제 확인된 코드 위치·수정 위치·재검증 RUN_ID를 상세히 누적한다. 미확인 위치는 UNKNOWN이다.
-5. 수정 후 두 도구 재검증과 회귀 검사를 실행한다. 필수 검사의 FAIL/BLOCKED/ERROR/NOT_RUN/SKIPPED 또는 미해결 HIGH/CRITICAL은 완료·병합·배포를 차단한다. 미실행은 PASS가 아니다.
-6. 보고서와 기존 코드/설정/검증 이력을 삭제하거나 덮어쓰지 않는다. 보고서는 Asia/Seoul 날짜 및 고유 RUN_ID로 누적한다. 최종 답변에는 실제 검사 결과와 미해결 위험을 보고한다.
+Do not report “automation complete” from policy text alone. Local hooks/change watch and GitHub Actions must be connected and verified.
 
-자동화 사용·한계·근거·기록 계약은 `qa-policy.md`를 따른다. 훅 우회나 CI 미실행 상태를 완료로 보고하지 않는다.
+## Areas and dual verification
+
+| Area | Tool A | Tool B | Focus |
+|---|---|---|---|
+| `01_unit_integration` | JUnit / pytest / Vitest (stack-appropriate) | Testcontainers or independent API/DB blackbox | Function results, branches, real service·DB |
+| `02_web_api` | Playwright | Schemathesis (OpenAPI) or independent API CLI | UI flows, HTTP status/body/errors/auth |
+| `03_security_quality` | CodeQL | Semgrep | Vuln patterns, secrets, auth gaps, SAST |
+| `04_infra_deploy` | Docker Compose config/health | `curl` smoke (k6 only in isolated env) | Container readiness, real request success |
+
+- Do not force unfit tools (e.g. Testcontainers on pure unit logic).
+- Running the same command twice is not dual verification.
+- If only one required path is possible, record reason + alternate plan in `risk.md` and do not treat as final PASS.
+- CodeQL/Semgrep do not replace behavioral UI/API/deploy checks.
+
+## Atomic TC decomposition
+
+Map `requirement → feature → UI/API → service/function → DB/external → exception/state`. Prefer changed files first; do not reload the whole project into AI context every time.
+
+Decompose into distinct atomic TCs for applicable: input, boundary, branch, output, state/data, authz, external failure, security/ops, regression. Each TC needs a clear expected result (never only “works normally”).
+
+Required fields: `TC_ID`, `FEATURE_ID`, `REQUIREMENT_ID`, `AREA`, `SECTION`, `SCENARIO`, `PRECONDITION`, `INPUT`, `STEPS`, `EXPECTED_RESULT`, `TOOL_A`, `COMMAND_A`, `TOOL_B`, `COMMAND_B`, `CODE_FILE`, `FUNCTION`, `RISK_LEVEL` (as needed). TC IDs are stable across reruns.
+
+## Completion workflow
+
+1. Before change: map requirements and existing TCs.
+2. New feature: add TCs to `qa/input/testcases.tsv` **before** execution. Preserve existing TCs on edits; add/update only what is needed.
+3. Ship feature with test code/fixtures/independent commands.
+4. Run tool A and B for the change scope; collect status, logs, evidence paths.
+5. On FAIL/RISK: record reports **before** further code fixes; notify the user; fix only in approved scope.
+6. Re-run fixed and related regression TCs on both paths.
+7. Do not report complete without required TCs and dual evidence.
+8. Before PR/deploy: full regression/security/deploy checks. CI must block on required failures and open HIGH/CRITICAL risks.
+
+## Layout (English names only)
+
+```
+qa/
+├── master_test_sheet.xlsx
+├── input/testcases.tsv
+├── config/test_map.json
+├── history/execution_log.tsv
+└── results/{area}/{section}/{YYYY-MM-DD}/
+    test_sheet.xlsx | pass.md | fail.md | risk.md | results.tsv
+```
+
+Paths/IDs/sheet tabs: English. Report bodies: Korean. Dates: Asia/Seoul `YYYY-MM-DD`. Create date folders only for executed area/section. History TSV is append-only; master Excel may refresh to latest.
+
+## Status and gate
+
+Statuses: `PASS / FAIL / BLOCKED / ERROR / NOT_RUN / SKIPPED`. RISK is a separate ledger (`qa/risks.json`), not a status substitute.
+
+PASS requires both required paths executed, all required assertions passed, and evidence present. Unrun work is never PASS. Open HIGH/CRITICAL blocks complete/merge/deploy.
+
+## Automation and AI
+
+- One QA Agent, one QA Skill.
+- Execution/judgment/reports/Excel via deterministic scripts (`scripts/qa/run.py`).
+- Commands live in `qa/config/test_map.json`—AI must not invent commands every run.
+- Local: hook/watch runs **related** TCs after work (debounced). CI: push/PR required checks. Branch protection/rulesets are separate remote settings.
+- AI only for new TC design, complex impact analysis, unexplained FAIL/RISK. Do not feed whole repo/TSV every time.
+
+Official runner: `PATH="$PWD/.venv/bin:$PATH" python3 scripts/qa/run.py`. Details: `qa-policy.md`.

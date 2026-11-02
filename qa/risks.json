@@ -101,5 +101,38 @@
     "file": "docs/ERROR_LOG.md",
     "function": "UNKNOWN",
     "line": "UNKNOWN"
+  },
+  {
+    "id": "RISK-V30-001",
+    "severity": "HIGH",
+    "likelihood": "HIGH",
+    "impact": "01_unit_integration Spring 경로에 Testcontainers 기반 DB 통합 검증이 아직 없고 HTTP 블랙박스는 서버 기동에 의존",
+    "recommendation": "Spring Testcontainers PostgreSQL 도입 후 TC-UNIT-SPRING-001 Tool B를 교체하고 이중 검증 재실행",
+    "status": "OPEN",
+    "file": "spring/build.gradle",
+    "function": "UNKNOWN",
+    "line": "UNKNOWN"
+  },
+  {
+    "id": "RISK-V30-002",
+    "severity": "HIGH",
+    "likelihood": "HIGH",
+    "impact": "로컬 CodeQL CLI/DB 분석이 구성되지 않아 03_security_quality 2차 경로가 secret-policy 폴백에 의존",
+    "recommendation": "GitHub CodeQL workflow를 required check로 연결하고 로컬/CI 이중 증거를 TC-SEC-SAST-001에 기록",
+    "status": "OPEN",
+    "file": ".github/workflows/githubactions.yml",
+    "function": "codeql",
+    "line": "UNKNOWN"
+  },
+  {
+    "id": "RISK-V30-003",
+    "severity": "HIGH",
+    "likelihood": "HIGH",
+    "impact": "Playwright가 설치·브라우저 준비되지 않아 02_web_api UI 1차 검증이 NOT_RUN이 될 수 있음",
+    "recommendation": "web-vite 또는 qa에 @playwright/test 설치 및 스모크 스펙 추가 후 TC-WEBAPI-UI-001 재실행",
+    "status": "OPEN",
+    "file": "scripts/qa/probes/playwright_smoke.py",
+    "function": "main",
+    "line": "UNKNOWN"
   }
 ]

@@ -1,6 +1,6 @@
 # 오류 및 결함 분석 로그 (`docs/ERROR_LOG.md`)
 
-> **원칙**: 바이브 코딩 QA·Security 자동화 지침 V2.5 제5절에 따라, 발견된 모든 `FAIL` 및 `RISK`는 **기존 코드를 임의로 수정하기 전에 `qa/reports/{test-type}/{YYYY-MM-DD}/fail.md` 및 `risk.md`에 먼저 기록하고 사용자에게 보고**합니다.
+> **원칙**: 바이브 코딩 QA·Security 자동화 지침 V3.0에 따라, 발견된 모든 `FAIL` 및 `RISK`는 **기존 코드를 임의로 수정하기 전에 `qa/results/{area}/{section}/{YYYY-MM-DD}/fail.md` 및 `risk.md`에 먼저 기록하고 사용자에게 보고**합니다.
 
 ---
 

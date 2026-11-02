@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -51,7 +52,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Test
+      - name: Typecheck (Tool B Cross-Verification)
+        run: npm run typecheck
+
+      - name: Test (Tool A Vitest)
         run: npm test
 
       - name: Build
@@ -77,8 +81,11 @@ jobs:
         run: |
           pip install -r requirements-dev.txt
           pip install torch --index-url https://download.pytorch.org/whl/cpu
-      - name: Test
+      - name: Test (Tool A pytest)
         run: python -m pytest tests -q
+      - name: Cross-Verify Score Boundaries (Tool B Python Runtime Assertion)
+        run: |
+          python -c "from src.risk_score import grade_of, calculate_score; assert grade_of(40)=='LOW' and grade_of(41)=='MID' and grade_of(60)=='MID' and grade_of(61)=='HIGH'"
 
   data-pipeline:
     name: Data pipeline
@@ -96,6 +103,122 @@ jobs:
         run: pip install -r data/requirements.txt
       - name: Test ingestion, processing and quality
         run: python -m unittest discover -s data/tests -v
+
+  codeql:
+    name: CodeQL (security Tool A)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: python, java, javascript
+      - uses: github/codeql-action/analyze@v3
+
+  qa-security-gate:
+    name: QA & Security Gate (V3.0)
+    runs-on: ubuntu-latest
+    needs: [backend-spring, web-vite, ai-fastapi, data-pipeline, qa-gate]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web-vite/package-lock.json
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Frontend Dependencies
+        working-directory: web-vite
+        run: npm ci
+
+      - name: Install QA regression dependencies
+        run: python3 -m pip install -r qa/requirements.txt
+
+      - name: Run QA & Security V3.0 Runner (runner contract)
+        run: python3 scripts/qa/run.py --tc TC-INFRA-RUNNER-001
+
+      - name: Upload QA & Security Reports Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-security-reports
+          path: |
+            qa/results
+            qa/input
+            qa/config
+            qa/history
+            qa/master_test_sheet.xlsx
+            qa/last-run.json
+
+  qa-gate:
+    name: QA gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web-vite/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install dependencies
+        run: |
+          npm ci --prefix web-vite
+          python -m pip install -r qa/requirements.txt -r ai/requirements-dev.txt -r data/requirements.txt
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+          cache: false
+      - name: Install workflow checker
+        run: go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+      - name: Verify automation wiring
+        run: python3 scripts/qa/run.py --verify-automation
+      - name: Mandatory cross validation and risk gate
+        run: python3 scripts/qa/run.py
+      - name: Preserve append-only QA evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            qa/results
+            qa/input
+            qa/config
+            qa/history
+            qa/master_test_sheet.xlsx
+            qa/last-run.json
+          retention-days: 90
+          if-no-files-found: error
 
   infra-validate:
     name: Infra validate

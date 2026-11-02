@@ -1,0 +1,144 @@
+{
+  "version": "3.0",
+  "notes": "Deterministic TC command map. Runner must not invent commands. Gaps vs ideal V3.0 tools are tracked as RISKs.",
+  "path_globs": {
+    "TC-UNIT-DATA-001": ["data/**"],
+    "TC-UNIT-SPRING-001": ["spring/**"],
+    "TC-UNIT-WEB-001": ["web-vite/src/**"],
+    "TC-WEBAPI-AI-001": ["ai/**"],
+    "TC-WEBAPI-UI-001": ["web-vite/**"],
+    "TC-SEC-SAST-001": ["ai/src/**", "data/etl/**", "spring/src/main/**"],
+    "TC-INFRA-COMPOSE-001": ["compose.yaml", "**/Dockerfile", ".github/workflows/**", "infra/**"],
+    "TC-INFRA-RUNNER-001": ["scripts/qa/**", "qa/record.py", "qa/config/**", ".githooks/**"]
+  },
+  "tcs": {
+    "TC-UNIT-DATA-001": {
+      "area": "01_unit_integration",
+      "section": "data_etl",
+      "feature_id": "FEAT-DATA-ETL",
+      "a": {
+        "name": "pytest",
+        "cwd": ".",
+        "command": ["python3", "-m", "pytest", "data/tests", "-q", "--junitxml=./qa/.runtime/{run_id}/TC-UNIT-DATA-001-a.xml"]
+      },
+      "b": {
+        "name": "unittest",
+        "cwd": ".",
+        "command": ["python3", "-m", "unittest", "discover", "-s", "data/tests", "-v"]
+      },
+      "comparison": "동일 ETL TC를 pytest와 unittest 엔진으로 교차 실행. DB Testcontainers 비적용(순수 변환 로직)."
+    },
+    "TC-UNIT-SPRING-001": {
+      "area": "01_unit_integration",
+      "section": "spring_assessment",
+      "feature_id": "FEAT-SPRING-ASSESS",
+      "a": {
+        "name": "JUnit",
+        "cwd": "spring",
+        "command": ["./gradlew", "test", "--rerun-tasks", "--console=plain"]
+      },
+      "b": {
+        "name": "http_blackbox",
+        "cwd": ".",
+        "command": ["python3", "scripts/qa/probes/http_blackbox.py", "--base", "http://127.0.0.1:8080", "--path", "/api/jobs"]
+      },
+      "comparison": "JUnit 단위/슬라이스 + 독립 HTTP 블랙박스. Testcontainers 미도입(RISK-V30-001)."
+    },
+    "TC-UNIT-WEB-001": {
+      "area": "01_unit_integration",
+      "section": "web_client_unit",
+      "feature_id": "FEAT-WEB-UNIT",
+      "a": {
+        "name": "Vitest",
+        "cwd": "web-vite",
+        "command": ["npm", "test", "--", "--reporter=default", "--reporter=junit", "--outputFile=../qa/.runtime/{run_id}/TC-UNIT-WEB-001-a.xml"]
+      },
+      "b": {
+        "name": "TypeScript",
+        "cwd": "web-vite",
+        "command": ["npm", "run", "typecheck"]
+      },
+      "comparison": "Vitest 동작 + tsc 정적. UI E2E는 TC-WEBAPI-UI-001(Playwright)로 분리."
+    },
+    "TC-WEBAPI-UI-001": {
+      "area": "02_web_api",
+      "section": "web_ui",
+      "feature_id": "FEAT-WEB-UI",
+      "a": {
+        "name": "Playwright",
+        "cwd": ".",
+        "command": ["python3", "scripts/qa/probes/playwright_smoke.py"]
+      },
+      "b": {
+        "name": "http_blackbox",
+        "cwd": ".",
+        "command": ["python3", "scripts/qa/probes/http_blackbox.py", "--base", "http://127.0.0.1", "--path", "/"]
+      },
+      "comparison": "Playwright UI 스모크 + 독립 HTTP 스모크. Schemathesis는 OpenAPI TC로 분리."
+    },
+    "TC-WEBAPI-AI-001": {
+      "area": "02_web_api",
+      "section": "ai_api",
+      "feature_id": "FEAT-AI-API",
+      "a": {
+        "name": "pytest",
+        "cwd": "ai",
+        "command": ["python3", "-m", "pytest", "tests", "-q", "--junitxml=../qa/.runtime/{run_id}/TC-WEBAPI-AI-001-a.xml"]
+      },
+      "b": {
+        "name": "schemathesis_or_openapi",
+        "cwd": ".",
+        "command": ["python3", "scripts/qa/probes/openapi_check.py", "--base", "http://127.0.0.1:8000"]
+      },
+      "comparison": "pytest API/로직 + OpenAPI/Schemathesis 독립 검사(서버 없으면 BLOCKED)."
+    },
+    "TC-SEC-SAST-001": {
+      "area": "03_security_quality",
+      "section": "sast",
+      "feature_id": "FEAT-SEC-SAST",
+      "a": {
+        "name": "Semgrep",
+        "cwd": ".",
+        "command": ["python3", "scripts/qa/probes/semgrep_run.py"]
+      },
+      "b": {
+        "name": "CodeQL_or_secret_policy",
+        "cwd": ".",
+        "command": ["python3", "scripts/qa/probes/codeql_or_fallback.py"]
+      },
+      "comparison": "Semgrep + CodeQL(가능 시)/비밀키 패턴 폴백. CodeQL 로컬 미설치 시 CI CodeQL과 RISK-V30-002."
+    },
+    "TC-INFRA-COMPOSE-001": {
+      "area": "04_infra_deploy",
+      "section": "deployment",
+      "feature_id": "FEAT-COMPOSE",
+      "a": {
+        "name": "compose_config",
+        "cwd": ".",
+        "command": ["python3", "scripts/qa/probes/compose_ready.py"]
+      },
+      "b": {
+        "name": "curl_smoke",
+        "cwd": ".",
+        "command": ["python3", "scripts/qa/probes/http_blackbox.py", "--base", "http://127.0.0.1:8000", "--path", "/docs", "--allow-blocked"]
+      },
+      "comparison": "Compose 설정/health 계약 + curl HTTP 스모크(스택 미기동 시 BLOCKED, PASS 아님)."
+    },
+    "TC-INFRA-RUNNER-001": {
+      "area": "04_infra_deploy",
+      "section": "qa_runner",
+      "feature_id": "FEAT-QA-RUNNER",
+      "a": {
+        "name": "unittest",
+        "cwd": ".",
+        "command": ["python3", "-m", "unittest", "discover", "-s", "scripts/qa", "-p", "test_*.py", "-v"]
+      },
+      "b": {
+        "name": "pytest",
+        "cwd": ".",
+        "command": ["python3", "-m", "pytest", "scripts/qa", "-q", "--junitxml=./qa/.runtime/{run_id}/TC-INFRA-RUNNER-001-b.xml"]
+      },
+      "comparison": "실행기 계약을 unittest와 pytest로 교차 검증."
+    }
+  }
+}

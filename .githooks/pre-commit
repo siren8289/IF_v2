@@ -5,4 +5,5 @@ if [ -x .venv/bin/python3 ]; then
   PATH="$PWD/.venv/bin:$PATH"
   export PATH
 fi
-exec python3 scripts/qa/run.py
+# Related TCs for staged/changed files (debounced full gate remains CI/PR).
+exec python3 scripts/qa/run.py --changed

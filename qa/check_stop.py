@@ -2,7 +2,7 @@
 """Stop hook. Block only when product files changed after the last QA run.
 
 Does not execute tests. Session-end stops (reason != end_turn) exit immediately.
-A run that already wrote qa/reports/last-run.json after the edit is enough to stop,
+A run that already wrote qa/last-run.json after the edit is enough to stop (V2.7),
 even when that run found FAIL or RISK. The agent still must report those findings.
 """
 import json
@@ -68,22 +68,23 @@ def main():
     pending = changed_files()
     if not pending:
         return 0
-    pointer = ROOT / "qa" / "reports" / "last-run.json"
+    pointer = ROOT / "qa" / "last-run.json"
     if not pointer.exists():
         print(json.dumps({
             "decision": "block",
-            "reason": "제품 코드가 바뀌었는데 qa/reports/last-run.json 이 없습니다. "
-                      "python3 qa/run_qa.py --types unit,api,security 를 실행하고 "
+            "reason": "제품 코드가 바뀌었는데 qa/last-run.json 이 없습니다. "
+                      "PATH=\"$PWD/.venv/bin:$PATH\" python3 scripts/qa/run.py 를 실행하고 "
                       "FAIL/RISK를 기록한 뒤 사용자에게 보고하세요. 제품 버그는 보고 전에 고치지 마세요.",
         }, ensure_ascii=False))
         return 0
     try:
         payload = json.loads(pointer.read_text(encoding="utf-8"))
-        started = datetime.fromisoformat(payload["started_at"])
-    except (OSError, json.JSONDecodeError, KeyError, ValueError):
+        stamp = payload.get("finished_at") or payload.get("started_at")
+        started = datetime.fromisoformat(stamp)
+    except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError):
         print(json.dumps({
             "decision": "block",
-            "reason": "qa/reports/last-run.json 을 읽지 못했습니다. qa/run_qa.py 를 다시 실행하세요.",
+            "reason": "qa/last-run.json 을 읽지 못했습니다. scripts/qa/run.py 를 다시 실행하세요.",
         }, ensure_ascii=False))
         return 0
     if started.tzinfo is None:
@@ -102,7 +103,7 @@ def main():
         print(json.dumps({
             "decision": "block",
             "reason": "제품 파일이 QA 실행 이후 다시 바뀌었습니다: "
-                      f"{shown}. python3 qa/run_qa.py 로 다시 검사하고 결과를 보고하세요.",
+                      f"{shown}. scripts/qa/run.py 로 다시 검사하고 결과를 보고하세요.",
         }, ensure_ascii=False))
     return 0
 

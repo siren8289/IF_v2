@@ -1,7 +1,8 @@
 [
   {
     "id": "QA-WEB",
-    "type": "unit",
+    "area": "02_web_api",
+    "section": "web_client",
     "purpose": "기존 UI/API 클라이언트 TC 회귀",
     "files": [
       "web-vite/src/pages/pages.test.tsx",
@@ -33,7 +34,8 @@
   },
   {
     "id": "QA-DATA",
-    "type": "unit",
+    "area": "01_unit_integration",
+    "section": "data_etl",
     "purpose": "JSON/XML 변환 및 중복 제거",
     "files": [
       "data/tests/test_transform.py"
@@ -68,7 +70,8 @@
   },
   {
     "id": "QA-AI",
-    "type": "api",
+    "area": "02_web_api",
+    "section": "ai_api",
     "purpose": "위험 점수 경계 및 FastAPI/RAG 회귀",
     "files": [
       "ai/tests/test_risk_score.py",
@@ -105,7 +108,8 @@
   },
   {
     "id": "QA-SPRING",
-    "type": "integration",
+    "area": "01_unit_integration",
+    "section": "spring_assessment",
     "purpose": "기존 Controller/Service TC 회귀",
     "files": [
       "spring/src/test/java/com/example/demo/assessment/AssessmentControllerTest.java",
@@ -136,7 +140,8 @@
   },
   {
     "id": "QA-SECURITY",
-    "type": "security",
+    "area": "03_security_quality",
+    "section": "python_sast",
     "purpose": "Python SAST 및 추적 파일 비밀키 패턴 검사",
     "files": [
       "ai/src",
@@ -168,7 +173,8 @@
   },
   {
     "id": "QA-REGRESSION",
-    "type": "regression",
+    "area": "04_infra_deploy",
+    "section": "qa_runner",
     "purpose": "QA 실행기 실패 차단·누적·상태·한글 검증",
     "files": [
       "scripts/qa/run.py",
@@ -206,7 +212,8 @@
   },
   {
     "id": "QA-CONFIG",
-    "type": "regression",
+    "area": "04_infra_deploy",
+    "section": "ci_deploy",
     "purpose": "CI 구성 및 실제 배포 셸 게이트 오류 주입",
     "files": [
       ".github/workflows/deploy.yml",
